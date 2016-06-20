@@ -1,4 +1,4 @@
 #!/bin/bash
 echo "Copying static files"
-cp -r ./templates/img ../img
-cp -r ./templates/css ../css
+cp -r ./templates/img ../
+cp -r ./templates/css ../
