@@ -22,7 +22,7 @@ do
     row="${row//__DATE__/$date}"
     row="${row//__CODE__/$code}"
     row="${row//__CITY__/$city}"
-    row="${row//__COUNTRY__/$code}"
+    row="${row//__COUNTRY__/${countries[$code]}}"
     row="${row//__P_STUDENT__/$p_student}"
     row="${row//__P_COUNTRY__/$p_country}"
     table+="$row"
