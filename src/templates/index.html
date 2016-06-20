@@ -2,34 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head>
 <meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
-<link href="./img/fav-logo.ico" rel="shortcut icon" type="image/x-icon" />
-<link href="./css/design.css" rel="stylesheet" type="text/css" />
-<link href="./css/index.css" rel="stylesheet" type="text/css" />
-<link href="./css/print.css" rel="stylesheet" type="text/css" media="print" />
+<link href="__BASE__/img/fav-logo.ico" rel="shortcut icon" type="image/x-icon" />
+<link href="__BASE__/css/design.css" rel="stylesheet" type="text/css" />
+<link href="__BASE__/css/index.css" rel="stylesheet" type="text/css" />
+<link href="__BASE__/css/print.css" rel="stylesheet" type="text/css" media="print" />
 <title>
 International Physics Olympiad
 </title>
 </head>
 <body>
-<div id="header">
-	<div id="h1">
-		<h1><a href="./index.html">International Physics Olympiad</a></h1>
-	</div>
-	
-	<div id="sub">
-		<span class="previous"><a href="http://www.ipho2015.in/">IPhO 2015</a></span>
-		<span class="img"><a href="./index.html"><img src="./img/logo.png" alt="IPhO" width="30" height="22"/></a></span>
-		<span class="next"><a href="http://www.ipho2016.org/">IPhO 2016</a></span>
-	</div>
-	
-	<div id="menu">
-		<a href="./timeline/index.html">Timeline</a> &bull;
-		<a href="./countries/index.html">Countries</a> &bull;
-		<a href="./search/index.html">Search</a> &bull;
-		<a target="_blank" href="http://ipho.org/problems-and-solutions_5.html">Problems</a> &bull;
-		<a target="_blank" href="https://en.wikipedia.org/wiki/International_Physics_Olympiad">About IPhO</a>
-	</div>
-</div>
+__HEADER_TOP__
 <div id="main">
 	<canvas id="canvas" width="400" height="300"></canvas>
 	<!-- <img src="logo.png" /> -->
@@ -43,21 +25,7 @@ International Physics Olympiad
 		The theme and design of the webpage is based on <a href="http://imo-official.org/">imo-official.org</a>.
 	</div>
 </div>
-<div id="footer">
-<a href="mailto:webmaster@ipho-unofficial.org">James Moriarty</a> 
-(Secretary of the IPhO Advisory Board)&nbsp; &bull; &nbsp;
-<b>Webmaster:</b> 
-<a href="mailto:webmaster@ipho-unofficial.org">webmaster@ipho-unofficial.org</a>
-</div>
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-68545700-1', 'auto');
-  ga('send', 'pageview');
-</script>
+__FOOTER__
 <script>
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
