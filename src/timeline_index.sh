@@ -1,8 +1,8 @@
 #!/bin/bash
 echo "Creating timeline/index"
 
-source countries.sh
-source header_side.sh
+source countrycodes.sh
+source header_side.sh 1
 source footer.sh
 
 # load file:
@@ -14,7 +14,7 @@ html="${html/__FOOTER__/$footer}"
 table=""
 rowt="$(cat templates/timeline/index_row.html)"
 # Read from CSV
-while IFS=, read number year date code city website p_student p_country gold silver bronze honourable 
+while IFS=, read number year date code city website p_country p_student gold silver bronze honourable newline
 do 
     row="$rowt"
     row="${row//__NUMBER__/$number}"
@@ -22,9 +22,9 @@ do
     row="${row//__DATE__/$date}"
     row="${row//__CODE__/$code}"
     row="${row//__CITY__/$city}"
-    row="${row//__COUNTRY__/${countries[$code]}}"
-    row="${row//__P_STUDENT__/$p_student}"
+    row="${row//__COUNTRY__/${countrycodes[$code]}}"
     row="${row//__P_COUNTRY__/$p_country}"
+    row="${row//__P_STUDENT__/$p_student}"
     table+="$row"
 done < database/timeline.csv
 html="${html/__TABLE__/$table}"

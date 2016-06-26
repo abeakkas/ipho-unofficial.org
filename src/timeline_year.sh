@@ -7,4 +7,5 @@
 echo "Creating timeline/$1"
 mkdir -p ../timeline/$1
 source timeline_year_index.sh $1 $2 $3
+source timeline_year_country.sh $1 $2 $3 $4
 source timeline_year_individual.sh $1 $2 $3 $4

@@ -6,9 +6,9 @@
 # $4: number of IPhO to be created
 echo "Creating timeline/$1/individual"
 # imports
-source countries.sh
+source countrycodes.sh
 source ordinals.sh
-source header_side.sh
+source header_side.sh 1
 source footer.sh
 # load file and replace basics
 html="$(cat templates/timeline/year/individual.html)"
@@ -48,7 +48,7 @@ do
         row="$rowt"
         row="${row//__NAME__/$name}"
         row="${row//__CODE__/$code}"
-        row="${row//__COUNTRY__/${countries[$code]}}"
+        row="${row//__COUNTRY__/${countrycodes[$code]}}"
         row="${row//__RANK__/$rank}"
         case $medal in
         1) row="${row//__MEDAL__/$gold}" ;;

@@ -1,0 +1,5 @@
+timeline_year_country.sh:
+  A team has at most 9 members
+  There are at most 1000 competitors
+estudiante.csv:
+  No double quotes in source therefore no commas, double quotes, or newline characters in student names.

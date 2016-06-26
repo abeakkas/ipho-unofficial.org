@@ -1,6 +1,4 @@
 #!/bin/bash
-declare -A countries
-# Read from CSV
-while IFS=, read code country newline
-do countries[$code]="$country"
-done < database/countries.csv
+echo "Creating countries"
+mkdir -p ../countries
+source countries_index.sh
