@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
+<link href="../img/fav-logo.ico" rel="shortcut icon" type="image/x-icon" />
+<link href="../css/design.css" rel="stylesheet" type="text/css" />
+<link href="../css/print.css" rel="stylesheet" type="text/css" media="print" />
+<title>IPhO: Search</title>
+<script src="search.js"></script>
+</head>
+<body>
+<div id="header">
+	<div id="h1">
+		<h1><a href="../index.html">International Physics Olympiad</a></h1>
+	</div>
+	<div id="sub">   
+		<span class="previous"><a href="http://www.ipho2015.in/" target="_blank">IPhO 2015</a></span>
+		<span class="img"><a href="../index.html"><img src="../img/logo.png" alt="IPhO" width="30" height="22"/></a></span>
+		<span class="next"><a href="http://www.ipho2016.org/" target="_blank">IPhO 2016</a></span>
+	</div>
+</div>
+<div id="sidebar">
+	<ul>
+	<li><a href="../timeline/index.html" class="">Timeline</a></li>
+	<li><a href="../countries/index.html" class="">Countries</a></li>
+	<li><a href="../search/index.html" class="highlight">Search</a></li>
+	<li><a target="_blank" href="http://ipho.org/problems-and-solutions_5.html">Problems</a></li>
+	<li><a target="_blank" href="https://en.wikipedia.org/wiki/International_Physics_Olympiad">About IPhO</a></li>
+	<li><a target="_blank" href="http://ipho.org/links.html">Links and Resources</a></li>
+	</ul>
+</div>
+<div id="main">
+	<h2>Search</h2>
+	<p>
+	<input type="text" maxlength="30" class="inptText" size="24" id="search_query" onkeydown="if(event.keyCode == 13) { ipho_search(); }" />
+	<input type="submit" value="Search" class="btnSubmit" onclick="ipho_search()" />
+	<span>(Search the IPhO database for a particular contestant)</span>
+	</p>
+    <table>
+    <thead><tr><th>Participant</th><th>Year</th><th>Country</th><th>Award</th></tr></thead>
+    <tbody id="search_results">
+    </tbody>
+    </table>
+</div>
+<div id="footer">
+<a href="http://ipho.org/international_board.html" target="_blank">Hans Jordens</a>
+(Secretary of the IPhO International Board)
+<a href="javascript:easteregg()" style="color: black;">&bull;</a>
+<b>Webmaster:</b>
+<a href="mailto:akkas@mit.edu">akkas@mit.edu</a>
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-68545700-1', 'auto');
+  ga('send', 'pageview');
+</script>
+<table>
+<tr style="display: none;" id="t_row">
+<td>{{name}}</td>
+<td><a href="../timeline/{{year}}/index.html">{{year}}</a></td>
+<td><a href="../countries/{{code}}/index.html">{{country}}</a></td>
+<td>{{medal}}</td>
+</tr>
+</table>
+<div style="display: none;" id="t_gold"><img src="../img/gold.png" width="9" height="9"> Gold Medal</div>
+<div style="display: none;" id="t_silver"><img src="../img/silver.png" width="9" height="9"> Silver Medal</div>
+<div style="display: none;" id="t_bronze"><img src="../img/bronze.png" width="9" height="9"> Bronze Medal</div>
+<div style="display: none;" id="t_honourable"><img src="../img/patates.png" width="9" height="9"> Honourable Mention</div>
+</body>
+</html>

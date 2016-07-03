@@ -1,36 +1,40 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
+<head><meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
 <link href="__BASE__/img/fav-logo.ico" rel="shortcut icon" type="image/x-icon" />
 <link href="__BASE__/css/design.css" rel="stylesheet" type="text/css" />
 <link href="__BASE__/css/print.css" rel="stylesheet" type="text/css" media="print" />
-<title>IPhO: __COUNTRY__</title>
+<title>IPhO: __COUNTRY__ - Individual Results</title>
 </head>
 <body>
 __HEADER_SIDE__
 <div id="main">
-	<div class="flag">
+	<div class="flag hideprn">
 		<a href="__INDEX__">
 		<img title="__COUNTRY__" src="http://imo-official.org/flags/__CODE__.gif" alt="__COUNTRY__" style="border-width:0px;" />
-		</a>
+        </a>
 	</div>
 	<h2>
 	__PREVIOUS_COUNTRY__
-	<a href="__INDEX__" class="highlight">__COUNTRY__</a>  
+	<a href="__INDEX__">__COUNTRY__</a>
 	__NEXT_COUNTRY__
     </h2>
-	<h3 class="hideprn">
-	<a href="individual__HTML_EXT__">Individual results</a>
+	<h3>
+	<a class="highlight" href="individual__HTML_EXT__">Individual results</a>
 	</h3>
-	<dl class="normal">
-    __CONTACT__
-	__HOST__
-    <dt>Performance at the IPhO</dt>
-	<dd>First participation: <a href="__BASE__/timeline/__FIRST_PARTICIPATION__/__INDEX__">__FIRST_PARTICIPATION__</a>.</dd>
-	<dd>Number of participations: __PARTICIPATION__.</dd>
-	<dd>Gold medals: __GOLD__. Silver medals: __SILVER__. Bronze medals: __BRONZE__. Honourable mentions: __HONOURABLE__.</dd>
-	</dl>
+	<table>
+	<thead>
+	<tr><th class="highlightDown">Year</th><th>Contestant</th><th>Rank</th><th>Award</th></tr>
+	</thead>
+	<tbody>
+	__TABLE__
+	</tbody>
+	</table>
+	<div>
+		Results may not be complete and may include mistakes. 
+		Please send relevant information to the webmaster: 
+		<a href="mailto:__WEBMASTER__">__WEBMASTER__</a>.
+	</div>
 </div>
 __FOOTER__
 </body>

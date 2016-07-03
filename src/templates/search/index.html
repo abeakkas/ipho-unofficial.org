@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
+<link href="__BASE__/img/fav-logo.ico" rel="shortcut icon" type="image/x-icon" />
+<link href="__BASE__/css/design.css" rel="stylesheet" type="text/css" />
+<link href="__BASE__/css/print.css" rel="stylesheet" type="text/css" media="print" />
+<title>IPhO: Search</title>
+<script src="search.js"></script>
+</head>
+<body>
+__HEADER_SIDE__
+<div id="main">
+	<h2>Search</h2>
+	<p>
+	<input type="text" maxlength="30" class="inptText" size="24" id="search_query" onkeydown="if(event.keyCode == 13) { ipho_search(); }" />
+	<input type="submit" value="Search" class="btnSubmit" onclick="ipho_search()" />
+	<span>(Search the IPhO database for a particular contestant)</span>
+	</p>
+    <table>
+    <thead><tr><th>Participant</th><th>Year</th><th>Country</th><th>Award</th></tr></thead>
+    <tbody id="search_results">
+    </tbody>
+    </table>
+</div>
+__FOOTER__
+<table>
+<tr style="display: none;" id="t_row">
+<td>{{name}}</td>
+<td><a href="__BASE__/timeline/{{year}}/__INDEX__">{{year}}</a></td>
+<td><a href="__BASE__/countries/{{code}}/__INDEX__">{{country}}</a></td>
+<td>{{medal}}</td>
+</tr>
+</table>
+<div style="display: none;" id="t_gold"><img src="__BASE__/img/gold.png" width="9" height="9"> Gold Medal</div>
+<div style="display: none;" id="t_silver"><img src="__BASE__/img/silver.png" width="9" height="9"> Silver Medal</div>
+<div style="display: none;" id="t_bronze"><img src="__BASE__/img/bronze.png" width="9" height="9"> Bronze Medal</div>
+<div style="display: none;" id="t_honourable"><img src="__BASE__/img/patates.png" width="9" height="9"> Honourable Mention</div>
+</body>
+</html>
