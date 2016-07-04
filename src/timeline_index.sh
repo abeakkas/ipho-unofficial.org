@@ -25,7 +25,7 @@ do
     row="${row//__COUNTRY__/${countrycodes[$code]}}"
     row="${row//__P_COUNTRY__/$p_country}"
     row="${row//__P_STUDENT__/$p_student}"
-    table+="$row"
+    table="$row$table"
 done < database/timeline.csv
 html="${html/__TABLE__/$table}"
 
