@@ -28,7 +28,12 @@ def initial_replace(html, type):
 
 def final_replace(html, base):
     html = html.replace("__BASE__", base)
-    html = html.replace("__INDEX__", "index.html")
-    html = html.replace("__HTML_EXT__", ".html")
+    github = True
+    if github:
+        html = html.replace("__INDEX__", "")
+        html = html.replace("__HTML_EXT__", "")
+    else:
+        html = html.replace("__INDEX__", "index.html")
+        html = html.replace("__HTML_EXT__", ".html")
     html = html.replace("__WEBMASTER__", "akkas@mit.edu")
     return html

@@ -4,14 +4,16 @@
 <title>
 Redirecting...
 </title>
+<script>
+var link = "../timeline/" + window.location.href.substr(-4) + "/";
+window.location = link;
+</script>
 </head>
 <body>
 Redirecting, please wait...<br>
 If you are not redirected shortly, <a id="clickhref">click here</a>.
 <script>
-var link = "../timeline/" + window.location.href.substr(-4) + "/index.html";
 document.getElementById("clickhref").href = link;
-window.location = link;
 </script>
 </body>
 </html>

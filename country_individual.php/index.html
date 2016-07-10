@@ -4,14 +4,16 @@
 <title>
 Redirecting...
 </title>
+<script>
+var link = "../countries/" + window.location.href.substr(-3) + "/individual";
+window.location = link;
+</script>
 </head>
 <body>
 Redirecting, please wait...<br>
 If you are not redirected shortly, <a id="clickhref">click here</a>.
 <script>
-var link = "../countries/" + window.location.href.substr(-3) + "/individual.html";
 document.getElementById("clickhref").href = link;
-window.location = link;
 </script>
 </body>
 </html>
