@@ -2,13 +2,14 @@
 Run main.py to create the project
 
 ## Assumptions
-### database/estudiantes.csv:
+
+##### database/estudiantes.csv:
 * Ordered first by year then by rank.
 * Don't assume ranks are numbers. They can be in two forms: 1234 or >=1234
 
-### database/timeline.csv:
+##### database/timeline.csv:
 * Ordered by year
 
-### timeline_year_country.py:
+##### timeline_year_country.py:
 * A team has at most 99 members
 * There are at most 10000 competitors
