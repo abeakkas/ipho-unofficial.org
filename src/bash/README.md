@@ -1,1 +1,1 @@
-Obsolete bash code
+Legacy bash code

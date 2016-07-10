@@ -35,5 +35,5 @@ def final_replace(html, base):
     else:
         html = html.replace("__INDEX__", "index.html")
         html = html.replace("__HTML_EXT__", ".html")
-    html = html.replace("__WEBMASTER__", "akkas@mit.edu")
+    html = html.replace("__WEBMASTER__", "iphounofficial@gmail.com")
     return html
