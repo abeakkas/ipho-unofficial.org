@@ -30,7 +30,7 @@ def final_replace(html, base):
     html = html.replace("__BASE__", base)
     github = True
     if github:
-        html = html.replace("__INDEX__", "")
+        html = html.replace("__INDEX__", ".")
         html = html.replace("__HTML_EXT__", "")
     else:
         html = html.replace("__INDEX__", "index.html")
