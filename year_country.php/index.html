@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>
+Redirecting...
+</title>
+</head>
+<body>
+Redirecting, please wait...<br>
+If you are not redirected shortly, <a id="clickhref">click here</a>.
+<script>
+var link = "../timeline/" + window.location.href.substr(-4) + "/country.html";
+document.getElementById("clickhref").href = link;
+window.location = link;
+</script>
+</body>
+</html>
