@@ -9,10 +9,10 @@ with open("database/estudiantes.csv") as file:
     reader = csv.reader(file)
     for row in reader:
         entry = {
-            "name": row[0],
-            "code": row[1],
-            "year": row[2],
-            "rank": row[3],
+            "year": row[0],
+            "rank": row[1],
+            "name": row[2],
+            "code": row[3],
             "medal": row[4]
         }
         database.append(entry)
