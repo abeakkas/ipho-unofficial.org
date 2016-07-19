@@ -20,8 +20,15 @@ def run(year):
     html = html.replace("__CODE__", yeardata["code"])
     html = html.replace("__COUNTRY__", code_to_country[yeardata["code"]])
     
+    if "code2" in yeardata:
+        html = html.replace("__CODE2__", yeardata["code2"])
+        html = html.replace("__COUNTRY2__", code_to_country[yeardata["code2"]])
+        html = html.replace("__CODE2_STYLE__", "")
+    else:
+        html = html.replace("__CODE2_STYLE__", "display: none;")
+    
     if yeardata["city"] != "":
-        html = html.replace("__CITY__", yeardata["city"] + ", ")
+        html = html.replace("__CITY__", yeardata["city"] + ",")
     else:
         html = html.replace("__CITY__", "")
     

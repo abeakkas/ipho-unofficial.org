@@ -1,8 +1,8 @@
 #!/usr/bin/python
 import util
 import templates
-from database_timeline import database as t_db
 from database_countries import code_to_country
+from database_timeline import database as t_db
 
 def run():
     print "Creating timeline/index"
@@ -20,6 +20,12 @@ def run():
         rowhtml = rowhtml.replace("__COUNTRY__", code_to_country[row["code"]])
         rowhtml = rowhtml.replace("__P_COUNTRY__", row["p_country"])
         rowhtml = rowhtml.replace("__P_STUDENT__", row["p_student"])
+        if "code2" in row:
+            rowhtml = rowhtml.replace("__CODE2__", row["code2"])
+            rowhtml = rowhtml.replace("__COUNTRY2__", code_to_country[row["code2"]])
+            rowhtml = rowhtml.replace("__CODE2_STYLE__", "")
+        else:
+            rowhtml = rowhtml.replace("__CODE2_STYLE__", "display: none;")
         # Reverse list
         tablehtml = rowhtml + tablehtml
     html = html.replace("__TABLE__", tablehtml)
