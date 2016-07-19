@@ -6,6 +6,7 @@ from database_timeline import year_indexed as t_db_y
 from database_timeline import previous_year
 from database_timeline import next_year
 from database_countries import code_to_country
+from database_students import year_grouped as s_db_y
 
 def run(year):
     print "Creating timeline/" + year + "/index"
@@ -54,12 +55,25 @@ def run(year):
     else:
         html = html.replace("__HOMEPAGE_STYLE__", "display: none;")
     
-    if yeardata["gold"] != "":
+    gold = 0
+    silver = 0
+    bronze = 0
+    honourable = 0
+    if year in s_db_y:
+        for studentdata in s_db_y[year]:
+            if studentdata["medal"] == "1":
+                gold += 1
+            elif studentdata["medal"] == "2":
+                silver += 1
+            elif studentdata["medal"] == "3":
+                bronze += 1
+            elif studentdata["medal"] == "4":
+                honourable += 1
         html = html.replace("__AWARDS_STYLE__", "")
-        html = html.replace("__GOLD__", yeardata["gold"])
-        html = html.replace("__SILVER__", yeardata["silver"])
-        html = html.replace("__BRONZE__", yeardata["bronze"])
-        html = html.replace("__HONOURABLE__", yeardata["honourable"])
+        html = html.replace("__GOLD__", str(gold))
+        html = html.replace("__SILVER__", str(silver))
+        html = html.replace("__BRONZE__", str(bronze))
+        html = html.replace("__HONOURABLE__", str(honourable))
     else:
         html = html.replace("__AWARDS_STYLE__", "display: none;")
     
