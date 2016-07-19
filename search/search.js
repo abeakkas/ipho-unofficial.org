@@ -29,7 +29,7 @@
                 var lines = tx.split("\n");
                 for(var i = 0; i < lines.length; i++) {
                     var ps = lines[i].split(",");
-                    students.push({name: ps[0], code: ps[1], year: ps[2], rank: ps[3], medal: ps[4].trim()});
+                    students.push({year: ps[0], rank: ps[1], name: ps[2], code: ps[3], medal: ps[4].trim()});
                 }
             }
         }
