@@ -505,7 +505,7 @@ INSERT INTO `estudiante` (`id`, `userid`, `name`, `country`, `year`, `rank`, `me
 (308, 0, 'Dao Phuong Khoi', 'VNM', 2014, 45, 2),
 (309, 0, 'Ahmet Burak CatlÄ±', 'TUR', 2014, 46, 2),
 (310, 0, 'Tudor Costel CreÅ£u', 'ROU', 2014, 47, 2),
-(311, 0, 'SamurdhiLeuke Bandara Karunaratne', 'LKA', 2014, 48, 2),
+(311, 0, 'Samurdhi Leuke Bandara Karunaratne', 'LKA', 2014, 48, 2),
 (312, 0, 'Alireza Modirshanehchi', 'IRN', 2014, 49, 2),
 (313, 0, 'Katerina Naydenova', 'BGR', 2014, 50, 2),
 (314, 0, 'Gideon Lee', 'SGP', 2014, 51, 2),
