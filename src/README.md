@@ -1,5 +1,8 @@
 # Source code
-Run main.py to create the project
+Run main.py to create the project:
+```
+python -B main.py
+```
 
 ## Assumptions
 
