@@ -1,7 +1,11 @@
 #!/usr/bin/python
 import util
+from database_timeline import year_indexed as t_db_y
 
 templates = {}
+# Technically, these don't have to be consecutive
+previous_year = util.readfile("database/previous_year.txt").strip()
+next_year = util.readfile("database/next_year.txt").strip()
 
 def get(path):
     if path not in templates:
@@ -23,6 +27,10 @@ def initial_replace(html, type):
         side = side.replace("__HIGHLIGHT_2__", "")
         side = side.replace("__HIGHLIGHT_3__", "")
         html = html.replace("__HEADER_SIDE__", side)
+    html = html.replace("__HEADER_PREVIOUS_YEAR__", previous_year)
+    html = html.replace("__HEADER_PREVIOUS_YEAR_HOMEPAGE__", t_db_y[previous_year]["homepage"])
+    html = html.replace("__HEADER_NEXT_YEAR__", next_year)
+    html = html.replace("__HEADER_NEXT_YEAR_HOMEPAGE__", t_db_y[next_year]["homepage"])
     html = html.replace("__FOOTER__", get("footer"))
     return html
 
