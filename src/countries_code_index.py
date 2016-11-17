@@ -26,18 +26,21 @@ def run(code):
             html = html.replace("__NATIONAL_SITE_TEXT__", codedata["website"][0:50] + "...")
     else:
         html = html.replace("__CONTACT_STYLE__", "display: none;")
+        html = html.replace("__NATIONAL_SITE__", ".") # Google crawler fix
     
     if code in previous_code:
         html = html.replace("__PREVIOUS_CODE__", previous_code[code])
         html = html.replace("__PREVIOUS_CODE_STYLE__", "")
     else:
         html = html.replace("__PREVIOUS_CODE_STYLE__", "display: none;")
+        html = html.replace("__PREVIOUS_CODE__", ".") # Google crawler fix
         
     if code in next_code:
         html = html.replace("__NEXT_CODE__", next_code[code])
         html = html.replace("__NEXT_CODE_STYLE__", "")
     else:
         html = html.replace("__NEXT_CODE_STYLE__", "display: none;")
+        html = html.replace("__NEXT_CODE__", ".") # Google crawler fix
     
     if code in t_db_c:
         hostshtml = ""

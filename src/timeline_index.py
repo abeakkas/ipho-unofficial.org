@@ -26,6 +26,7 @@ def run():
             rowhtml = rowhtml.replace("__CODE2_STYLE__", "")
         else:
             rowhtml = rowhtml.replace("__CODE2_STYLE__", "display: none;")
+            rowhtml = rowhtml.replace("__CODE2__", ".") # Google crawler fix
         # Reverse list
         tablehtml = rowhtml + tablehtml
     html = html.replace("__TABLE__", tablehtml)

@@ -22,12 +22,14 @@ def run(year):
         html = html.replace("__PREVIOUS_YEAR_STYLE__", "")
     else:
         html = html.replace("__PREVIOUS_YEAR_STYLE__", "display: none;")
+        html = html.replace("__PREVIOUS_YEAR__", ".") # Google crawler fix
         
     if year in next_year:
         html = html.replace("__NEXT_YEAR__", next_year[year])
         html = html.replace("__NEXT_YEAR_STYLE__", "")
     else:
         html = html.replace("__NEXT_YEAR_STYLE__", "display: none;")
+        html = html.replace("__NEXT_YEAR__", ".") # Google crawler fix
     
     medals = {}
     _gold = 10000000000

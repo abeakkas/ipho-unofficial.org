@@ -26,6 +26,7 @@ def run(year):
         html = html.replace("__CODE2_STYLE__", "")
     else:
         html = html.replace("__CODE2_STYLE__", "display: none;")
+        html = html.replace("__CODE2__", ".") # Google crawler fix
     
     if yeardata["city"] != "":
         html = html.replace("__CITY__", yeardata["city"] + ",")
@@ -37,12 +38,14 @@ def run(year):
         html = html.replace("__PREVIOUS_YEAR_STYLE__", "")
     else:
         html = html.replace("__PREVIOUS_YEAR_STYLE__", "display: none;")
+        html = html.replace("__PREVIOUS_YEAR__", ".") # Google crawler fix
         
     if year in next_year:
         html = html.replace("__NEXT_YEAR__", next_year[year])
         html = html.replace("__NEXT_YEAR_STYLE__", "")
     else:
         html = html.replace("__NEXT_YEAR_STYLE__", "display: none;")
+        html = html.replace("__NEXT_YEAR__", ".") # Google crawler fix
     
     if yeardata["p_student"] != "":
         html = html.replace("__P_STUDENT_STYLE__", "")
@@ -61,6 +64,7 @@ def run(year):
         html = html.replace("__HOMEPAGE__", yeardata["homepage"])
     else:
         html = html.replace("__HOMEPAGE_STYLE__", "display: none;")
+        html = html.replace("__HOMEPAGE__", ".") # Google crawler fix
     
     gold = 0
     silver = 0

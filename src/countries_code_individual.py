@@ -20,12 +20,15 @@ def run(code):
         html = html.replace("__PREVIOUS_CODE_STYLE__", "")
     else:
         html = html.replace("__PREVIOUS_CODE_STYLE__", "display: none;")
+        html = html.replace("__PREVIOUS_CODE__", ".") # Google crawler fix
         
     if code in next_code:
         html = html.replace("__NEXT_CODE__", next_code[code])
         html = html.replace("__NEXT_CODE_STYLE__", "")
     else:
         html = html.replace("__NEXT_CODE_STYLE__", "display: none;")
+        html = html.replace("__NEXT_CODE__", ".") # Google crawler fix
+
     
     tablehtml = ""
     if code in s_db_c:
