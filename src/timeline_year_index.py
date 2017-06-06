@@ -9,7 +9,7 @@ from database_countries import code_to_country
 from database_students import year_grouped as s_db_y
 
 def run(year):
-    print "Creating timeline/" + year + "/index"
+    print("Creating timeline/" + year + "/index")
     html = templates.get("timeline/year/index")
     html = templates.initial_replace(html, 1)
     yeardata = t_db_y[year]

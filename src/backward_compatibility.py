@@ -9,7 +9,7 @@ def create(name):
     util.writefile("../" + name + ".php/index.html", html)
 
 def run():
-    print "Copying backward compatibility files"
+    print("Copying backward compatibility files")
     create("index")
     create("countries")
     create("country_individual")

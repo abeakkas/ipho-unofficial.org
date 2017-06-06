@@ -6,7 +6,7 @@ import timeline_year
 from database_timeline import database as t_db
 
 def run():
-    print "Creating timeline"
+    print("Creating timeline")
     util.makedirs("../timeline")
     timeline_index.run()
     for yeardata in t_db:

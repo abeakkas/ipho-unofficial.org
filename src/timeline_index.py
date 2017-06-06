@@ -5,7 +5,7 @@ from database_countries import code_to_country
 from database_timeline import database as t_db
 
 def run():
-    print "Creating timeline/index"
+    print("Creating timeline/index")
     html = templates.get("timeline/index")
     html = templates.initial_replace(html, 1)
     

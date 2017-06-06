@@ -8,7 +8,7 @@ import static_files
 import backward_compatibility
 
 def run():
-    print "Creating whole project"
+    print("Creating whole project")
     index.run()
     e404.run()
     timeline.run()

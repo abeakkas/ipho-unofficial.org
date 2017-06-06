@@ -3,7 +3,7 @@ import util
 import templates
 
 def run():
-    print "Creating 404"
+    print("Creating 404")
     html = templates.get("404")
     html = templates.initial_replace(html, -1)
     html = templates.final_replace(html, ".")

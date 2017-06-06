@@ -6,7 +6,7 @@ import timeline_year_country
 import timeline_year_individual
 
 def run(year):
-    print "Creating timeline/" + year
+    print("Creating timeline/" + year)
     util.makedirs("../timeline/" + year)
     timeline_year_index.run(year)
     timeline_year_country.run(year)

@@ -6,7 +6,7 @@ from database_countries import code_to_country
 from database_timeline import code_grouped as t_db_c
 
 def run():
-    print "Creating countries/index"
+    print("Creating countries/index")
     html = templates.get("countries/index")
     html = templates.initial_replace(html, 2)
     
