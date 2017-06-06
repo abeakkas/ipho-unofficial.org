@@ -37,7 +37,7 @@ def run(code):
         for studentdata in s_db_c[code]:
             rowhtml = templates.get("countries/code/individual_row")
             rowhtml = rowhtml.replace("__NAME__", studentdata["name"])
-            rowhtml = rowhtml.replace("__RANK__", studentdata["rank"])
+            rowhtml = rowhtml.replace("__RANK__", ("&ge;" if studentdata["rank>="] else "") + studentdata["rank"])
             rowhtml = rowhtml.replace("__YEAR__", studentdata["year"])
             if studentdata["medal"] == "1":
                 rowhtml = rowhtml.replace("__MEDAL__", templates.get("countries/code/individual_gold"))

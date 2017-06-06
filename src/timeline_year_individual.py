@@ -38,7 +38,7 @@ def run(year):
             rowhtml = rowhtml.replace("__NAME__", row["name"])
             rowhtml = rowhtml.replace("__CODE__", row["code"])
             rowhtml = rowhtml.replace("__COUNTRY__", code_to_country[row["code"]])
-            rowhtml = rowhtml.replace("__RANK__", row["rank"])
+            rowhtml = rowhtml.replace("__RANK__", ("&ge;" if row["rank>="] else "") + row["rank"])
             if row["medal"] == "1":
                 rowhtml = rowhtml.replace("__MEDAL__", templates.get("timeline/year/individual_gold"))
             elif row["medal"] == "2":

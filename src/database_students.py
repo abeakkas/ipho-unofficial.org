@@ -13,8 +13,12 @@ with open("database/estudiantes.csv") as file:
             "rank": row[1],
             "name": row[2],
             "code": row[3],
-            "medal": row[4]
+            "medal": row[4],
+            "rank>=": False
         }
+        if entry["rank"][:2] == ">=":
+            entry["rank"] = entry["rank"][2:]
+            entry["rank>="] = True
         database.append(entry)
         if entry["code"] not in code_grouped:
             code_grouped[entry["code"]] = []

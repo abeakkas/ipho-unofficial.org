@@ -40,8 +40,7 @@ def run(year):
         for row in s_db_y[year]:
             if row["code"] not in medals:
                 # This assures countries with same medals are sorted by their best student
-                rank = int(row["rank"]) if row["rank"][0] != ">" else int(row["rank"][2:])
-                medals[row["code"]] = _honourable - rank
+                medals[row["code"]] = _honourable - int(row["rank"])
             if row["medal"] == "1":
                 medals[row["code"]] += _gold
             elif row["medal"] == "2":
