@@ -12,7 +12,9 @@
                 var lines = tx.split("\n");
                 for(var i = 0; i < lines.length; i++) {
                     var ps = lines[i].split(",");
-                    countries[ps[0]] = ps[1];
+                    if (ps.length > 2) {
+                        countries[ps[0]] = ps[1];
+                    }
                 }
             }
         }
@@ -29,7 +31,9 @@
                 var lines = tx.split("\n");
                 for(var i = 0; i < lines.length; i++) {
                     var ps = lines[i].split(",");
-                    students.push({year: ps[0], rank: ps[1], name: ps[2], code: ps[3], medal: ps[4].trim()});
+                    if (ps.length > 4) {
+                        students.push({year: ps[0], rank: ps[1], name: ps[2], code: ps[3], medal: ps[4].trim()});
+                    }
                 }
             }
         }
