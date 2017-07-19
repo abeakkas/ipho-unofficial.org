@@ -1,4 +1,10 @@
+// Requries asciify.js
+
 (function () {
+    if (typeof(asciify) != "function") {
+        console.error("asciify not imported!");
+        return;
+    }
     var countries = null;
     var students = null;
     function loadCountries() {
@@ -6,7 +12,8 @@
         xmlhttp.open("GET", "countries.csv", true);
         xmlhttp.overrideMimeType("text/plain");
         xmlhttp.onreadystatechange = function() {
-            if(xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            // Let's ignore xmlhttp.status as it doesn't work local
+            if(xmlhttp.readyState == 4 && xmlhttp.responseText != null) {
                 countries = [];
                 var tx = xmlhttp.responseText;
                 var lines = tx.split("\n");
@@ -25,14 +32,22 @@
         xmlhttp.open("GET", "estudiantes.csv", true);
         xmlhttp.overrideMimeType("text/plain");
         xmlhttp.onreadystatechange = function() {
-            if(xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            // Let's ignore xmlhttp.status as it doesn't work local
+            if(xmlhttp.readyState == 4 && xmlhttp.responseText != null) {
                 students = [];
                 var tx = xmlhttp.responseText;
                 var lines = tx.split("\n");
                 for(var i = 0; i < lines.length; i++) {
-                    var ps = lines[i].split(",");
+                    var ps = lines[i].trim().split(",");
                     if (ps.length > 4) {
-                        students.push({year: ps[0], rank: ps[1], name: ps[2], code: ps[3], medal: ps[4].trim()});
+                        students.push({
+                            year: ps[0],
+                            rank: ps[1],
+                            name: ps[2],
+                            code: ps[3],
+                            medal: ps[4],
+                            name_ascii_lower: asciify(ps[2]).toLowerCase(),
+                        });
                     }
                 }
             }
@@ -40,46 +55,48 @@
         xmlhttp.send();
     }
     window.ipho_search = function() {
-        if(countries != null && students != null) {
-            var html = "";
-            var name = document.getElementById("search_query").value;
-            var t_row = document.getElementById("t_row").innerHTML;
-            var t_gold = document.getElementById("t_gold").innerHTML;
-            var t_silver = document.getElementById("t_silver").innerHTML;
-            var t_bronze = document.getElementById("t_bronze").innerHTML;
-            var t_honourable = document.getElementById("t_honourable").innerHTML;
-            if(name.length > 1) {
-                for(var i = 0; i < students.length; i++) {
-                    if(students[i].name.toLowerCase().indexOf(name.toLowerCase()) != -1) {
-                        var row = t_row.replace(/{{name}}/g, students[i].name);
-                        row = row.replace(/{{code}}/g, students[i].code);
-                        row = row.replace(/{{country}}/g, countries[students[i].code]);
-                        row = row.replace(/{{year}}/g, students[i].year);
-                        row = row.replace(/{{code}}/g, students[i].code);
-                        switch(students[i].medal) {
-                            case "1":
-                                row = row.replace(/{{medal}}/g, t_gold);
-                                break;
-                            case "2":
-                                row = row.replace(/{{medal}}/g, t_silver);
-                                break;
-                            case "3":
-                                row = row.replace(/{{medal}}/g, t_bronze);
-                                break;
-                            case "4":
-                                row = row.replace(/{{medal}}/g, t_honourable);
-                                break;
-                            default:
-                                row = row.replace(/{{medal}}/g, "");
-                                break;
-                        }
-                        html += "<tr>" + row + "</tr>";
-                    }
+        if(countries == null || students == null) {
+          return;
+        }
+        var html = "";
+        var t_row = document.getElementById("t_row").innerHTML;
+        var t_gold = document.getElementById("t_gold").innerHTML;
+        var t_silver = document.getElementById("t_silver").innerHTML;
+        var t_bronze = document.getElementById("t_bronze").innerHTML;
+        var t_honourable = document.getElementById("t_honourable").innerHTML;
+        var query = document.getElementById("search_query").value;
+        query = asciify(query).toLowerCase().trim();
+        if(query.length <= 1) {
+            return;
+        }
+        for(var i = 0; i < students.length; i++) {
+            if(students[i].name_ascii_lower.indexOf(query) != -1) {
+                var row = t_row.replace(/{{name}}/g, students[i].name)
+                    .replace(/{{code}}/g, students[i].code)
+                    .replace(/{{country}}/g, countries[students[i].code])
+                    .replace(/{{year}}/g, students[i].year)
+                    .replace(/{{code}}/g, students[i].code);
+                switch(students[i].medal) {
+                    case "1":
+                        row = row.replace(/{{medal}}/g, t_gold);
+                        break;
+                    case "2":
+                        row = row.replace(/{{medal}}/g, t_silver);
+                        break;
+                    case "3":
+                        row = row.replace(/{{medal}}/g, t_bronze);
+                        break;
+                    case "4":
+                        row = row.replace(/{{medal}}/g, t_honourable);
+                        break;
+                    default:
+                        row = row.replace(/{{medal}}/g, "");
+                        break;
                 }
-                window.low = html;
-                document.getElementById("search_results").innerHTML = html;
+                html += "<tr>" + row + "</tr>";
             }
         }
+        document.getElementById("search_results").innerHTML = html;
     }
     loadCountries();
     loadStudents();
