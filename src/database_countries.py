@@ -14,7 +14,8 @@ with open("database/countries.csv") as file:
         entry = {
             "code": row[0],
             "country": row[1],
-            "website": row[2]
+            "website": row[2],
+            "former": row[3] == "former"
         }
         database.append(entry)
         code_indexed[entry["code"]] = entry

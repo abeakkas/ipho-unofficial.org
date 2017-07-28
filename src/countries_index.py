@@ -37,6 +37,8 @@ def run():
             rowhtml = rowhtml.replace("__HOSTS__", hosts)
         else:
             rowhtml = rowhtml.replace("__HOSTS__", "")
+
+        rowhtml = rowhtml.replace("__CLASS__", "tr-former" if row["former"] else "")
         
         tablehtml += rowhtml
     html = html.replace("__TABLE__", tablehtml)
