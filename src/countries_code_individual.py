@@ -7,6 +7,7 @@ from database_countries import previous_code
 from database_countries import next_code
 from database_students import code_grouped as s_db_c
 
+
 def run(code):
     print("Creating countries/" + code + "/individual")
     html = templates.get("countries/code/individual")
@@ -29,7 +30,6 @@ def run(code):
         html = html.replace("__NEXT_CODE_STYLE__", "display: none;")
         html = html.replace("__NEXT_CODE__", ".") # Google crawler fix
 
-    
     tablehtml = ""
     if code in s_db_c:
         yearhtml = ""
@@ -58,10 +58,14 @@ def run(code):
                 tablehtml = yearhtml + tablehtml
                 rowhtml = rowhtml.replace("__CLASS__", "doubleTopLine")
                 yearhtml = rowhtml
+        # Hacky way of removing first double top line:
+        yearhtml = yearhtml.replace("doubleTopLine", "", 1)
         tablehtml = yearhtml + tablehtml
+
     html = html.replace("__TABLE__", tablehtml)
     html = templates.final_replace(html, "../..")
     util.writefile("../countries/" + code + "/individual.html", html)
-    
+
+
 if __name__ == "__main__":
     run(sys.argv[1])
