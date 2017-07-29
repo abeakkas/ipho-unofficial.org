@@ -6,6 +6,8 @@ python -B main.py
 
 ## Assumptions
 
+CSV files don't actually obey CSV format. They are literally "comma separated values". Thus, names should not include commas.
+
 ##### database/estudiantes.csv:
 * Ordered first by year then by rank.
 * Don't assume ranks are numbers. They can be in two forms: 1234 or >=1234
