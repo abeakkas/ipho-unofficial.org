@@ -32,12 +32,16 @@ def run(year):
         html = html.replace("__NEXT_YEAR__", ".") # Google crawler fix
     
     medals = {}
+    # Assuming no country gets 100 medals in a year:
     _gold = 10000000000
     _silver = 100000000
-    _bronze = 1000000
+    _bronze =   1000000
     _honourable = 10000
     if year in s_db_y:
         for row in s_db_y[year]:
+            if row["code"] == "":
+                # Country unknown
+                continue
             if row["code"] not in medals:
                 # This assures countries with same medals are sorted by their best student
                 medals[row["code"]] = _honourable - int(row["rank"])

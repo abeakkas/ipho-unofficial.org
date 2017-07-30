@@ -15,6 +15,7 @@
             // Let's ignore xmlhttp.status as it doesn't work local
             if(xmlhttp.readyState == 4 && xmlhttp.responseText != null) {
                 countries = [];
+                countries[""] = "";
                 var tx = xmlhttp.responseText;
                 var lines = tx.split("\n");
                 for(var i = 0; i < lines.length; i++) {

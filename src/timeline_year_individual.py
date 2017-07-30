@@ -35,9 +35,13 @@ def run(year):
     if year in s_db_y:
         for row in s_db_y[year]:
             rowhtml = templates.get("timeline/year/individual_row")
+            if row["code"] == "":
+                rowhtml = rowhtml.replace("__CODE__", "TUR") # Yup, this is my hack
+                rowhtml = rowhtml.replace("__COUNTRY__", "")
+            else:
+                rowhtml = rowhtml.replace("__CODE__", row["code"])
+                rowhtml = rowhtml.replace("__COUNTRY__", code_to_country[row["code"]])
             rowhtml = rowhtml.replace("__NAME__", row["name"])
-            rowhtml = rowhtml.replace("__CODE__", row["code"])
-            rowhtml = rowhtml.replace("__COUNTRY__", code_to_country[row["code"]])
             rowhtml = rowhtml.replace("__RANK__", ("&ge;" if row["rank>="] else "") + row["rank"])
             if row["medal"] == "1":
                 rowhtml = rowhtml.replace("__MEDAL__", templates.get("timeline/year/individual_gold"))
