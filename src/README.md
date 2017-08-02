@@ -4,17 +4,18 @@ Run main.py to create the project:
 python -B main.py
 ```
 
+You can run individual scripts with command line arguments.
+
 ## Assumptions
 
 CSV files don't actually obey CSV format. They are literally "comma separated values". Thus, names should not include commas.
 
 ##### database/estudiantes.csv:
+* Columns: year, rank, name, country-code, medal, theoretical, experimental, total.
+* Medal is one of: G, S, B, H, P.
 * Ordered first by year then by rank.
 * Don't assume ranks are numbers. They can be in two forms: 1234 or >=1234
+* Country-code can be empty if unknown.
 
 ##### database/timeline.csv:
 * Ordered by year
-
-##### timeline_year_country.py:
-* A team has at most 99 members
-* There are at most 10000 competitors
