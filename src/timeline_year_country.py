@@ -40,7 +40,7 @@ def run(year):
             if row["code"] not in medals:
                 medals[row["code"]] = {
                     "bestrank": int(row["rank"]),
-                    "bestrank>=": row["rank>="],
+                    "bestrank>=": "&ge;" if row["rank>="] else "",
                     "gold": 0,
                     "silver": 0,
                     "bronze": 0,
@@ -88,6 +88,7 @@ def run(year):
         rowhtml = rowhtml.replace("__SILVER__", str(medals[code]["silver"]))
         rowhtml = rowhtml.replace("__BRONZE__", str(medals[code]["bronze"]))
         rowhtml = rowhtml.replace("__HONOURABLE__", str(medals[code]["honourable"]))
+        rowhtml = rowhtml.replace("__BEST_RANK__", medals[code]["bestrank>="] + str(medals[code]["bestrank"]))
         tablehtml += rowhtml
     html = html.replace("__TABLE__", tablehtml)
     
