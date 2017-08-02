@@ -32,40 +32,55 @@ def run(year):
         html = html.replace("__NEXT_YEAR__", ".") # Google crawler fix
     
     medals = {}
-    # Assuming no country gets 100 medals in a year:
-    _gold = 10000000000
-    _silver = 100000000
-    _bronze =   1000000
-    _honourable = 10000
     if year in s_db_y:
         for row in s_db_y[year]:
             if row["code"] == "":
                 # Country unknown
                 continue
             if row["code"] not in medals:
-                # This assures countries with same medals are sorted by their best student
-                medals[row["code"]] = _honourable - int(row["rank"])
+                medals[row["code"]] = {
+                    "bestrank": int(row["rank"]),
+                    "bestrank>=": row["rank>="],
+                    "gold": 0,
+                    "silver": 0,
+                    "bronze": 0,
+                    "honourable": 0
+                    }
             if row["medal"] == "1":
-                medals[row["code"]] += _gold
+                medals[row["code"]]["gold"] += 1
             elif row["medal"] == "2":
-                medals[row["code"]] += _silver
+                medals[row["code"]]["silver"] += 1
             elif row["medal"] == "3":
-                medals[row["code"]] += _bronze
+                medals[row["code"]]["bronze"] += 1
             elif row["medal"] == "4":
-                medals[row["code"]] += _honourable
+                medals[row["code"]]["honourable"] += 1
     
-    msort = sorted(medals, key = medals.get)[::-1]
+    def cmpfn(k1, k2):
+        m1 = medals[k1]
+        m2 = medals[k2]
+        if m1["gold"] != m2["gold"]:
+            return cmp(m1["gold"], m2["gold"])
+        elif m1["silver"] != m2["silver"]:
+            return cmp(m1["silver"], m2["silver"])
+        elif m1["bronze"] != m2["bronze"]:
+            return cmp(m1["bronze"], m2["bronze"])
+        elif m1["honourable"] != m2["honourable"]:
+            return cmp(m1["honourable"], m2["honourable"])
+        else:
+            return cmp(m2["bestrank"], m1["bestrank"])
+
+    sortedcodes = reversed(sorted(medals, cmp = cmpfn))
     
     tablehtml = ""
-    for i in range(len(msort)):
+    for i, code in enumerate(sortedcodes):
         rowhtml = templates.get("timeline/year/country_row")
-        rowhtml = rowhtml.replace("__CODE__", msort[i])
-        rowhtml = rowhtml.replace("__COUNTRY__", code_to_country[msort[i]])
+        rowhtml = rowhtml.replace("__CODE__", code)
+        rowhtml = rowhtml.replace("__COUNTRY__", code_to_country[code])
         rowhtml = rowhtml.replace("__RANK__", str(i + 1))
-        rowhtml = rowhtml.replace("__GOLD__", str(medals[msort[i]] / _gold))
-        rowhtml = rowhtml.replace("__SILVER__", str(medals[msort[i]] / _silver % 100))
-        rowhtml = rowhtml.replace("__BRONZE__", str(medals[msort[i]] / _bronze % 100))
-        rowhtml = rowhtml.replace("__HONOURABLE__", str(medals[msort[i]] / _honourable % 100))
+        rowhtml = rowhtml.replace("__GOLD__", str(medals[code]["gold"]))
+        rowhtml = rowhtml.replace("__SILVER__", str(medals[code]["silver"]))
+        rowhtml = rowhtml.replace("__BRONZE__", str(medals[code]["bronze"]))
+        rowhtml = rowhtml.replace("__HONOURABLE__", str(medals[code]["honourable"]))
         tablehtml += rowhtml
     html = html.replace("__TABLE__", tablehtml)
     
