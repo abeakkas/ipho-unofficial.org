@@ -72,11 +72,18 @@ def run(year):
     sortedcodes = reversed(sorted(medals, cmp = cmpfn))
     
     tablehtml = ""
+    prevcode = ""
+    prevrank = 0
     for i, code in enumerate(sortedcodes):
         rowhtml = templates.get("timeline/year/country_row")
         rowhtml = rowhtml.replace("__CODE__", code)
         rowhtml = rowhtml.replace("__COUNTRY__", code_to_country[code])
-        rowhtml = rowhtml.replace("__RANK__", str(i + 1))
+        if prevcode != "" and cmpfn(prevcode, code) == 0:
+            rowhtml = rowhtml.replace("__RANK__", prevrank)
+        else:
+            rowhtml = rowhtml.replace("__RANK__", str(i + 1))
+            prevcode = code
+            prevrank = str(i + 1)
         rowhtml = rowhtml.replace("__GOLD__", str(medals[code]["gold"]))
         rowhtml = rowhtml.replace("__SILVER__", str(medals[code]["silver"]))
         rowhtml = rowhtml.replace("__BRONZE__", str(medals[code]["bronze"]))
