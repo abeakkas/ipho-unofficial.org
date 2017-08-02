@@ -39,13 +39,13 @@ def run(code):
             rowhtml = rowhtml.replace("__NAME__", studentdata["name"])
             rowhtml = rowhtml.replace("__RANK__", ("&ge;" if studentdata["rank>="] else "") + studentdata["rank"])
             rowhtml = rowhtml.replace("__YEAR__", studentdata["year"])
-            if studentdata["medal"] == "1":
+            if studentdata["medal"] == "G":
                 rowhtml = rowhtml.replace("__MEDAL__", templates.get("countries/code/individual_gold"))
-            elif studentdata["medal"] == "2":
+            elif studentdata["medal"] == "S":
                 rowhtml = rowhtml.replace("__MEDAL__", templates.get("countries/code/individual_silver"))
-            elif studentdata["medal"] == "3":
+            elif studentdata["medal"] == "B":
                 rowhtml = rowhtml.replace("__MEDAL__", templates.get("countries/code/individual_bronze"))
-            elif studentdata["medal"] == "4":
+            elif studentdata["medal"] == "H":
                 rowhtml = rowhtml.replace("__MEDAL__", templates.get("countries/code/individual_honourable"))
             else:
                 rowhtml = rowhtml.replace("__MEDAL__", "")

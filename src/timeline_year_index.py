@@ -72,13 +72,13 @@ def run(year):
     honourable = 0
     if year in s_db_y:
         for studentdata in s_db_y[year]:
-            if studentdata["medal"] == "1":
+            if studentdata["medal"] == "G":
                 gold += 1
-            elif studentdata["medal"] == "2":
+            elif studentdata["medal"] == "S":
                 silver += 1
-            elif studentdata["medal"] == "3":
+            elif studentdata["medal"] == "B":
                 bronze += 1
-            elif studentdata["medal"] == "4":
+            elif studentdata["medal"] == "H":
                 honourable += 1
         html = html.replace("__AWARDS_STYLE__", "")
         html = html.replace("__GOLD__", str(gold))

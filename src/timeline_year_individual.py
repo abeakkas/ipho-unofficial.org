@@ -43,13 +43,13 @@ def run(year):
                 rowhtml = rowhtml.replace("__COUNTRY__", code_to_country[row["code"]])
             rowhtml = rowhtml.replace("__NAME__", row["name"])
             rowhtml = rowhtml.replace("__RANK__", ("&ge;" if row["rank>="] else "") + row["rank"])
-            if row["medal"] == "1":
+            if row["medal"] == "G":
                 rowhtml = rowhtml.replace("__MEDAL__", templates.get("timeline/year/individual_gold"))
-            elif row["medal"] == "2":
+            elif row["medal"] == "S":
                 rowhtml = rowhtml.replace("__MEDAL__", templates.get("timeline/year/individual_silver"))
-            elif row["medal"] == "3":
+            elif row["medal"] == "B":
                 rowhtml = rowhtml.replace("__MEDAL__", templates.get("timeline/year/individual_bronze"))
-            elif row["medal"] == "4":
+            elif row["medal"] == "H":
                 rowhtml = rowhtml.replace("__MEDAL__", templates.get("timeline/year/individual_honourable"))
             else:
                 rowhtml = rowhtml.replace("__MEDAL__", "")

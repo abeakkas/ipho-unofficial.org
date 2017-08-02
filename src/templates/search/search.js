@@ -78,16 +78,16 @@
                     .replace(/{{year}}/g, students[i].year)
                     .replace(/{{code}}/g, students[i].code);
                 switch(students[i].medal) {
-                    case "1":
+                    case "G":
                         row = row.replace(/{{medal}}/g, t_gold);
                         break;
-                    case "2":
+                    case "S":
                         row = row.replace(/{{medal}}/g, t_silver);
                         break;
-                    case "3":
+                    case "B":
                         row = row.replace(/{{medal}}/g, t_bronze);
                         break;
-                    case "4":
+                    case "H":
                         row = row.replace(/{{medal}}/g, t_honourable);
                         break;
                     default:

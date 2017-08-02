@@ -68,13 +68,13 @@ def run(code):
     honourable = 0
     if code in s_db_c:
         for studentdata in s_db_c[code]:
-            if studentdata["medal"] == "1":
+            if studentdata["medal"] == "G":
                 gold += 1
-            elif studentdata["medal"] == "2":
+            elif studentdata["medal"] == "S":
                 silver += 1
-            elif studentdata["medal"] == "3":
+            elif studentdata["medal"] == "B":
                 bronze += 1
-            elif studentdata["medal"] == "4":
+            elif studentdata["medal"] == "H":
                 honourable += 1
     html = html.replace("__GOLD__", str(gold))
     html = html.replace("__SILVER__", str(silver))

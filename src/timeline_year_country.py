@@ -7,6 +7,7 @@ from database_students import year_grouped as s_db_y
 from database_timeline import year_indexed as t_db_y
 from database_timeline import previous_year
 from database_timeline import next_year
+from functools import cmp_to_key
 
 def run(year):
     print("Creating timeline/" + year + "/country")
@@ -46,13 +47,13 @@ def run(year):
                     "bronze": 0,
                     "honourable": 0
                     }
-            if row["medal"] == "1":
+            if row["medal"] == "G":
                 medals[row["code"]]["gold"] += 1
-            elif row["medal"] == "2":
+            elif row["medal"] == "S":
                 medals[row["code"]]["silver"] += 1
-            elif row["medal"] == "3":
+            elif row["medal"] == "B":
                 medals[row["code"]]["bronze"] += 1
-            elif row["medal"] == "4":
+            elif row["medal"] == "H":
                 medals[row["code"]]["honourable"] += 1
     
     def cmpfn(k1, k2):
@@ -69,7 +70,7 @@ def run(year):
         else:
             return cmp(m2["bestrank"], m1["bestrank"])
 
-    sortedcodes = reversed(sorted(medals, cmp = cmpfn))
+    sortedcodes = reversed(sorted(medals, key = cmp_to_key(cmpfn)))
     
     tablehtml = ""
     prevcode = ""
