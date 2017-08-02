@@ -21,7 +21,7 @@ def run():
             if len(row["website"]) < 50:
                 rowhtml = rowhtml.replace("__NATIONAL_SITE_TEXT__", row["website"])
             else:
-                rowhtml = rowhtml.replace("__NATIONAL_SITE_TEXT__", row["website"][0:50] + "...")
+                rowhtml = rowhtml.replace("__NATIONAL_SITE_TEXT__", row["website"][0:35] + "...")
             rowhtml = rowhtml.replace("__NATIONAL_SITE_STYLE__", "")
         else:
             rowhtml = rowhtml.replace("__NATIONAL_SITE_STYLE__", "display: none;")
