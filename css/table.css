@@ -90,6 +90,7 @@
 #main td
 {
 	page-break-inside: avoid;
+    max-width: 350px;
 	padding: 0.5ex;
 	margin: 0;
 }
