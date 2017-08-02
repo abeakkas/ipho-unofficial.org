@@ -167,6 +167,7 @@ run = function() {
 	var foo = rules.value.split("\n");
 	for(var i = 0; i < foo.length; i++){
 		text.value = text.value.replace(new RegExp(foo[i].split("_")[1], 'g'), foo[i].split("_")[0]);
+		text.value = text.value.replace(new RegExp(foo[i].split("_")[1].toUpperCase(), 'g'), foo[i].split("_")[0]);
 	}
 }
 </script>
