@@ -637,6 +637,43 @@
 
   ga('create', 'UA-68545700-1', 'auto');
   ga('send', 'pageview');
+
+  function easteregg() {
+      var rightside = Math.random() < .5;
+      var heads = ["newton", "einstein", "bohr", "feynman", "boltzmann", "curie", "dirac",
+          "galileo", "maxwell", "planck", "schrodinger"];
+      var img = document.createElement("img");
+      img.src = "../../img/easter/" + heads[Math.floor(Math.random() * heads.length)] + ".png";
+      img.style.width = "150px";
+      img.style.position = "absolute";
+      if (rightside) {
+          img.style.right = "-150px";
+      } else {
+          img.style.left = "-150px";
+      }
+      img.style.bottom = "-150px";
+      img.style.zIndex = "10";
+      document.body.appendChild(img);
+      var startTime = new Date().getTime();
+      var fn = function () {
+          var dt = new Date().getTime() - startTime;
+          if (dt > 1000) {
+              document.body.removeChild(img);
+              return;
+          }
+          var maxd = 180;
+          if (dt < 500) var dx = Math.floor(Math.sin(dt / 500 * Math.PI / 2) * maxd);
+          else if (dt < 700) var dx = maxd;
+          else var dx = Math.floor(Math.cos((dt - 700) / 300 * Math.PI / 2) * maxd);
+          if (rightside) {
+              img.style.transform = "rotate(-45deg) translateY(-" + dx + "px) scaleX(-1)";
+          } else {
+              img.style.transform = "rotate(45deg) translateY(-" + dx + "px)";
+          }
+          setTimeout(fn, 40);
+      };
+      fn();
+  }
 </script>
 
 </body>
