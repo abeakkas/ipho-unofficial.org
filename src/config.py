@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 webmaster_email = "iphounofficial@gmail.com"
 
 # Technically, these can be non-consecutive
