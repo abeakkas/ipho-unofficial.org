@@ -56,21 +56,12 @@ def run(year):
             elif row["medal"] == "H":
                 medals[row["code"]]["honourable"] += 1
     
-    def cmpfn(k1, k2):
-        m1 = medals[k1]
-        m2 = medals[k2]
-        if m1["gold"] != m2["gold"]:
-            return cmp(m1["gold"], m2["gold"])
-        elif m1["silver"] != m2["silver"]:
-            return cmp(m1["silver"], m2["silver"])
-        elif m1["bronze"] != m2["bronze"]:
-            return cmp(m1["bronze"], m2["bronze"])
-        elif m1["honourable"] != m2["honourable"]:
-            return cmp(m1["honourable"], m2["honourable"])
-        else:
-            return cmp(m2["bestrank"], m1["bestrank"])
+    def keyfn(code):
+        m = medals[code]
+        return (m["gold"], m["silver"], m["bronze"], m["honourable"],
+                -m["bestrank"])
 
-    sortedcodes = reversed(sorted(medals, key = cmp_to_key(cmpfn)))
+    sortedcodes = reversed(sorted(medals, key = keyfn))
     
     tablehtml = ""
     prevcode = ""
@@ -79,7 +70,7 @@ def run(year):
         rowhtml = templates.get("timeline/year/country_row")
         rowhtml = rowhtml.replace("__CODE__", code)
         rowhtml = rowhtml.replace("__COUNTRY__", code_to_country[code])
-        if prevcode != "" and cmpfn(prevcode, code) == 0:
+        if prevcode != "" and keyfn(prevcode) == keyfn(code):
             rowhtml = rowhtml.replace("__RANK__", prevrank)
         else:
             rowhtml = rowhtml.replace("__RANK__", str(i + 1))
