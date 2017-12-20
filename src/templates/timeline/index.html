@@ -6,6 +6,12 @@
 <link href="__BASE__/css/design.css" rel="stylesheet" type="text/css" />
 <link href="__BASE__/css/print.css" rel="stylesheet" type="text/css" media="print" />
 <title>IPhO: Timeline</title>
+<script>
+function showupcoming() {
+  upcoming.style.display = '';
+  upcomingcue.style.display = 'none';
+}
+</script>
 </head>
 <body>
 __HEADER_SIDE__
@@ -22,6 +28,18 @@ __HEADER_SIDE__
 	<th>Countries</th>
 	<th>Contestants</tr>
 	</thead>
+	<tbody id="upcomingcue">
+  	<tr>
+      <td colspan="7">
+        <center>
+          <a href="javascript:showupcoming();">Upcoming Years</a>
+        </center>
+      </td>
+    </tr>
+	</tbody>
+	<tbody id="upcoming" style="display:none">
+	__UPCOMING__
+	</tbody>
 	<tbody>
 	__TABLE__
 	</tbody>

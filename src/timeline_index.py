@@ -1,6 +1,7 @@
 #!/usr/bin/python
-import util
+import config
 import templates
+import util
 from database_countries import code_to_country
 from database_timeline import database as t_db
 
@@ -10,6 +11,7 @@ def run():
     html = templates.initial_replace(html, 1)
     
     tablehtml = ""
+    upcominghtml = ""
     for row in t_db:
         rowhtml = templates.get("timeline/index_row")
         rowhtml = rowhtml.replace("__NUMBER__", row["number"])
@@ -27,9 +29,13 @@ def run():
         else:
             rowhtml = rowhtml.replace("__CODE2_STYLE__", "display: none;")
             rowhtml = rowhtml.replace("__CODE2__", ".") # Google crawler fix
-        # Reverse list
-        tablehtml = rowhtml + tablehtml
+        if int(row["year"]) < int(config.previous_year) + 3:
+            # Reverse list
+            tablehtml = rowhtml + tablehtml
+        else:
+            upcominghtml = rowhtml + upcominghtml
     html = html.replace("__TABLE__", tablehtml)
+    html = html.replace("__UPCOMING__", upcominghtml)
     
     html = templates.final_replace(html, "..")
     util.writefile("../timeline/index.html", html)
