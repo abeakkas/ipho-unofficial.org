@@ -1,7 +1,7 @@
 # Source code
 Run main.py to create the project:
 ```
-python -B main.py
+python2.7 -B main.py
 ```
 
 You can run individual scripts with command line arguments.
