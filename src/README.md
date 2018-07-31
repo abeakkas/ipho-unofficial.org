@@ -4,7 +4,9 @@ Run main.py to build the project:
 python2.7 -B main.py
 ```
 
-After adding new year increment config.py counters. You can run individual scripts with command line arguments.
+You can run individual scripts with command line arguments.
+
+After adding a new year increment config.py counters.
 
 ## Assumptions
 
