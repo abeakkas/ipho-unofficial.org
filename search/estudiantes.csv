@@ -6221,7 +6221,7 @@
 2016,29,Edgar Ara Vardanyan,ARM,G,23.9,17.5,41.4
 2016,31,Vasilii Iugov,RUS,G,22.6,18.4,41
 2016,32,Dinh Thi Huong Thao,VNM,G,23.9,17,40.9
-2016,33,The Quynh Nguyen,VNM,G,22.8,18,40.8
+2016,33,Nguyen The Quynh,VNM,G,22.8,18,40.8
 2016,33,Gowtham Amirthya S. N.,IND,G,23,17.8,40.8
 2016,35,Thiago Bergamaschi,BRA,G,25.3,15.3,40.6
 2016,35,Siang-Ruei Wu,TWN,G,23.9,16.7,40.6
@@ -6260,7 +6260,7 @@
 2016,68,Nermedin Dzekovic,BIH,S,16.2,18.2,34.4
 2016,68,Iddo Friedman,ISR,S,22.5,11.9,34.4
 2016,71,Tudor Costel Crețu,ROU,S,18,16.1,34.1
-2016,72,Andrei - Cătălin Răduc,ROU,S,19.9,14.1,34
+2016,72,Andrei-Cătălin Răduc,ROU,S,19.9,14.1,34
 2016,73,Ashot Artur Matevosyan,ARM,S,20.8,13,33.8
 2016,73,Henrique Zanarella,BRA,S,19.1,14.7,33.8
 2016,75,Jitrapon Lertprasertpong,THA,S,17.1,16.6,33.7
@@ -6365,10 +6365,10 @@
 2016,174,Zoe Catherine Schwerkolt,AUS,B,12.5,12.9,25.4
 2016,175,Javier Peñafiel Tomás,ESP,B,14.3,11,25.3
 2016,175,Jacob Robertson,UNK,B,14.5,10.8,25.3
-2016,177,Yazan Almajnouni,SAU,B,13.6,11.3,24.9
+2016,177,Yazan Mohammad M Almajnouni,SAU,B,13.6,11.3,24.9
 2016,177,Ghadah Alshalan,SAU,B,13.2,11.7,24.9
 2016,177,Fahim Tajwar,BGD,B,12.6,12.3,24.9
-2016,180,Aleksandar Ivanov,BGR,B,11.7,13.1,24.8
+2016,180,Aleksandar Valentinov Ivanov,BGR,B,11.7,13.1,24.8
 2016,180,Jokubas Pelanskis,LTU,B,13.6,11.2,24.8
 2016,182,Farhad Allahverdiyev,AZE,B,10.3,14.3,24.6
 2016,183,Aletta Csapo,SWE,B,9.4,15.1,24.5
@@ -6386,7 +6386,7 @@
 2016,195,Samy Farrag,EGY,B,6.8,16.7,23.5
 2016,195,Dominykas Ruibys,LTU,B,14.1,9.4,23.5
 2016,195,Akila Manamendra Bandara Uyanwatta,LKA,B,11.3,12.2,23.5
-2016,198,Yuheng (jack) Xu,CAN,B,11.9,11.5,23.4
+2016,198,Yuheng (Jack) Xu,CAN,B,11.9,11.5,23.4
 2016,199,Laurentiu Calancea,MDA,B,13.2,10.1,23.3
 2016,199,Diogo Correia Netto,BRA,B,12.3,11,23.3
 2016,199,Gilbertas Umbrazunas,LTU,B,10.7,12.6,23.3
@@ -6427,7 +6427,7 @@
 2016,236,Nurbek Baizakov,KGZ,H,12.1,8.7,20.8
 2016,237,Albert Johansson,SWE,H,6.9,13.8,20.7
 2016,238,Fernando Ballesteros Flores,MEX,H,13.9,6.7,20.6
-2016,239,Dzenan Devedzic,BIH,H,9.4,11.1,20.5
+2016,239,Dženan Devedžić,BIH,H,9.4,11.1,20.5
 2016,240,Karlo Delic,HRV,H,12.7,7.6,20.3
 2016,240,Sasha Ivlev,NLD,H,6.1,14.2,20.3
 2016,242,Matthias Harksen,ISL,H,8.5,11.6,20.1
@@ -6488,7 +6488,7 @@
 2017,>=1,Dinh Anh Dung,VNM,G,,,
 2017,>=1,Diogo Correia Netto,BRA,G,,,
 2017,>=1,Dmitrii Plotnikov,RUS,G,,,
-2017,>=1,Dusan Djordjevic,SRB,G,,,
+2017,>=1,Dušan Djordjević,SRB,G,,,
 2017,>=1,Euan Tebbutt,UNK,G,,,
 2017,>=1,Ferris Prima Nugraha,IDN,G,,,
 2017,>=1,Gabriel Golfetti,BRA,G,,,
@@ -6502,17 +6502,17 @@
 2017,>=1,Kye Shi,USA,G,,,
 2017,>=1,Lay Jain,IND,G,,,
 2017,>=1,Lee Vint Ve Shein Lin Htut,SGP,G,,,
-2017,>=1,Liptak Jozef,SVK,G,,,
+2017,>=1,Jozef Lipták,SVK,G,,,
 2017,>=1,Ma Zhao Yu,SGP,G,,,
 2017,>=1,Ming Yang Ye,CAN,G,,,
 2017,>=1,Natnicha Merin,THA,G,,,
 2017,>=1,Nguyen The Quynh,VNM,G,,,
 2017,>=1,Ong Hong Ming Teddy,SGP,G,,,
-2017,>=1,Petru Cotrut,ROU,G,,,
+2017,>=1,Cotruț Petru,ROU,G,,,
 2017,>=1,Pinyuan Wang,CHN,G,,,
 2017,>=1,Qiantan Hong,CHN,G,,,
 2017,>=1,Radu Andrei,ROU,G,,,
-2017,>=1,Razvan Octavian Radu,ROU,G,,,
+2017,>=1,Răzvan-Octavian Radu,ROU,G,,,
 2017,>=1,Roman Soletskyi,UKR,G,,,
 2017,>=1,Sangwook Tae,KOR,G,,,
 2017,>=1,Seokwon Choi,KOR,G,,,
@@ -6545,7 +6545,7 @@
 2017,>=65,Artun Bayer,TUR,S,,,
 2017,>=65,Athikom Wanichkul,THA,S,,,
 2017,>=65,Balázs Németh,HUN,S,,,
-2017,>=65,Bogdan Stanojevic,SRB,S,,,
+2017,>=65,Bogdan Stanojević,SRB,S,,,
 2017,>=65,Bonfilio Nainggolan,IDN,S,,,
 2017,>=65,Botond Nagy,HUN,S,,,
 2017,>=65,Boyko Krasimirov Borisov,BGR,S,,,
@@ -6556,7 +6556,7 @@
 2017,>=65,Dominykas Ruibys,LTU,S,,,
 2017,>=65,Dulguun Lkhagvadorj,MNG,S,,,
 2017,>=65,Erfan Abbasgholinejadkhamirgir,IRN,S,,,
-2017,>=65,Faisal Alsallom,SAU,S,,,
+2017,>=65,Faisal Fahad A Alsallom,SAU,S,,,
 2017,>=65,Faizal Husni,IDN,S,,,
 2017,>=65,Feng-Yang Hsieh,TWN,S,,,
 2017,>=65,Fikri Makarim Sosrianto,IDN,S,,,
@@ -6566,7 +6566,7 @@
 2017,>=65,Hilaire Bizalion,FRA,S,,,
 2017,>=65,Hsuan-Jui Chen,TWN,S,,,
 2017,>=65,Jakub Boguta,POL,S,,,
-2017,>=65,Jindrich Jelinek,CZE,S,,,
+2017,>=65,Jindřich Jelínek,CZE,S,,,
 2017,>=65,Jokubas Pelanskis,LTU,S,,,
 2017,>=65,Jose Manuel Betancourt Valencia,COL,S,,,
 2017,>=65,Konstantin Schwark,GER,S,,,
@@ -6584,7 +6584,7 @@
 2017,>=65,Muhammed Yusuf Efe,TUR,S,,,
 2017,>=65,Nishka Tapaswi,AUS,S,,,
 2017,>=65,Nitzan Shapira,ISR,S,,,
-2017,>=65,Novak Stanojevic,SRB,S,,,
+2017,>=65,Novak Stanojević,SRB,S,,,
 2017,>=65,Oscar Emil Sommer,DEN,S,,,
 2017,>=65,Oyuntugs Luubaatar,MNG,S,,,
 2017,>=65,Patin Inkaew,THA,S,,,
@@ -6604,7 +6604,7 @@
 2017,>=65,Tóbiás Marozsák,HUN,S,,,
 2017,>=65,Tomohiro Komiyama,JPN,S,,,
 2017,>=65,Victoriia Kovalova,UKR,S,,,
-2017,>=65,Vuk Radovic,SRB,S,,,
+2017,>=65,Vuk Radović,SRB,S,,,
 2017,>=65,Weida Liao,UNK,S,,,
 2017,>=65,Yanai Bittmann,ISR,S,,,
 2017,>=65,Yauheni Sharamed,BLR,S,,,
@@ -6620,7 +6620,7 @@
 2017,>=137,Alessandro Seccarelli,ITA,B,,,
 2017,>=137,Alessandro Trenta,ITA,B,,,
 2017,>=137,Amaechi Ikechukwu Abua,NGA,B,,,
-2017,>=137,Amarbold Byabajargal,MNG,B,,,
+2017,>=137,Amarbold Byambajargal,MNG,B,,,
 2017,>=137,Arda Aydın,TUR,B,,,
 2017,>=137,Asger Mølsted Mikkelsen,DEN,B,,,
 2017,>=137,Azamat Myrzabekov,KGZ,B,,,
@@ -6629,7 +6629,7 @@
 2017,>=137,Callum Brennan-Rich,UNK,B,,,
 2017,>=137,Čermaák Filip,SVK,B,,,
 2017,>=137,Christian David Forero Pulido,COL,B,,,
-2017,>=137,Chun Wang Chau,HKG,B,,,
+2017,>=137,Chau Chun Wang,HKG,B,,,
 2017,>=137,Claire Kah-Lei Yung,AUS,B,,,
 2017,>=137,Daler Pirov,TJK,B,,,
 2017,>=137,Daniel Pajer,CZE,B,,,
@@ -6640,7 +6640,7 @@
 2017,>=137,Dženan Devedžić,BIH,B,,,
 2017,>=137,Edvin Đapo,BIH,B,,,
 2017,>=137,Edward Bentley Carr,AUS,B,,,
-2017,>=137,Emilis Kaziukenas,LTU,B,,,
+2017,>=137,Emilis Kaziukėnas,LTU,B,,,
 2017,>=137,Erasmo Hinojosa Saenz,MEX,B,,,
 2017,>=137,Fahim Tajwar,BGD,B,,,
 2017,>=137,Farhad Allahverdiyev,AZE,B,,,
@@ -6652,7 +6652,7 @@
 2017,>=137,Gilbertas Umbrazunas,LTU,B,,,
 2017,>=137,Giorgi Grigolia,GEO,B,,,
 2017,>=137,Grecia Castelazo Martinez,MEX,B,,,
-2017,>=137,Halabrin Juraj,SVK,B,,,
+2017,>=137,Juraj Halabrin,SVK,B,,,
 2017,>=137,Henning Zhang,SUI,B,,,
 2017,>=137,Henry Tang,CAN,B,,,
 2017,>=137,Igor Kladaric,HRV,B,,,
@@ -6685,11 +6685,11 @@
 2017,>=137,Nishat Fahmida Protyasha,BGD,B,,,
 2017,>=137,Nurdaulet Kemel,KAZ,B,,,
 2017,>=137,Nurdoolot Omuraliev,KGZ,B,,,
-2017,>=137,Okanik Martin,SVK,B,,,
+2017,>=137,Okánik Martin,SVK,B,,,
 2017,>=137,Oleksandr Khasai,UKR,B,,,
-2017,>=137,Oliver Vicente Garcia Esparza,MEX,B,,,
+2017,>=137,Oliver Vicente García Esparza,MEX,B,,,
 2017,>=137,Ondrej Knopp,CZE,B,,,
-2017,>=137,Oscar Guardado Chacon,MEX,B,,,
+2017,>=137,Oscar Guardado Chacón,MEX,B,,,
 2017,>=137,Pascal Reeck,GER,B,,,
 2017,>=137,Pavel Kurach,BLR,B,,,
 2017,>=137,Pedram Amani,CAN,B,,,
@@ -6699,16 +6699,16 @@
 2017,>=137,Rotheudt Nicolas,BEL,B,,,
 2017,>=137,Sabina Abdurakhmanova,TJK,B,,,
 2017,>=137,Sam Heyrman,BEL,B,,,
-2017,>=137,Simon Karch,CZE,B,,,
+2017,>=137,Šimon Karch,CZE,B,,,
 2017,>=137,Steven Liu,AUS,B,,,
 2017,>=137,Sumiyajav Sarangerel,MNG,B,,,
 2017,>=137,Tharindu Madushanka Sandabandara Samarakoon Kimbulobbe Herath Mudiyanselage,LKA,B,,,
 2017,>=137,Valiantsin Darafeyeu,BLR,B,,,
 2017,>=137,Vicent Roig Requena,ESP,B,,,
 2017,>=137,Vinicius Gabriel Felix Barbosa,BRA,B,,,
-2017,>=137,Yazan Almajnouni,SAU,B,,,
+2017,>=137,Yazan Mohammad M Almajnouni,SAU,B,,,
 2017,>=137,Yeap Heng Yii,MAS,B,,,
-2017,>=137,Yuheng Xu,CAN,B,,,
+2017,>=137,Yuheng (Jack) Xu,CAN,B,,,
 2017,>=137,Yuyu Ma,AUS,B,,,
 2017,>=137,Zurab Jashi,GEO,B,,,
 2017,>=239,Ahmed Moustafa,SYR,H,,,
@@ -6725,7 +6725,7 @@
 2017,>=239,Carl Fredrik Andresen,NOR,H,,,
 2017,>=239,Chanmonirath Chak,KHM,H,,,
 2017,>=239,Chivi Throkal Chan,KHM,H,,,
-2017,>=239,Daniel Sireteanu,MDA,H,,,
+2017,>=239,Daniel Sîrețanu,MDA,H,,,
 2017,>=239,Digalaki Korina,HEL,H,,,
 2017,>=239,Dinno Koluh,BIH,H,,,
 2017,>=239,Edgardo Letona,SLV,H,,,
@@ -6745,7 +6745,7 @@
 2017,>=239,Josip Jerolim Banovic,HRV,H,,,
 2017,>=239,Kairat Zhumaev,KGZ,H,,,
 2017,>=239,Kemal Kochekov,TKM,H,,,
-2017,>=239,Khasanov Farakhmand,TJK,H,,,
+2017,>=239,Farakhmand Khasanov,TJK,H,,,
 2017,>=239,Konstantin Mark,AUT,H,,,
 2017,>=239,Konstantin Wohlwend,LIE,H,,,
 2017,>=239,Konstantine Gagnidze,GEO,H,,,
@@ -6769,7 +6769,7 @@
 2017,>=239,Pascal Isenring,SUI,H,,,
 2017,>=239,Pierre Kreins,LUX,H,,,
 2017,>=239,Randula Abeyweera Kankanam Arachchige,LKA,H,,,
-2017,>=239,Sabina Tonticia,MDA,H,,,
+2017,>=239,Sabina Tontici,MDA,H,,,
 2017,>=239,Sabuhi Mikayilov,AZE,H,,,
 2017,>=239,Samuel Klumpers,NLD,H,,,
 2017,>=239,Sanam Limbu,NPL,H,,,
@@ -6784,3 +6784,280 @@
 2017,>=239,Urban Duh,SVN,H,,,
 2017,>=239,Wojciech Szymański,POL,H,,,
 2017,>=239,Zaka Humlesen,DEN,H,,,
+2018,1,Yang Tianhua,CHN,G,29.9,16.9,46.8
+2018,2,Bobkov Grigorii,RUS,G,27.3,15.2,42.5
+2018,3,Dongjin Shin,KOR,G,29.5,12.65,42.15
+2018,4,Dylan Toh Shan Hong,SGP,G,29.4,12.7,42.1
+2018,5,Daniel Zhu,USA,G,29.8,11.6,41.4
+2018,6,Chen Shiqi,CHN,G,29.5,11.75,41.25
+2018,7,Pawan Goyal,IND,G,29.5,11.5,41
+2018,8,Iakovlev Zakhar,RUS,G,25.9,14.85,40.75
+2018,9,Xue Zeyang,CHN,G,29.3,11.4,40.7
+2018,10,Kiwhan Song,KOR,G,29.1,11.55,40.65
+2018,11,Li Xingqiao,CHN,G,28,12.4,40.4
+2018,12,Lay Jain,IND,G,29.5,10.75,40.25
+2018,13,Seongyeon Park,KOR,G,29,11,40
+2018,13,Dong Zehao,CHN,G,29.7,10.3,40
+2018,15,Dowon Im,KOR,G,26.1,12.05,38.15
+2018,16,Nguyen Ngoc Long,VNM,G,28.8,9.3,38.1
+2018,17,Tran Duc Huy,VNM,G,28.7,9.25,37.95
+2018,18,Kuznetsov Viacheslav,RUS,G,26.4,11.5,37.9
+2018,18,Jonatan Hadas,ISR,G,27.7,10.2,37.9
+2018,20,Siddharth Tiwary,IND,G,27.2,9.85,37.05
+2018,21,Aukkarwit Nakprasert,THA,G,26.5,10.5,37
+2018,22,Lu Ziyou,SGP,G,27.1,9.8,36.9
+2018,22,Shang-Hsuan Chung,TWN,G,28,8.9,36.9
+2018,24,Cotruț Petru,ROU,G,25.1,11.35,36.45
+2018,25,Bhaskar Gupta,IND,G,26.4,9.9,36.3
+2018,25,Yuqing Xie,USA,G,27.4,8.9,36.3
+2018,27,Tsapaev Stanislav,RUS,G,27.5,8.75,36.25
+2018,28,Takuma Okura,JPN,G,27.7,8.45,36.15
+2018,29,Johanes Suhardjo,IDN,G,25.6,10.45,36.05
+2018,30,Gopal Goel,USA,G,27,9,36
+2018,31,Eyal Shlomo Walach,ISR,G,25.6,10.2,35.8
+2018,31,Chang-Han Chen,TWN,G,27.5,8.3,35.8
+2018,33,Joshua Teo Wei Hern,SGP,G,26.3,9.3,35.6
+2018,34,Hugo Mccahon-Boersma,AUS,G,25.5,9.95,35.45
+2018,35,Sutter Adrien,FRA,G,25.4,10,35.4
+2018,36,Alejandro Epelde Blanco,ESP,G,25,10.35,35.35
+2018,37,Li-Yuan Chiang,TWN,G,26.4,8.9,35.3
+2018,37,Rahul Arya,HKG,G,26.7,8.6,35.3
+2018,39,Jianzhi Wang,SGP,G,25.5,9.7,35.2
+2018,40,Cem Arda Tepe,TUR,G,26.7,8.35,35.05
+2018,40,Nishant Abhangi,IND,G,29.4,5.65,35.05
+2018,42,Wei-Bo Kao,TWN,G,25.2,9.8,35
+2018,43,Pascal Reeck,GER,S,23.4,11.05,34.45
+2018,43,Jaehwan Kim,KOR,S,26.2,8.25,34.45
+2018,45,Yunus Emre Parmaksız,TUR,S,23.1,11,34.1
+2018,46,Steven Ting Reyes,PHI,S,25.4,8.55,33.95
+2018,47,Kosuke Yoshimi,JPN,S,23.5,10.3,33.8
+2018,47,Yanawarut Paratipcharoenchai,THA,S,25.7,8.1,33.8
+2018,49,Oscar Emil Sommer,DEN,S,23.5,10.1,33.6
+2018,50,Domagoj Perkovic,HRV,S,25.2,8.25,33.45
+2018,51,Shishkin Aleksei,RUS,S,25.1,8.05,33.15
+2018,52,Aviv Tillinger,ISR,S,24.3,8.7,33
+2018,53,Laphas Premcharoen,THA,S,21.2,11.65,32.85
+2018,54,Balázs Németh,HUN,S,25.6,7.2,32.8
+2018,55,Rin Kida,JPN,S,23.2,9.5,32.7
+2018,56,Novak Stanojević,SRB,S,24.4,8.2,32.6
+2018,57,Nguyen Xuan Tan,VNM,S,24.2,8.35,32.55
+2018,58,Mich Song,USA,S,22.5,9.95,32.45
+2018,59,Artun Bayer,TUR,S,24.1,8.15,32.25
+2018,60,Jason Jovi Brata,IDN,S,23.7,8.3,32
+2018,61,Trinh Duy Hieu,VNM,S,22.7,8.65,31.35
+2018,61,Amirhossein Boreiri,IRN,S,23.7,7.65,31.35
+2018,63,Pojcharapol Leenukiat,THA,S,23.6,7.65,31.25
+2018,64,Serhii Kryhin,UKR,S,21.9,9.2,31.1
+2018,65,Richard Luhtaru,EST,S,18.7,12.25,30.95
+2018,65,Drăgoi Sabina,ROU,S,24.2,6.75,30.95
+2018,67,Sulyma Oleksandr,UKR,S,22.8,8.05,30.85
+2018,68,Alkın Kaz,TUR,S,23.9,6.9,30.8
+2018,69,Ridkokasha Ivan,UKR,S,20.7,10.05,30.75
+2018,69,Igor Medvedev,SRB,S,22.6,8.15,30.75
+2018,71,Marko Medvedev,SRB,S,23.9,6.75,30.65
+2018,72,Thomas Ross-White Bergamaschi,BRA,S,21.4,9.2,30.6
+2018,73,David Ventzke,GER,S,20.6,9.95,30.55
+2018,74,Hadi Azizi,IRN,S,22.2,8.3,30.5
+2018,74,Dolteanu Ștefan,ROU,S,23.2,7.3,30.5
+2018,76,Anthony Ou,USA,S,21.9,8.55,30.45
+2018,77,Itthipatpol Chaipattanakarn,THA,S,22.4,7.75,30.15
+2018,78,Sian-Yang Tseng,TWN,S,20.7,9.25,29.95
+2018,79,Daniel Cropper,UNK,S,19.1,10.65,29.75
+2018,79,Zurab Jashi,GEO,S,23.2,6.55,29.75
+2018,81,Jindřich Jelínek,CZE,S,22.5,7.05,29.55
+2018,82,Joshua Leung,HKG,S,21.4,8.1,29.5
+2018,83,Soma Nagahama,JPN,S,22.7,6.7,29.4
+2018,84,Dimitrije Pavlov,SRB,S,22.2,7,29.2
+2018,85,Lasse Harboe Wolff,DEN,S,21.2,7.85,29.05
+2018,86,Metin Ersin Arıcan,TUR,S,19.6,9.25,28.85
+2018,87,Georgi Miroslavov Aleksandrov,BGR,S,22.8,6,28.8
+2018,88,Yauheni Hankovich,BLR,S,20.9,7.85,28.75
+2018,89,Omri Reved,ISR,S,21,7.7,28.7
+2018,90,Sabina Abdurakhmanova,TJK,S,20.8,7.8,28.6
+2018,91,Elias Hohl,AUT,S,18.88,9.65,28.53
+2018,92,Davit Gevorgyan,ARM,S,20.2,8.25,28.45
+2018,93,Chau Chun Wang,HKG,S,20.1,8.1,28.2
+2018,94,Grammatica Giulio,FRA,S,17.2,10.95,28.15
+2018,94,Faisal Fahad A Alsallom,SAU,S,21.2,6.95,28.15
+2018,96,Alon Sarel,ISR,S,18.9,9.2,28.1
+2018,96,Gaurav Arya,HKG,S,23.3,4.8,28.1
+2018,98,Shervin Khalafi,IRN,S,19,8.85,27.85
+2018,99,Emilis Kaziukėnas,LTU,S,21.8,6,27.8
+2018,100,Aleksi Kononen,FIN,S,18,9.75,27.75
+2018,101,Tamon Suehiro,JPN,S,20.6,7.05,27.65
+2018,102,Han Ruobin,SGP,S,19,8.55,27.55
+2018,103,Guès Nicolas,FRA,S,17,10.45,27.45
+2018,103,Daler Pirov,TJK,S,19.1,8.35,27.45
+2018,103,Lamouret Quentin,FRA,S,19.3,8.15,27.45
+2018,106,Rovel Paul,FRA,S,16.4,11,27.4
+2018,106,Yauheni Dziadkou,BLR,S,19.9,7.5,27.4
+2018,108,Konstantin Dukatš,EST,S,18.9,8.45,27.35
+2018,109,Ivo Vladislavov Petrov,BGR,S,18.2,9,27.2
+2018,109,Bogdan Stanojević,SRB,S,21.4,5.8,27.2
+2018,109,Sumiyajav Sarangerel,MNG,S,22.3,4.9,27.2
+2018,112,Stephen Catsamas,AUS,B,17.6,9.3,26.9
+2018,113,Paulo Toshio Kitayama,BRA,B,18,8.65,26.65
+2018,113,Alessandro Seccarelli,ITA,B,18.7,7.95,26.65
+2018,115,Andrei Cosmin,ROU,B,18.8,7.8,26.6
+2018,116,Levy Bruno Do Nascimento Batista,BRA,B,20.9,5.6,26.5
+2018,117,Ursu Răzvan-Mihai,ROU,B,19.2,7.15,26.35
+2018,118,Marcell Szakály,HUN,B,19.2,7.1,26.3
+2018,119,Kaarel Kivisalu,EST,B,16.7,9.45,26.15
+2018,120,Bryant Juspi,IDN,B,18.8,7.25,26.05
+2018,120,Mobin Moradi,IRN,B,18.8,7.25,26.05
+2018,122,Nguyen Van Thanh Loi,VNM,B,17.6,8.15,25.75
+2018,123,Phoenix Sremcevic,UNK,B,18.8,6.8,25.6
+2018,123,Fortuna Nazarii,UKR,B,20.8,4.8,25.6
+2018,125,Michael Brownlie,UNK,B,19.4,6.15,25.55
+2018,126,Azamat Myrzabekov,KGZ,B,19.3,6.2,25.5
+2018,127,Sean Mann,HKG,B,15.9,9.55,25.45
+2018,128,Ruairidh Forgan,UNK,B,17.4,7.8,25.2
+2018,128,Tóbiás Marozsák,HUN,B,18.5,6.7,25.2
+2018,128,Filip Marijanovic,HRV,B,21.2,4,25.2
+2018,131,Mikhail Angel Canlas Torio,PHI,B,18.97,6.15,25.12
+2018,132,Aleksandar Ivanov,MKD,B,18.6,6.3,24.9
+2018,133,Nurdoolot Omuraliev,KGZ,B,17.6,7.25,24.85
+2018,133,Ahmad Aufar Thoriq,IDN,B,18.3,6.55,24.85
+2018,135,David Tang,CAN,B,17.8,6.9,24.7
+2018,135,Afzal Arshia,IRN,B,17.8,6.9,24.7
+2018,137,Nicolas Meira Sinott Lopes,BRA,B,16.2,8.35,24.55
+2018,138,Tulenov Diyar,KAZ,B,16.1,8.3,24.4
+2018,139,Irtiza Iram,BGD,B,17.2,6.7,23.9
+2018,140,Raditya Adhidarma Nugraha,IDN,B,18.3,5.55,23.85
+2018,141,Nurdaulet Kemel,KAZ,B,16.8,7,23.8
+2018,142,Alina Gaukhartas,KAZ,B,16.7,7,23.7
+2018,143,Šimon Karch,CZE,B,14.3,9.3,23.6
+2018,144,Alessio Marchetti,ITA,B,16.2,7.35,23.55
+2018,144,Abrar Al Shadid Abir,BGD,B,18.5,5.05,23.55
+2018,146,Joshua Brown,UNK,B,14,9.5,23.5
+2018,146,Stefan Todorov Ivanov,BGR,B,14.7,8.8,23.5
+2018,148,Matteo Dell Acqua,ITA,B,15.6,7.85,23.45
+2018,148,Yazan Mohammad M Almajnouni,SAU,B,16.5,6.95,23.45
+2018,150,Teo Hau Tian,MAS,B,14.7,8.4,23.1
+2018,150,Daniel Sîrețanu,MDA,B,15.6,7.5,23.1
+2018,152,Kuzyk Oleh,UKR,B,16.13,6.7,22.83
+2018,153,Jānis Huns,LVA,B,14.4,8.4,22.8
+2018,154,Luka Govedič,SVN,B,15,7.65,22.65
+2018,155,Okánik Martin,SVK,B,16.33,6.1,22.43
+2018,156,Matheus Barros Da Silveira,BRA,B,15.2,7,22.2
+2018,157,Choong Khye Xuin,MAS,B,12.5,9.6,22.1
+2018,158,Švrčková Jana,SVK,B,14.7,7.35,22.05
+2018,159,Daniel Martín Marín Quiroz,MEX,B,16.8,5.2,22
+2018,160,Steven Mai,CAN,B,15.35,6.6,21.95
+2018,161,Alwaleed Ibrahim Aldirgham,SAU,B,15.8,5.85,21.65
+2018,162,Flavio Salvati,ITA,B,15.9,5.65,21.55
+2018,163,Juan Ernesto Recoaro,ARG,B,12.4,9.1,21.5
+2018,163,Roberto Marin Delgado,CRI,B,14.5,7,21.5
+2018,165,Charles Jerome Reyes Bartolo,PHI,B,14.4,6.95,21.35
+2018,166,Lucas Díaz,ARG,B,12.1,9.2,21.3
+2018,167,Kopunec Matúš,SVK,B,14.17,6.9,21.07
+2018,168,Rubén Ulises Rodríguez González,MEX,B,16.95,4,20.95
+2018,169,Marcos Olivera,ARG,B,13.9,7,20.9
+2018,170,Edward Garemo,UAE,B,13.2,7.65,20.85
+2018,171,Maciej Maruszczak,POL,B,12.9,7.85,20.75
+2018,172,Sean Gee Zhing,MAS,B,14.4,6.3,20.7
+2018,173,Joan Hernanz I Ibáñez,ESP,B,11.9,8.75,20.65
+2018,173,Ingvars Vitenburgs,LVA,B,12.9,7.75,20.65
+2018,173,Marko Čmrlec,SVN,B,14.3,6.35,20.65
+2018,176,Natan Dominko Kobilica,SVN,B,12.4,8.1,20.5
+2018,176,Amarbold Byambajargal,MNG,B,13.6,6.9,20.5
+2018,176,Gabriela Maria Corea Moran,SLV,B,14.7,5.8,20.5
+2018,179,Davit Zohrabyan,ARM,B,14.3,6.05,20.35
+2018,180,Wojciech Szymański,POL,B,14.5,5.7,20.2
+2018,181,Adam Warnerbring,SWE,B,11.5,8.3,19.8
+2018,182,Alexander You,CAN,B,10.7,9,19.7
+2018,182,Rashedul Islam,BGD,B,12.1,7.6,19.7
+2018,184,Péter Elek,HUN,B,13.8,5.45,19.25
+2018,185,Uladzislau Fiadurka,BLR,B,12.8,6.4,19.2
+2018,186,Nikolay Zunikov,BLR,B,10.6,8.45,19.05
+2018,187,Oscar Guardado Chacón,MEX,B,11.5,7.5,19
+2018,188,Hofizov Umidjon,UZB,B,15.1,3.8,18.9
+2018,189,Gustavo Alves,POR,B,12.17,6.7,18.87
+2018,190,Félix Moreno Peñarrubia,ESP,B,12.8,6.05,18.85
+2018,191,Jerry Aunula,FIN,B,11.4,7.4,18.8
+2018,192,Kristijonas Samuolis,LTU,B,11.9,6.75,18.65
+2018,193,Rasmus Bruhn Nielsen,DEN,B,11.7,6.9,18.6
+2018,193,Vladimir Mikho,AUS,B,11.9,6.7,18.6
+2018,195,Oliver Vicente García Esparza,MEX,B,13.8,4.75,18.55
+2018,196,Farakhmand Khasanov,TJK,B,13,5.45,18.45
+2018,197,Oliver Lindström,SWE,B,12,6.35,18.35
+2018,198,Manqiu Wu,CAN,B,12.5,5.8,18.3
+2018,199,Sabina Tontici,MDA,B,12.4,5.85,18.25
+2018,200,Kalzhan Zhamaliddin,KAZ,B,13.4,4.7,18.1
+2018,201,Jakub Suchánek,CZE,B,11.4,6.65,18.05
+2018,202,Tahmid Mosaddeque,BGD,B,13.2,4.8,18
+2018,203,Wilhelm Holfeld,GER,B,9.5,8.4,17.9
+2018,203,Martynas Linkevičius,LTU,B,10.9,7,17.9
+2018,205,Ahmed Hares Ibrahim Eldesouky,EGY,B,11.4,6.45,17.85
+2018,206,David Hambraeus,SWE,B,8.8,9,17.8
+2018,206,Vilhelms Cinis,LVA,B,10.6,7.2,17.8
+2018,206,Daniel Alfredo Caballero Bastidas,COL,B,11.7,6.1,17.8
+2018,206,Simon Lemal,BEL,B,12.5,5.3,17.8
+2018,206,Alessandro Piccaro,ITA,B,13,4.8,17.8
+2018,211,Irfan Durmić,BIH,H,11.4,6,17.4
+2018,212,Annejan Van Den Dool,NLD,H,11.88,5.5,17.38
+2018,213,Jurčo Róbert,SVK,H,10.25,6.95,17.2
+2018,214,Lukasz Bialas,POL,H,9.4,7.7,17.1
+2018,215,Boris Deletic,AUS,H,9.1,7.85,16.95
+2018,216,Tobias Veerkamp,NLD,H,9.28,7.65,16.93
+2018,217,Pratyaksh Gupta,UAE,H,10.7,6.2,16.9
+2018,218,Martin Orság,CZE,H,10.2,6.6,16.8
+2018,219,Matthaios Chouzouris,CYP,H,10.1,6.65,16.75
+2018,219,Martin Avila Gonzalez,CUB,H,10.9,5.85,16.75
+2018,219,Tim Pokart,GER,H,11,5.75,16.75
+2018,222,Karl Paul Parmakson,EST,H,8.7,8,16.7
+2018,222,Bailin Amirkhan,KAZ,H,12.4,4.3,16.7
+2018,224,Jule Schrepfer,GER,H,10.9,5.7,16.6
+2018,224,Muhamed Sokolović,BIH,H,11.1,5.5,16.6
+2018,226,Diogo Rodrigues,POR,H,10.33,6.2,16.53
+2018,227,Davor Bokan,BIH,H,10.2,6.25,16.45
+2018,227,Yryskeldi Anarbekov,KGZ,H,10.6,5.85,16.45
+2018,229,Isaac Liao,CAN,H,8.9,7.4,16.3
+2018,230,Davit Mdinaradze,GEO,H,12.7,3.55,16.25
+2018,231,Csanád Hajdú,HUN,H,10.5,5.7,16.2
+2018,231,Kiram Al-Kharba,BLR,H,11.3,4.9,16.2
+2018,233,Prijith Babu Pradeep,UAE,H,10.8,5.25,16.05
+2018,233,Nyamtsogt Munkhbilguun,MNG,H,11.4,4.65,16.05
+2018,235,Kristine Grigoryan,ARM,H,9.4,6.6,16
+2018,236,Robert Babin,AUT,H,7.8,8.15,15.95
+2018,237,David Nassauer,POR,H,10.2,5.7,15.9
+2018,237,Mika Nurmela,FIN,H,10.7,5.2,15.9
+2018,239,Mudith Nirmala Witharama,LKA,H,10.2,5.65,15.85
+2018,240,Rafael Almeida,POR,H,5.5,10.3,15.8
+2018,240,David Kaczer,BEL,H,8.2,7.6,15.8
+2018,240,Thijs De Kok,NLD,H,8.25,7.55,15.8
+2018,243,Aleksandre Merabishvili,GEO,H,9.1,6.65,15.75
+2018,244,Ganbaatar Sumiyabazar,MNG,H,9.2,6.4,15.6
+2018,245,Rusko Todorov Ruskov,BGR,H,10.3,5.2,15.5
+2018,245,Pui In Ip,MAC,H,10.4,5.1,15.5
+2018,245,Vladislav Ivov Stefanov,BGR,H,12,3.5,15.5
+2018,248,Ulpathagedara Kumuthu Mandara Premalal,LKA,H,9.2,6.25,15.45
+2018,249,Ashwin Sudheer,UAE,H,10.9,4.45,15.35
+2018,250,Alicia Lieng,AUS,H,8.5,6.7,15.2
+2018,251,Edgardo Alfredo Letona Chavez,SLV,H,9,6.1,15.1
+2018,252,Juan Felipe Barrera Lopez,COL,H,8.9,6.15,15.05
+2018,253,Domantas Burba,LTU,H,9.2,5.8,15
+2018,254,Koen Schouten,NLD,H,8.83,6.1,14.93
+2018,255,Mārtiņš Klevs,LVA,H,8.3,6.6,14.9
+2018,255,Václav Kubíček,CZE,H,9.4,5.5,14.9
+2018,257,Oh Jian Hui,MAS,H,7.6,7.2,14.8
+2018,257,Urban Duh,SVN,H,8.4,6.4,14.8
+2018,257,Artur Sadikov,KGZ,H,8.8,6,14.8
+2018,260,Konrad Pawlik,POL,H,8.1,6.65,14.75
+2018,260,Ginige Yasod Sandeepa,LKA,H,8.7,6.05,14.75
+2018,262,Valeria García Hernández,MEX,H,10.7,4,14.7
+2018,263,José Antonio Castro Moreno,ESP,H,6.9,7.6,14.5
+2018,263,Bernard Faulend,HRV,H,7.3,7.2,14.5
+2018,265,Aleksander Heino,FIN,H,8.2,6.2,14.4
+2018,265,Ričardas Navickas,LTU,H,8.2,6.2,14.4
+2018,265,Moaaz Hasan A Fayumy,SAU,H,8.7,5.7,14.4
+2018,268,Julius Tesarek,AUT,H,5.8,8.5,14.3
+2018,269,Tobias Hächler,SUI,H,8.2,6.05,14.25
+2018,269,Dilini Sandunika Palihakkara,LKA,H,8.5,5.75,14.25
+2018,271,Arbalestrier Adrien,BEL,H,8.4,5.8,14.2
+2018,271,Andreas Miltiadous,CYP,H,11,3.2,14.2
+2018,271,Damdinbayar Khongor,MNG,H,11.4,2.8,14.2
+2018,274,Robin Haljak,EST,H,8.8,5.3,14.1
+2018,274,Chi Kin Lai,MAC,H,9.5,4.6,14.1
+2018,276,Tomás Feith,POR,H,7.5,6.55,14.05
+2018,276,Avgoustinos Ioannou,CYP,H,7.7,6.35,14.05

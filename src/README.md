@@ -1,10 +1,10 @@
 # Source code
-Run main.py to create the project:
+Run main.py to build the project:
 ```
 python2.7 -B main.py
 ```
 
-You can run individual scripts with command line arguments.
+After adding new year increment config.py counters. You can run individual scripts with command line arguments.
 
 ## Assumptions
 
@@ -19,3 +19,6 @@ CSV files don't actually obey CSV format. They are literally "comma separated va
 
 ##### database/timeline.csv:
 * Ordered by year
+
+## Notes
+* Fahim Tajwar@2017 and Mohammad Fahim Tajwar@2014 from Bangladesh are not the same person

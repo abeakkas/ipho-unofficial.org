@@ -5,12 +5,12 @@ from database_students import code_grouped as dbc
 from difflib import SequenceMatcher
 from unidecode import unidecode
 
-def massive():
+def massive(from_year, to_year):
     for year in dby:
         for row in dby[year]:
             row['supername'] = row['code'] + " " + " ".join(sorted(unidecode(row['name']).split(" ")))
     threshold = .9
-    for year1 in range(1967, 2018):
+    for year1 in range(from_year, to_year + 1):
         print(year1)
         for year2 in range(year1 + 1, year1 + 5):
             if str(year1) in dby and str(year2) in dby:
@@ -26,13 +26,15 @@ def comp(s1, s2):
     r2 = min(max(SequenceMatcher(None, x2, x1).ratio() for x1 in s1) for x2 in s2)
     return max(r1, r2)
 
-def incountry():
+def withincountry(start_year=1967):
     threshold = .7
     for code in dbc:
         for row in dbc[code]:
             row['seq'] = unidecode(row['name']).replace("-", " ").split(" ")
         for i, row1 in enumerate(dbc[code]):
             for j, row2 in enumerate(dbc[code]):
+                if int(row1['year']) < start_year or int(row2['year']) < start_year:
+                    continue
                 if i == j:
                     break
                 if abs(int(row1['year']) - int(row2['year'])) < 3 and row1['name'] != row2['name']:
@@ -56,5 +58,6 @@ def samenamedifferentcountry():
         else:
             names[row['ascii']] = row
 
-# incountry()
-samenamedifferentcountry()
+withincountry(2015)
+# samenamedifferentcountry()
+# massive(2015, 2018)
