@@ -8,6 +8,6 @@ def run():
     html = templates.initial_replace(html, -1)
     html = templates.final_replace(html, ".")
     util.writefile("../404.html", html)
-    
+
 if __name__ == "__main__":
     run()

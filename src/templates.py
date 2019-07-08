@@ -3,24 +3,26 @@ import util
 import config
 from database_timeline import year_indexed as t_db_y
 
-templates = {}
-
-def get(path):
+def get(path, templates={}):
+    """
+    Load HTML from file and return as string
+    templates is used for memoization
+    """
     if path not in templates:
         templates[path] = util.readfile("templates/" + path + ".html")
     return templates[path]
 
 def initial_replace(html, type):
+    """
+    Fill header and footer in given template string
+    type=0 is for top header pages
+    type=[1,2,3] is for side header with different highlights
+    """
     if type == 0:
         html = html.replace("__HEADER_TOP__", get("header_top"))
     else:
         side = get("header_side")
-        if type == 1:
-            side = side.replace("__HIGHLIGHT_1__", "highlight")
-        elif type == 2:
-            side = side.replace("__HIGHLIGHT_2__", "highlight")
-        elif type == 3:
-            side = side.replace("__HIGHLIGHT_3__", "highlight")
+        side = side.replace("__HIGHLIGHT_" + str(type) + "__", "highlight")
         side = side.replace("__HIGHLIGHT_1__", "")
         side = side.replace("__HIGHLIGHT_2__", "")
         side = side.replace("__HIGHLIGHT_3__", "")
@@ -32,8 +34,13 @@ def initial_replace(html, type):
     html = html.replace("__FOOTER__", get("footer"))
     return html
 
-def final_replace(html, base):
-    html = html.replace("__BASE__", base)
+def final_replace(html, root):
+    """
+    Fill URL templates
+    root is the relative path of the root directory of website
+    See the setting config.github
+    """
+    html = html.replace("__ROOT__", root)
     if config.github:
         html = html.replace("__INDEX__", ".")
         html = html.replace("__HTML_EXT__", "")
