@@ -18,11 +18,7 @@ with open("database/timeline.csv") as file:
             "city": row[4],
             "homepage": row[5],
             "p_country": row[6],
-            "p_student": row[7],
-            "gold": row[8],
-            "silver": row[9],
-            "bronze": row[10],
-            "honourable": row[11]
+            "p_student": row[7]
         }
         if "&" in row[3]:
             entry["code"] = row[3].split("&")[0]
