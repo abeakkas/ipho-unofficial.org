@@ -29,7 +29,7 @@ def run():
         else:
             rowhtml = rowhtml.replace("__CODE2_STYLE__", "display: none;")
             rowhtml = rowhtml.replace("__CODE2__", ".") # Google crawler fix
-        if int(row["year"]) < int(config.previous_year) + 3:
+        if int(row["year"]) <= int(config.next_year) + 2:
             # Reverse list
             tablehtml = rowhtml + tablehtml
         else:
