@@ -27,7 +27,7 @@ CSV files don't strictly obey CSV format. They are literally "comma separated va
 * Ordered by year
 
 ##### database/countries.csv:
-* Columns: country code, name, website, whether former
+* Columns: country code, name, website, if former
 
 ## Notes
 * Fahim Tajwar@2017 and Mohammad Fahim Tajwar@2014 from Bangladesh are not the same person
