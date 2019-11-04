@@ -17,21 +17,21 @@ def run(year):
     html = html.replace("__YEAR__", year)
     html = html.replace("__NUMBER__", yeardata["number"])
     html = html.replace("__ORDINAL__", util.ordinal(yeardata["number"]))
-    
+
     if year in previous_year:
         html = html.replace("__PREVIOUS_YEAR__", previous_year[year])
         html = html.replace("__PREVIOUS_YEAR_STYLE__", "")
     else:
         html = html.replace("__PREVIOUS_YEAR_STYLE__", "display: none;")
         html = html.replace("__PREVIOUS_YEAR__", ".") # Google crawler fix
-        
+
     if year in next_year:
         html = html.replace("__NEXT_YEAR__", next_year[year])
         html = html.replace("__NEXT_YEAR_STYLE__", "")
     else:
         html = html.replace("__NEXT_YEAR_STYLE__", "display: none;")
         html = html.replace("__NEXT_YEAR__", ".") # Google crawler fix
-    
+
     medals = {}
     if year in s_db_y:
         for row in s_db_y[year]:
@@ -55,14 +55,14 @@ def run(year):
                 medals[row["code"]]["bronze"] += 1
             elif row["medal"] == "H":
                 medals[row["code"]]["honourable"] += 1
-    
+
     def keyfn(code):
         m = medals[code]
-        return (m["gold"], m["silver"], m["bronze"], m["honourable"],
-                -m["bestrank"])
+        return (-m["gold"], -m["silver"], -m["bronze"], -m["honourable"],
+                m["bestrank"], code)
 
-    sortedcodes = reversed(sorted(medals, key = keyfn))
-    
+    sortedcodes = sorted(medals, key = keyfn)
+
     tablehtml = ""
     prevcode = ""
     prevrank = 0
@@ -83,9 +83,9 @@ def run(year):
         rowhtml = rowhtml.replace("__BEST_RANK__", medals[code]["bestrank>="] + str(medals[code]["bestrank"]))
         tablehtml += rowhtml
     html = html.replace("__TABLE__", tablehtml)
-    
+
     html = templates.final_replace(html, "../..")
     util.writefile("../timeline/" + year + "/country.html", html)
-    
+
 if __name__ == "__main__":
     run(sys.argv[1])
