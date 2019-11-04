@@ -70,7 +70,7 @@ def run(year):
         rowhtml = templates.get("timeline/year/country_row")
         rowhtml = rowhtml.replace("__CODE__", code)
         rowhtml = rowhtml.replace("__COUNTRY__", code_to_country[code])
-        if prevcode != "" and keyfn(prevcode) == keyfn(code):
+        if prevcode != "" and keyfn(prevcode)[:-1] == keyfn(code)[:-1]:
             rowhtml = rowhtml.replace("__RANK__", prevrank)
         else:
             rowhtml = rowhtml.replace("__RANK__", str(i + 1))
