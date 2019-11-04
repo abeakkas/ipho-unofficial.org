@@ -1,7 +1,7 @@
 # Source code
 Run main.py to build the project:
 ```
-python2.7 -B main.py
+python3 -B main.py
 ```
 
 This generates the whole website to the parent folder by filling in the
