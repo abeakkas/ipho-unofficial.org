@@ -9,6 +9,7 @@ year_grouped = {}
 with open("database/estudiantes.csv") as file:
     reader = csv.reader(file)
     for row in reader:
+        assert len(row) == 9, "Student row error: {}".format(row)
         entry = {
             "year": row[0],
             "rank": row[1],
