@@ -32,12 +32,12 @@
 </div>
 
 <div id="main">
-	<h2>Search</h2>
-	<p>
-	<input type="text" maxlength="30" class="inptText" size="24" id="search_query" onkeydown="if(event.keyCode == 13) { ipho_search(); }" />
-	<input type="submit" value="Search" class="btnSubmit" onclick="ipho_search()" />
-	<span>(Search the IPhO database for a particular contestant)</span>
-	</p>
+    <h2>Search</h2>
+    <p>
+    <input type="text" maxlength="30" class="inptText" size="24" id="search_query" onkeydown="if(event.keyCode == 13) { ipho_search(); }" />
+    <input type="submit" value="Search" class="btnSubmit" onclick="ipho_search()" />
+    <span>(Search the IPhO database for a particular contestant)</span>
+    </p>
     <table>
     <thead><tr><th>Participant</th><th>Year</th><th>Country</th><th>Award</th></tr></thead>
     <tbody id="search_results">
@@ -106,6 +106,7 @@
 <td>{{medal}}</td>
 </tr>
 </table>
+<div style="display: none;" id="t_website"><a href="{{link}}">{{name}}</a></div>
 <div style="display: none;" id="t_gold"><img src="../img/gold.png" width="9" height="9"> Gold Medal</div>
 <div style="display: none;" id="t_silver"><img src="../img/silver.png" width="9" height="9"> Silver Medal</div>
 <div style="display: none;" id="t_bronze"><img src="../img/bronze.png" width="9" height="9"> Bronze Medal</div>

@@ -47,6 +47,7 @@
                             name: ps[2],
                             code: ps[3],
                             medal: ps[4],
+                            website: ps[8],
                             name_ascii_lower: asciify(ps[2]).toLowerCase(),
                         });
                     }
@@ -61,6 +62,7 @@
         }
         var html = "";
         var t_row = document.getElementById("t_row").innerHTML;
+        var t_website = document.getElementById("t_website").innerHTML;
         var t_gold = document.getElementById("t_gold").innerHTML;
         var t_silver = document.getElementById("t_silver").innerHTML;
         var t_bronze = document.getElementById("t_bronze").innerHTML;
@@ -72,11 +74,16 @@
         }
         for(var i = 0; i < students.length; i++) {
             if(students[i].name_ascii_lower.indexOf(query) != -1) {
-                var row = t_row.replace(/{{name}}/g, students[i].name)
-                    .replace(/{{code}}/g, students[i].code)
+                var row = t_row.replace(/{{code}}/g, students[i].code)
                     .replace(/{{country}}/g, countries[students[i].code])
-                    .replace(/{{year}}/g, students[i].year)
-                    .replace(/{{code}}/g, students[i].code);
+                    .replace(/{{year}}/g, students[i].year);
+                if (students[i].website) {
+                    var link = t_website.replace(/{{name}}/, students[i].name)
+                                        .replace(/{{link}}/, students[i].website);
+                    row = row.replace(/{{name}}/, link)
+                } else {
+                    row = row.replace(/{{name}}/, students[i].name)
+                }
                 switch(students[i].medal) {
                     case "G":
                         row = row.replace(/{{medal}}/g, t_gold);

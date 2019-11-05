@@ -12,17 +12,17 @@ def run(code):
     print("Creating countries/" + code + "/individual")
     html = templates.get("countries/code/individual")
     html = templates.initial_replace(html, 2)
-    
+
     html = html.replace("__CODE__", code)
     html = html.replace("__COUNTRY__", c_db_c[code]["country"])
-    
+
     if code in previous_code:
         html = html.replace("__PREVIOUS_CODE__", previous_code[code])
         html = html.replace("__PREVIOUS_CODE_STYLE__", "")
     else:
         html = html.replace("__PREVIOUS_CODE_STYLE__", "display: none;")
         html = html.replace("__PREVIOUS_CODE__", ".") # Google crawler fix
-        
+
     if code in next_code:
         html = html.replace("__NEXT_CODE__", next_code[code])
         html = html.replace("__NEXT_CODE_STYLE__", "")
@@ -36,7 +36,13 @@ def run(code):
         lastyear = ""
         for studentdata in s_db_c[code]:
             rowhtml = templates.get("countries/code/individual_row")
-            rowhtml = rowhtml.replace("__NAME__", studentdata["name"])
+            if studentdata["website"]:
+                link = templates.get("timeline/year/individual_student_link")
+                link = link.replace("__LINK__", studentdata["website"])
+                link = link.replace("__NAME__", studentdata["name"])
+                rowhtml = rowhtml.replace("__NAME__", link)
+            else:
+                rowhtml = rowhtml.replace("__NAME__", studentdata["name"])
             rowhtml = rowhtml.replace("__RANK__", ("&ge;" if studentdata["rank>="] else "") + studentdata["rank"])
             rowhtml = rowhtml.replace("__YEAR__", studentdata["year"])
             if studentdata["medal"] == "G":
