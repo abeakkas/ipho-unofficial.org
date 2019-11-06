@@ -11,6 +11,7 @@ with open("database/countries.csv") as file:
     reader = csv.reader(file)
     prev = ""
     for row in reader:
+        assert len(row) == 4, "Country row error: {}".format(row)
         entry = {
             "code": row[0],
             "country": row[1],

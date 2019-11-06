@@ -11,6 +11,7 @@ with open("database/timeline.csv") as file:
     reader = csv.reader(file)
     prev = ""
     for row in reader:
+        assert len(row) == 8, "Timeline row error: {}".format(row)
         entry = {
             "number": row[0],
             "year": row[1],

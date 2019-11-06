@@ -4,8 +4,8 @@ Run main.py to build the project:
 python3 -B main.py
 ```
 
-This generates the whole website to the parent folder by filling in the
-pages in the templates folder with data from the database folder.
+This generates the whole website to the parent folder of src. templates folder
+contains HTML files and database folder contains CSV data files.
 
 You can generate individual pages with scripts as well.
 
@@ -23,7 +23,7 @@ CSV files don't strictly obey CSV format. They are literally "comma separated va
 * Country-code can be empty if unknown.
 
 ##### database/timeline.csv:
-* Columns: number, year, date, country code, city, website, # of countries, # of students 
+* Columns: number, year, date, country code, city, website, # of countries, # of students
 * Ordered by year
 
 ##### database/countries.csv:
