@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
+<link href="../../img/fav-logo.ico" rel="shortcut icon" type="image/x-icon" />
+<link href="../../css/design.css" rel="stylesheet" type="text/css" />
+<link href="../../css/print.css" rel="stylesheet" type="text/css" media="print" />
+<title>IPhO 2029 - Individual Results</title>
+</head>
+<body>
+<div id="header">
+    <div id="h1">
+        <h1><a href="../../.">International Physics Olympiad</a></h1>
+    </div>
+    <div id="sub">
+        <span class="previous"><a href="https://www.ipho2019.org.il/" target="_blank">IPhO 2019</a></span>
+        <span class="img"><a href="../../."><img src="../../img/logo.png" alt="IPhO" width="30" height="22"/></a></span>
+        <span class="next"><a href="https://www.ipho2020.lt/" target="_blank">IPhO 2021</a></span>
+    </div>
+</div>
+<div id="sidebar">
+    <ul>
+        <li><a href="../../timeline/." class="highlight">Timeline</a></li>
+        <li><a href="../../countries/." class="">Countries</a></li>
+        <li><a href="../../search/." class="">Search</a></li>
+        <li><a target="_blank" href="http://physprob.com/">Problems</a></li>
+        <li><a target="_blank" href="https://en.wikipedia.org/wiki/International_Physics_Olympiad">About IPhO</a></li>
+        <li><a target="_blank" href="http://ipho.org/links.html">Links and Resources</a></li>
+    </ul>
+</div>
+
+<div id="main">
+    <h2>
+    <a href="../2028/individual" class="pointer" style="">&#9668;</a>
+    <a href=".">59<sup>th</sup> IPHO 2029</a>
+    <a href=".././individual" class="pointer" style="display: none;">&#9658;</a>
+    </h2>
+    <h3>
+    <a class="hideprn" href="country">Country results</a> &bull;
+    <a class="highlight" href="individual">Individual results</a>
+    </h3>
+    <table>
+    <thead><tr><th>Contestant</th><th>Country</th><th>Rank</th><th>Award</th></tr></thead>
+    <tbody>
+    
+    </tbody>
+    </table>
+    <div>
+        Results may be incomplete and may include mistakes.
+        Please send relevant information to the webmaster:
+        <a href="mailto:iphounofficial@gmail.com">iphounofficial@gmail.com</a>.
+        <br>
+        If you're a participant you can send a personal page URL to be attached
+        to your name.
+    </div>
+    <br>
+</div>
+<div id="footer">
+<a href="http://ipho.org/" target="_blank">IPhO Official Website</a>
+<a href="javascript:easteregg()" style="color: black;">&bull;</a>
+<b>Webmaster:</b>
+<a href="mailto:iphounofficial@gmail.com">iphounofficial@gmail.com</a>
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-68545700-1', 'auto');
+  ga('send', 'pageview');
+
+  function easteregg() {
+      var rightside = Math.random() < .5;
+      var heads = ["newton", "einstein", "bohr", "feynman", "boltzmann", "curie", "dirac",
+          "galileo", "maxwell", "planck", "schrodinger"];
+      var img = document.createElement("img");
+      img.src = "../../img/easter/" + heads[Math.floor(Math.random() * heads.length)] + ".png";
+      img.style.width = "150px";
+      img.style.position = "absolute";
+      if (rightside) {
+          img.style.right = "-150px";
+      } else {
+          img.style.left = "-150px";
+      }
+      img.style.bottom = "-150px";
+      img.style.zIndex = "10";
+      document.body.appendChild(img);
+      var startTime = new Date().getTime();
+      var fn = function () {
+          var dt = new Date().getTime() - startTime;
+          if (dt > 1000) {
+              document.body.removeChild(img);
+              return;
+          }
+          var maxd = 180;
+          if (dt < 500) var dx = Math.floor(Math.sin(dt / 500 * Math.PI / 2) * maxd);
+          else if (dt < 700) var dx = maxd;
+          else var dx = Math.floor(Math.cos((dt - 700) / 300 * Math.PI / 2) * maxd);
+          if (rightside) {
+              img.style.transform = "rotate(-45deg) translateY(-" + dx + "px) scaleX(-1)";
+          } else {
+              img.style.transform = "rotate(45deg) translateY(-" + dx + "px)";
+          }
+          setTimeout(fn, 40);
+      };
+      fn();
+      ga('send', 'event', 'EasterEgg', 'click');
+  }
+</script>
+
+</body>
+</html>

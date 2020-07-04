@@ -25,6 +25,7 @@ CSV files don't strictly obey CSV format. They are literally "comma separated va
 ##### database/timeline.csv:
 * Columns: number, year, date, country code, city, website, # of countries, # of students
 * Ordered by year
+* Years are not necessarily consecutive
 
 ##### database/countries.csv:
 * Columns: country code, name, website, if former
