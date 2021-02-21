@@ -2,7 +2,7 @@
 
 (function () {
     if (typeof(asciify) != "function") {
-        console.error("asciify not imported!");
+        console.error("asciify is not imported!");
         return;
     }
     var countries = null;
@@ -13,12 +13,12 @@
         xmlhttp.overrideMimeType("text/plain");
         xmlhttp.onreadystatechange = function() {
             // Let's ignore xmlhttp.status as it doesn't work local
-            if(xmlhttp.readyState == 4 && xmlhttp.responseText != null) {
+            if (xmlhttp.readyState == 4 && xmlhttp.responseText != null) {
                 countries = [];
                 countries[""] = "";
                 var tx = xmlhttp.responseText;
                 var lines = tx.split("\n");
-                for(var i = 0; i < lines.length; i++) {
+                for (var i = 0; i < lines.length; i++) {
                     var ps = lines[i].split(",");
                     if (ps.length > 2) {
                         countries[ps[0]] = ps[1];
@@ -32,13 +32,13 @@
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.open("GET", "estudiantes.csv", true);
         xmlhttp.overrideMimeType("text/plain");
-        xmlhttp.onreadystatechange = function() {
+        xmlhttp.onreadystatechange = function () {
             // Let's ignore xmlhttp.status as it doesn't work local
-            if(xmlhttp.readyState == 4 && xmlhttp.responseText != null) {
+            if (xmlhttp.readyState == 4 && xmlhttp.responseText != null) {
                 students = [];
                 var tx = xmlhttp.responseText;
                 var lines = tx.split("\n");
-                for(var i = 0; i < lines.length; i++) {
+                for (var i = 0; i < lines.length; i++) {
                     var ps = lines[i].trim().split(",");
                     if (ps.length > 4) {
                         students.push({
@@ -56,8 +56,8 @@
         }
         xmlhttp.send();
     }
-    window.ipho_search = function() {
-        if(countries == null || students == null) {
+    window.ipho_search = function () {
+        if (countries == null || students == null) {
           return;
         }
         var html = "";
@@ -69,22 +69,24 @@
         var t_honourable = document.getElementById("t_honourable").innerHTML;
         var query = document.getElementById("search_query").value;
         query = asciify(query).toLowerCase().trim();
-        if(query.length <= 1) {
+        if (query.length <= 1) {
             return;
         }
-        for(var i = 0; i < students.length; i++) {
-            if(students[i].name_ascii_lower.indexOf(query) != -1) {
-                var row = t_row.replace(/{{code}}/g, students[i].code)
-                    .replace(/{{country}}/g, countries[students[i].code])
-                    .replace(/{{year}}/g, students[i].year);
-                if (students[i].website) {
-                    var link = t_website.replace(/{{name}}/, students[i].name)
-                                        .replace(/{{link}}/, students[i].website);
+        // Traverse in reverse order so that recent results show up higher.
+        for (var i = students.length - 1; i >= 0; i--) {
+            var student = students[i];
+            if (student.name_ascii_lower.indexOf(query) != -1) {
+                var row = t_row.replace(/{{code}}/g, student.code)
+                    .replace(/{{country}}/g, countries[student.code])
+                    .replace(/{{year}}/g, student.year);
+                if (student.website) {
+                    var link = t_website.replace(/{{name}}/, student.name)
+                                        .replace(/{{link}}/, student.website);
                     row = row.replace(/{{name}}/, link)
                 } else {
-                    row = row.replace(/{{name}}/, students[i].name)
+                    row = row.replace(/{{name}}/, student.name)
                 }
-                switch(students[i].medal) {
+                switch (student.medal) {
                     case "G":
                         row = row.replace(/{{medal}}/g, t_gold);
                         break;
