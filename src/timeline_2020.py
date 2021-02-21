@@ -1,8 +1,7 @@
-import util
 import templates
-from database_2020 import database
+import util
 from database_countries import code_to_country
-from database_timeline import year_indexed as t_db_y
+from database_2020 import database
 
 def run():
     print("Creating timeline/2020")

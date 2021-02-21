@@ -1,4 +1,3 @@
-#!/usr/bin/python
 import csv
 
 database = []
@@ -26,7 +25,7 @@ with open("database/timeline.csv") as file:
             entry["code2"] = row[3].split("&")[1]
         else:
             entry["code"] = row[3]
-        
+
         database.append(entry)
         year_indexed[entry["year"]] = entry
         if entry["code"] not in code_grouped:

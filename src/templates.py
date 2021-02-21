@@ -1,6 +1,5 @@
-#!/usr/bin/python
-import util
 import config
+import util
 from database_timeline import year_indexed as t_db_y
 
 def get(path, templates={}):

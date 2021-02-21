@@ -1,7 +1,6 @@
-#!/usr/bin/python
 import sys
-import util
 import templates
+import util
 from database_countries import code_to_country
 from database_students import year_grouped as s_db_y
 from database_timeline import year_indexed as t_db_y

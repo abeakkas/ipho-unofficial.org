@@ -1,6 +1,5 @@
-#!/usr/bin/python
-import util
 import templates
+import util
 
 def run():
     print("Creating search")

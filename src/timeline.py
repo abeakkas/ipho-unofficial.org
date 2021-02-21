@@ -1,9 +1,7 @@
-#!/usr/bin/python
-import util
-import templates
 import timeline_index
 import timeline_year
 import timeline_2020
+import util
 from database_timeline import database as t_db
 
 def run():

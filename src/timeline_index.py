@@ -1,4 +1,3 @@
-#!/usr/bin/python
 import config
 import templates
 import util

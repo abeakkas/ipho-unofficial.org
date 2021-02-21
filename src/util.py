@@ -1,4 +1,3 @@
-#!/usr/bin/python
 import os
 
 def makedirs(path):
@@ -14,11 +13,10 @@ def readfile(path):
 def writefile(path, content):
     with open(path, 'w') as file:
         return file.write(content)
-        
+
 def copyfile(_from, to):
-    # sry shutil
     writefile(to, readfile(_from))
-        
+
 def ordinal(number):
     if number[-1] == "1":
         return "st"

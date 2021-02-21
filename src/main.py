@@ -1,14 +1,12 @@
-#!/usr/bin/python
-
-import index
-import e404
-import timeline
 import countries
+import e404
+import index
 import search
 import static_files
+import timeline
 
 def run():
-    print("Creating whole project")
+    print("Creating the whole project")
     index.run()
     e404.run()
     timeline.run()

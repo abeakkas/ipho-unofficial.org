@@ -1,4 +1,4 @@
-# Aims to find people who participated several times
+# Tries to find similar names in successive years
 from database_students import database as db
 from database_students import year_grouped as dby
 from database_students import code_grouped as dbc

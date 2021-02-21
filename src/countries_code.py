@@ -1,4 +1,3 @@
-#!/usr/bin/python
 import sys
 import util
 import countries_code_index
@@ -9,6 +8,6 @@ def run(code):
     util.makedirs("../countries/" + code)
     countries_code_index.run(code)
     countries_code_individual.run(code)
-    
+
 if __name__ == "__main__":
     run(sys.argv[1])

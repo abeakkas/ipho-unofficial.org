@@ -1,4 +1,3 @@
-#!/usr/bin/python
 import csv
 from database_countries import code_to_country as c_t_c
 
@@ -21,7 +20,7 @@ with open("database/estudiantes.csv") as file:
         }
         if (entry["medal"] not in ["G", "S", "B", "H", "P"]
                 or (entry["code"] != "" and entry["code"] not in c_t_c)):
-            raise Exception("Student database corrupted! Row: {}".format(row))
+            raise Exception("Student database is corrupted! Row: {}".format(row))
         if entry["rank"][:2] == ">=":
             entry["rank"] = entry["rank"][2:]
             entry["rank>="] = True

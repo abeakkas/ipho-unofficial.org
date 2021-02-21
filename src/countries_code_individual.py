@@ -1,7 +1,6 @@
-#!/usr/bin/python
 import sys
-import util
 import templates
+import util
 from database_countries import code_indexed as c_db_c
 from database_countries import previous_code
 from database_countries import next_code

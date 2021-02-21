@@ -1,6 +1,5 @@
-#!/usr/bin/python
-import util
 import templates
+import util
 
 def run():
     print("Creating index")
@@ -8,6 +7,6 @@ def run():
     html = templates.initial_replace(html, 0)
     html = templates.final_replace(html, ".")
     util.writefile("../index.html", html)
-    
+
 if __name__ == "__main__":
     run()
