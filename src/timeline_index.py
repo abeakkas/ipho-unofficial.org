@@ -9,7 +9,7 @@ def run():
     print("Creating timeline/index")
     html = templates.get("timeline/index")
     html = templates.initial_replace(html, 1)
-    
+
     tablehtml = ""
     upcominghtml = ""
     for row in t_db:
@@ -34,11 +34,13 @@ def run():
             tablehtml = rowhtml + tablehtml
         else:
             upcominghtml = rowhtml + upcominghtml
+        if int(row["year"]) == 2019:
+            tablehtml = templates.get("timeline/index_row_2020") + tablehtml
     html = html.replace("__TABLE__", tablehtml)
     html = html.replace("__UPCOMING__", upcominghtml)
-    
+
     html = templates.final_replace(html, "..")
     util.writefile("../timeline/index.html", html)
-    
+
 if __name__ == "__main__":
     run()
