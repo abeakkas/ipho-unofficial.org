@@ -15,6 +15,9 @@ with open("database/estudiantes.csv") as file:
             "name": row[2],
             "code": row[3],
             "medal": row[4],
+            "theoretical": row[5],
+            "experimental": row[6],
+            "total": row[7],
             "website": row[8],
             "rank>=": False
         }
