@@ -31,7 +31,7 @@ CSV files don't strictly obey CSV format. They are literally "comma separated va
 * Columns: country code, name, website, if former
 
 ##### database/2020.csv:
-* Columns: rank, name, country code, medal
+* Columns: rank, name, country code, medal, website
 
 ## Notes
 * Fahim Tajwar@2017 and Mohammad Fahim Tajwar@2014 from Bangladesh are not the same person

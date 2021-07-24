@@ -14,7 +14,13 @@ def run():
         rowhtml = templates.get("timeline/year/individual_row")
         rowhtml = rowhtml.replace("__CODE__", row["code"])
         rowhtml = rowhtml.replace("__COUNTRY__", code_to_country[row["code"]])
-        rowhtml = rowhtml.replace("__NAME__", row["name"])
+        if row["website"]:
+            link = templates.get("timeline/year/individual_student_link")
+            link = link.replace("__LINK__", row["website"])
+            link = link.replace("__NAME__", row["name"])
+            rowhtml = rowhtml.replace("__NAME__", link)
+        else:
+            rowhtml = rowhtml.replace("__NAME__", row["name"])
         rowhtml = rowhtml.replace("__RANK__", row["rank"])
         if row["medal"] == "G":
             rowhtml = rowhtml.replace("__MEDAL__", templates.get("timeline/year/individual_gold"))
