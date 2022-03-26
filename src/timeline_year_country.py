@@ -38,13 +38,11 @@ def run(year):
                 continue
             if row["code"] not in medals:
                 medals[row["code"]] = {
-                    "bestrank": int(row["rank"]),
-                    "bestrank>=": "&ge;" if row["rank>="] else "",
                     "gold": 0,
                     "silver": 0,
                     "bronze": 0,
                     "honourable": 0
-                    }
+                }
             if row["medal"] == "G":
                 medals[row["code"]]["gold"] += 1
             elif row["medal"] == "S":
@@ -56,8 +54,7 @@ def run(year):
 
     def keyfn(code):
         m = medals[code]
-        return (-m["gold"], -m["silver"], -m["bronze"], -m["honourable"],
-                m["bestrank"], code)
+        return (-m["gold"], -m["silver"], -m["bronze"], -m["honourable"], code)
 
     sortedcodes = sorted(medals, key = keyfn)
 
@@ -78,7 +75,6 @@ def run(year):
         rowhtml = rowhtml.replace("__SILVER__", str(medals[code]["silver"]))
         rowhtml = rowhtml.replace("__BRONZE__", str(medals[code]["bronze"]))
         rowhtml = rowhtml.replace("__HONOURABLE__", str(medals[code]["honourable"]))
-        rowhtml = rowhtml.replace("__BEST_RANK__", medals[code]["bestrank>="] + str(medals[code]["bestrank"]))
         tablehtml += rowhtml
     html = html.replace("__TABLE__", tablehtml)
 
