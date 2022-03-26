@@ -28,7 +28,7 @@ CSV files don't strictly obey CSV format. They are literally "comma separated va
 * Years are not necessarily consecutive
 
 ##### database/countries.csv:
-* Columns: country code, name, website, if former
+* Columns: country code, name, website, if-former
 
 ##### database/2020.csv:
 * Columns: rank, name, country code, medal, website
