@@ -29,56 +29,59 @@ __HEADER_TOP__
 </div>
 __FOOTER__
 <script>
+// Homepage animation
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
-var bx = 230, by = 110, br = 20, ba = 0;
+var bx = 230, by = 110, br = 20;
 var a = 250;
-setInterval(function() {
-        bx = 200 + 70 * Math.sin(ba);
-        by = 150 + 70 * Math.cos(ba);
-        ba += .1;
-		ctx.save();
-		ctx.beginPath();
-		ctx.rect(200 - a / 2 + a * .4, 150 - a / 2 + a * .18, a * .6, a * .6);
-		ctx.fillStyle="#ff9090";
-		ctx.fill();
-		ctx.strokeStyle="#ff0000";
-		ctx.stroke();
-		ctx.clip();
-		ctx.fillStyle="#ff0000";
-		ctx.beginPath();
-		ctx.arc(bx, by, br, 0, 7);
-		ctx.fill();
-		ctx.restore();
-		
-		ctx.save();
-		ctx.beginPath();
-		ctx.rect(200 - a / 2 + a * .18, 150 - a / 2 + a * .4, a * .6, a * .6);
-		ctx.fillStyle="#9090ff";
-		ctx.fill();
-		ctx.strokeStyle="#0000ff";
-		ctx.stroke();
-		ctx.clip();
-		ctx.fillStyle="#0000ff";
-		ctx.beginPath();
-		ctx.arc(bx, by, br, 0, 7);
-		ctx.fill();
-		ctx.restore();
-		
-		ctx.save();
-		ctx.beginPath();
-		ctx.rect(200 - a / 2, 150 - a / 2, a * .6, a * .6);
-		ctx.fillStyle="#ffff90";
-		ctx.fill();
-		ctx.strokeStyle="#ffff00";
-		ctx.stroke();
-		ctx.clip();
-		ctx.fillStyle="#ffff00";
-		ctx.beginPath();
-		ctx.arc(bx, by, br, 0, 7);
-		ctx.fill();
-		ctx.restore();
-	},40);
+function render() {
+    requestAnimationFrame(render);
+    var ba = new Date().getTime() * 0.002;
+    bx = 200 + 70 * Math.sin(ba);
+    by = 150 + 70 * Math.cos(ba);
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(200 - a / 2 + a * .4, 150 - a / 2 + a * .18, a * .6, a * .6);
+    ctx.fillStyle = "#ff9090";
+    ctx.fill();
+    ctx.strokeStyle = "#ff0000";
+    ctx.stroke();
+    ctx.clip();
+    ctx.fillStyle = "#ff0000";
+    ctx.beginPath();
+    ctx.arc(bx, by, br, 0, 7);
+    ctx.fill();
+    ctx.restore();
+
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(200 - a / 2 + a * .18, 150 - a / 2 + a * .4, a * .6, a * .6);
+    ctx.fillStyle = "#9090ff";
+    ctx.fill();
+    ctx.strokeStyle = "#0000ff";
+    ctx.stroke();
+    ctx.clip();
+    ctx.fillStyle = "#0000ff";
+    ctx.beginPath();
+    ctx.arc(bx, by, br, 0, 7);
+    ctx.fill();
+    ctx.restore();
+    
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(200 - a / 2, 150 - a / 2, a * .6, a * .6);
+    ctx.fillStyle="#ffff90";
+    ctx.fill();
+    ctx.strokeStyle="#ffff00";
+    ctx.stroke();
+    ctx.clip();
+    ctx.fillStyle="#ffff00";
+    ctx.beginPath();
+    ctx.arc(bx, by, br, 0, 7);
+    ctx.fill();
+    ctx.restore();
+}
+render();
 </script>
 </body>
 </html>
