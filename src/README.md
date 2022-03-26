@@ -26,6 +26,7 @@ CSV files don't strictly obey CSV format. They are literally "comma separated va
 * Columns: number, year, date, country code, city, website, # of countries, # of students
 * Ordered by year
 * Years are not necessarily consecutive
+* If there are multiple countries hosting the competition, codes are separated by '&'
 
 ##### database/countries.csv:
 * Columns: country-code, name, website, if-former

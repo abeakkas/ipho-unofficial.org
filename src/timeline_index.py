@@ -11,6 +11,7 @@ def run():
 
     tablehtml = ""
     upcominghtml = ""
+    upcoming_row_ctr = 0
     for row in t_db:
         rowhtml = templates.get("timeline/index_row")
         rowhtml = rowhtml.replace("__NUMBER__", row["number"])
@@ -33,8 +34,14 @@ def run():
             tablehtml = rowhtml + tablehtml
         else:
             upcominghtml = rowhtml + upcominghtml
+            upcoming_row_ctr += 1
         if int(row["year"]) == 2019:
             tablehtml = templates.get("timeline/index_row_2020") + tablehtml
+
+    # Append an empty row to preserve row parity between tables for styling purposes
+    if upcoming_row_ctr % 2:
+        upcominghtml = "<tr style=\"display:none;\"></tr>" + upcominghtml
+
     html = html.replace("__TABLE__", tablehtml)
     html = html.replace("__UPCOMING__", upcominghtml)
 
