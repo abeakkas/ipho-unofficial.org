@@ -39,8 +39,3 @@ with open("database/timeline.csv") as file:
             previous_year[entry["year"]] = prev
             next_year[prev] = entry["year"]
         prev = entry["year"]
-    # Special handling for 2020
-    previous_year["2020"] = "2019"
-    previous_year["2021"] = "2020"
-    next_year["2019"] = "2020"
-    next_year["2020"] = "2021"
