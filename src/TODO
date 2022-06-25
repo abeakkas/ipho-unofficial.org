@@ -1,4 +1,3 @@
-- Timeline to not skip 2020 during navigation
 - Move common js scripts to a separate file
 - Move common page headers to a template
 - Remove unnecessary HTML junk
