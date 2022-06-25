@@ -7,55 +7,6 @@
     }
     var countries = null;
     var students = null;
-    function loadCountries() {
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.open("GET", "countries.csv", true);
-        xmlhttp.overrideMimeType("text/plain");
-        xmlhttp.onreadystatechange = function() {
-            // Let's ignore xmlhttp.status as it doesn't work local
-            if (xmlhttp.readyState == 4 && xmlhttp.responseText != null) {
-                countries = [];
-                countries[""] = "";
-                var tx = xmlhttp.responseText;
-                var lines = tx.split("\n");
-                for (var i = 0; i < lines.length; i++) {
-                    var ps = lines[i].split(",");
-                    if (ps.length > 2) {
-                        countries[ps[0]] = ps[1];
-                    }
-                }
-            }
-        }
-        xmlhttp.send();
-    }
-    function loadStudents() {
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.open("GET", "estudiantes.csv", true);
-        xmlhttp.overrideMimeType("text/plain");
-        xmlhttp.onreadystatechange = function () {
-            // Let's ignore xmlhttp.status as it doesn't work local
-            if (xmlhttp.readyState == 4 && xmlhttp.responseText != null) {
-                students = [];
-                var tx = xmlhttp.responseText;
-                var lines = tx.split("\n");
-                for (var i = 0; i < lines.length; i++) {
-                    var ps = lines[i].trim().split(",");
-                    if (ps.length > 4) {
-                        students.push({
-                            year: ps[0],
-                            rank: ps[1],
-                            name: ps[2],
-                            code: ps[3],
-                            medal: ps[4],
-                            website: ps[8],
-                            name_ascii_lower: asciify(ps[2]).toLowerCase(),
-                        });
-                    }
-                }
-            }
-        }
-        xmlhttp.send();
-    }
     window.ipho_search = function () {
         if (countries == null || students == null) {
           return;
@@ -77,8 +28,8 @@
             var student = students[i];
             if (student.name_ascii_lower.indexOf(query) != -1) {
                 var row = t_row.replace(/{{code}}/g, student.code)
-                    .replace(/{{country}}/g, countries[student.code])
-                    .replace(/{{year}}/g, student.year);
+                               .replace(/{{country}}/g, countries[student.code])
+                               .replace(/{{year}}/g, student.year);
                 if (student.website) {
                     var link = t_website.replace(/{{name}}/, student.name)
                                         .replace(/{{link}}/, student.website);
@@ -108,6 +59,44 @@
         }
         document.getElementById("search_results").innerHTML = html;
     }
-    loadCountries();
-    loadStudents();
+    function loadCSV(filename, onload) {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("GET", filename, true);
+        xmlhttp.overrideMimeType("text/plain");
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && this.status == 200) {
+                onload(xmlhttp.responseText);
+            }
+        }
+        xmlhttp.send();
+    }
+    loadCSV("countries.csv", function (csv) {
+        countries = [];
+        countries[""] = "";
+        var lines = csv.split("\n");
+        for (var i = 0; i < lines.length; i++) {
+            var ps = lines[i].split(",");
+            if (ps.length > 2) {
+                countries[ps[0]] = ps[1];
+            }
+        }
+    });
+    loadCSV("estudiantes.csv", function (csv) {
+        students = [];
+        var lines = csv.split("\n");
+        for (var i = 0; i < lines.length; i++) {
+            var ps = lines[i].trim().split(",");
+            if (ps.length > 4) {
+                students.push({
+                    year: ps[0],
+                    rank: ps[1],
+                    name: ps[2],
+                    code: ps[3],
+                    medal: ps[4],
+                    website: ps[8],
+                    name_ascii_lower: asciify(ps[2]).toLowerCase(),
+                });
+            }
+        }
+    });
 })();

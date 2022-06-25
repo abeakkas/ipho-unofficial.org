@@ -6,6 +6,7 @@ def run():
     util.makedirs("../search")
     util.copyfile("database/countries.csv", "../search/countries.csv")
     util.copyfile("database/estudiantes.csv", "../search/estudiantes.csv")
+    util.copyfile("database/2020.csv", "../search/2020.csv")
     util.copyfile("templates/search/search.js", "../search/search.js")
     util.copyfile("templates/search/asciify.js", "../search/asciify.js")
     html = templates.get("search/index")
