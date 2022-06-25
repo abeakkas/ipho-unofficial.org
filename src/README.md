@@ -14,6 +14,7 @@ After adding a new year increment config.py counters.
 ## Database format
 
 CSV files don't strictly obey CSV format. They are literally "comma separated values". Thus, names should not include commas.
+If you change the database structure update search.js script as well.
 
 ##### database/estudiantes.csv:
 * Columns: year, rank, name, country-code, medal, theoretical, experimental, total, website

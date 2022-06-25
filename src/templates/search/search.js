@@ -5,10 +5,10 @@
         console.error("asciify is not imported!");
         return;
     }
-    var countries = null;
-    var students = null;
+    var countries = [];
+    var students = [];
     window.ipho_search = function () {
-        if (countries == null || students == null) {
+        if (countries == [] || students == []) {
           return;
         }
         var html = "";
@@ -71,7 +71,6 @@
         xmlhttp.send();
     }
     loadCSV("countries.csv", function (csv) {
-        countries = [];
         countries[""] = "";
         var lines = csv.split("\n");
         for (var i = 0; i < lines.length; i++) {
@@ -82,11 +81,10 @@
         }
     });
     loadCSV("estudiantes.csv", function (csv) {
-        students = [];
         var lines = csv.split("\n");
         for (var i = 0; i < lines.length; i++) {
             var ps = lines[i].trim().split(",");
-            if (ps.length > 4) {
+            if (ps.length > 8) {
                 students.push({
                     year: ps[0],
                     rank: ps[1],
@@ -95,6 +93,23 @@
                     medal: ps[4],
                     website: ps[8],
                     name_ascii_lower: asciify(ps[2]).toLowerCase(),
+                });
+            }
+        }
+    });
+    loadCSV("2020.csv", function (csv) {
+        var lines = csv.split("\n");
+        for (var i = 0; i < lines.length; i++) {
+            var ps = lines[i].trim().split(",");
+            if (ps.length > 4) {
+                students.push({
+                    year: "2020",
+                    rank: ps[0],
+                    name: ps[1],
+                    code: ps[2],
+                    medal: ps[3],
+                    website: ps[4],
+                    name_ascii_lower: asciify(ps[1]).toLowerCase(),
                 });
             }
         }
