@@ -1,5 +1,5 @@
 # Source code
-Run main.py to build the project:
+Run main.py from src to build the project:
 ```
 python3 -B main.py
 ```
@@ -13,7 +13,7 @@ After adding a new year increment config.py counters.
 
 ## Database format
 
-CSV files don't strictly obey CSV format. They are literally "comma separated values". Thus, names should not include commas.
+CSV files don't obey the CSV format strictly. They are literally "comma separated values". Thus, names should not contain commas.
 If you change the database structure update search.js script as well.
 
 ##### database/estudiantes.csv:
