@@ -1,10 +1,9 @@
-- Timeline to not skip 2020 during navigation
 - Move common js scripts to a separate file
 - Move common page headers to a template
 - Remove unnecessary HTML junk
 - Cleanup unused CSS
-- Show scores when available
 - Make initial/final replace signature more readable
 - indentation=2
 - 2020 shows up at the top of search
 - Row dividers are occasionally thick on Chrome
+- Sort by scores (good luck)
