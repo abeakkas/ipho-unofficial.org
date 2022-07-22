@@ -30,6 +30,13 @@ def run(year):
         html = html.replace("__NEXT_YEAR_STYLE__", "display: none;")
         html = html.replace("__NEXT_YEAR__", ".") # Google crawler fix
 
+    show_points = year in s_db_y and s_db_y[year] and s_db_y[year][0]["theoretical"]
+
+    if show_points:
+        html = html.replace("__POINTS_STYLE__", "")
+    else:
+        html = html.replace("__POINTS_STYLE__", "display: none;")
+
     tablehtml = ""
     if year in s_db_y:
         for row in s_db_y[year]:
@@ -58,6 +65,13 @@ def run(year):
                 rowhtml = rowhtml.replace("__MEDAL__", templates.get("timeline/year/individual_honourable"))
             else:
                 rowhtml = rowhtml.replace("__MEDAL__", "")
+            if show_points:
+                rowhtml = rowhtml.replace("__POINTS_STYLE__", "")
+                rowhtml = rowhtml.replace("__THEORETICAL__", row["theoretical"])
+                rowhtml = rowhtml.replace("__EXPERIMENTAL__", row["experimental"])
+                rowhtml = rowhtml.replace("__TOTAL__", row["total"])
+            else:
+                rowhtml = rowhtml.replace("__POINTS_STYLE__", "display: none;")
             tablehtml += rowhtml
     html = html.replace("__TABLE__", tablehtml)
 

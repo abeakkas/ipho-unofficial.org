@@ -32,6 +32,7 @@ def run():
             rowhtml = rowhtml.replace("__MEDAL__", templates.get("timeline/year/individual_honourable"))
         else:
             rowhtml = rowhtml.replace("__MEDAL__", "")
+        rowhtml = rowhtml.replace("__POINTS_STYLE__", "display: none;")
         tablehtml += rowhtml
     html = html.replace("__TABLE__", tablehtml)
 
