@@ -34,3 +34,17 @@ with open("database/estudiantes.csv") as file:
         if entry["year"] not in year_grouped:
             year_grouped[entry["year"]] = []
         year_grouped[entry["year"]].append(entry)
+
+def check_point_rank_consistency():
+    for year in year_grouped:
+        if not year_grouped[year][0]["total"]:
+            continue
+        last_rank = 0
+        last_points = 1e10
+        for row in year_grouped[year]:
+            rank = int(row["rank"])
+            points = float(row["total"])
+            if points > last_points or (points == last_points and rank != last_rank):
+                print("Row should have higher rank: {}".format(row))
+            last_rank = rank
+            last_points = points
