@@ -48,3 +48,20 @@ def check_point_rank_consistency():
                 print("Row should have higher rank: {}".format(row))
             last_rank = rank
             last_points = points
+
+def check_point_sums():
+    for year in year_grouped:
+        if (not year_grouped[year][0]["theoretical"] or
+            not year_grouped[year][0]["experimental"] or
+            not year_grouped[year][0]["total"]):
+            continue
+        for row in year_grouped[year]:
+            th = float(row["theoretical"])
+            ex = float(row["experimental"])
+            to = float(row["total"])
+            if abs(th + ex - to) > .0001:
+                print("Points don't add up: {}".format(row))
+
+if __name__ == "__main__":
+    check_point_rank_consistency()
+    check_point_sums()
