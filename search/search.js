@@ -96,22 +96,28 @@
                 });
             }
         }
-    });
-    loadCSV("2020.csv", function (csv) {
-        var lines = csv.split("\n");
-        for (var i = 0; i < lines.length; i++) {
-            var ps = lines[i].trim().split(",");
-            if (ps.length > 4) {
-                students.push({
-                    year: "2020",
-                    rank: ps[0],
-                    name: ps[1],
-                    code: ps[2],
-                    medal: ps[3],
-                    website: ps[4],
-                    name_ascii_lower: asciify(ps[1]).toLowerCase(),
-                });
+        loadCSV("2020.csv", function (csv) {
+            var lines = csv.split("\n");
+            var rows2020 = [];
+            for (var i = 0; i < lines.length; i++) {
+                var ps = lines[i].trim().split(",");
+                if (ps.length > 4) {
+                    rows2020.push({
+                        year: "2020",
+                        rank: ps[0],
+                        name: ps[1],
+                        code: ps[2],
+                        medal: ps[3],
+                        website: ps[4],
+                        name_ascii_lower: asciify(ps[1]).toLowerCase(),
+                    });
+                }
             }
-        }
+            // Insert 2020's rows to right location to the right place with JS magic:
+            // https://stackoverflow.com/a/7032717
+            var ix = 0;
+            for (; ix < students.length && students[ix]["year"] != "2021"; ix++);
+            students.splice.apply(students, [ix, 0].concat(rows2020));
+        });
     });
 })();

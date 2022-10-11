@@ -4,6 +4,6 @@
 - Cleanup unused CSS
 - Make initial/final replace signature more readable
 - indentation=2
-- 2020 shows up at the top of search
 - Row dividers are occasionally thick on Chrome
 - Sort by scores (good luck)
+- Cumulative country results
