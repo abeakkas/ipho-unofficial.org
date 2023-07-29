@@ -2,6 +2,7 @@ import templates
 import util
 from database_countries import database as c_db
 from database_countries import code_to_country
+from database_students import code_grouped as s_db_c
 from database_timeline import code_grouped as t_db_c
 
 def run():
@@ -36,6 +37,15 @@ def run():
             rowhtml = rowhtml.replace("__HOSTS__", hosts)
         else:
             rowhtml = rowhtml.replace("__HOSTS__", "")
+
+        medals = {"G": 0, "S": 0, "B": 0, "H": 0, "P": 0}
+        if row["code"] in s_db_c:
+            for student in s_db_c[row["code"]]:
+                medals[student["medal"]] += 1
+        rowhtml = rowhtml.replace("__GOLD__", str(medals["G"]))
+        rowhtml = rowhtml.replace("__SILVER__", str(medals["S"]))
+        rowhtml = rowhtml.replace("__BRONZE__", str(medals["B"]))
+        rowhtml = rowhtml.replace("__HONOURABLE__", str(medals["H"]))
 
         rowhtml = rowhtml.replace("__CLASS__", "tr-former" if row["former"] else "")
 
