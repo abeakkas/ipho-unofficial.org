@@ -40,7 +40,7 @@
         <th rowspan="2">IPhO Host</th>
         <th colspan="4"><a href="#" onclick="sort_awards();return false;">Awards</a></th>
 	</tr>
-	<tr>
+	<tr id="table_head">
         <th title="Gold medal">G</th>
         <th title="Silver medal">S</th>
         <th title="Bronze medal">B</th>
@@ -1420,11 +1420,18 @@ function sort_awards() {
             prev_summary = summary;
             var rank = document.createElement("td");
             rank.align = "right";
-            rank.innerHTML = "#" + prevrank;
+            rank.innerHTML = prevrank;
             i++;
             if (sorted) row.removeChild(row.lastChild);
             row.appendChild(rank);
         });
+    if (!sorted) {
+        var head = document.getElementById("table_head");
+        var rank = document.createElement("td");
+        rank.style.fontWeight = "bold";
+        rank.innerHTML = "Rank";
+        head.appendChild(rank);
+    }
     sorted = true;
 }
 </script>
