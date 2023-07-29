@@ -18,7 +18,7 @@ __HEADER_SIDE__
         <th rowspan="2">Country</th>
         <th rowspan="2">National PhO site</th>
         <th rowspan="2">IPhO Host</th>
-        <th colspan="4">Awards</th>
+        <th colspan="4"><a href="#" onclick="sort_awards();return false;">Awards</a></th>
 	</tr>
 	<tr>
         <th title="Gold medal">G</th>
@@ -27,11 +27,26 @@ __HEADER_SIDE__
         <th title="Honourable mention">HM</th>
 	</tr>
 	</thead>
-	<tbody>
+	<tbody id="table_body">
 	__TABLE__
 	</tbody>
 	</table>
 </div>
+<script>
+function sort_awards() {
+    var table = document.getElementById("table_body");
+    Array.from(table.children)
+        .sort(function (r1, r2) {
+            return parseInt(r2.children[4].innerHTML) - parseInt(r1.children[4].innerHTML) ||
+                   parseInt(r2.children[5].innerHTML) - parseInt(r1.children[5].innerHTML) ||
+                   parseInt(r2.children[6].innerHTML) - parseInt(r1.children[6].innerHTML) ||
+                   parseInt(r2.children[7].innerHTML) - parseInt(r1.children[7].innerHTML);
+        })
+        .forEach(function (row) {
+            table.appendChild(row);
+        });
+}
+</script>
 __FOOTER__
 </body>
 </html>
