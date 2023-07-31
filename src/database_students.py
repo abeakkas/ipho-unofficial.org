@@ -62,6 +62,13 @@ def check_point_sums():
             if abs(th + ex - to) > .0001:
                 print("Points don't add up: {}".format(row))
 
+def check_combining_characters():
+    for row in database:
+        for c in row['name']:
+            if 768 <= ord(c) < 880:
+                print("Combining character {} detected: {}".format(c, row))
+
 if __name__ == "__main__":
     check_point_rank_consistency()
     check_point_sums()
+    check_combining_characters()
