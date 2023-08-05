@@ -37,6 +37,14 @@ def run(year):
     else:
         html = html.replace("__POINTS_STYLE__", "display: none;")
 
+    medal_to_template = {
+        "G": templates.get("timeline/year/individual_gold"),
+        "S": templates.get("timeline/year/individual_silver"),
+        "B": templates.get("timeline/year/individual_bronze"),
+        "H": templates.get("timeline/year/individual_honourable"),
+        "P": "",
+    }
+
     tablehtml = ""
     if year in s_db_y:
         for row in s_db_y[year]:
@@ -55,16 +63,7 @@ def run(year):
             else:
                 rowhtml = rowhtml.replace("__NAME__", row.name)
             rowhtml = rowhtml.replace("__RANK__", ("&ge;" if row.rank_geq else "") + row.rank)
-            if row.medal == "G":
-                rowhtml = rowhtml.replace("__MEDAL__", templates.get("timeline/year/individual_gold"))
-            elif row.medal == "S":
-                rowhtml = rowhtml.replace("__MEDAL__", templates.get("timeline/year/individual_silver"))
-            elif row.medal == "B":
-                rowhtml = rowhtml.replace("__MEDAL__", templates.get("timeline/year/individual_bronze"))
-            elif row.medal == "H":
-                rowhtml = rowhtml.replace("__MEDAL__", templates.get("timeline/year/individual_honourable"))
-            else:
-                rowhtml = rowhtml.replace("__MEDAL__", "")
+            rowhtml = rowhtml.replace("__MEDAL__", medal_to_template[row.medal])
             if show_points:
                 rowhtml = rowhtml.replace("__POINTS_STYLE__", "")
                 rowhtml = rowhtml.replace("__THEORETICAL__", row.theoretical)

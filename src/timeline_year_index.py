@@ -66,24 +66,14 @@ def run(year):
         html = html.replace("__HOMEPAGE__", ".") # Google crawler fix
 
     if year in s_db_y:
-        gold = 0
-        silver = 0
-        bronze = 0
-        honourable = 0
+        medals = {"G": 0, "S": 0, "B": 0, "H": 0, "P": 0}
         for studentdata in s_db_y[year]:
-            if studentdata.medal == "G":
-                gold += 1
-            elif studentdata.medal == "S":
-                silver += 1
-            elif studentdata.medal == "B":
-                bronze += 1
-            elif studentdata.medal == "H":
-                honourable += 1
+            medals[studentdata.medal] += 1
         html = html.replace("__AWARDS_STYLE__", "")
-        html = html.replace("__GOLD__", str(gold))
-        html = html.replace("__SILVER__", str(silver))
-        html = html.replace("__BRONZE__", str(bronze))
-        html = html.replace("__HONOURABLE__", str(honourable))
+        html = html.replace("__GOLD__", str(medals["G"]))
+        html = html.replace("__SILVER__", str(medals["S"]))
+        html = html.replace("__BRONZE__", str(medals["B"]))
+        html = html.replace("__HONOURABLE__", str(medals["H"]))
     else:
         html = html.replace("__AWARDS_STYLE__", "display: none;")
 

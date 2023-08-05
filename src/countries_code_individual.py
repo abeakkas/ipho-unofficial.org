@@ -6,7 +6,6 @@ from database_countries import previous_code
 from database_countries import next_code
 from database_students import code_grouped as s_db_c
 
-
 def run(code):
     print("Creating countries/" + code + "/individual")
     html = templates.get("countries/code/individual")

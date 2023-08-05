@@ -1,7 +1,7 @@
 import templates
 import util
-from database_countries import database as c_db
 from database_countries import code_to_country
+from database_countries import database as c_db
 from database_students import code_grouped as s_db_c
 from database_timeline import code_grouped as t_db_c
 
@@ -16,7 +16,7 @@ def run():
         rowhtml = rowhtml.replace("__CODE__", row.code)
         rowhtml = rowhtml.replace("__COUNTRY__", code_to_country[row.code])
 
-        if row.website != "":
+        if row.website:
             rowhtml = rowhtml.replace("__NATIONAL_SITE__", row.website)
             if len(row.website) < 50:
                 rowhtml = rowhtml.replace("__NATIONAL_SITE_TEXT__", row.website)
