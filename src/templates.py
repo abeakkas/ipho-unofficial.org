@@ -48,3 +48,11 @@ def final_replace(html, root):
         html = html.replace("__HTML_EXT__", ".html")
     html = html.replace("__WEBMASTER__", config.webmaster_email)
     return html
+
+medal = {
+    "G": get("medal_gold"),
+    "S": get("medal_silver"),
+    "B": get("medal_bronze"),
+    "H": get("medal_honourable"),
+    "P": "",
+}

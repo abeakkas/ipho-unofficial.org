@@ -9,14 +9,6 @@ def run():
     html = templates.get("timeline/2020/index")
     html = templates.initial_replace(html, 1)
 
-    medal_to_template = {
-        "G": templates.get("timeline/year/individual_gold"),
-        "S": templates.get("timeline/year/individual_silver"),
-        "B": templates.get("timeline/year/individual_bronze"),
-        "H": templates.get("timeline/year/individual_honourable"),
-        "P": "",
-    }
-
     tablehtml = ""
     for row in database:
         rowhtml = templates.get("timeline/year/individual_row")
@@ -30,7 +22,7 @@ def run():
         else:
             rowhtml = rowhtml.replace("__NAME__", row.name)
         rowhtml = rowhtml.replace("__RANK__", row.rank)
-        rowhtml = rowhtml.replace("__MEDAL__", medal_to_template[row.medal])
+        rowhtml = rowhtml.replace("__MEDAL__", templates.medal[row.medal])
         rowhtml = rowhtml.replace("__POINTS_STYLE__", "display: none;")
         tablehtml += rowhtml
     html = html.replace("__TABLE__", tablehtml)
