@@ -1,9 +1,10 @@
 import csv
+from collections import defaultdict
 from collections import namedtuple
 
 database = []
 year_indexed = {}
-code_grouped = {}
+code_grouped = defaultdict(list)
 previous_year = {}
 next_year = {}
 
@@ -21,12 +22,8 @@ with open("database/timeline.csv") as file:
 
         database.append(entry)
         year_indexed[entry.year] = entry
-        if entry.code not in code_grouped:
-            code_grouped[entry.code] = []
         code_grouped[entry.code].append(entry)
         if entry.code2:
-            if entry.code2 not in code_grouped:
-                code_grouped[entry.code2] = []
             code_grouped[entry.code2].append(entry)
         if prev != "":
             previous_year[entry.year] = prev

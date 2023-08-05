@@ -1,10 +1,11 @@
 import csv
+from collections import defaultdict
 from collections import namedtuple
 from database_countries import code_to_country as c_t_c
 
 database = []
-code_grouped = {}
-year_grouped = {}
+code_grouped = defaultdict(list)
+year_grouped = defaultdict(list)
 
 Row = namedtuple('Row', 'year,rank,name,code,medal,theoretical,experimental,total,website,rank_geq')
 
@@ -21,12 +22,9 @@ with open("database/estudiantes.csv") as file:
         if (entry.medal not in ["G", "S", "B", "H", "P"]
                 or (entry.code != "" and entry.code not in c_t_c)):
             raise Exception("Student database is corrupted! Row: {}".format(row))
+
         database.append(entry)
-        if entry.code not in code_grouped:
-            code_grouped[entry.code] = []
         code_grouped[entry.code].append(entry)
-        if entry.year not in year_grouped:
-            year_grouped[entry.year] = []
         year_grouped[entry.year].append(entry)
 
 def check_point_rank_consistency():
