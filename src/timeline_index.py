@@ -14,28 +14,28 @@ def run():
     upcoming_row_ctr = 0
     for row in t_db:
         rowhtml = templates.get("timeline/index_row")
-        rowhtml = rowhtml.replace("__NUMBER__", row["number"])
-        rowhtml = rowhtml.replace("__YEAR__", row["year"])
-        rowhtml = rowhtml.replace("__DATE__", row["date"])
-        rowhtml = rowhtml.replace("__CODE__", row["code"])
-        rowhtml = rowhtml.replace("__CITY__", row["city"])
-        rowhtml = rowhtml.replace("__COUNTRY__", code_to_country[row["code"]])
-        rowhtml = rowhtml.replace("__P_COUNTRY__", row["p_country"])
-        rowhtml = rowhtml.replace("__P_STUDENT__", row["p_student"])
-        if "code2" in row:
-            rowhtml = rowhtml.replace("__CODE2__", row["code2"])
-            rowhtml = rowhtml.replace("__COUNTRY2__", code_to_country[row["code2"]])
+        rowhtml = rowhtml.replace("__NUMBER__", row.number)
+        rowhtml = rowhtml.replace("__YEAR__", row.year)
+        rowhtml = rowhtml.replace("__DATE__", row.date)
+        rowhtml = rowhtml.replace("__CODE__", row.code)
+        rowhtml = rowhtml.replace("__CITY__", row.city)
+        rowhtml = rowhtml.replace("__COUNTRY__", code_to_country[row.code])
+        rowhtml = rowhtml.replace("__P_COUNTRY__", row.p_country)
+        rowhtml = rowhtml.replace("__P_STUDENT__", row.p_student)
+        if row.code2:
+            rowhtml = rowhtml.replace("__CODE2__", row.code2)
+            rowhtml = rowhtml.replace("__COUNTRY2__", code_to_country[row.code2])
             rowhtml = rowhtml.replace("__CODE2_STYLE__", "")
         else:
             rowhtml = rowhtml.replace("__CODE2_STYLE__", "display: none;")
             rowhtml = rowhtml.replace("__CODE2__", ".") # Google crawler fix
-        if int(row["year"]) <= int(config.next_year) + 2:
+        if int(row.year) <= int(config.next_year) + 2:
             # Reverse list
             tablehtml = rowhtml + tablehtml
         else:
             upcominghtml = rowhtml + upcominghtml
             upcoming_row_ctr += 1
-        if int(row["year"]) == 2019:
+        if int(row.year) == 2019:
             tablehtml = templates.get("timeline/index_row_2020") + tablehtml
 
     # Append an empty row to preserve row parity between tables for styling purposes

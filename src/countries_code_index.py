@@ -14,15 +14,15 @@ def run(code):
     codedata = c_db_c[code]
 
     html = html.replace("__CODE__", code)
-    html = html.replace("__COUNTRY__", codedata["country"])
+    html = html.replace("__COUNTRY__", codedata.country)
 
-    if codedata["website"] != "":
+    if codedata.website != "":
         html = html.replace("__CONTACT_STYLE__", "")
-        html = html.replace("__NATIONAL_SITE__", codedata["website"])
-        if len(codedata["website"]) < 50:
-            html = html.replace("__NATIONAL_SITE_TEXT__", codedata["website"])
+        html = html.replace("__NATIONAL_SITE__", codedata.website)
+        if len(codedata.website) < 50:
+            html = html.replace("__NATIONAL_SITE_TEXT__", codedata.website)
         else:
-            html = html.replace("__NATIONAL_SITE_TEXT__", codedata["website"][0:50] + "...")
+            html = html.replace("__NATIONAL_SITE_TEXT__", codedata.website[0:50] + "...")
     else:
         html = html.replace("__CONTACT_STYLE__", "display: none;")
         html = html.replace("__NATIONAL_SITE__", ".") # Google crawler fix
@@ -45,40 +45,30 @@ def run(code):
         hostshtml = ""
         for yeardata in t_db_c[code]:
             hosthtml = templates.get("countries/code/index_host")
-            if yeardata["city"] != "":
-                hosthtml = hosthtml.replace("__CITY__", " - " + yeardata["city"])
+            if yeardata.city:
+                hosthtml = hosthtml.replace("__CITY__", " - " + yeardata.city)
             else:
                 hosthtml = hosthtml.replace("__CITY__", "")
-            if yeardata["homepage"] != "":
+            if yeardata.homepage:
                 homepagehtml = templates.get("countries/code/index_host_homepage")
-                homepagehtml = homepagehtml.replace("__LINK__", yeardata["homepage"])
+                homepagehtml = homepagehtml.replace("__LINK__", yeardata.homepage)
                 hosthtml = hosthtml.replace("__HOMEPAGE__", homepagehtml)
             else:
                 hosthtml = hosthtml.replace("__HOMEPAGE__", "")
-            hosthtml = hosthtml.replace("__YEAR__", yeardata["year"])
+            hosthtml = hosthtml.replace("__YEAR__", yeardata.year)
             hostshtml += hosthtml
         html = html.replace("__HOST__", "<dt>IPhO Host</dt>" + hostshtml)
     else:
         html = html.replace("__HOST__", "")
 
-    gold = 0
-    silver = 0
-    bronze = 0
-    honourable = 0
+    medals = {"G": 0, "S": 0, "B": 0, "H": 0, "P": 0}
     if code in s_db_c:
         for studentdata in s_db_c[code]:
-            if studentdata["medal"] == "G":
-                gold += 1
-            elif studentdata["medal"] == "S":
-                silver += 1
-            elif studentdata["medal"] == "B":
-                bronze += 1
-            elif studentdata["medal"] == "H":
-                honourable += 1
-    html = html.replace("__GOLD__", str(gold))
-    html = html.replace("__SILVER__", str(silver))
-    html = html.replace("__BRONZE__", str(bronze))
-    html = html.replace("__HONOURABLE__", str(honourable))
+            medals[studentdata.medal] += 1
+    html = html.replace("__GOLD__", str(medals["G"]))
+    html = html.replace("__SILVER__", str(medals["S"]))
+    html = html.replace("__BRONZE__", str(medals["B"]))
+    html = html.replace("__HONOURABLE__", str(medals["H"]))
 
     html = templates.final_replace(html, "../..")
     util.writefile("../countries/" + code + "/index.html", html)

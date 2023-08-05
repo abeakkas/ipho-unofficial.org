@@ -10,7 +10,7 @@ def run():
     timeline_index.run()
     timeline_2020.run()
     for yeardata in t_db:
-        timeline_year.run(yeardata["year"])
+        timeline_year.run(yeardata.year)
 
 if __name__ == "__main__":
     run()

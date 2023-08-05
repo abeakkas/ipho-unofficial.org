@@ -13,8 +13,8 @@ def run(year):
     html = templates.initial_replace(html, 1)
     yeardata = t_db_y[year]
     html = html.replace("__YEAR__", year)
-    html = html.replace("__NUMBER__", yeardata["number"])
-    html = html.replace("__ORDINAL__", util.ordinal(yeardata["number"]))
+    html = html.replace("__NUMBER__", yeardata.number)
+    html = html.replace("__ORDINAL__", util.ordinal(yeardata.number))
 
     if year in previous_year:
         html = html.replace("__PREVIOUS_YEAR__", previous_year[year])
@@ -33,28 +33,15 @@ def run(year):
     medals = {}
     if year in s_db_y:
         for row in s_db_y[year]:
-            if row["code"] == "":
-                # Country unknown
+            if row.code == "":
                 continue
-            if row["code"] not in medals:
-                medals[row["code"]] = {
-                    "gold": 0,
-                    "silver": 0,
-                    "bronze": 0,
-                    "honourable": 0
-                }
-            if row["medal"] == "G":
-                medals[row["code"]]["gold"] += 1
-            elif row["medal"] == "S":
-                medals[row["code"]]["silver"] += 1
-            elif row["medal"] == "B":
-                medals[row["code"]]["bronze"] += 1
-            elif row["medal"] == "H":
-                medals[row["code"]]["honourable"] += 1
+            if row.code not in medals:
+                medals[row.code] = {"G": 0, "S": 0, "B": 0, "H": 0, "P": 0}
+            medals[row.code][row.medal] += 1
 
     def keyfn(code):
         m = medals[code]
-        return (-m["gold"], -m["silver"], -m["bronze"], -m["honourable"], code)
+        return (-m["G"], -m["S"], -m["B"], -m["H"], code)
 
     sortedcodes = sorted(medals, key = keyfn)
 
@@ -71,10 +58,10 @@ def run(year):
             rowhtml = rowhtml.replace("__RANK__", str(i + 1))
             prevcode = code
             prevrank = str(i + 1)
-        rowhtml = rowhtml.replace("__GOLD__", str(medals[code]["gold"]))
-        rowhtml = rowhtml.replace("__SILVER__", str(medals[code]["silver"]))
-        rowhtml = rowhtml.replace("__BRONZE__", str(medals[code]["bronze"]))
-        rowhtml = rowhtml.replace("__HONOURABLE__", str(medals[code]["honourable"]))
+        rowhtml = rowhtml.replace("__GOLD__", str(medals[code]["G"]))
+        rowhtml = rowhtml.replace("__SILVER__", str(medals[code]["S"]))
+        rowhtml = rowhtml.replace("__BRONZE__", str(medals[code]["B"]))
+        rowhtml = rowhtml.replace("__HONOURABLE__", str(medals[code]["H"]))
         tablehtml += rowhtml
     html = html.replace("__TABLE__", tablehtml)
 

@@ -8,7 +8,7 @@ def run():
     util.makedirs("../countries")
     countries_index.run()
     for codedata in c_db:
-        countries_code.run(codedata["code"])
+        countries_code.run(codedata.code)
 
 if __name__ == "__main__":
     run()
