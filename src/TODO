@@ -4,7 +4,6 @@
 - Cleanup unused CSS
 - Make initial/final replace signature more readable
 - indentation=2
-- Add some message on empty timeline pages
 - Fixed precision for score numbers
 - Make a hall of fame page
 - countries/Awards sorting should go back to regular order
