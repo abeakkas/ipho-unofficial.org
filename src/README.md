@@ -39,3 +39,4 @@ If you change the database structure update search.js script as well.
 * Fahim Tajwar@2017 and Mohammad Fahim Tajwar@2014 from Bangladesh are not the same person
 * Delia Cropper@2018's name is changed from Daniel Cropper due to contestant request
 * Ophelia Evelyn Sommer@2017/2018's name is changed from Oscar Emil Sommer due to contestant request
+* Kazhymurat Aknazar@2017's name originally had a typo and was written as Kazhymurat Aknar
