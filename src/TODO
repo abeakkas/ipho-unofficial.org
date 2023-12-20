@@ -3,7 +3,6 @@
 - Remove unnecessary HTML junk
 - Cleanup unused CSS
 - Make initial/final replace signature more readable
-- indentation=2
 - Fixed precision for score numbers
 - Make a hall of fame page
 - countries/Awards sorting should go back to regular order
