@@ -1,8 +1,4 @@
-- Move common js scripts to a separate file
-- Move common page headers to a template
-- Remove unnecessary HTML junk
-- Cleanup unused CSS
 - Make initial/final replace signature more readable
 - Fixed precision for score numbers
 - Make a hall of fame page
-- countries/Awards sorting should go back to regular order
+- Safari doesn't show favicon
