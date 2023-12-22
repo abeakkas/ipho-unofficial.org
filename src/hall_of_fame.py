@@ -42,6 +42,7 @@ def run():
             key_to_bin[key1] = bins[-1]
             key_to_bin[key2] = bins[-1]
 
+    # For each country compare students from each year with two previous years
     for code_rows in dbc.values():
        years = defaultdict(list)
        for row in code_rows:
@@ -55,19 +56,20 @@ def run():
                        if is_similar(row1.name, row2.name):
                            merge(row1, row2)
 
+    # Sort by medal quality
     def sort_key(bin):
         m = {"G": 0, "S": 0, "B": 0, "H": 0, "P": 0}
         for row in bin:
             m[row.medal] += 1
         return (-m["G"], -m["S"], -m["B"], -m["H"], row_to_key(bin[0]))
 
-    sorted_bins = sorted(bins, key=sort_key)
+    bins = sorted(bins, key=sort_key)
 
     html = templates.get("hall_of_fame/index")
-    html = templates.initial_replace(html, 2)
+    html = templates.initial_replace(html, 4)
 
     tablehtml = ""
-    for bin in sorted_bins:
+    for bin in bins:
         rowhtml = templates.get("hall_of_fame/index_row")
         rowhtml = rowhtml.replace("__NAME__", bin[0].name)
         rowhtml = rowhtml.replace("__CODE__", bin[0].code)
@@ -77,8 +79,8 @@ def run():
         for row in bin:
             medals[row.medal] += 1
 
-        # Cutoff at 2 golds
-        if medals["G"] < 2:
+        # Cutoff at 1 gold, 1 silver, 1 bronze
+        if medals["G"] < 2 and medals["S"] < 2 and medals["B"] < 1:
             break
 
         rowhtml = rowhtml.replace("__GOLD__", str(medals["G"]))
@@ -101,9 +103,58 @@ def run():
 
     html = html.replace("__TABLE__", tablehtml)
 
+    # Remove the printed elements from the list
+    bins = bins[bins.index(bin):]
+
+    # Sort by total number of medals
+    def sort_key(bin):
+        m = {"G": 0, "S": 0, "B": 0, "H": 0, "P": 0}
+        for row in bin:
+            m[row.medal] += 1
+        return (-m["G"] - m["S"] - m["B"], -m["G"], -m["S"], -m["B"], -m["H"], row_to_key(bin[0]))
+
+    bins = sorted(bins, key=sort_key)
+
+    table2html = ""
+    for bin in bins:
+        rowhtml = templates.get("hall_of_fame/index_row")
+        rowhtml = rowhtml.replace("__NAME__", bin[0].name)
+        rowhtml = rowhtml.replace("__CODE__", bin[0].code)
+        rowhtml = rowhtml.replace("__COUNTRY__", code_to_country[bin[0].code])
+
+        medals = {"G": 0, "S": 0, "B": 0, "H": 0, "P": 0}
+        for row in bin:
+            medals[row.medal] += 1
+
+        # Cutoff at 3 medals
+        if medals["G"] + medals["S"] + medals["B"] < 3:
+            break
+
+        rowhtml = rowhtml.replace("__GOLD__", str(medals["G"]))
+        rowhtml = rowhtml.replace("__SILVER__", str(medals["S"]))
+        rowhtml = rowhtml.replace("__BRONZE__", str(medals["B"]))
+        rowhtml = rowhtml.replace("__HONOURABLE__", str(medals["H"]))
+
+        participations = ""
+        for row in sorted(bin, key=lambda row: row.year):
+            if participations:
+                participations += ", "
+            year_html = templates.get("hall_of_fame/index_participation_year").strip()
+            year_html = year_html.replace("__YEAR__", row.year)
+            year_html = year_html.replace("__TITLE__", "Appeared as " + row.name)
+            participations += year_html
+
+        rowhtml = rowhtml.replace("__PARTICIPATIONS__", participations)
+
+        table2html += rowhtml
+
+    html = html.replace("__TABLE2__", table2html)
+
     html = templates.final_replace(html, "..")
-    util.makedirs("../hall_of_fame")
-    util.writefile("../hall_of_fame/index.html", html)
+
+    # Apparently Google recommends dashes over underscores :/
+    util.makedirs("../hall-of-fame")
+    util.writefile("../hall-of-fame/index.html", html)
 
 if __name__ == "__main__":
     run()

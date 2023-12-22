@@ -15,7 +15,7 @@ def initial_replace(html, type):
     """
     Fill header and footer in given template string
     type=0 is for top header pages
-    type=[1,2,3] is for side header with different highlights
+    type=[1,2,3,4] is for side header with different highlights
     """
     if type == 0:
         html = html.replace("__HEADER_TOP__", get("header_top"))
@@ -25,6 +25,7 @@ def initial_replace(html, type):
         side = side.replace("__HIGHLIGHT_1__", "")
         side = side.replace("__HIGHLIGHT_2__", "")
         side = side.replace("__HIGHLIGHT_3__", "")
+        side = side.replace("__HIGHLIGHT_4__", "")
         html = html.replace("__HEADER_SIDE__", side)
     html = html.replace("__HEADER_PREVIOUS_YEAR__", config.previous_year)
     html = html.replace("__HEADER_PREVIOUS_YEAR_HOMEPAGE__", t_db_y[config.previous_year].homepage)
