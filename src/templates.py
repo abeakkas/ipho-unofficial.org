@@ -11,21 +11,20 @@ def get(path, templates={}):
         templates[path] = util.readfile("templates/" + path + ".html")
     return templates[path]
 
-def initial_replace(html, type):
+def set_headers(html, type):
     """
     Fill header and footer in given template string
-    type=0 is for top header pages
-    type=[1,2,3,4] is for side header with different highlights
+    type is one of ["homepage", "timeline", "countries", "search", "hall_of_fame", ""]
     """
-    if type == 0:
+    if type == "homepage":
         html = html.replace("__HEADER_TOP__", get("header_top"))
     else:
         side = get("header_side")
-        side = side.replace("__HIGHLIGHT_" + str(type) + "__", "highlight")
-        side = side.replace("__HIGHLIGHT_1__", "")
-        side = side.replace("__HIGHLIGHT_2__", "")
-        side = side.replace("__HIGHLIGHT_3__", "")
-        side = side.replace("__HIGHLIGHT_4__", "")
+        side = side.replace("__HIGHLIGHT_{}__".format(type.upper()), "highlight")
+        side = side.replace("__HIGHLIGHT_TIMELINE__", "")
+        side = side.replace("__HIGHLIGHT_COUNTRIES__", "")
+        side = side.replace("__HIGHLIGHT_SEARCH__", "")
+        side = side.replace("__HIGHLIGHT_HALL_OF_FAME__", "")
         html = html.replace("__HEADER_SIDE__", side)
     html = html.replace("__HEADER_PREVIOUS_YEAR__", config.previous_year)
     html = html.replace("__HEADER_PREVIOUS_YEAR_HOMEPAGE__", t_db_y[config.previous_year].homepage)
@@ -34,7 +33,7 @@ def initial_replace(html, type):
     html = html.replace("__FOOTER__", get("footer"))
     return html
 
-def final_replace(html, root):
+def finalize(html, root):
     """
     Fill URL templates
     root is the relative path of the root directory of website
@@ -57,3 +56,4 @@ medal = {
     "H": get("medal_honourable"),
     "P": "",
 }
+

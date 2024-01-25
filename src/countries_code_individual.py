@@ -9,7 +9,7 @@ from database_students import code_grouped as s_db_c
 def run(code):
     print("Creating countries/" + code + "/individual")
     html = templates.get("countries/code/individual")
-    html = templates.initial_replace(html, 2)
+    html = templates.set_headers(html, "countries")
 
     html = html.replace("__CODE__", code)
     html = html.replace("__COUNTRY__", c_db_c[code].country)
@@ -58,7 +58,7 @@ def run(code):
         tablehtml = yearhtml + tablehtml
 
     html = html.replace("__TABLE__", tablehtml)
-    html = templates.final_replace(html, "../..")
+    html = templates.finalize(html, "../..")
     util.writefile("../countries/" + code + "/individual.html", html)
 
 

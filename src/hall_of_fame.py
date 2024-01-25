@@ -66,7 +66,7 @@ def run():
     bins = sorted(bins, key=sort_key)
 
     html = templates.get("hall_of_fame/index")
-    html = templates.initial_replace(html, 4)
+    html = templates.set_headers(html, "hall_of_fame")
 
     tablehtml = ""
     for bin in bins:
@@ -150,7 +150,7 @@ def run():
 
     html = html.replace("__TABLE2__", table2html)
 
-    html = templates.final_replace(html, "..")
+    html = templates.finalize(html, "..")
 
     # Apparently Google recommends dashes over underscores :/
     util.makedirs("../hall-of-fame")

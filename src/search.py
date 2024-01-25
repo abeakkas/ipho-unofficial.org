@@ -10,8 +10,8 @@ def run():
     util.copyfile("templates/search/search.js", "../search/search.js")
     util.copyfile("templates/search/asciify.js", "../search/asciify.js")
     html = templates.get("search/index")
-    html = templates.initial_replace(html, 3)
-    html = templates.final_replace(html, "..")
+    html = templates.set_headers(html, "search")
+    html = templates.finalize(html, "..")
     util.writefile("../search/index.html", html)
 
 if __name__ == "__main__":

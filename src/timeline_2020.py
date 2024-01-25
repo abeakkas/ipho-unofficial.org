@@ -7,7 +7,7 @@ def run():
     print("Creating timeline/2020")
     util.makedirs("../timeline/2020")
     html = templates.get("timeline/2020/index")
-    html = templates.initial_replace(html, 1)
+    html = templates.set_headers(html, "timeline")
 
     tablehtml = ""
     for row in database:
@@ -27,7 +27,7 @@ def run():
         tablehtml += rowhtml
     html = html.replace("__TABLE__", tablehtml)
 
-    html = templates.final_replace(html, "../..")
+    html = templates.finalize(html, "../..")
     util.writefile("../timeline/2020/index.html", html)
 
 if __name__ == "__main__":

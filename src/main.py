@@ -1,14 +1,14 @@
 import countries
 import e404
 import hall_of_fame
-import index
+import homepage
 import search
 import static_files
 import timeline
 
 def run():
     print("Creating the whole project")
-    index.run()
+    homepage.run()
     e404.run()
     timeline.run()
     countries.run()

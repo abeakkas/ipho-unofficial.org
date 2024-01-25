@@ -10,7 +10,7 @@ from database_students import year_grouped as s_db_y
 def run(year):
     print("Creating timeline/" + year + "/index")
     html = templates.get("timeline/year/index")
-    html = templates.initial_replace(html, 1)
+    html = templates.set_headers(html, "timeline")
     yeardata = t_db_y[year]
     html = html.replace("__YEAR__", year)
     html = html.replace("__NUMBER__", yeardata.number)
@@ -77,7 +77,7 @@ def run(year):
     else:
         html = html.replace("__AWARDS_STYLE__", "display: none;")
 
-    html = templates.final_replace(html, "../..")
+    html = templates.finalize(html, "../..")
     util.writefile("../timeline/" + year + "/index.html", html)
 
 if __name__ == "__main__":

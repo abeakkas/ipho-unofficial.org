@@ -8,7 +8,7 @@ from database_timeline import code_grouped as t_db_c
 def run():
     print("Creating countries/index")
     html = templates.get("countries/index")
-    html = templates.initial_replace(html, 2)
+    html = templates.set_headers(html, "countries")
 
     tablehtml = ""
     for row in c_db:
@@ -52,7 +52,7 @@ def run():
         tablehtml += rowhtml
     html = html.replace("__TABLE__", tablehtml)
 
-    html = templates.final_replace(html, "..")
+    html = templates.finalize(html, "..")
     util.writefile("../countries/index.html", html)
 
 if __name__ == "__main__":

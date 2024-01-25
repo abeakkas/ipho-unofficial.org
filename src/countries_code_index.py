@@ -10,7 +10,7 @@ from database_timeline import code_grouped as t_db_c
 def run(code):
     print("Creating countries/" + code + "/index")
     html = templates.get("countries/code/index")
-    html = templates.initial_replace(html, 2)
+    html = templates.set_headers(html, "countries")
     codedata = c_db_c[code]
 
     html = html.replace("__CODE__", code)
@@ -70,7 +70,7 @@ def run(code):
     html = html.replace("__BRONZE__", str(medals["B"]))
     html = html.replace("__HONOURABLE__", str(medals["H"]))
 
-    html = templates.final_replace(html, "../..")
+    html = templates.finalize(html, "../..")
     util.writefile("../countries/" + code + "/index.html", html)
 
 if __name__ == "__main__":

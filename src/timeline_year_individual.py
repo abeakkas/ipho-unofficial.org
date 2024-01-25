@@ -10,7 +10,7 @@ from database_timeline import next_year
 def run(year):
     print("Creating timeline/" + year + "/individual")
     html = templates.get("timeline/year/individual")
-    html = templates.initial_replace(html, 1)
+    html = templates.set_headers(html, "timeline")
     yeardata = t_db_y[year]
     html = html.replace("__YEAR__", year)
     html = html.replace("__NUMBER__", yeardata.number)
@@ -69,7 +69,7 @@ def run(year):
         html = html.replace("__NOTE__", "Results will be added once they are published on the official website.<br>")
     html = html.replace("__TABLE__", tablehtml)
 
-    html = templates.final_replace(html, "../..")
+    html = templates.finalize(html, "../..")
     util.writefile("../timeline/" + year + "/individual.html", html)
 
 if __name__ == "__main__":

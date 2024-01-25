@@ -17,7 +17,7 @@ def monospace_date(date):
 def run():
     print("Creating timeline/index")
     html = templates.get("timeline/index")
-    html = templates.initial_replace(html, 1)
+    html = templates.set_headers(html, "timeline")
 
     tablehtml = ""
     upcominghtml = ""
@@ -55,7 +55,7 @@ def run():
     html = html.replace("__TABLE__", tablehtml)
     html = html.replace("__UPCOMING__", upcominghtml)
 
-    html = templates.final_replace(html, "..")
+    html = templates.finalize(html, "..")
     util.writefile("../timeline/index.html", html)
 
 if __name__ == "__main__":
