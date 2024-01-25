@@ -4,7 +4,7 @@ import util
 from database_countries import database as c_db
 
 def run():
-    print("Creating countries")
+    print("Generating countries")
     util.makedirs("../countries")
     countries_index.run()
     for codedata in c_db:

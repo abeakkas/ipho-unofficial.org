@@ -6,7 +6,7 @@ from database_students import code_grouped as s_db_c
 from database_timeline import code_grouped as t_db_c
 
 def run():
-    print("Creating countries/index")
+    print("Generating countries/index")
     html = templates.get("countries/index")
     html = templates.set_headers(html, "countries")
 

@@ -8,7 +8,7 @@ from database_timeline import previous_year
 from database_timeline import next_year
 
 def run(year):
-    print("Creating timeline/" + year + "/country")
+    print("Generating timeline/" + year + "/country")
     html = templates.get("timeline/year/country")
     html = templates.set_headers(html, "timeline")
     yeardata = t_db_y[year]

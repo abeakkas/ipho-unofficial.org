@@ -4,7 +4,7 @@ from database_countries import code_to_country
 from database_2020 import database
 
 def run():
-    print("Creating timeline/2020")
+    print("Generating timeline/2020")
     util.makedirs("../timeline/2020")
     html = templates.get("timeline/2020/index")
     html = templates.set_headers(html, "timeline")

@@ -8,7 +8,7 @@ from database_students import code_grouped as s_db_c
 from database_timeline import code_grouped as t_db_c
 
 def run(code):
-    print("Creating countries/" + code + "/index")
+    print("Generating countries/" + code + "/index")
     html = templates.get("countries/code/index")
     html = templates.set_headers(html, "countries")
     codedata = c_db_c[code]

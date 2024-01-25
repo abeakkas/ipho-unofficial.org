@@ -2,7 +2,7 @@ import templates
 import util
 
 def run():
-    print("Creating 404")
+    print("Generating 404")
     html = templates.get("404")
     html = templates.set_headers(html, "")
     # This can't both work local and Github :/

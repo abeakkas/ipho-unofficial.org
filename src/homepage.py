@@ -2,7 +2,7 @@ import templates
 import util
 
 def run():
-    print("Creating homepage")
+    print("Generating homepage")
     html = templates.get("homepage")
     html = templates.set_headers(html, "homepage")
     html = templates.finalize(html, ".")

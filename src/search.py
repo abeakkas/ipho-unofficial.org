@@ -2,7 +2,7 @@ import templates
 import util
 
 def run():
-    print("Creating search")
+    print("Generating search")
     util.makedirs("../search")
     util.copyfile("database/countries.csv", "../search/countries.csv")
     util.copyfile("database/estudiantes.csv", "../search/estudiantes.csv")

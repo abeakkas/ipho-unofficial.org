@@ -7,7 +7,7 @@ import static_files
 import timeline
 
 def run():
-    print("Creating the whole project")
+    print("Generating the whole project")
     homepage.run()
     e404.run()
     timeline.run()

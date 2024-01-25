@@ -15,7 +15,7 @@ def monospace_date(date):
     return date
 
 def run():
-    print("Creating timeline/index")
+    print("Generating timeline/index")
     html = templates.get("timeline/index")
     html = templates.set_headers(html, "timeline")
 

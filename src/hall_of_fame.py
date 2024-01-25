@@ -6,7 +6,7 @@ from database_countries import code_to_country
 from database_students import code_grouped as dbc
 
 def run():
-    print("Creating hall_of_fame")
+    print("Generating hall_of_fame")
 
     bins = []
     key_to_bin = {}

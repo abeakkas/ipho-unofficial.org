@@ -5,7 +5,7 @@ import util
 from database_timeline import database as t_db
 
 def run():
-    print("Creating timeline")
+    print("Generating timeline")
     util.makedirs("../timeline")
     timeline_index.run()
     timeline_2020.run()
