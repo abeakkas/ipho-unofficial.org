@@ -5,6 +5,9 @@ from collections import defaultdict
 from database_countries import code_to_country
 from database_students import code_grouped as dbc
 
+# Identities that algorithm can't find
+exceptions = [[("2010", "SVK", "Eugen Hruska"), ("2011", "GER", "Eugen Hruska")]]
+
 def run():
     print("Generating hall_of_fame")
 
@@ -56,6 +59,18 @@ def run():
                        if is_similar(row1.name, row2.name):
                            merge(row1, row2)
 
+    for ex in exceptions:
+        row1 = row2 = None
+        for row in dbc[ex[0][1]]:
+            if row.year == ex[0][0] and row.name == ex[0][2]:
+                row1 = row
+        for row in dbc[ex[1][1]]:
+            if row.year == ex[1][0] and row.name == ex[1][2]:
+                row2 = row
+        if not row1 or not row2:
+            raise Exception("Hall of fame exception not found: {}".format(ex))
+        merge(row1, row2)
+
     # Sort by medal quality
     def sort_key(bin):
         m = {"G": 0, "S": 0, "B": 0, "H": 0, "P": 0}
@@ -68,20 +83,11 @@ def run():
     html = templates.get("hall_of_fame/index")
     html = templates.set_headers(html, "hall_of_fame")
 
-    tablehtml = ""
-    for bin in bins:
+    def print_bin(tablehtml, bin, medals):
         rowhtml = templates.get("hall_of_fame/index_row")
         rowhtml = rowhtml.replace("__NAME__", bin[0].name)
         rowhtml = rowhtml.replace("__CODE__", bin[0].code)
         rowhtml = rowhtml.replace("__COUNTRY__", code_to_country[bin[0].code])
-
-        medals = {"G": 0, "S": 0, "B": 0, "H": 0, "P": 0}
-        for row in bin:
-            medals[row.medal] += 1
-
-        # Cutoff at 1 gold, 1 silver, 1 bronze
-        if medals["G"] < 2 and medals["S"] < 2 and medals["B"] < 1:
-            break
 
         rowhtml = rowhtml.replace("__GOLD__", str(medals["G"]))
         rowhtml = rowhtml.replace("__SILVER__", str(medals["S"]))
@@ -94,12 +100,26 @@ def run():
                 participations += ", "
             year_html = templates.get("hall_of_fame/index_participation_year").strip()
             year_html = year_html.replace("__YEAR__", row.year)
+            if row.code == bin[0].code:
+                year_html = year_html.replace("__YEAR_TEXT__", row.year)
+            else:
+                year_html = year_html.replace("__YEAR_TEXT__", "{}({})".format(row.year, row.code))
             year_html = year_html.replace("__TITLE__", "Appeared as " + row.name)
             participations += year_html
 
-        rowhtml = rowhtml.replace("__PARTICIPATIONS__", participations)
+        return rowhtml.replace("__PARTICIPATIONS__", participations)
 
-        tablehtml += rowhtml
+    tablehtml = ""
+    for bin in bins:
+        medals = {"G": 0, "S": 0, "B": 0, "H": 0, "P": 0}
+        for row in bin:
+            medals[row.medal] += 1
+
+        # Cutoff at 1 gold, 1 silver, 1 bronze
+        if medals["G"] < 2 and medals["S"] < 2 and medals["B"] < 1:
+            break
+
+        tablehtml += print_bin(tablehtml, bin, medals)
 
     html = html.replace("__TABLE__", tablehtml)
 
@@ -117,11 +137,6 @@ def run():
 
     table2html = ""
     for bin in bins:
-        rowhtml = templates.get("hall_of_fame/index_row")
-        rowhtml = rowhtml.replace("__NAME__", bin[0].name)
-        rowhtml = rowhtml.replace("__CODE__", bin[0].code)
-        rowhtml = rowhtml.replace("__COUNTRY__", code_to_country[bin[0].code])
-
         medals = {"G": 0, "S": 0, "B": 0, "H": 0, "P": 0}
         for row in bin:
             medals[row.medal] += 1
@@ -130,23 +145,7 @@ def run():
         if medals["G"] + medals["S"] + medals["B"] < 3:
             break
 
-        rowhtml = rowhtml.replace("__GOLD__", str(medals["G"]))
-        rowhtml = rowhtml.replace("__SILVER__", str(medals["S"]))
-        rowhtml = rowhtml.replace("__BRONZE__", str(medals["B"]))
-        rowhtml = rowhtml.replace("__HONOURABLE__", str(medals["H"]))
-
-        participations = ""
-        for row in sorted(bin, key=lambda row: row.year):
-            if participations:
-                participations += ", "
-            year_html = templates.get("hall_of_fame/index_participation_year").strip()
-            year_html = year_html.replace("__YEAR__", row.year)
-            year_html = year_html.replace("__TITLE__", "Appeared as " + row.name)
-            participations += year_html
-
-        rowhtml = rowhtml.replace("__PARTICIPATIONS__", participations)
-
-        table2html += rowhtml
+        table2html += print_bin(tablehtml, bin, medals)
 
     html = html.replace("__TABLE2__", table2html)
 
