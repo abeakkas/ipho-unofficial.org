@@ -60,13 +60,13 @@ def run():
                        if is_similar(row1.name, row2.name):
                            merge(row1, row2)
 
-    for ex in exceptions:
+    for (year1, code1, name1), (year2, code2, name2) in exceptions:
         row1 = row2 = None
-        for row in dbc[ex[0][1]]:
-            if row.year == ex[0][0] and row.name == ex[0][2]:
+        for row in dbc[code1]:
+            if row.year == year1 and row.name == name1:
                 row1 = row
-        for row in dbc[ex[1][1]]:
-            if row.year == ex[1][0] and row.name == ex[1][2]:
+        for row in dbc[code2]:
+            if row.year == year2 and row.name == name2:
                 row2 = row
         if not row1 or not row2:
             raise Exception("Hall of fame exception not found: {}".format(ex))
