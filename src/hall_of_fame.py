@@ -18,9 +18,10 @@ def run():
         return row.year + row.code + row.name
 
     def is_similar(name1, name2):
-        name1 = " ".join(sorted(asciify(name1.replace("-", " ")).split(" ")))
-        name2 = " ".join(sorted(asciify(name2.replace("-", " ")).split(" ")))
-        return name1 == name2
+        name1 = asciify(name1.replace("-", " ")).split(" ")
+        name2 = asciify(name2.replace("-", " ")).split(" ")
+        # Check if a name can be found in the name
+        return all(s in name2 for s in name1) or all(s in name1 for s in name2)
 
     def merge(row1, row2):
         key1 = row_to_key(row1)
