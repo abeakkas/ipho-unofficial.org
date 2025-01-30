@@ -21,6 +21,7 @@ If you change the database structure update templates/search/search.js script as
 * Ordered first by year then by rank.
 * Don't assume ranks are numbers. They can be in two forms: 1234 or >=1234
 * Country-code can be empty if unknown.
+* Run `python3 -B database_students.py` to check errors.
 
 ##### database/timeline.csv:
 * Columns: number, year, date, country code, city, website, # of countries, # of students
