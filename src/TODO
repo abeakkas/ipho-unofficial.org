@@ -6,3 +6,4 @@
 - Sorting for theoretical/experimental
 - Add a link to download database
 - Make a better database check for weird unicode characters like \xa0 space
+- Fix database check issues
