@@ -27,27 +27,32 @@ with open("database/estudiantes.csv") as file:
         code_grouped[entry.code].append(entry)
         year_grouped[entry.year].append(entry)
 
-def check_point_rank_consistency():
+def check_score_rank_consistency():
+    """
+    Check if someone with a higher score is below in rank than someone else.
+    """
     for year in year_grouped:
         if not year_grouped[year][0].total:
             continue
         last_rank = 0
-        last_points = 1e10
+        last_score = 1e10
         for row in year_grouped[year]:
+            if not row.total or row.rank_geq:
+                break
             rank = int(row.rank)
-            points = float(row.total)
-            if points > last_points or (points == last_points and rank != last_rank):
-                print("Row should have higher rank: {}".format(row))
+            score = float(row.total)
+            if rank < last_rank:
+                print(f"Rank should not decrease: {row}")
+            if score > last_score or (score == last_score and rank != last_rank):
+                print(f"Row should have higher rank: {row}")
             last_rank = rank
-            last_points = points
+            last_score = score
 
-def check_point_sums():
+def check_score_sums():
     for year in year_grouped:
-        if (not year_grouped[year][0].theoretical or
-            not year_grouped[year][0].experimental or
-            not year_grouped[year][0].total):
-            continue
         for row in year_grouped[year]:
+            if not row.theoretical or not row.experimental or not row.total:
+                continue
             th = float(row.theoretical)
             ex = float(row.experimental)
             to = float(row.total)
@@ -61,6 +66,6 @@ def check_combining_characters():
                 print("Combining character {} detected: {}".format(c, row))
 
 if __name__ == "__main__":
-    check_point_rank_consistency()
-    check_point_sums()
+    check_score_rank_consistency()
+    check_score_sums()
     check_combining_characters()
