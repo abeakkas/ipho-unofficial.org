@@ -12,7 +12,8 @@ Row = namedtuple('Row', 'year,rank,name,code,medal,theoretical,experimental,tota
 with open("database/estudiantes.csv") as file:
     reader = csv.reader(file)
     for row in reader:
-        assert len(row) == 9, "Student row error: {}".format(row)
+        assert len(row) == 9, f"Student row error: {row}"
+
         rank_geq = False
         if row[1][:2] == ">=":
             rank_geq = True
@@ -21,7 +22,7 @@ with open("database/estudiantes.csv") as file:
 
         if (entry.medal not in ["G", "S", "B", "H", "P"]
                 or (entry.code != "" and entry.code not in c_t_c)):
-            raise Exception("Student database is corrupted! Row: {}".format(row))
+            raise Exception(f"Student database is corrupted! Row: {row}")
 
         database.append(entry)
         code_grouped[entry.code].append(entry)
@@ -57,13 +58,17 @@ def check_score_sums():
             ex = float(row.experimental)
             to = float(row.total)
             if abs(th + ex - to) > .0001:
-                print("Points don't add up: {}".format(row))
+                print(f"Points don't add up: {row}")
 
 def check_combining_characters():
     for row in database:
         for c in row.name:
             if 768 <= ord(c) < 880:
-                print("Combining character {} detected: {}".format(c, row))
+                print(f"Combining character {c} detected in {row}")
+                print("Please replace with a single character. See unicodedata.normalize")
+        if '\xa0' in row.name:
+            print(f"Non-breaking space \\xa0 detected in {row}")
+            print("Please replace with a regular space")
 
 if __name__ == "__main__":
     check_score_rank_consistency()
