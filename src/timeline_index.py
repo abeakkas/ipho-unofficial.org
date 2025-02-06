@@ -10,7 +10,6 @@ def monospace_date(date):
     if len(date.split("-")[0]) == 4:
         date = "&nbsp;" + date
     if len(date.split("-")[1]) == 4:
-        # date = date.replace("-", "-&nbsp;")
         date = date + "&nbsp;"
     return date
 
