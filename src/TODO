@@ -3,4 +3,4 @@
 - Move common scripts to a separate file
 - Sorting for theoretical/experimental
 - Replace tabs with spaces
-- Replace the fixed score back and explain in README.md
+- Replace "students" with "participants" everywhere
