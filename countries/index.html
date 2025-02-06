@@ -9,47 +9,47 @@
 </head>
 <body>
 <div id="header">
-    <div id="h1">
-        <h1><a href="../.">International Physics Olympiad</a></h1>
-    </div>
-    <div id="sub">
-        <span class="previous"><a href="https://www.ipho2024.ir/" target="_blank">IPhO 2024</a></span>
-        <span class="img"><a href="../."><img src="../img/logo.png" alt="IPhO" width="30" height="22"/></a></span>
-        <span class="next"><a href="https://www.ipho2025.fr/" target="_blank">IPhO 2025</a></span>
-    </div>
+  <div id="h1">
+    <h1><a href="../.">International Physics Olympiad</a></h1>
+  </div>
+  <div id="sub">
+    <span class="previous"><a href="https://www.ipho2024.ir/" target="_blank">IPhO 2024</a></span>
+    <span class="img"><a href="../."><img src="../img/logo.png" alt="IPhO" width="30" height="22"/></a></span>
+    <span class="next"><a href="https://www.ipho2025.fr/" target="_blank">IPhO 2025</a></span>
+  </div>
 </div>
 <div id="sidebar">
-    <ul>
-        <li><a href="../timeline/." class="">Timeline</a></li>
-        <li><a href="../countries/." class="highlight">Countries</a></li>
-        <li><a href="../search/." class="">Search</a></li>
-        <li><a href="../hall-of-fame/." class="">Hall of Fame</a></li>
-        <li><a target="_blank" href="https://ipho.olimpicos.net/">Problems</a></li>
-        <li><a target="_blank" href="https://en.wikipedia.org/wiki/International_Physics_Olympiad">About IPhO</a></li>
-        <li><a target="_blank" href="https://ipho-new.org/">Official IPhO Website</a></li>
-    </ul>
+  <ul>
+    <li><a href="../timeline/." class="">Timeline</a></li>
+    <li><a href="../countries/." class="highlight">Countries</a></li>
+    <li><a href="../search/." class="">Search</a></li>
+    <li><a href="../hall-of-fame/." class="">Hall of Fame</a></li>
+    <li><a target="_blank" href="https://ipho.olimpicos.net/">Problems</a></li>
+    <li><a target="_blank" href="https://en.wikipedia.org/wiki/International_Physics_Olympiad">About IPhO</a></li>
+    <li><a target="_blank" href="https://ipho-new.org/">Official IPhO Website</a></li>
+  </ul>
 </div>
 
 <div id="main">
-	<h2>List of countries</h2>
-	<table>
-	<thead>
-	<tr>
-        <th rowspan="2">Code</th>
-        <th rowspan="2">Country</th>
-        <th rowspan="2">National PhO site</th>
-        <th rowspan="2">IPhO Host</th>
-        <th colspan="5"><a href="#" onclick="sort_awards(this);return false;">Awards</a></th>
-	</tr>
-	<tr id="table_head">
-        <th title="Gold medal">G</th>
-        <th title="Silver medal">S</th>
-        <th title="Bronze medal">B</th>
-        <th title="Honourable mention">HM</th>
-	</tr>
-	</thead>
-	<tbody id="table_body">
-	<tr class="">
+  <h2>List of countries</h2>
+  <table>
+  <thead>
+  <tr>
+    <th rowspan="2">Code</th>
+    <th rowspan="2">Country</th>
+    <th rowspan="2">National PhO site</th>
+    <th rowspan="2">IPhO Host</th>
+    <th colspan="5"><a href="#" onclick="sort_awards(this);return false;">Awards</a></th>
+  </tr>
+  <tr id="table_head">
+    <th title="Gold medal">G</th>
+    <th title="Silver medal">S</th>
+    <th title="Bronze medal">B</th>
+    <th title="Honourable mention">HM</th>
+  </tr>
+  </thead>
+  <tbody id="table_body">
+  <tr class="">
 <td align="center"><a href="AFG/.">AFG</a></td>
 <td><a href="AFG/.">Afghanistan</a></td>
 <td><a href="__NATIONAL_SITE__" target="_blank" style="display: none;">__NATIONAL_SITE_TEXT__</a></td>
@@ -1380,68 +1380,68 @@
 <td align="right">0</td>
 </tr>
 
-	</tbody>
-	</table>
+  </tbody>
+  </table>
 </div>
 <script>
 var sorted = false;
 var sort_mode = 0; // GSBH vs total
 function sort_awards(target) {
-    var table = document.getElementById("table_body");
-    Array.from(table.children)
-        .sort(function (r1, r2) {
-            var g1 = parseInt(r1.children[4].innerHTML);
-            var s1 = parseInt(r1.children[5].innerHTML);
-            var b1 = parseInt(r1.children[6].innerHTML);
-            var h1 = parseInt(r1.children[7].innerHTML);
-            var g2 = parseInt(r2.children[4].innerHTML);
-            var s2 = parseInt(r2.children[5].innerHTML);
-            var b2 = parseInt(r2.children[6].innerHTML);
-            var h2 = parseInt(r2.children[7].innerHTML);
-            if (sort_mode == 0) {
-                return g2 - g1 || s2 - s1 || b2 - b1 || h2 - h1;
-            } else {
-                return (g2 + s2 + b2) - (g1 + s1 + b1) || g2 - g1 || s2 - s1 || b2 - b1 || h2 - h1;
-            }
-        })
-        .forEach(function (row) {
-            table.appendChild(row);
-        });
-    sort_mode ^= 1;
-    var i = 1;
-    var prevrank = i;
-    var prev_summary = "";
-    Array.from(table.children)
-        .forEach(function (row) {
-            var summary = row.children[4].innerHTML + ","
-                          + row.children[5].innerHTML + ","
-                          + row.children[6].innerHTML + ","
-                          + row.children[7].innerHTML;
-            if (summary != prev_summary) prevrank = i;
-            prev_summary = summary;
-            var rank = document.createElement("td");
-            rank.align = "right";
-            rank.innerHTML = prevrank;
-            i++;
-            if (sorted) row.removeChild(row.lastChild);
-            row.appendChild(rank);
-        });
-    if (!sorted) {
-        var head = document.getElementById("table_head");
-        var rank = document.createElement("td");
-        rank.style.fontWeight = "bold";
-        rank.innerHTML = "Rank";
-        head.appendChild(rank);
-    }
-    sorted = true;
+  var table = document.getElementById("table_body");
+  Array.from(table.children)
+    .sort(function (r1, r2) {
+      var g1 = parseInt(r1.children[4].innerHTML);
+      var s1 = parseInt(r1.children[5].innerHTML);
+      var b1 = parseInt(r1.children[6].innerHTML);
+      var h1 = parseInt(r1.children[7].innerHTML);
+      var g2 = parseInt(r2.children[4].innerHTML);
+      var s2 = parseInt(r2.children[5].innerHTML);
+      var b2 = parseInt(r2.children[6].innerHTML);
+      var h2 = parseInt(r2.children[7].innerHTML);
+      if (sort_mode == 0) {
+        return g2 - g1 || s2 - s1 || b2 - b1 || h2 - h1;
+      } else {
+        return (g2 + s2 + b2) - (g1 + s1 + b1) || g2 - g1 || s2 - s1 || b2 - b1 || h2 - h1;
+      }
+    })
+    .forEach(function (row) {
+      table.appendChild(row);
+    });
+  sort_mode ^= 1;
+  var i = 1;
+  var prevrank = i;
+  var prev_summary = "";
+  Array.from(table.children)
+    .forEach(function (row) {
+      var summary = row.children[4].innerHTML + ","
+              + row.children[5].innerHTML + ","
+              + row.children[6].innerHTML + ","
+              + row.children[7].innerHTML;
+      if (summary != prev_summary) prevrank = i;
+      prev_summary = summary;
+      var rank = document.createElement("td");
+      rank.align = "right";
+      rank.innerHTML = prevrank;
+      i++;
+      if (sorted) row.removeChild(row.lastChild);
+      row.appendChild(rank);
+    });
+  if (!sorted) {
+    var head = document.getElementById("table_head");
+    var rank = document.createElement("td");
+    rank.style.fontWeight = "bold";
+    rank.innerHTML = "Rank";
+    head.appendChild(rank);
+  }
+  sorted = true;
 
-    // Add description
-    if (target.nextSibling) {
-        target.nextSibling.remove();
-    }
-    var desc = document.createElement("span");
-    desc.innerHTML = sort_mode ? " (by quality)" : " (by total)";
-    target.parentNode.appendChild(desc);
+  // Add description
+  if (target.nextSibling) {
+    target.nextSibling.remove();
+  }
+  var desc = document.createElement("span");
+  desc.innerHTML = sort_mode ? " (by quality)" : " (by total)";
+  target.parentNode.appendChild(desc);
 }
 </script>
 <div id="footer">
@@ -1460,41 +1460,41 @@ function sort_awards(target) {
   ga('send', 'pageview');
 
   function easteregg() {
-      var rightside = Math.random() < .5;
-      var heads = ["newton", "einstein", "bohr", "feynman", "boltzmann", "curie", "dirac",
-          "galileo", "maxwell", "planck", "schrodinger"];
-      var img = document.createElement("img");
-      img.src = "../img/easter/" + heads[Math.floor(Math.random() * heads.length)] + ".png";
-      img.style.width = "150px";
-      img.style.position = "absolute";
-      if (rightside) {
-          img.style.right = "-150px";
-      } else {
-          img.style.left = "-150px";
+    var rightside = Math.random() < .5;
+    var heads = ["newton", "einstein", "bohr", "feynman", "boltzmann", "curie", "dirac",
+      "galileo", "maxwell", "planck", "schrodinger"];
+    var img = document.createElement("img");
+    img.src = "../img/easter/" + heads[Math.floor(Math.random() * heads.length)] + ".png";
+    img.style.width = "150px";
+    img.style.position = "absolute";
+    if (rightside) {
+      img.style.right = "-150px";
+    } else {
+      img.style.left = "-150px";
+    }
+    img.style.bottom = "-150px";
+    img.style.zIndex = "10";
+    document.body.appendChild(img);
+    var startTime = new Date().getTime();
+    var fn = function () {
+      var dt = new Date().getTime() - startTime;
+      if (dt > 1000) {
+        document.body.removeChild(img);
+        return;
       }
-      img.style.bottom = "-150px";
-      img.style.zIndex = "10";
-      document.body.appendChild(img);
-      var startTime = new Date().getTime();
-      var fn = function () {
-          var dt = new Date().getTime() - startTime;
-          if (dt > 1000) {
-              document.body.removeChild(img);
-              return;
-          }
-          var maxd = 180;
-          if (dt < 500) var dx = Math.floor(Math.sin(dt / 500 * Math.PI / 2) * maxd);
-          else if (dt < 700) var dx = maxd;
-          else var dx = Math.floor(Math.cos((dt - 700) / 300 * Math.PI / 2) * maxd);
-          if (rightside) {
-              img.style.transform = "rotate(-45deg) translateY(-" + dx + "px) scaleX(-1)";
-          } else {
-              img.style.transform = "rotate(45deg) translateY(-" + dx + "px)";
-          }
-          setTimeout(fn, 40);
-      };
-      fn();
-      ga('send', 'event', 'EasterEgg', 'click');
+      var maxd = 180;
+      if (dt < 500) var dx = Math.floor(Math.sin(dt / 500 * Math.PI / 2) * maxd);
+      else if (dt < 700) var dx = maxd;
+      else var dx = Math.floor(Math.cos((dt - 700) / 300 * Math.PI / 2) * maxd);
+      if (rightside) {
+        img.style.transform = "rotate(-45deg) translateY(-" + dx + "px) scaleX(-1)";
+      } else {
+        img.style.transform = "rotate(45deg) translateY(-" + dx + "px)";
+      }
+      setTimeout(fn, 40);
+    };
+    fn();
+    ga('send', 'event', 'EasterEgg', 'click');
   }
 </script>
 

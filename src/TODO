@@ -2,5 +2,4 @@
 - Check Windows compatibility
 - Move common scripts to a separate file
 - Sorting for theoretical/experimental
-- Replace tabs with spaces
 - Replace "students" with "participants" everywhere

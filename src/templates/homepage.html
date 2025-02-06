@@ -11,21 +11,21 @@
 <body>
 __HEADER_TOP__
 <div id="main">
-	<canvas id="canvas" width="400" height="300"></canvas>
-	<br />
-	<div class="intro">
-        The International Physics Olympiad (IPhO) is the most prestigious international physics competition for secondary school students. The main aim of IPhO is to test the highest level of knowledge, critical thinking, problem solving, proper practices of presentation and analysis, and hands-on skills in theoretical and experimental physics. The IPhO is organized annually in different countries as a 9-10 day competition where national teams comprising a maximum of five of their best physics students and two team leaders participate.
-	</div>
-	<br />
-	<div class="intro">
-		<a href="http://ipho-unofficial.org/">ipho-unofficial.org</a> is an online resource for the past and upcoming Physics Olympiads.
-        It is unofficial and non-profit, and does not hold any rights over its contents. The data is taken from various websites including <a href="http://ipho-new.org/" target="_blank">ipho-new.org</a>, the official website of IPhO.
-		The theme and design of the website is based on <a href="http://www.imo-official.org/" target="_blank" style="white-space: nowrap;">imo-official.org</a>.
-        <br>
-        <br>
-        <a href="http://ipho-unofficial.org/">ipho-unofficial.org</a> is an open source project. <a href="https://github.com/abeakkas/ipho-unofficial.org" target="_blank">View on Github</a>.
-	</div>
-	<br />
+  <canvas id="canvas" width="400" height="300"></canvas>
+  <br />
+  <div class="intro">
+    The International Physics Olympiad (IPhO) is the most prestigious international physics competition for secondary school students. The main aim of IPhO is to test the highest level of knowledge, critical thinking, problem solving, proper practices of presentation and analysis, and hands-on skills in theoretical and experimental physics. The IPhO is organized annually in different countries as a 9-10 day competition where national teams comprising a maximum of five of their best physics students and two team leaders participate.
+  </div>
+  <br />
+  <div class="intro">
+    <a href="http://ipho-unofficial.org/">ipho-unofficial.org</a> is an online resource for the past and upcoming Physics Olympiads.
+    It is unofficial and non-profit, and does not hold any rights over its contents. The data is taken from various websites including <a href="http://ipho-new.org/" target="_blank">ipho-new.org</a>, the official website of IPhO.
+    The theme and design of the website is based on <a href="http://www.imo-official.org/" target="_blank" style="white-space: nowrap;">imo-official.org</a>.
+    <br>
+    <br>
+    <a href="http://ipho-unofficial.org/">ipho-unofficial.org</a> is an open source project. <a href="https://github.com/abeakkas/ipho-unofficial.org" target="_blank">View on Github</a>.
+  </div>
+  <br />
 </div>
 __FOOTER__
 <script>
@@ -35,51 +35,51 @@ var ctx = canvas.getContext("2d");
 var bx = 230, by = 110, br = 20;
 var a = 250;
 function render() {
-    requestAnimationFrame(render);
-    var ba = new Date().getTime() * 0.002;
-    bx = 200 + 70 * Math.sin(ba);
-    by = 150 + 70 * Math.cos(ba);
-    ctx.save();
-    ctx.beginPath();
-    ctx.rect(200 - a / 2 + a * .4, 150 - a / 2 + a * .18, a * .6, a * .6);
-    ctx.fillStyle = "#ff9090";
-    ctx.fill();
-    ctx.strokeStyle = "#ff0000";
-    ctx.stroke();
-    ctx.clip();
-    ctx.fillStyle = "#ff0000";
-    ctx.beginPath();
-    ctx.arc(bx, by, br, 0, 7);
-    ctx.fill();
-    ctx.restore();
+  requestAnimationFrame(render);
+  var ba = new Date().getTime() * 0.002;
+  bx = 200 + 70 * Math.sin(ba);
+  by = 150 + 70 * Math.cos(ba);
+  ctx.save();
+  ctx.beginPath();
+  ctx.rect(200 - a / 2 + a * .4, 150 - a / 2 + a * .18, a * .6, a * .6);
+  ctx.fillStyle = "#ff9090";
+  ctx.fill();
+  ctx.strokeStyle = "#ff0000";
+  ctx.stroke();
+  ctx.clip();
+  ctx.fillStyle = "#ff0000";
+  ctx.beginPath();
+  ctx.arc(bx, by, br, 0, 7);
+  ctx.fill();
+  ctx.restore();
 
-    ctx.save();
-    ctx.beginPath();
-    ctx.rect(200 - a / 2 + a * .18, 150 - a / 2 + a * .4, a * .6, a * .6);
-    ctx.fillStyle = "#9090ff";
-    ctx.fill();
-    ctx.strokeStyle = "#0000ff";
-    ctx.stroke();
-    ctx.clip();
-    ctx.fillStyle = "#0000ff";
-    ctx.beginPath();
-    ctx.arc(bx, by, br, 0, 7);
-    ctx.fill();
-    ctx.restore();
-    
-    ctx.save();
-    ctx.beginPath();
-    ctx.rect(200 - a / 2, 150 - a / 2, a * .6, a * .6);
-    ctx.fillStyle="#ffff90";
-    ctx.fill();
-    ctx.strokeStyle="#ffff00";
-    ctx.stroke();
-    ctx.clip();
-    ctx.fillStyle="#ffff00";
-    ctx.beginPath();
-    ctx.arc(bx, by, br, 0, 7);
-    ctx.fill();
-    ctx.restore();
+  ctx.save();
+  ctx.beginPath();
+  ctx.rect(200 - a / 2 + a * .18, 150 - a / 2 + a * .4, a * .6, a * .6);
+  ctx.fillStyle = "#9090ff";
+  ctx.fill();
+  ctx.strokeStyle = "#0000ff";
+  ctx.stroke();
+  ctx.clip();
+  ctx.fillStyle = "#0000ff";
+  ctx.beginPath();
+  ctx.arc(bx, by, br, 0, 7);
+  ctx.fill();
+  ctx.restore();
+
+  ctx.save();
+  ctx.beginPath();
+  ctx.rect(200 - a / 2, 150 - a / 2, a * .6, a * .6);
+  ctx.fillStyle="#ffff90";
+  ctx.fill();
+  ctx.strokeStyle="#ffff00";
+  ctx.stroke();
+  ctx.clip();
+  ctx.fillStyle="#ffff00";
+  ctx.beginPath();
+  ctx.arc(bx, by, br, 0, 7);
+  ctx.fill();
+  ctx.restore();
 }
 render();
 </script>
