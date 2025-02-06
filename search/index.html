@@ -35,15 +35,26 @@
 <div id="main">
     <h2>Search</h2>
     <p>
+    Search the IPhO database for a particular contestant:
+    </p>
+    <p>
     <input type="text" maxlength="30" class="inptText" size="24" id="search_query" onkeydown="if(event.keyCode == 13) { ipho_search(); }" />
     <input type="submit" value="Search" class="btnSubmit" onclick="ipho_search()" />
-    <span>(Search the IPhO database for a particular contestant)</span>
     </p>
     <table>
     <thead><tr><th>Participant</th><th>Year</th><th>Country</th><th>Award</th></tr></thead>
     <tbody id="search_results">
     </tbody>
     </table>
+    <h2>Download</h2>
+    <p>
+    Download participant database as a CSV file:<br>
+    </p>
+    <p>
+    <a href="estudiantes.csv" download="ipho_results.csv">
+    <input type="submit" value="Download" class="btnSubmit" onclick="ipho_search()" />
+    </a>
+    </p>
 </div>
 <div id="footer">
 <a href="http://ipho-new.org/" target="_blank">IPhO Official Website</a>

@@ -41,4 +41,4 @@ If you change the database structure update templates/search/search.js script as
 * Delia Cropper@2018's name was changed from Daniel Cropper due to contestant request
 * Ophelia Evelyn Sommer@2017/2018's name was changed from Oscar Emil Sommer due to contestant request
 * Eleni Claire Shor@2019's name was changed from Guilhermo Cutrim Costa due to contestant request
-* Joshua Zexi Lin@2015's experimental score is reported as 13.5 in the official results but was bumped to 13.7 since scores don't add up to the total reported.
+* Joshua Zexi Lin@2015's experimental score is reported as 13.5 in the official results but was bumped to 13.7 since scores don't add up to the total reported
