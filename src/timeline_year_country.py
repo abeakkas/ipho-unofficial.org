@@ -38,9 +38,8 @@ def run(year):
       if row.code not in medals:
         medals[row.code] = {"G": 0, "S": 0, "B": 0, "H": 0, "P": 0}
       medals[row.code][row.medal] += 1
-    html = html.replace("__NOTE__", "")
   else:
-    html = html.replace("__NOTE__", "Results will be added once they are published on the official website.<br>")
+    html = html.replace("__TABLE__", "<tr><td colspan=6>Results will be added once they are published on the official website.</td></tr>")
 
   def keyfn(code):
     m = medals[code]

@@ -64,9 +64,8 @@ def run(year):
       else:
         rowhtml = rowhtml.replace("__POINTS_STYLE__", "display: none;")
       tablehtml += rowhtml
-    html = html.replace("__NOTE__", "")
   else:
-    html = html.replace("__NOTE__", "Results will be added once they are published on the official website.<br>")
+    tablehtml = "<tr><td colspan=4>Results will be added once they are published on the official website.</td></tr>"
   html = html.replace("__TABLE__", tablehtml)
 
   html = templates.finalize(html, "../..")
