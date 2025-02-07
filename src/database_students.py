@@ -60,6 +60,15 @@ def check_score_sums():
       if abs(th + ex - to) > .0001:
         print(f"Points don't add up: {row}")
 
+def check_score_precision():
+  for year in year_grouped:
+    for row in year_grouped[year]:
+      for score in [row.theoretical, row.experimental, row.total]:
+        if score and ("." not in score or len(score.split(".")[1]) != 2):
+          print("Score precision should be two digits after decimal:")
+          print(f"{score} in {row}")
+
+
 def check_combining_characters():
   for row in database:
     for c in row.name:
@@ -73,5 +82,6 @@ def check_combining_characters():
 if __name__ == "__main__":
   check_score_rank_consistency()
   check_score_sums()
+  check_score_precision()
   check_combining_characters()
 

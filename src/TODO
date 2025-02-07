@@ -1,4 +1,3 @@
-- Fixed precision for score numbers
 - Check Windows compatibility
 - Move common scripts to a separate file
 - Replace "students" with "participants" everywhere
