@@ -8,3 +8,4 @@ next_year = "2025"
 # On github, the links don't have to have .html suffix,
 # and directories forward to index.html inside.
 github = True
+
