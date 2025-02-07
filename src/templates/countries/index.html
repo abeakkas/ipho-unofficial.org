@@ -18,7 +18,7 @@ __HEADER_SIDE__
     <th rowspan="2">Country</th>
     <th rowspan="2">National PhO site</th>
     <th rowspan="2">IPhO Host</th>
-    <th colspan="5"><a href="#" onclick="sort_awards(this);return false;">Awards</a></th>
+    <th colspan="5"><a href="#" onclick="sort_awards(this); return false;">Awards</a></th>
   </tr>
   <tr id="table_head">
     <th title="Gold medal">G</th>
@@ -32,11 +32,13 @@ __HEADER_SIDE__
   </tbody>
   </table>
 </div>
+__FOOTER__
 <script>
 var sorted = false;
 var sort_mode = 0; // GSBH vs total
 function sort_awards(target) {
   var table = document.getElementById("table_body");
+  // Sort rows of the table.
   Array.from(table.children)
     .sort(function (r1, r2) {
       var g1 = parseInt(r1.children[4].innerHTML);
@@ -57,6 +59,7 @@ function sort_awards(target) {
       table.appendChild(row);
     });
   sort_mode ^= 1;
+  // Add ranks.
   var i = 1;
   var prevrank = i;
   var prev_summary = "";
@@ -84,7 +87,7 @@ function sort_awards(target) {
   }
   sorted = true;
 
-  // Add description
+  // Add description to the header.
   if (target.nextSibling) {
     target.nextSibling.remove();
   }
@@ -93,6 +96,5 @@ function sort_awards(target) {
   target.parentNode.appendChild(desc);
 }
 </script>
-__FOOTER__
 </body>
 </html>

@@ -47,17 +47,17 @@
   <th>Country</th>
   <th>Rank</th>
   <th>Award</th>
-  <th style="display: none;">Theoretical</th>
-  <th style="display: none;">Experimental</th>
-  <th style="display: none;">Total</th>
+  <th style="display: none;"><a href="#" onclick="sort_by(this); return false;">Theoretical</a></th>
+  <th style="display: none;"><a href="#" onclick="sort_by(this); return false;">Experimental</a></th>
+  <th style="display: none;"><a href="#" onclick="sort_by(this); return false;">Total</a></th>
   </tr>
   </thead>
-  <tbody>
-  
+  <tbody id="table_body">
+    
   </tbody>
   </table>
   <div>
-  Results will be added once they are published on the official website.<br>
+    Results will be added once they are published on the official website.<br>
   </div>
   <br>
   <div>
@@ -124,5 +124,24 @@
   }
 </script>
 
+<script>
+function sort_by(target) {
+  var th = target.parentElement;
+  index = Array.prototype.indexOf.call(th.parentElement.children, th);
+
+  var table = document.getElementById("table_body");
+  Array.from(table.children)
+    .sort(function (row1, row2) {
+      var score1 = parseFloat(row1.children[index].innerHTML);
+      var score2 = parseFloat(row2.children[index].innerHTML);
+      var rank1 = parseInt(row1.children[3].innerHTML);
+      var rank2 = parseInt(row2.children[3].innerHTML);
+      return score2 - score1 || rank1 - rank2;
+    })
+    .forEach(function (row) {
+      table.appendChild(row);
+    });
+}
+</script>
 </body>
 </html>

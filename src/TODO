@@ -1,5 +1,4 @@
 - Fixed precision for score numbers
 - Check Windows compatibility
 - Move common scripts to a separate file
-- Sorting for theoretical/experimental
 - Replace "students" with "participants" everywhere

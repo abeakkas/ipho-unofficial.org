@@ -39,7 +39,7 @@
     <th rowspan="2">Country</th>
     <th rowspan="2">National PhO site</th>
     <th rowspan="2">IPhO Host</th>
-    <th colspan="5"><a href="#" onclick="sort_awards(this);return false;">Awards</a></th>
+    <th colspan="5"><a href="#" onclick="sort_awards(this); return false;">Awards</a></th>
   </tr>
   <tr id="table_head">
     <th title="Gold medal">G</th>
@@ -1383,67 +1383,6 @@
   </tbody>
   </table>
 </div>
-<script>
-var sorted = false;
-var sort_mode = 0; // GSBH vs total
-function sort_awards(target) {
-  var table = document.getElementById("table_body");
-  Array.from(table.children)
-    .sort(function (r1, r2) {
-      var g1 = parseInt(r1.children[4].innerHTML);
-      var s1 = parseInt(r1.children[5].innerHTML);
-      var b1 = parseInt(r1.children[6].innerHTML);
-      var h1 = parseInt(r1.children[7].innerHTML);
-      var g2 = parseInt(r2.children[4].innerHTML);
-      var s2 = parseInt(r2.children[5].innerHTML);
-      var b2 = parseInt(r2.children[6].innerHTML);
-      var h2 = parseInt(r2.children[7].innerHTML);
-      if (sort_mode == 0) {
-        return g2 - g1 || s2 - s1 || b2 - b1 || h2 - h1;
-      } else {
-        return (g2 + s2 + b2) - (g1 + s1 + b1) || g2 - g1 || s2 - s1 || b2 - b1 || h2 - h1;
-      }
-    })
-    .forEach(function (row) {
-      table.appendChild(row);
-    });
-  sort_mode ^= 1;
-  var i = 1;
-  var prevrank = i;
-  var prev_summary = "";
-  Array.from(table.children)
-    .forEach(function (row) {
-      var summary = row.children[4].innerHTML + ","
-              + row.children[5].innerHTML + ","
-              + row.children[6].innerHTML + ","
-              + row.children[7].innerHTML;
-      if (summary != prev_summary) prevrank = i;
-      prev_summary = summary;
-      var rank = document.createElement("td");
-      rank.align = "right";
-      rank.innerHTML = prevrank;
-      i++;
-      if (sorted) row.removeChild(row.lastChild);
-      row.appendChild(rank);
-    });
-  if (!sorted) {
-    var head = document.getElementById("table_head");
-    var rank = document.createElement("td");
-    rank.style.fontWeight = "bold";
-    rank.innerHTML = "Rank";
-    head.appendChild(rank);
-  }
-  sorted = true;
-
-  // Add description
-  if (target.nextSibling) {
-    target.nextSibling.remove();
-  }
-  var desc = document.createElement("span");
-  desc.innerHTML = sort_mode ? " (by quality)" : " (by total)";
-  target.parentNode.appendChild(desc);
-}
-</script>
 <div id="footer">
 <a href="http://ipho-new.org/" target="_blank">IPhO Official Website</a>
 <a href="javascript:easteregg()" style="color: black;">&bull;</a>
@@ -1498,5 +1437,68 @@ function sort_awards(target) {
   }
 </script>
 
+<script>
+var sorted = false;
+var sort_mode = 0; // GSBH vs total
+function sort_awards(target) {
+  var table = document.getElementById("table_body");
+  // Sort rows of the table.
+  Array.from(table.children)
+    .sort(function (r1, r2) {
+      var g1 = parseInt(r1.children[4].innerHTML);
+      var s1 = parseInt(r1.children[5].innerHTML);
+      var b1 = parseInt(r1.children[6].innerHTML);
+      var h1 = parseInt(r1.children[7].innerHTML);
+      var g2 = parseInt(r2.children[4].innerHTML);
+      var s2 = parseInt(r2.children[5].innerHTML);
+      var b2 = parseInt(r2.children[6].innerHTML);
+      var h2 = parseInt(r2.children[7].innerHTML);
+      if (sort_mode == 0) {
+        return g2 - g1 || s2 - s1 || b2 - b1 || h2 - h1;
+      } else {
+        return (g2 + s2 + b2) - (g1 + s1 + b1) || g2 - g1 || s2 - s1 || b2 - b1 || h2 - h1;
+      }
+    })
+    .forEach(function (row) {
+      table.appendChild(row);
+    });
+  sort_mode ^= 1;
+  // Add ranks.
+  var i = 1;
+  var prevrank = i;
+  var prev_summary = "";
+  Array.from(table.children)
+    .forEach(function (row) {
+      var summary = row.children[4].innerHTML + ","
+              + row.children[5].innerHTML + ","
+              + row.children[6].innerHTML + ","
+              + row.children[7].innerHTML;
+      if (summary != prev_summary) prevrank = i;
+      prev_summary = summary;
+      var rank = document.createElement("td");
+      rank.align = "right";
+      rank.innerHTML = prevrank;
+      i++;
+      if (sorted) row.removeChild(row.lastChild);
+      row.appendChild(rank);
+    });
+  if (!sorted) {
+    var head = document.getElementById("table_head");
+    var rank = document.createElement("td");
+    rank.style.fontWeight = "bold";
+    rank.innerHTML = "Rank";
+    head.appendChild(rank);
+  }
+  sorted = true;
+
+  // Add description to the header.
+  if (target.nextSibling) {
+    target.nextSibling.remove();
+  }
+  var desc = document.createElement("span");
+  desc.innerHTML = sort_mode ? " (by quality)" : " (by total)";
+  target.parentNode.appendChild(desc);
+}
+</script>
 </body>
 </html>

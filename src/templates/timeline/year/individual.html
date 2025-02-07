@@ -26,17 +26,17 @@ __HEADER_SIDE__
   <th>Country</th>
   <th>Rank</th>
   <th>Award</th>
-  <th style="__POINTS_STYLE__">Theoretical</th>
-  <th style="__POINTS_STYLE__">Experimental</th>
-  <th style="__POINTS_STYLE__">Total</th>
+  <th style="__POINTS_STYLE__"><a href="#" onclick="sort_by(this); return false;">Theoretical</a></th>
+  <th style="__POINTS_STYLE__"><a href="#" onclick="sort_by(this); return false;">Experimental</a></th>
+  <th style="__POINTS_STYLE__"><a href="#" onclick="sort_by(this); return false;">Total</a></th>
   </tr>
   </thead>
-  <tbody>
-  __TABLE__
+  <tbody id="table_body">
+    __TABLE__
   </tbody>
   </table>
   <div>
-  __NOTE__
+    __NOTE__
   </div>
   <br>
   <div>
@@ -50,5 +50,24 @@ __HEADER_SIDE__
   <br>
 </div>
 __FOOTER__
+<script>
+function sort_by(target) {
+  var th = target.parentElement;
+  index = Array.prototype.indexOf.call(th.parentElement.children, th);
+
+  var table = document.getElementById("table_body");
+  Array.from(table.children)
+    .sort(function (row1, row2) {
+      var score1 = parseFloat(row1.children[index].innerHTML);
+      var score2 = parseFloat(row2.children[index].innerHTML);
+      var rank1 = parseInt(row1.children[3].innerHTML);
+      var rank2 = parseInt(row2.children[3].innerHTML);
+      return score2 - score1 || rank1 - rank2;
+    })
+    .forEach(function (row) {
+      table.appendChild(row);
+    });
+}
+</script>
 </body>
 </html>
