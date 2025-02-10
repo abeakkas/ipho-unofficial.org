@@ -104,55 +104,52 @@
 // Homepage animation
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
-var bx = 230, by = 110, br = 20;
 var a = 250;
-function render() {
-  requestAnimationFrame(render);
-  var ba = new Date().getTime() * 0.002;
-  bx = 200 + 70 * Math.sin(ba);
-  by = 150 + 70 * Math.cos(ba);
-  ctx.save();
-  ctx.beginPath();
-  ctx.rect(200 - a / 2 + a * .4, 150 - a / 2 + a * .18, a * .6, a * .6);
-  ctx.fillStyle = "#ff9090";
-  ctx.fill();
-  ctx.strokeStyle = "#ff0000";
-  ctx.stroke();
-  ctx.clip();
-  ctx.fillStyle = "#ff0000";
-  ctx.beginPath();
-  ctx.arc(bx, by, br, 0, 7);
-  ctx.fill();
-  ctx.restore();
+var ball_r = 8;
+var ball_w = 90;
+var ball_h = 27;
 
+function rect(x, y, fill, stroke) {
   ctx.save();
+  ctx.fillStyle = fill;
+  ctx.strokeStyle = stroke;
   ctx.beginPath();
-  ctx.rect(200 - a / 2 + a * .18, 150 - a / 2 + a * .4, a * .6, a * .6);
-  ctx.fillStyle = "#9090ff";
+  ctx.rect(x, y, a * 0.6, a * 0.6);
   ctx.fill();
-  ctx.strokeStyle = "#0000ff";
   ctx.stroke();
   ctx.clip();
-  ctx.fillStyle = "#0000ff";
-  ctx.beginPath();
-  ctx.arc(bx, by, br, 0, 7);
-  ctx.fill();
-  ctx.restore();
-
-  ctx.save();
-  ctx.beginPath();
-  ctx.rect(200 - a / 2, 150 - a / 2, a * .6, a * .6);
-  ctx.fillStyle="#ffff90";
-  ctx.fill();
-  ctx.strokeStyle="#ffff00";
-  ctx.stroke();
-  ctx.clip();
-  ctx.fillStyle="#ffff00";
-  ctx.beginPath();
-  ctx.arc(bx, by, br, 0, 7);
-  ctx.fill();
+  ctx.fillStyle = stroke;
+  for (var i = 0; i < 3; i++) {
+    ctx.beginPath();
+    ctx.save();
+    ctx.scale(1, ball_h / ball_w);
+    ctx.arc(0, 0, ball_w, 0, 2 * Math.PI);
+    ctx.stroke();
+    ctx.restore();
+    var ba = new Date().getTime() * 0.0023 * (1 + i * 0.09);
+    var ball_x = ball_w * Math.sin(ba);
+    var ball_y = ball_h * Math.cos(ba);
+    ctx.beginPath();
+    ctx.arc(ball_x, ball_y, ball_r, 0, 2 * Math.PI);
+    ctx.fill();
+    ctx.rotate(Math.PI / 3);
+  }
   ctx.restore();
 }
+
+function render() {
+  requestAnimationFrame(render);
+
+  ctx.save();
+  ctx.translate(canvas.width / 2, canvas.height / 2);
+
+  rect(-a * 0.10, -a * 0.32, "#ff9090", "#ff0000");
+  rect(-a * 0.32, -a * 0.10, "#9090ff", "#0000ff");
+  rect(-a * 0.50, -a * 0.50, "#ffff90", "#d9d95b");
+
+  ctx.restore();
+}
+
 render();
 </script>
 </body>
