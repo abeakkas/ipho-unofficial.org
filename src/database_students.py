@@ -12,7 +12,7 @@ Row = namedtuple('Row', 'year,rank,name,code,medal,theoretical,experimental,tota
 with open("database/estudiantes.csv") as file:
   reader = csv.reader(file)
   for row in reader:
-    assert len(row) == 9, f"Student row error: {row}"
+    assert len(row) == 9, f"Expecting 9 elements per row: {row}"
 
     rank_geq = False
     if row[1][:2] == ">=":
