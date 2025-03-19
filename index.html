@@ -119,6 +119,7 @@ function rect(x, y, fill, stroke) {
   ctx.stroke();
   ctx.clip();
   ctx.fillStyle = stroke;
+  ctx.rotate(new Date().getTime() * .0001 % (2 * Math.PI));
   for (var i = 0; i < 3; i++) {
     ctx.beginPath();
     ctx.save();
