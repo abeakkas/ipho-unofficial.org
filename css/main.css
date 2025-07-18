@@ -16,6 +16,8 @@
 
 .pointer {
   text-decoration: none;
+  /* Fix different shaped arrows issue: */
+  font-family: Arial;
 }
 
 a.pointer:hover {
