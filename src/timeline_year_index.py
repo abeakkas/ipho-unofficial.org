@@ -65,6 +65,11 @@ def run(year):
     html = html.replace("__HOMEPAGE_STYLE__", "display: none;")
     html = html.replace("__HOMEPAGE__", ".") # Google crawler fix
 
+  if not templates.hasminutes(year):
+    html = html.replace("__MINUTES_STYLE__", "display: none;")
+  html = html.replace("__MINUTES_STYLE__", "")
+
+
   if year in s_db_y:
     medals = {"G": 0, "S": 0, "B": 0, "H": 0, "P": 0}
     for studentdata in s_db_y[year]:

@@ -4,6 +4,7 @@ def run():
   print("Copying static files")
   subprocess.Popen("cp -r ./templates/img ../", shell=True)
   subprocess.Popen("cp -r ./templates/css ../", shell=True)
+  subprocess.Popen("cp -r ./templates/minutes ../", shell=True)
 
 if __name__ == "__main__":
   run()

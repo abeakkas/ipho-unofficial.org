@@ -1,4 +1,5 @@
 import config
+import os
 import util
 from database_timeline import year_indexed as t_db_y
 
@@ -48,6 +49,9 @@ def finalize(html, root):
     html = html.replace("__HTML_EXT__", ".html")
   html = html.replace("__WEBMASTER__", config.webmaster_email)
   return html
+
+def hasminutes(year):
+  return os.path.exists(f"templates/minutes/{year}.pdf")
 
 medal = {
   "G": get("medal_gold"),
