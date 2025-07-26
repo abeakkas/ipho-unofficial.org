@@ -45,3 +45,4 @@ If you change the database structure update `templates/search/search.js` script 
 * Ophelia Evelyn Sommer@2017/2018's name was changed from Oscar Emil Sommer due to contestant request
 * Eleni Claire Shor@2019's name was changed from Guilhermo Cutrim Costa due to contestant request
 * Joshua Zexi Lin@2015's theoretical and experimental scores reported in the official release don't add up the to total score
+* 2006, 2014 Minutes and data don't match

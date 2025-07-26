@@ -38,19 +38,19 @@
 38,2007,7.7 - 16.7,IRN,Isfahan,,69,
 39,2008,20.7 - 29.7,VNM,Hanoi,,82,
 40,2009,11.7 - 19.7,MEX,Merida,http://ipho2009.smf.mx/home/,68,
-41,2010,17.7 - 25.7,HRV,Zagreb,http://ipho2010.hfd.hr/,79,
-42,2011,10.7 - 18.7,THA,Bangkok,http://mpec.sc.mahidol.ac.th/ipho2011/,84,
+41,2010,17.7 - 25.7,HRV,Zagreb,http://ipho2010.hfd.hr/,79,370
+42,2011,10.7 - 18.7,THA,Bangkok,http://mpec.sc.mahidol.ac.th/ipho2011/,84,393
 43,2012,15.7 - 24.7,EST,Tallinn & Tartu,http://www.ipho2012.ee/,80,378
 44,2013,7.7 - 15.7,DEN,Copenhagen,http://ipho2013.dk/,82,374
-45,2014,13.7 - 21.7,KAZ,Astana,http://ipho2014.kz/,86,383
+45,2014,13.7 - 21.7,KAZ,Astana,http://ipho2014.kz/,83,374
 46,2015,5.7 - 12.7,IND,Mumbai,http://www.ipho2015.in/,83,382
-47,2016,11.7 - 17.7,SUI&LIE,Zurich,http://www.ipho2016.org/,86,400
+47,2016,11.7 - 17.7,SUI&LIE,Zurich,http://www.ipho2016.org/,86,398
 48,2017,16.7 - 24.7,IDN,Yogyakarta,http://ipho2017.id/,86,395
-49,2018,21.7 - 29.7,POR,Lisbon,http://ipho2018.pt/,90,412
+49,2018,21.7 - 29.7,POR,Lisbon,http://ipho2018.pt/,90,396
 50,2019,7.7 - 15.7,ISR,Tel Aviv,https://www.ipho2019.org.il/,78,364
-51,2021,17.7 - 24.7,LTU,Vilnius,https://www.ipho2021.lt/,76,366
-52,2022,10.7 - 17.7,SUI,Remote,https://ipho2022.com/,,
-53,2023,10.7 - 17.7,JPN,Tokyo,https://international-physics-olympiad2023-tokyo.jp/,80,392
+51,2021,17.7 - 24.7,LTU,Vilnius,https://www.ipho2021.lt/,76,368
+52,2022,10.7 - 17.7,SUI,Remote,https://ipho2022.com/,75,368
+53,2023,10.7 - 17.7,JPN,Tokyo,https://international-physics-olympiad2023-tokyo.jp/,82,394
 54,2024,21.7 - 28.7,IRN,Isfahan,https://www.ipho2024.ir/,43,197
 55,2025,17.7 - 25.7,FRA,Paris,https://www.ipho2025.fr/,,
 56,2026,,COL,,,,

@@ -2,5 +2,5 @@
 - Move common scripts to a separate file
 - Replace "students" with "participants" everywhere
 - Create a separate category for the first IPhO medals
-- Get Minutes data from official website
 - Add a team results page like IMO
+- Go over websites and replace outdated ones with Web Archive
