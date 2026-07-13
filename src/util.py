@@ -17,8 +17,10 @@ def writefile(path, content):
 def copyfile(_from, to):
   writefile(to, readfile(_from))
 
-def ordinal(number):
-  if number[-1] == "1":
+def ordinal(number: str) -> str:
+  if number[-2:] in ("11", "12", "13"):
+    return "th"
+  elif number[-1] == "1":
     return "st"
   elif number[-1] == "2":
     return "nd"
