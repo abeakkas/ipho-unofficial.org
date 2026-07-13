@@ -2,8 +2,8 @@ import sys
 import templates
 import util
 from database_countries import code_to_country
-from database_students import year_grouped as s_db_y
-from database_timeline import year_indexed as t_db_y
+from database_participants import year_grouped as participants_by_year
+from database_timeline import year_indexed as editions_by_year
 from database_timeline import previous_year
 from database_timeline import next_year
 
@@ -11,7 +11,7 @@ def run(year):
   print("Generating timeline/" + year + "/individual")
   html = templates.get("timeline/year/individual")
   html = templates.set_headers(html, "timeline")
-  yeardata = t_db_y[year]
+  yeardata = editions_by_year[year]
   html = html.replace("__YEAR__", year)
   html = html.replace("__NUMBER__", yeardata.number)
   html = html.replace("__ORDINAL__", util.ordinal(yeardata.number))
@@ -30,7 +30,7 @@ def run(year):
     html = html.replace("__NEXT_YEAR_STYLE__", "display: none;")
     html = html.replace("__NEXT_YEAR__", ".") # Google crawler fix
 
-  show_points = year in s_db_y and s_db_y[year] and s_db_y[year][0].theoretical
+  show_points = year in participants_by_year and participants_by_year[year] and participants_by_year[year][0].theoretical
 
   if show_points:
     html = html.replace("__POINTS_STYLE__", "")
@@ -38,8 +38,8 @@ def run(year):
     html = html.replace("__POINTS_STYLE__", "display: none;")
 
   tablehtml = ""
-  if year in s_db_y:
-    for row in s_db_y[year]:
+  if year in participants_by_year:
+    for row in participants_by_year[year]:
       rowhtml = templates.get("timeline/year/individual_row")
       if row.code == "":
         rowhtml = rowhtml.replace("__CODE__", "TUR") # Yup, this is my hack
@@ -48,7 +48,7 @@ def run(year):
         rowhtml = rowhtml.replace("__CODE__", row.code)
         rowhtml = rowhtml.replace("__COUNTRY__", code_to_country[row.code])
       if row.website:
-        link = templates.get("timeline/year/individual_student_link")
+        link = templates.get("timeline/year/individual_participant_link")
         link = link.replace("__LINK__", row.website)
         link = link.replace("__NAME__", row.name)
         rowhtml = rowhtml.replace("__NAME__", link)
@@ -73,4 +73,3 @@ def run(year):
 
 if __name__ == "__main__":
   run(sys.argv[1])
-

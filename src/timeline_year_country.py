@@ -2,8 +2,8 @@ import sys
 import templates
 import util
 from database_countries import code_to_country
-from database_students import year_grouped as s_db_y
-from database_timeline import year_indexed as t_db_y
+from database_participants import year_grouped as participants_by_year
+from database_timeline import year_indexed as editions_by_year
 from database_timeline import previous_year
 from database_timeline import next_year
 
@@ -11,7 +11,7 @@ def run(year):
   print("Generating timeline/" + year + "/country")
   html = templates.get("timeline/year/country")
   html = templates.set_headers(html, "timeline")
-  yeardata = t_db_y[year]
+  yeardata = editions_by_year[year]
   html = html.replace("__YEAR__", year)
   html = html.replace("__NUMBER__", yeardata.number)
   html = html.replace("__ORDINAL__", util.ordinal(yeardata.number))
@@ -31,8 +31,8 @@ def run(year):
     html = html.replace("__NEXT_YEAR__", ".") # Google crawler fix
 
   medals = {}
-  if year in s_db_y:
-    for row in s_db_y[year]:
+  if year in participants_by_year:
+    for row in participants_by_year[year]:
       if row.code == "":
         continue
       if row.code not in medals:
@@ -72,4 +72,3 @@ def run(year):
 
 if __name__ == "__main__":
   run(sys.argv[1])
-

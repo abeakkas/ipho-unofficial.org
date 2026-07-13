@@ -1,9 +1,9 @@
 import templates
 import util
 from database_countries import code_to_country
-from database_countries import database as c_db
-from database_students import code_grouped as s_db_c
-from database_timeline import code_grouped as t_db_c
+from database_countries import database as countries
+from database_participants import code_grouped as participants_by_code
+from database_timeline import code_grouped as editions_by_code
 
 def run():
   print("Generating countries/index")
@@ -11,7 +11,7 @@ def run():
   html = templates.set_headers(html, "countries")
 
   tablehtml = ""
-  for row in c_db:
+  for row in countries:
     rowhtml = templates.get("countries/index_row")
     rowhtml = rowhtml.replace("__CODE__", row.code)
     rowhtml = rowhtml.replace("__COUNTRY__", code_to_country[row.code])
@@ -26,10 +26,10 @@ def run():
     else:
       rowhtml = rowhtml.replace("__NATIONAL_SITE_STYLE__", "display: none;")
 
-    if row.code in t_db_c:
+    if row.code in editions_by_code:
       hosts = ""
       flag = False
-      for year in t_db_c[row.code]:
+      for year in editions_by_code[row.code]:
         if flag:
           hosts += ", "
         hosts += templates.get("countries/index_hostyear").replace("__YEAR__", year.year)
@@ -39,9 +39,9 @@ def run():
       rowhtml = rowhtml.replace("__HOSTS__", "")
 
     medals = {"G": 0, "S": 0, "B": 0, "H": 0, "P": 0}
-    if row.code in s_db_c:
-      for student in s_db_c[row.code]:
-        medals[student.medal] += 1
+    if row.code in participants_by_code:
+      for participant in participants_by_code[row.code]:
+        medals[participant.medal] += 1
     rowhtml = rowhtml.replace("__GOLD__", str(medals["G"]))
     rowhtml = rowhtml.replace("__SILVER__", str(medals["S"]))
     rowhtml = rowhtml.replace("__BRONZE__", str(medals["B"]))
@@ -57,4 +57,3 @@ def run():
 
 if __name__ == "__main__":
   run()
-

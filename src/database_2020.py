@@ -1,6 +1,6 @@
 import csv
 from collections import namedtuple
-from database_countries import code_to_country as c_t_c
+from database_countries import code_to_country
 
 database = []
 
@@ -13,8 +13,7 @@ with open("database/2020.csv") as file:
     entry = Row(*row)
 
     if (entry.medal not in ["G", "S", "B", "H", "P"]
-        or (entry.code != "" and entry.code not in c_t_c)):
+        or (entry.code != "" and entry.code not in code_to_country)):
       raise Exception("2020 database is corrupted! Row: {}".format(row))
 
     database.append(entry)
-

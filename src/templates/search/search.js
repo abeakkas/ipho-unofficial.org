@@ -6,9 +6,9 @@
         return;
     }
     var countries = [];
-    var students = [];
+    var participants = [];
     window.ipho_search = function () {
-        if (countries == [] || students == []) {
+        if (countries == [] || participants == []) {
           return;
         }
         var html = "";
@@ -24,20 +24,20 @@
             return;
         }
         // Traverse in reverse order so that recent results show up higher.
-        for (var i = students.length - 1; i >= 0; i--) {
-            var student = students[i];
-            if (student.name_ascii_lower.indexOf(query) != -1) {
-                var row = t_row.replace(/{{code}}/g, student.code)
-                               .replace(/{{country}}/g, countries[student.code])
-                               .replace(/{{year}}/g, student.year);
-                if (student.website) {
-                    var link = t_website.replace(/{{name}}/, student.name)
-                                        .replace(/{{link}}/, student.website);
+        for (var i = participants.length - 1; i >= 0; i--) {
+            var participant = participants[i];
+            if (participant.name_ascii_lower.indexOf(query) != -1) {
+                var row = t_row.replace(/{{code}}/g, participant.code)
+                               .replace(/{{country}}/g, countries[participant.code])
+                               .replace(/{{year}}/g, participant.year);
+                if (participant.website) {
+                    var link = t_website.replace(/{{name}}/, participant.name)
+                                        .replace(/{{link}}/, participant.website);
                     row = row.replace(/{{name}}/, link)
                 } else {
-                    row = row.replace(/{{name}}/, student.name)
+                    row = row.replace(/{{name}}/, participant.name)
                 }
-                switch (student.medal) {
+                switch (participant.medal) {
                     case "G":
                         row = row.replace(/{{medal}}/g, t_gold);
                         break;
@@ -80,12 +80,12 @@
             }
         }
     });
-    loadCSV("estudiantes.csv", function (csv) {
+    loadCSV("participants.csv", function (csv) {
         var lines = csv.split("\n");
         for (var i = 0; i < lines.length; i++) {
             var ps = lines[i].trim().split(",");
             if (ps.length > 8) {
-                students.push({
+                participants.push({
                     year: ps[0],
                     rank: ps[1],
                     name: ps[2],
@@ -116,8 +116,8 @@
             // Insert 2020's rows to right location to the right place with JS magic:
             // https://stackoverflow.com/a/7032717
             var ix = 0;
-            for (; ix < students.length && students[ix]["year"] != "2021"; ix++);
-            students.splice.apply(students, [ix, 0].concat(rows2020));
+            for (; ix < participants.length && participants[ix]["year"] != "2021"; ix++);
+            participants.splice.apply(participants, [ix, 0].concat(rows2020));
         });
     });
 })();

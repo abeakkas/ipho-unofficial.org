@@ -3,7 +3,7 @@ import util
 from asciify import asciify
 from collections import defaultdict
 from database_countries import code_to_country
-from database_students import code_grouped as dbc
+from database_participants import code_grouped as participants_by_code
 
 # Identities that algorithm can't find
 exceptions = [[("2010", "SVK", "Eugen Hruska"), ("2011", "GER", "Eugen Hruska")]]
@@ -46,8 +46,8 @@ def run():
       key_to_bin[key1] = bins[-1]
       key_to_bin[key2] = bins[-1]
 
-  # For each country compare students from each year with two previous years
-  for code_rows in dbc.values():
+  # For each country compare participants from each year with two previous years
+  for code_rows in participants_by_code.values():
      years = defaultdict(list)
      for row in code_rows:
        years[int(row.year)].append(row)
@@ -62,10 +62,10 @@ def run():
 
   for (year1, code1, name1), (year2, code2, name2) in exceptions:
     row1 = row2 = None
-    for row in dbc[code1]:
+    for row in participants_by_code[code1]:
       if row.year == year1 and row.name == name1:
         row1 = row
-    for row in dbc[code2]:
+    for row in participants_by_code[code2]:
       if row.year == year2 and row.name == name2:
         row2 = row
     if not row1 or not row2:

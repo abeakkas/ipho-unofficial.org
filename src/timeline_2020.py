@@ -15,7 +15,7 @@ def run():
     rowhtml = rowhtml.replace("__CODE__", row.code)
     rowhtml = rowhtml.replace("__COUNTRY__", code_to_country[row.code])
     if row.website:
-      link = templates.get("timeline/year/individual_student_link")
+      link = templates.get("timeline/year/individual_participant_link")
       link = link.replace("__LINK__", row.website)
       link = link.replace("__NAME__", row.name)
       rowhtml = rowhtml.replace("__NAME__", link)

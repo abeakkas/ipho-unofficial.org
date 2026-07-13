@@ -18,16 +18,16 @@ After adding a new year increment the `config.py` counters.
 
 If you change the database structure update `templates/search/search.js` script as well.
 
-##### database/estudiantes.csv:
+##### database/participants.csv:
 * Columns: year, rank, name, country-code, medal, theoretical, experimental, total, website
 * Medal is one of: G, S, B, H, P
 * Ordered first by year then by rank
 * Rank can be in two forms: `123`, `>=123`
 * Country-code can be empty if unknown
-* Run `python3 database_students.py` to check errors
+* Run `python3 database_participants.py` to check errors
 
 ##### database/timeline.csv:
-* Columns: number, year, date, country code, city, website, # of countries, # of students
+* Columns: number, year, date, country code, city, website, # of countries, # of participants
 * Ordered by year
 * Years are not necessarily consecutive
 * If there are multiple countries hosting the competition, codes are separated by '&'

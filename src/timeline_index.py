@@ -2,7 +2,7 @@ import config
 import templates
 import util
 from database_countries import code_to_country
-from database_timeline import database as t_db
+from database_timeline import database as editions
 
 def monospace_date(date):
   if "-" not in date:
@@ -21,7 +21,7 @@ def run():
   tablehtml = ""
   upcominghtml = ""
   upcoming_row_ctr = 0
-  for row in t_db:
+  for row in editions:
     rowhtml = templates.get("timeline/index_row")
     rowhtml = rowhtml.replace("__NUMBER__", row.number)
     rowhtml = rowhtml.replace("__YEAR__", row.year)
@@ -30,7 +30,7 @@ def run():
     rowhtml = rowhtml.replace("__CITY__", row.city)
     rowhtml = rowhtml.replace("__COUNTRY__", code_to_country[row.code])
     rowhtml = rowhtml.replace("__P_COUNTRY__", row.p_country)
-    rowhtml = rowhtml.replace("__P_STUDENT__", row.p_student)
+    rowhtml = rowhtml.replace("__P_PARTICIPANT__", row.p_participant)
     if row.code2:
       rowhtml = rowhtml.replace("__CODE2__", row.code2)
       rowhtml = rowhtml.replace("__COUNTRY2__", code_to_country[row.code2])

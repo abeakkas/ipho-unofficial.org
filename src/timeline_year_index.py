@@ -1,17 +1,17 @@
 import sys
 import templates
 import util
-from database_timeline import year_indexed as t_db_y
+from database_timeline import year_indexed as editions_by_year
 from database_timeline import previous_year
 from database_timeline import next_year
 from database_countries import code_to_country
-from database_students import year_grouped as s_db_y
+from database_participants import year_grouped as participants_by_year
 
 def run(year):
   print("Generating timeline/" + year + "/index")
   html = templates.get("timeline/year/index")
   html = templates.set_headers(html, "timeline")
-  yeardata = t_db_y[year]
+  yeardata = editions_by_year[year]
   html = html.replace("__YEAR__", year)
   html = html.replace("__NUMBER__", yeardata.number)
   html = html.replace("__ORDINAL__", util.ordinal(yeardata.number))
@@ -46,11 +46,12 @@ def run(year):
     html = html.replace("__NEXT_YEAR_STYLE__", "display: none;")
     html = html.replace("__NEXT_YEAR__", ".") # Google crawler fix
 
-  if yeardata.p_student:
-    html = html.replace("__P_STUDENT_STYLE__", "")
-    html = html.replace("__P_STUDENT__", yeardata.p_student)
+  if yeardata.p_participant:
+    html = html.replace("__P_PARTICIPANT_STYLE__", "")
+    html = html.replace("__P_PARTICIPANT__", yeardata.p_participant)
   else:
-    html = html.replace("__P_STUDENT_STYLE__", "display: none;")
+    html = html.replace("__P_PARTICIPANT_STYLE__", "display: none;")
+    html = html.replace("__P_PARTICIPANT__", "")
 
   if yeardata.p_country:
     html = html.replace("__P_COUNTRY_STYLE__", "")
@@ -70,10 +71,10 @@ def run(year):
   html = html.replace("__MINUTES_STYLE__", "")
 
 
-  if year in s_db_y:
+  if year in participants_by_year:
     medals = {"G": 0, "S": 0, "B": 0, "H": 0, "P": 0}
-    for studentdata in s_db_y[year]:
-      medals[studentdata.medal] += 1
+    for participant in participants_by_year[year]:
+      medals[participant.medal] += 1
     html = html.replace("__AWARDS_STYLE__", "")
     html = html.replace("__GOLD__", str(medals["G"]))
     html = html.replace("__SILVER__", str(medals["S"]))
@@ -87,4 +88,3 @@ def run(year):
 
 if __name__ == "__main__":
   run(sys.argv[1])
-

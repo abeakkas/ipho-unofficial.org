@@ -1,14 +1,23 @@
 import csv
 from collections import defaultdict
-from collections import namedtuple
+from typing import NamedTuple
 
-database = []
-year_indexed = {}
-code_grouped = defaultdict(list)
-previous_year = {}
-next_year = {}
+class Edition(NamedTuple):
+  number: str
+  year: str
+  date: str
+  code: str
+  city: str
+  homepage: str
+  p_country: str
+  p_participant: str
+  code2: str
 
-Row = namedtuple('Row', 'number,year,date,code,city,homepage,p_country,p_student,code2')
+database: list[Edition] = []
+year_indexed: dict[str, Edition] = {}
+code_grouped: dict[str, list[Edition]] = defaultdict(list)
+previous_year: dict[str, str] = {}
+next_year: dict[str, str] = {}
 
 with open("database/timeline.csv") as file:
   reader = csv.reader(file)
@@ -18,7 +27,7 @@ with open("database/timeline.csv") as file:
     code2 = ""
     if "&" in row[3]:
       row[3], code2 = row[3].split("&")
-    entry = Row(*row, code2)
+    entry = Edition(*row, code2)
 
     database.append(entry)
     year_indexed[entry.year] = entry
@@ -29,4 +38,3 @@ with open("database/timeline.csv") as file:
       previous_year[entry.year] = prev
       next_year[prev] = entry.year
     prev = entry.year
-
