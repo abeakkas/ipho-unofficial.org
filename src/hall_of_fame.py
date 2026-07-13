@@ -4,6 +4,7 @@ from asciify import asciify
 from collections import defaultdict
 from database_countries import code_to_country
 from database_participants import code_grouped as participants_by_code
+from database_participants import count_medals
 
 # Identities that algorithm can't find
 exceptions = [[("2010", "SVK", "Eugen Hruska"), ("2011", "GER", "Eugen Hruska")]]
@@ -69,14 +70,12 @@ def run():
       if row.year == year2 and row.name == name2:
         row2 = row
     if not row1 or not row2:
-      raise Exception("Hall of fame exception not found: {}".format(ex))
+      raise Exception(f"Hall of fame exception not found: {(year1, code1, name1)} / {(year2, code2, name2)}")
     merge(row1, row2)
 
   # Sort by medal quality
   def sort_key(bin):
-    m = {"G": 0, "S": 0, "B": 0, "H": 0, "P": 0}
-    for row in bin:
-      m[row.medal] += 1
+    m = count_medals(bin)
     return (-m["G"], -m["S"], -m["B"], -m["H"], row_to_key(bin[0]))
 
   bins = sorted(bins, key=sort_key)
@@ -84,7 +83,7 @@ def run():
   html = templates.get("hall_of_fame/index")
   html = templates.set_headers(html, "hall_of_fame")
 
-  def print_bin(tablehtml, bin, medals):
+  def print_bin(bin, medals):
     rowhtml = templates.get("hall_of_fame/index_row")
     rowhtml = rowhtml.replace("__NAME__", bin[0].name)
     rowhtml = rowhtml.replace("__CODE__", bin[0].code)
@@ -112,15 +111,13 @@ def run():
 
   tablehtml = ""
   for bin in bins:
-    medals = {"G": 0, "S": 0, "B": 0, "H": 0, "P": 0}
-    for row in bin:
-      medals[row.medal] += 1
+    medals = count_medals(bin)
 
     # Cutoff at 1 gold, 1 silver, 1 bronze
     if medals["G"] < 2 and medals["S"] < 2 and medals["B"] < 1:
       break
 
-    tablehtml += print_bin(tablehtml, bin, medals)
+    tablehtml += print_bin(bin, medals)
 
   html = html.replace("__TABLE__", tablehtml)
 
@@ -129,24 +126,20 @@ def run():
 
   # Sort by total number of medals
   def sort_key(bin):
-    m = {"G": 0, "S": 0, "B": 0, "H": 0, "P": 0}
-    for row in bin:
-      m[row.medal] += 1
+    m = count_medals(bin)
     return (-m["G"] - m["S"] - m["B"], -m["G"], -m["S"], -m["B"], -m["H"], row_to_key(bin[0]))
 
   bins = sorted(bins, key=sort_key)
 
   table2html = ""
   for bin in bins:
-    medals = {"G": 0, "S": 0, "B": 0, "H": 0, "P": 0}
-    for row in bin:
-      medals[row.medal] += 1
+    medals = count_medals(bin)
 
     # Cutoff at 3 medals
     if medals["G"] + medals["S"] + medals["B"] < 3:
       break
 
-    table2html += print_bin(tablehtml, bin, medals)
+    table2html += print_bin(bin, medals)
 
   html = html.replace("__TABLE2__", table2html)
 

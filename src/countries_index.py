@@ -3,6 +3,7 @@ import util
 from database_countries import code_to_country
 from database_countries import database as countries
 from database_participants import code_grouped as participants_by_code
+from database_participants import count_medals
 from database_timeline import code_grouped as editions_by_code
 
 def run():
@@ -38,10 +39,7 @@ def run():
     else:
       rowhtml = rowhtml.replace("__HOSTS__", "")
 
-    medals = {"G": 0, "S": 0, "B": 0, "H": 0, "P": 0}
-    if row.code in participants_by_code:
-      for participant in participants_by_code[row.code]:
-        medals[participant.medal] += 1
+    medals = count_medals(participants_by_code.get(row.code, []))
     rowhtml = rowhtml.replace("__GOLD__", str(medals["G"]))
     rowhtml = rowhtml.replace("__SILVER__", str(medals["S"]))
     rowhtml = rowhtml.replace("__BRONZE__", str(medals["B"]))

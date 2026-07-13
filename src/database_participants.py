@@ -23,6 +23,12 @@ class Participant(NamedTuple):
   website: str
   rank_geq: bool
 
+def count_medals(participants: list[Participant]) -> dict[Medal, int]:
+  counts = {m: 0 for m in Medal}
+  for p in participants:
+    counts[p.medal] += 1
+  return counts
+
 database: list[Participant] = []
 code_grouped: dict[str, list[Participant]] = defaultdict(list)
 year_grouped: dict[str, list[Participant]] = defaultdict(list)

@@ -6,6 +6,7 @@ from database_timeline import previous_year
 from database_timeline import next_year
 from database_countries import code_to_country
 from database_participants import year_grouped as participants_by_year
+from database_participants import count_medals
 
 def run(year):
   print("Generating timeline/" + year + "/index")
@@ -72,9 +73,7 @@ def run(year):
 
 
   if year in participants_by_year:
-    medals = {"G": 0, "S": 0, "B": 0, "H": 0, "P": 0}
-    for participant in participants_by_year[year]:
-      medals[participant.medal] += 1
+    medals = count_medals(participants_by_year[year])
     html = html.replace("__AWARDS_STYLE__", "")
     html = html.replace("__GOLD__", str(medals["G"]))
     html = html.replace("__SILVER__", str(medals["S"]))
