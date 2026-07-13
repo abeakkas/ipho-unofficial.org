@@ -59,6 +59,7 @@ def run(year):
     html = html.replace("__P_COUNTRY__", yeardata.p_country)
   else:
     html = html.replace("__P_COUNTRY_STYLE__", "display: none;")
+    html = html.replace("__P_COUNTRY__", "")
 
   if yeardata.homepage:
     html = html.replace("__HOMEPAGE_STYLE__", "")
@@ -81,6 +82,10 @@ def run(year):
     html = html.replace("__HONOURABLE__", str(medals["H"]))
   else:
     html = html.replace("__AWARDS_STYLE__", "display: none;")
+    html = html.replace("__GOLD__", "")
+    html = html.replace("__SILVER__", "")
+    html = html.replace("__BRONZE__", "")
+    html = html.replace("__HONOURABLE__", "")
 
   html = templates.finalize(html, "../..")
   util.writefile("../timeline/" + year + "/index.html", html)
