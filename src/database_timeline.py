@@ -16,8 +16,9 @@ class Edition(NamedTuple):
 database: list[Edition] = []
 year_indexed: dict[str, Edition] = {}
 code_grouped: dict[str, list[Edition]] = defaultdict(list)
-previous_year: dict[str, str] = {}
-next_year: dict[str, str] = {}
+# Technically, years can be non-consecutive, and wow that actually happened in 2020.
+get_previous_year: dict[str, str] = {}
+get_next_year: dict[str, str] = {}
 
 with open("database/timeline.csv") as file:
   reader = csv.reader(file)
@@ -35,6 +36,6 @@ with open("database/timeline.csv") as file:
     if entry.code2:
       code_grouped[entry.code2].append(entry)
     if prev != "":
-      previous_year[entry.year] = prev
-      next_year[prev] = entry.year
+      get_previous_year[entry.year] = prev
+      get_next_year[prev] = entry.year
     prev = entry.year

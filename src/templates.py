@@ -1,6 +1,8 @@
 import config
 import os
 import util
+from database_participants import last_year
+from database_participants import next_year
 from database_timeline import year_indexed as editions_by_year
 
 def get(path, templates={}):
@@ -27,10 +29,10 @@ def set_headers(html, type):
     side = side.replace("__HIGHLIGHT_SEARCH__", "")
     side = side.replace("__HIGHLIGHT_HALL_OF_FAME__", "")
     html = html.replace("__HEADER_SIDE__", side)
-  html = html.replace("__HEADER_PREVIOUS_YEAR__", config.previous_year)
-  html = html.replace("__HEADER_PREVIOUS_YEAR_HOMEPAGE__", editions_by_year[config.previous_year].homepage)
-  html = html.replace("__HEADER_NEXT_YEAR__", config.next_year)
-  html = html.replace("__HEADER_NEXT_YEAR_HOMEPAGE__", editions_by_year[config.next_year].homepage)
+  html = html.replace("__HEADER_PREVIOUS_YEAR__", last_year)
+  html = html.replace("__HEADER_PREVIOUS_YEAR_HOMEPAGE__", editions_by_year[last_year].homepage)
+  html = html.replace("__HEADER_NEXT_YEAR__", next_year)
+  html = html.replace("__HEADER_NEXT_YEAR_HOMEPAGE__", editions_by_year[next_year].homepage)
   html = html.replace("__FOOTER__", get("footer"))
   return html
 

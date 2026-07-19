@@ -1,7 +1,7 @@
-import config
 import templates
 import util
 from database_countries import code_to_country
+from database_participants import next_year
 from database_timeline import database as editions
 
 def monospace_date(date):
@@ -38,7 +38,7 @@ def run():
     else:
       rowhtml = rowhtml.replace("__CODE2_STYLE__", "display: none;")
       rowhtml = rowhtml.replace("__CODE2__", ".") # Google crawler fix
-    if int(row.year) <= int(config.next_year) + 2:
+    if int(row.year) <= int(next_year) + 2:
       # Reverse list
       tablehtml = rowhtml + tablehtml
     else:

@@ -3,6 +3,7 @@ from collections import defaultdict
 from enum import Enum
 from typing import NamedTuple
 from database_countries import code_to_country
+from database_timeline import get_next_year
 
 class Medal(str, Enum):
   GOLD = "G"
@@ -51,3 +52,7 @@ with open("database/participants.csv") as file:
     database.append(entry)
     code_grouped[entry.code].append(entry)
     year_grouped[entry.year].append(entry)
+
+last_year = max(year_grouped, key=int)
+assert last_year in get_next_year, "Next year doesn't exist in timeline!"
+next_year = get_next_year[last_year]

@@ -4,8 +4,8 @@ import util
 from database_countries import code_to_country
 from database_participants import year_grouped as participants_by_year
 from database_timeline import year_indexed as editions_by_year
-from database_timeline import previous_year
-from database_timeline import next_year
+from database_timeline import get_previous_year
+from database_timeline import get_next_year
 
 def run(year):
   print("Generating timeline/" + year + "/individual")
@@ -16,15 +16,15 @@ def run(year):
   html = html.replace("__NUMBER__", yeardata.number)
   html = html.replace("__ORDINAL__", util.ordinal(yeardata.number))
 
-  if year in previous_year:
-    html = html.replace("__PREVIOUS_YEAR__", previous_year[year])
+  if year in get_previous_year:
+    html = html.replace("__PREVIOUS_YEAR__", get_previous_year[year])
     html = html.replace("__PREVIOUS_YEAR_STYLE__", "")
   else:
     html = html.replace("__PREVIOUS_YEAR_STYLE__", "display: none;")
     html = html.replace("__PREVIOUS_YEAR__", ".") # Google crawler fix
 
-  if year in next_year:
-    html = html.replace("__NEXT_YEAR__", next_year[year])
+  if year in get_next_year:
+    html = html.replace("__NEXT_YEAR__", get_next_year[year])
     html = html.replace("__NEXT_YEAR_STYLE__", "")
   else:
     html = html.replace("__NEXT_YEAR_STYLE__", "display: none;")
