@@ -12,16 +12,18 @@ You can generate individual pages with scripts as well.
 python3 timeline_year.py 2024
 ```
 
-After adding a new year increment the `config.py` counters.
+## How to maintain
 
-Run validate.py to check for database issues:
-```
-python3 validate.py
-```
+After every competition:
+- Pull the rankings/medals from the official website and add to `archive` folder
+- Update `participants.csv` using the rankings data
+- Pull that year's minutes document from IPhO official website and add it to `templates/minutes`
+- Update `timeline.csv` using the minutes
+- Run `main.py` and `validate.py`
 
 ## Database format
 
-If you change the database structure update `templates/search/search.js` script as well.
+> If you change the database structure update `templates/search/search.js` script as well.
 
 ##### database/participants.csv:
 * Columns: year, rank, name, country-code, medal, theoretical, experimental, total, website
@@ -41,6 +43,11 @@ If you change the database structure update `templates/search/search.js` script 
 
 ##### database/2020.csv:
 * Columns: rank, name, country-code, medal, website
+
+##### Run validate.py to check for database issues:
+```
+python3 validate.py
+```
 
 ## Notes
 * Fahim Tajwar@2017 and Mohammad Fahim Tajwar@2014 from Bangladesh are not the same person
