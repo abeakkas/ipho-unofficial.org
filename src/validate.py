@@ -2,11 +2,14 @@ import sys
 from database_participants import database
 from database_participants import year_grouped
 
+# How many problems to print per check before truncating the rest
+LIMIT = 10
+
 def check_score_rank_consistency():
   """
   Check if someone with a higher score is below in rank than someone else.
   """
-  problems = []
+  n = 0
   for year in year_grouped:
     if not year_grouped[year][0].total:
       continue
@@ -18,15 +21,21 @@ def check_score_rank_consistency():
       rank = int(row.rank)
       score = float(row.total)
       if rank < last_rank:
-        problems.append(f"Rank should not decrease: {row}")
+        n += 1
+        if n <= LIMIT:
+          print(f"Rank should not decrease: {row}")
       if score > last_score or (score == last_score and rank != last_rank):
-        problems.append(f"Row should have higher rank: {row}")
+        n += 1
+        if n <= LIMIT:
+          print(f"Row should have higher rank: {row}")
       last_rank = rank
       last_score = score
-  return problems
+  if n > LIMIT:
+    print(f"... and {n - LIMIT} more")
+  return n
 
 def check_score_sums():
-  problems = []
+  n = 0
   for year in year_grouped:
     for row in year_grouped[year]:
       if not row.theoretical or not row.experimental or not row.total:
@@ -35,33 +44,44 @@ def check_score_sums():
       ex = float(row.experimental)
       to = float(row.total)
       if abs(th + ex - to) > .0001:
-        problems.append(f"Points don't add up: {row}")
-  return problems
+        n += 1
+        if n <= LIMIT:
+          print(f"Points don't add up: {row}")
+  if n > LIMIT:
+    print(f"... and {n - LIMIT} more")
+  return n
 
 def check_score_precision():
-  problems = []
+  n = 0
   for year in year_grouped:
     for row in year_grouped[year]:
       for score in [row.theoretical, row.experimental, row.total]:
         if score and ("." not in score or len(score.split(".")[1]) != 2):
-          problems.append(
-            "Score precision should be two digits after decimal:\n"
-            f"{score} in {row}")
-  return problems
+          n += 1
+          if n <= LIMIT:
+            print("Score precision should be two digits after decimal:")
+            print(f"{score} in {row}")
+  if n > LIMIT:
+    print(f"... and {n - LIMIT} more")
+  return n
 
 def check_combining_characters():
-  problems = []
+  n = 0
   for row in database:
     for c in row.name:
       if 768 <= ord(c) < 880:
-        problems.append(
-          f"Combining character {c} detected in {row}\n"
-          "Please replace with a single character. See unicodedata.normalize")
+        n += 1
+        if n <= LIMIT:
+          print(f"Combining character {c} detected in {row}")
+          print("Please replace with a single character. See unicodedata.normalize")
     if '\xa0' in row.name:
-      problems.append(
-        f"Non-breaking space \\xa0 detected in {row}\n"
-        "Please replace with a regular space")
-  return problems
+      n += 1
+      if n <= LIMIT:
+        print(f"Non-breaking space \\xa0 detected in {row}")
+        print("Please replace with a regular space")
+  if n > LIMIT:
+    print(f"... and {n - LIMIT} more")
+  return n
 
 checks = [
   check_score_rank_consistency,
@@ -70,27 +90,14 @@ checks = [
   check_combining_characters,
 ]
 
-# How many problems to print per check before truncating the rest
-LIMIT = 10
-
 def run():
   total = 0
   for check in checks:
-    problems = check()
-    total += len(problems)
-    for problem in problems[:LIMIT]:
-      print(problem)
-    if len(problems) > LIMIT:
-      print(f"... and {len(problems) - LIMIT} more from {check.__name__}")
-    if problems:
-      print()
+    total += check()
 
-  if total:
-    print(f"{total} problem(s) found.")
-    return 1
-  else:
+  if not total:
     print("All checks passed.")
-    return 0
+  return 1 if total else 0
 
 if __name__ == "__main__":
   sys.exit(run())
