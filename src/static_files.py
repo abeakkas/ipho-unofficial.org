@@ -1,11 +1,10 @@
-import subprocess
+import shutil
 
 def run():
   print("Copying static files")
-  subprocess.Popen("cp -r ./templates/img ../", shell=True)
-  subprocess.Popen("cp -r ./templates/css ../", shell=True)
-  subprocess.Popen("cp -r ./templates/minutes ../", shell=True)
+  shutil.copytree("templates/img", "../img", dirs_exist_ok=True)
+  shutil.copytree("templates/css", "../css", dirs_exist_ok=True)
+  shutil.copytree("templates/minutes", "../minutes", dirs_exist_ok=True)
 
 if __name__ == "__main__":
   run()
-
