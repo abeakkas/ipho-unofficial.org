@@ -877,5 +877,5 @@ diacritics_map = {
 }
 
 def asciify(s):
-    return "".join(diacritics_map[c] if c in diacritics_map else c for c in s)
+  return "".join(diacritics_map[c] if c in diacritics_map else c for c in s)
 

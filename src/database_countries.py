@@ -18,7 +18,7 @@ with open("database/countries.csv") as file:
   prev = ""
   for row in reader:
     assert len(row) == 4, "Country row error: {}".format(row)
-    entry = Country(row[0], row[1], row[2], bool(row[3]))
+    entry = Country(row[0], row[1], row[2], row[3] != "")
 
     database.append(entry)
     code_indexed[entry.code] = entry

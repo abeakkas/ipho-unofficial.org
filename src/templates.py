@@ -1,18 +1,17 @@
 import config
 import os
 import util
+from functools import cache
 from database_participants import last_year
 from database_participants import next_year
 from database_timeline import year_indexed as editions_by_year
 
-def get(path, templates={}):
+@cache
+def get(path):
   """
   Load HTML from file and return as string
-  templates is used for memoization
   """
-  if path not in templates:
-    templates[path] = util.readfile("templates/" + path + ".html")
-  return templates[path]
+  return util.readfile("templates/" + path + ".html")
 
 def set_headers(html, type):
   """

@@ -1,10 +1,7 @@
 import os
 
 def makedirs(path):
-  try:
-    os.makedirs(path)
-  except OSError:
-    pass
+  os.makedirs(path, exist_ok=True)
 
 def readfile(path):
   with open(path, 'r') as file:

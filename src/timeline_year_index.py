@@ -68,9 +68,10 @@ def run(year):
     html = html.replace("__HOMEPAGE_STYLE__", "display: none;")
     html = html.replace("__HOMEPAGE__", ".") # Google crawler fix
 
-  if not templates.hasminutes(year):
+  if templates.hasminutes(year):
+    html = html.replace("__MINUTES_STYLE__", "")
+  else:
     html = html.replace("__MINUTES_STYLE__", "display: none;")
-  html = html.replace("__MINUTES_STYLE__", "")
 
 
   if year in participants_by_year:
