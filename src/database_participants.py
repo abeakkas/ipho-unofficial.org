@@ -15,6 +15,7 @@ class Medal(str, Enum):
 class Participant(NamedTuple):
   year: str
   rank: str
+  rank_geq: bool
   name: str
   code: str
   medal: Medal
@@ -22,7 +23,6 @@ class Participant(NamedTuple):
   experimental: str
   total: str
   website: str
-  rank_geq: bool
 
 def count_medals(participants: list[Participant]) -> dict[Medal, int]:
   counts = {m: 0 for m in Medal}
@@ -38,16 +38,17 @@ with open("database/participants.csv") as file:
   reader = csv.reader(file)
   for row in reader:
     assert len(row) == 9, f"Expecting 9 elements per row: {row}"
+    year, rank, name, code, medal, theoretical, experimental, total, website = row
 
-    rank_geq = False
-    if row[1][:2] == ">=":
-      rank_geq = True
-      row[1] = row[1][2:]
+    rank_geq = rank.startswith(">=")
+    if rank_geq:
+      rank = rank.removeprefix(">=")
 
-    if row[3] != "" and row[3] not in code_to_country:
+    if code != "" and code not in code_to_country:
       raise Exception(f"Participant database is corrupted! Row: {row}")
 
-    entry = Participant(*row[:4], Medal(row[4]), *row[5:], rank_geq)
+    entry = Participant(year, rank, rank_geq, name, code, Medal(medal),
+                        theoretical, experimental, total, website)
 
     database.append(entry)
     code_grouped[entry.code].append(entry)

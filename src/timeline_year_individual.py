@@ -42,7 +42,8 @@ def run(year):
     for row in participants_by_year[year]:
       rowhtml = templates.get("timeline/year/individual_row")
       if row.code == "":
-        rowhtml = rowhtml.replace("__CODE__", "TUR") # Yup, this is my hack
+        # Unknown country: filler code keeps the link path valid; name is hidden.
+        rowhtml = rowhtml.replace("__CODE__", "TUR")
         rowhtml = rowhtml.replace("__COUNTRY__", "")
       else:
         rowhtml = rowhtml.replace("__CODE__", row.code)

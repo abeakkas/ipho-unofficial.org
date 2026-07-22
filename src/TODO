@@ -1,5 +1,6 @@
-- Switch to {} formatting.
-- Check Windows compatibility
+- Switch to {} formatting
+- Revise country list, original was taken from IMO website
+- Check Windows build compatibility
 - Move common scripts to a separate file
 - Create a separate category for the first IPhO medals
 - Add a team results page like IMO

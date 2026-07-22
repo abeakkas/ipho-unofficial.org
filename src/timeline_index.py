@@ -44,6 +44,7 @@ def run():
     else:
       upcominghtml = rowhtml + upcominghtml
       upcoming_row_ctr += 1
+    # IPhO 2020 was a special event and is not listed in timeline database.
     if int(row.year) == 2019:
       tablehtml = templates.get("timeline/index_row_2020") + tablehtml
 

@@ -22,7 +22,7 @@ def set_headers(html, type):
     html = html.replace("__HEADER_TOP__", get("header_top"))
   else:
     side = get("header_side")
-    side = side.replace("__HIGHLIGHT_{}__".format(type.upper()), "highlight")
+    side = side.replace(f"__HIGHLIGHT_{type.upper()}__", "highlight")
     side = side.replace("__HIGHLIGHT_TIMELINE__", "")
     side = side.replace("__HIGHLIGHT_COUNTRIES__", "")
     side = side.replace("__HIGHLIGHT_SEARCH__", "")

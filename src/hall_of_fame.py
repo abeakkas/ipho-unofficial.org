@@ -80,7 +80,7 @@ def _print_bin(bin, medals):
     if row.code == bin[0].code:
       year_html = year_html.replace("__YEAR_TEXT__", row.year)
     else:
-      year_html = year_html.replace("__YEAR_TEXT__", "{}({})".format(row.year, row.code))
+      year_html = year_html.replace("__YEAR_TEXT__", f"{row.year}({row.code})")
     year_html = year_html.replace("__TITLE__", "Appeared as " + row.name)
     participations += year_html
 

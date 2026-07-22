@@ -7,11 +7,11 @@ class Edition(NamedTuple):
   year: str
   date: str
   code: str
+  code2: str
   city: str
   homepage: str
   p_country: str
   p_participant: str
-  code2: str
 
 database: list[Edition] = []
 year_indexed: dict[str, Edition] = {}
@@ -24,11 +24,16 @@ with open("database/timeline.csv") as file:
   reader = csv.reader(file)
   prev = ""
   for row in reader:
-    assert len(row) == 8, "Timeline row error: {}".format(row)
-    code2 = ""
-    if "&" in row[3]:
-      row[3], code2 = row[3].split("&")
-    entry = Edition(*row, code2)
+    assert len(row) == 8, f"Timeline row error: {row}"
+    number, year, date, code, city, homepage, p_country, p_participant = row
+
+    if "&" in code:
+      code, code2 = code.split("&")
+    else:
+      code2 = ""
+
+    entry = Edition(number, year, date, code, code2, city, homepage,
+                    p_country, p_participant)
 
     database.append(entry)
     year_indexed[entry.year] = entry
