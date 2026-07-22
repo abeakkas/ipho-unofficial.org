@@ -58,14 +58,14 @@ def _find_recurring_participations():
     merge(row1, row2)
 
   # Return unique lists.
-  return list({id(bin): bin for bin in participant_bin.values()}.values())
+  return list({id(group): group for group in participant_bin.values()}.values())
 
-def _print_bin(bin, medals):
+def _print_group(group, medals):
   participations = ""
-  for row in sorted(bin, key=lambda row: row.year):
+  for row in sorted(group, key=lambda row: row.year):
     if participations:
       participations += ", "
-    if row.code == bin[0].code:
+    if row.code == group[0].code:
       year_text = row.year
     else:
       year_text = f"{row.year}({row.code})"
@@ -80,9 +80,9 @@ def _print_bin(bin, medals):
   return render(
     "hall_of_fame/index_row",
     root="..",
-    name=bin[0].name,
-    code=bin[0].code,
-    country=code_to_country[bin[0].code],
+    name=group[0].name,
+    code=group[0].code,
+    country=code_to_country[group[0].code],
     gold=str(medals[Medal.GOLD]),
     silver=str(medals[Medal.SILVER]),
     bronze=str(medals[Medal.BRONZE]),
@@ -96,15 +96,15 @@ def run():
   bins = _find_recurring_participations()
 
   # Sort by medal quality, best is first
-  def quality(bin):
-    medals = count_medals(bin)
+  def quality(group):
+    medals = count_medals(group)
     return (
       -medals[Medal.GOLD],
       -medals[Medal.SILVER],
       -medals[Medal.BRONZE],
       -medals[Medal.HONOURABLE],
-      bin[0].year,
-      bin[0].name,
+      group[0].year,
+      group[0].name,
     )
   bins = sorted(bins, key=quality)
 
@@ -115,21 +115,21 @@ def run():
     # Cutoff at 1 gold, 1 silver, 1 bronze
     if medals[Medal.GOLD] < 2 and medals[Medal.SILVER] < 2 and medals[Medal.BRONZE] < 1:
       break
-    tablehtml += _print_bin(bins[i], medals)
+    tablehtml += _print_group(bins[i], medals)
     i += 1
   bins = bins[i:]
 
   # Sort by total number of medals, best is first
-  def quantity(bin):
-    medals = count_medals(bin)
+  def quantity(group):
+    medals = count_medals(group)
     return (
       -(medals[Medal.GOLD] + medals[Medal.SILVER] + medals[Medal.BRONZE]),
       -medals[Medal.GOLD],
       -medals[Medal.SILVER],
       -medals[Medal.BRONZE],
       -medals[Medal.HONOURABLE],
-      bin[0].year,
-      bin[0].name,
+      group[0].year,
+      group[0].name,
     )
   bins = sorted(bins, key=quantity)
 
@@ -140,7 +140,7 @@ def run():
     # Cutoff at 3 medals
     if medals[Medal.GOLD] + medals[Medal.SILVER] + medals[Medal.BRONZE] < 3:
       break
-    table2html += _print_bin(bins[i], medals)
+    table2html += _print_group(bins[i], medals)
     i += 1
 
   html = render(

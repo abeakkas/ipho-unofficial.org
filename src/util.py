@@ -11,9 +11,6 @@ def writefile(path, content):
   with open(path, 'w') as file:
     return file.write(content)
 
-def copyfile(_from, to):
-  writefile(to, readfile(_from))
-
 def ordinal(number: str) -> str:
   if number[-2:] in ("11", "12", "13"):
     return "th"

@@ -25,12 +25,12 @@ def _fill_header_footer(html, root, path):
   """
   Fill header/footer. Nav highlight comes from path's first segment.
   """
-  type = path.split("/")[0]
+  section = path.split("/")[0]
   side = Template(_load("header_side", root)).substitute(
-    highlight_timeline="highlight" if type == "timeline" else "",
-    highlight_countries="highlight" if type == "countries" else "",
-    highlight_search="highlight" if type == "search" else "",
-    highlight_hall_of_fame="highlight" if type == "hall_of_fame" else "",
+    highlight_timeline="highlight" if section == "timeline" else "",
+    highlight_countries="highlight" if section == "countries" else "",
+    highlight_search="highlight" if section == "search" else "",
+    highlight_hall_of_fame="highlight" if section == "hall_of_fame" else "",
     header_previous_year=last_year,
     header_previous_year_homepage=editions_by_year[last_year].homepage,
     header_next_year=next_year,

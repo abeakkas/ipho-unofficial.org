@@ -1,7 +1,10 @@
 import sys
 import util
+from collections import defaultdict
 from database_countries import code_to_country
 from database_participants import year_grouped as participants_by_year
+from database_participants import count_medals
+from database_participants import Medal
 from database_timeline import year_indexed as editions_by_year
 from database_timeline import get_previous_year
 from database_timeline import get_next_year
@@ -27,16 +30,16 @@ def run(year):
 
   medals = {}
   if year in participants_by_year:
-    for row in participants_by_year[year]:
-      if row.code == "":
+    by_code = defaultdict(list)
+    for participant in participants_by_year[year]:
+      if participant.code == "":
         continue
-      if row.code not in medals:
-        medals[row.code] = {"G": 0, "S": 0, "B": 0, "H": 0, "P": 0}
-      medals[row.code][row.medal] += 1
+      by_code[participant.code].append(participant)
+    medals = {code: count_medals(participants) for code, participants in by_code.items()}
 
   def keyfn(code):
     m = medals[code]
-    return (-m["G"], -m["S"], -m["B"], -m["H"], code)
+    return (-m[Medal.GOLD], -m[Medal.SILVER], -m[Medal.BRONZE], -m[Medal.HONOURABLE], code)
 
   sortedcodes = sorted(medals, key = keyfn)
 
@@ -59,10 +62,10 @@ def run(year):
         code=code,
         country=code_to_country[code],
         rank=rank,
-        gold=str(medals[code]["G"]),
-        silver=str(medals[code]["S"]),
-        bronze=str(medals[code]["B"]),
-        honourable=str(medals[code]["H"]),
+        gold=str(medals[code][Medal.GOLD]),
+        silver=str(medals[code][Medal.SILVER]),
+        bronze=str(medals[code][Medal.BRONZE]),
+        honourable=str(medals[code][Medal.HONOURABLE]),
       )
 
   html = render(
