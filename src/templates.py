@@ -17,17 +17,16 @@ def set_headers(html, type):
   """
   Fill header and footer in given template string
   type is one of ["homepage", "timeline", "countries", "search", "hall_of_fame", ""]
+  homepage has its own inline header (no sidebar), so the header_side splice
+  below is a no-op for it (no ${header_side} placeholder to replace).
   """
-  if type == "homepage":
-    html = html.replace("${header_top}", get("header_top"))
-  else:
-    side = get("header_side")
-    side = side.replace(f"${{highlight_{type}}}", "highlight")
-    side = side.replace("${highlight_timeline}", "")
-    side = side.replace("${highlight_countries}", "")
-    side = side.replace("${highlight_search}", "")
-    side = side.replace("${highlight_hall_of_fame}", "")
-    html = html.replace("${header_side}", side)
+  side = get("header_side")
+  side = side.replace(f"${{highlight_{type}}}", "highlight")
+  side = side.replace("${highlight_timeline}", "")
+  side = side.replace("${highlight_countries}", "")
+  side = side.replace("${highlight_search}", "")
+  side = side.replace("${highlight_hall_of_fame}", "")
+  html = html.replace("${header_side}", side)
   html = html.replace("${header_previous_year}", last_year)
   html = html.replace("${header_previous_year_homepage}", editions_by_year[last_year].homepage)
   html = html.replace("${header_next_year}", next_year)
@@ -69,10 +68,10 @@ def hasminutes(year):
   return os.path.exists(f"templates/minutes/{year}.pdf")
 
 medal = {
-  "G": get("medal_gold"),
-  "S": get("medal_silver"),
-  "B": get("medal_bronze"),
-  "H": get("medal_honourable"),
+  "G": util.readfile("templates/medal_gold.html"),
+  "S": util.readfile("templates/medal_silver.html"),
+  "B": util.readfile("templates/medal_bronze.html"),
+  "H": util.readfile("templates/medal_honourable.html"),
   "P": "",
 }
 
