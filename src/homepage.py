@@ -6,7 +6,6 @@ def run():
   html = render(
     "homepage",
     root=".",
-    section="homepage",
   )
   util.writefile("../index.html", html)
 

@@ -8,7 +8,6 @@ def run():
   html = render(
     "404",
     root="",
-    section="",
   )
   util.writefile("../404.html", html)
 

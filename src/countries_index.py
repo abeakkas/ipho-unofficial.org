@@ -49,7 +49,6 @@ def run():
   html = render(
     "countries/index",
     root="..",
-    section="countries",
     table=tablehtml,
   )
   util.writefile("../countries/index.html", html)

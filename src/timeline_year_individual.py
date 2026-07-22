@@ -68,7 +68,7 @@ def run(year):
         country=country,
         name=name,
         rank=("&ge;" if row.rank_geq else "") + row.rank,
-        medal=templates.medal[row.medal],
+        medal=templates.medal(row.medal, root="../.."),
         points_style=row_points_style,
         theoretical=theoretical,
         experimental=experimental,
@@ -80,7 +80,6 @@ def run(year):
   html = render(
     "timeline/year/individual",
     root="../..",
-    section="timeline",
     year=year,
     number=yeardata.number,
     ordinal=util.ordinal(yeardata.number),

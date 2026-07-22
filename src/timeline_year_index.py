@@ -78,7 +78,6 @@ def run(year):
   html = render(
     "timeline/year/index",
     root="../..",
-    section="timeline",
     year=year,
     number=yeardata.number,
     ordinal=util.ordinal(yeardata.number),

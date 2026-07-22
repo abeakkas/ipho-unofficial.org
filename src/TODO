@@ -1,4 +1,3 @@
-- Switch to {} formatting
 - Revise country list, original was taken from IMO website
 - Check Windows build compatibility
 - Move common scripts to a separate file

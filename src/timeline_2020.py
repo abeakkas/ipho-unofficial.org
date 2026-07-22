@@ -27,7 +27,7 @@ def run():
       country=code_to_country[participant.code],
       name=name,
       rank=participant.rank,
-      medal=templates.medal[participant.medal],
+      medal=templates.medal(participant.medal, root="../.."),
       points_style="display: none;",
       theoretical="",
       experimental="",
@@ -37,7 +37,6 @@ def run():
   html = render(
     "timeline/2020/index",
     root="../..",
-    section="timeline",
     table=tablehtml,
   )
   util.writefile("../timeline/2020/index.html", html)

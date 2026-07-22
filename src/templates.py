@@ -2,76 +2,70 @@ import config
 import os
 import util
 from functools import cache
+from string import Template
 from database_participants import last_year
 from database_participants import next_year
+from database_participants import Medal
 from database_timeline import year_indexed as editions_by_year
 
 @cache
-def get(path):
+def _load(path, root):
   """
-  Load HTML from file and return as string
+  Load HTML from file and resolve root/index/html_ext/webmaster substitutions.
   """
-  return util.readfile("templates/" + path + ".html")
+  html = util.readfile("templates/" + path + ".html")
+  return Template(html).safe_substitute(
+    root=root,
+    index="." if config.github else "index.html",
+    html_ext="" if config.github else ".html",
+    webmaster=config.webmaster_email,
+  )
 
-def set_headers(html, type):
+def _fill_header_footer(html, root, path):
   """
-  Fill header and footer in given template string
-  type is one of ["homepage", "timeline", "countries", "search", "hall_of_fame", ""]
-  homepage has its own inline header (no sidebar), so the header_side splice
-  below is a no-op for it (no ${header_side} placeholder to replace).
+  Fill header/footer. Nav highlight comes from path's first segment.
   """
-  side = get("header_side")
-  side = side.replace(f"${{highlight_{type}}}", "highlight")
-  side = side.replace("${highlight_timeline}", "")
-  side = side.replace("${highlight_countries}", "")
-  side = side.replace("${highlight_search}", "")
-  side = side.replace("${highlight_hall_of_fame}", "")
-  html = html.replace("${header_side}", side)
-  html = html.replace("${header_previous_year}", last_year)
-  html = html.replace("${header_previous_year_homepage}", editions_by_year[last_year].homepage)
-  html = html.replace("${header_next_year}", next_year)
-  html = html.replace("${header_next_year_homepage}", editions_by_year[next_year].homepage)
-  html = html.replace("${footer}", get("footer"))
-  return html
+  type = path.split("/")[0]
+  side = Template(_load("header_side", root)).substitute(
+    highlight_timeline="highlight" if type == "timeline" else "",
+    highlight_countries="highlight" if type == "countries" else "",
+    highlight_search="highlight" if type == "search" else "",
+    highlight_hall_of_fame="highlight" if type == "hall_of_fame" else "",
+    header_previous_year=last_year,
+    header_previous_year_homepage=editions_by_year[last_year].homepage,
+    header_next_year=next_year,
+    header_next_year_homepage=editions_by_year[next_year].homepage,
+  )
 
-def finalize(html, root):
-  """
-  Fill URL templates
-  root is the relative path of the root directory of website
-  See the setting config.github
-  """
-  html = html.replace("${root}", root)
-  if config.github:
-    html = html.replace("${index}", ".")
-    html = html.replace("${html_ext}", "")
-  else:
-    html = html.replace("${index}", "index.html")
-    html = html.replace("${html_ext}", ".html")
-  html = html.replace("${webmaster}", config.webmaster_email)
-  return html
+  return Template(html).safe_substitute(
+    header_side=side,
+    header_previous_year=last_year,
+    header_previous_year_homepage=editions_by_year[last_year].homepage,
+    header_next_year=next_year,
+    header_next_year_homepage=editions_by_year[next_year].homepage,
+    footer=_load("footer", root),
+  )
 
-def render(path, *, root, section=None, **values):
+def render(path, *, root, **substitutions):
   """
-  Render a template to final HTML.
-  Fills chrome (when section is given), body values, then URL/root tokens.
-  Transitional: templates use ${token} syntax, but still filled via replace; will switch to string.Template.substitute.
+  Render a template to the final HTML. All substitutions must be complete.
   """
-  html = get(path)
-  if section is not None:
-    html = set_headers(html, section)
-  for key, value in values.items():
-    html = html.replace(f"${{{key}}}", value)
-  html = finalize(html, root)
-  return html
+  html = _load(path, root)
+  if "${footer}" in html:
+    html = _fill_header_footer(html, root, path)
+  return Template(html).substitute(**substitutions)
 
 def hasminutes(year):
   return os.path.exists(f"templates/minutes/{year}.pdf")
 
-medal = {
-  "G": util.readfile("templates/medal_gold.html"),
-  "S": util.readfile("templates/medal_silver.html"),
-  "B": util.readfile("templates/medal_bronze.html"),
-  "H": util.readfile("templates/medal_honourable.html"),
-  "P": "",
-}
+def medal(kind, *, root):
+  paths = {
+    Medal.GOLD: "medal_gold",
+    Medal.SILVER: "medal_silver",
+    Medal.BRONZE: "medal_bronze",
+    Medal.HONOURABLE: "medal_honourable",
+  }
+  if kind not in paths:
+    return ""
+  return _load(paths[kind], root)
 

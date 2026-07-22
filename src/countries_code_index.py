@@ -43,6 +43,7 @@ def run(code):
           "countries/code/index_host_homepage",
           root="../..",
           link=yeardata.homepage,
+          year=yeardata.year,
         )
       else:
         homepagehtml = ""
@@ -62,7 +63,6 @@ def run(code):
   html = render(
     "countries/code/index",
     root="../..",
-    section="countries",
     code=code,
     country=codedata.country,
     contact_style=contact_style,

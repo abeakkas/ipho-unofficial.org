@@ -45,7 +45,7 @@ def run(code):
         name=name,
         rank=("&ge;" if participant.rank_geq else "") + participant.rank,
         year=participant.year,
-        medal=templates.medal[participant.medal],
+        medal=templates.medal(participant.medal, root="../.."),
         css_class="" if lastyear == participant.year else "doubleTopLine",
       )
       if lastyear == participant.year:
@@ -62,7 +62,6 @@ def run(code):
   html = render(
     "countries/code/individual",
     root="../..",
-    section="countries",
     code=code,
     country=countries_by_code[code].country,
     previous_code=previous_code_value,

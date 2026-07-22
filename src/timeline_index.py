@@ -62,7 +62,6 @@ def run():
   html = render(
     "timeline/index",
     root="..",
-    section="timeline",
     table=tablehtml,
     upcoming=upcominghtml,
   )

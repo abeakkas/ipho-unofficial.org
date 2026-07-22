@@ -146,7 +146,6 @@ def run():
   html = render(
     "hall_of_fame/index",
     root="..",
-    section="hall_of_fame",
     table=tablehtml,
     table2=table2html,
   )

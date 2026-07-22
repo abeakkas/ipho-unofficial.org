@@ -12,7 +12,6 @@ def run():
   html = render(
     "search/index",
     root="..",
-    section="search",
   )
   util.writefile("../search/index.html", html)
 
