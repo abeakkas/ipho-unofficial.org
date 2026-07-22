@@ -1,34 +1,29 @@
 import sys
-import templates
 import util
 from database_countries import code_to_country
 from database_participants import year_grouped as participants_by_year
 from database_timeline import year_indexed as editions_by_year
 from database_timeline import get_previous_year
 from database_timeline import get_next_year
+from templates import render
 
 def run(year):
   print("Generating timeline/" + year + "/country")
-  html = templates.get("timeline/year/country")
-  html = templates.set_headers(html, "timeline")
   yeardata = editions_by_year[year]
-  html = html.replace("__YEAR__", year)
-  html = html.replace("__NUMBER__", yeardata.number)
-  html = html.replace("__ORDINAL__", util.ordinal(yeardata.number))
 
   if year in get_previous_year:
-    html = html.replace("__PREVIOUS_YEAR__", get_previous_year[year])
-    html = html.replace("__PREVIOUS_YEAR_STYLE__", "")
+    previous_year = get_previous_year[year]
+    previous_year_style = ""
   else:
-    html = html.replace("__PREVIOUS_YEAR_STYLE__", "display: none;")
-    html = html.replace("__PREVIOUS_YEAR__", ".") # Google crawler fix
+    previous_year = "." # Google crawler fix
+    previous_year_style = "display: none;"
 
   if year in get_next_year:
-    html = html.replace("__NEXT_YEAR__", get_next_year[year])
-    html = html.replace("__NEXT_YEAR_STYLE__", "")
+    next_year = get_next_year[year]
+    next_year_style = ""
   else:
-    html = html.replace("__NEXT_YEAR_STYLE__", "display: none;")
-    html = html.replace("__NEXT_YEAR__", ".") # Google crawler fix
+    next_year = "." # Google crawler fix
+    next_year_style = "display: none;"
 
   medals = {}
   if year in participants_by_year:
@@ -38,8 +33,6 @@ def run(year):
       if row.code not in medals:
         medals[row.code] = {"G": 0, "S": 0, "B": 0, "H": 0, "P": 0}
       medals[row.code][row.medal] += 1
-  else:
-    html = html.replace("__TABLE__", "<tr><td colspan=6>Results will be added once they are published on the official website.</td></tr>")
 
   def keyfn(code):
     m = medals[code]
@@ -47,27 +40,44 @@ def run(year):
 
   sortedcodes = sorted(medals, key = keyfn)
 
-  tablehtml = ""
-  prevcode = ""
-  prevrank = 0
-  for i, code in enumerate(sortedcodes):
-    rowhtml = templates.get("timeline/year/country_row")
-    rowhtml = rowhtml.replace("__CODE__", code)
-    rowhtml = rowhtml.replace("__COUNTRY__", code_to_country[code])
-    if prevcode != "" and keyfn(prevcode)[:-1] == keyfn(code)[:-1]:
-      rowhtml = rowhtml.replace("__RANK__", prevrank)
-    else:
-      rowhtml = rowhtml.replace("__RANK__", str(i + 1))
-      prevcode = code
-      prevrank = str(i + 1)
-    rowhtml = rowhtml.replace("__GOLD__", str(medals[code]["G"]))
-    rowhtml = rowhtml.replace("__SILVER__", str(medals[code]["S"]))
-    rowhtml = rowhtml.replace("__BRONZE__", str(medals[code]["B"]))
-    rowhtml = rowhtml.replace("__HONOURABLE__", str(medals[code]["H"]))
-    tablehtml += rowhtml
-  html = html.replace("__TABLE__", tablehtml)
+  if year not in participants_by_year:
+    tablehtml = "<tr><td colspan=6>Results will be added once they are published on the official website.</td></tr>"
+  else:
+    tablehtml = ""
+    prevcode = ""
+    prevrank = 0
+    for i, code in enumerate(sortedcodes):
+      if prevcode != "" and keyfn(prevcode)[:-1] == keyfn(code)[:-1]:
+        rank = prevrank
+      else:
+        rank = str(i + 1)
+        prevcode = code
+        prevrank = str(i + 1)
+      tablehtml += render(
+        "timeline/year/country_row",
+        root="../..",
+        code=code,
+        country=code_to_country[code],
+        rank=rank,
+        gold=str(medals[code]["G"]),
+        silver=str(medals[code]["S"]),
+        bronze=str(medals[code]["B"]),
+        honourable=str(medals[code]["H"]),
+      )
 
-  html = templates.finalize(html, "../..")
+  html = render(
+    "timeline/year/country",
+    root="../..",
+    section="timeline",
+    year=year,
+    number=yeardata.number,
+    ordinal=util.ordinal(yeardata.number),
+    previous_year=previous_year,
+    previous_year_style=previous_year_style,
+    next_year=next_year,
+    next_year_style=next_year_style,
+    table=tablehtml,
+  )
   util.writefile("../timeline/" + year + "/country.html", html)
 
 if __name__ == "__main__":

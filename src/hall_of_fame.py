@@ -1,4 +1,3 @@
-import templates
 import util
 from asciify import asciify
 from collections import defaultdict
@@ -6,6 +5,7 @@ from database_countries import code_to_country
 from database_participants import code_grouped as participants_by_code
 from database_participants import count_medals
 from database_participants import Medal
+from templates import render
 
 # Identities that algorithm can't find
 identity_overrides = [
@@ -61,30 +61,34 @@ def _find_recurring_participations():
   return list({id(bin): bin for bin in participant_bin.values()}.values())
 
 def _print_bin(bin, medals):
-  rowhtml = templates.get("hall_of_fame/index_row")
-  rowhtml = rowhtml.replace("__NAME__", bin[0].name)
-  rowhtml = rowhtml.replace("__CODE__", bin[0].code)
-  rowhtml = rowhtml.replace("__COUNTRY__", code_to_country[bin[0].code])
-
-  rowhtml = rowhtml.replace("__GOLD__", str(medals[Medal.GOLD]))
-  rowhtml = rowhtml.replace("__SILVER__", str(medals[Medal.SILVER]))
-  rowhtml = rowhtml.replace("__BRONZE__", str(medals[Medal.BRONZE]))
-  rowhtml = rowhtml.replace("__HONOURABLE__", str(medals[Medal.HONOURABLE]))
-
   participations = ""
   for row in sorted(bin, key=lambda row: row.year):
     if participations:
       participations += ", "
-    year_html = templates.get("hall_of_fame/index_participation_year").strip()
-    year_html = year_html.replace("__YEAR__", row.year)
     if row.code == bin[0].code:
-      year_html = year_html.replace("__YEAR_TEXT__", row.year)
+      year_text = row.year
     else:
-      year_html = year_html.replace("__YEAR_TEXT__", f"{row.year}({row.code})")
-    year_html = year_html.replace("__TITLE__", "Appeared as " + row.name)
-    participations += year_html
+      year_text = f"{row.year}({row.code})"
+    participations += render(
+      "hall_of_fame/index_participation_year",
+      root="..",
+      year=row.year,
+      year_text=year_text,
+      title="Appeared as " + row.name,
+    ).strip()
 
-  return rowhtml.replace("__PARTICIPATIONS__", participations)
+  return render(
+    "hall_of_fame/index_row",
+    root="..",
+    name=bin[0].name,
+    code=bin[0].code,
+    country=code_to_country[bin[0].code],
+    gold=str(medals[Medal.GOLD]),
+    silver=str(medals[Medal.SILVER]),
+    bronze=str(medals[Medal.BRONZE]),
+    honourable=str(medals[Medal.HONOURABLE]),
+    participations=participations,
+  )
 
 def run():
   print("Generating hall_of_fame")
@@ -104,9 +108,6 @@ def run():
     )
   bins = sorted(bins, key=quality)
 
-  html = templates.get("hall_of_fame/index")
-  html = templates.set_headers(html, "hall_of_fame")
-
   tablehtml = ""
   i = 0
   while i < len(bins):
@@ -117,8 +118,6 @@ def run():
     tablehtml += _print_bin(bins[i], medals)
     i += 1
   bins = bins[i:]
-
-  html = html.replace("__TABLE__", tablehtml)
 
   # Sort by total number of medals, best is first
   def quantity(bin):
@@ -144,9 +143,13 @@ def run():
     table2html += _print_bin(bins[i], medals)
     i += 1
 
-  html = html.replace("__TABLE2__", table2html)
-
-  html = templates.finalize(html, "..")
+  html = render(
+    "hall_of_fame/index",
+    root="..",
+    section="hall_of_fame",
+    table=tablehtml,
+    table2=table2html,
+  )
 
   # Apparently Google recommends dashes over underscores :/
   util.makedirs("../hall-of-fame")

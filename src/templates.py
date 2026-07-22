@@ -51,6 +51,23 @@ def finalize(html, root):
   html = html.replace("__WEBMASTER__", config.webmaster_email)
   return html
 
+# Value keys whose token isn't just __UPPERCASE__ (e.g. Python-keyword names).
+_TOKEN_ALIASES = {"css_class": "__CLASS__"}
+
+def render(path, *, root, section=None, **values):
+  """
+  Render a template to final HTML.
+  Fills chrome (when section is given), body values, then URL/root tokens.
+  Transitional: still fills __TOKEN__ via replace; will switch to ${token}.
+  """
+  html = get(path)
+  if section is not None:
+    html = set_headers(html, section)
+  for key, value in values.items():
+    html = html.replace(_TOKEN_ALIASES.get(key, f"__{key.upper()}__"), value)
+  html = finalize(html, root)
+  return html
+
 def hasminutes(year):
   return os.path.exists(f"templates/minutes/{year}.pdf")
 

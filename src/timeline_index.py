@@ -1,8 +1,8 @@
-import templates
 import util
 from database_countries import code_to_country
 from database_participants import next_year
 from database_timeline import database as editions
+from templates import render
 
 def monospace_date(date):
   if "-" not in date:
@@ -15,29 +15,36 @@ def monospace_date(date):
 
 def run():
   print("Generating timeline/index")
-  html = templates.get("timeline/index")
-  html = templates.set_headers(html, "timeline")
 
   tablehtml = ""
   upcominghtml = ""
   upcoming_row_ctr = 0
   for row in editions:
-    rowhtml = templates.get("timeline/index_row")
-    rowhtml = rowhtml.replace("__NUMBER__", row.number)
-    rowhtml = rowhtml.replace("__YEAR__", row.year)
-    rowhtml = rowhtml.replace("__DATE__", monospace_date(row.date))
-    rowhtml = rowhtml.replace("__CODE__", row.code)
-    rowhtml = rowhtml.replace("__CITY__", row.city)
-    rowhtml = rowhtml.replace("__COUNTRY__", code_to_country[row.code])
-    rowhtml = rowhtml.replace("__P_COUNTRY__", row.p_country)
-    rowhtml = rowhtml.replace("__P_PARTICIPANT__", row.p_participant)
     if row.code2:
-      rowhtml = rowhtml.replace("__CODE2__", row.code2)
-      rowhtml = rowhtml.replace("__COUNTRY2__", code_to_country[row.code2])
-      rowhtml = rowhtml.replace("__CODE2_STYLE__", "")
+      code2 = row.code2
+      country2 = code_to_country[row.code2]
+      code2_style = ""
     else:
-      rowhtml = rowhtml.replace("__CODE2_STYLE__", "display: none;")
-      rowhtml = rowhtml.replace("__CODE2__", ".") # Google crawler fix
+      code2 = "." # Google crawler fix
+      country2 = ""
+      code2_style = "display: none;"
+
+    rowhtml = render(
+      "timeline/index_row",
+      root="..",
+      number=row.number,
+      year=row.year,
+      date=monospace_date(row.date),
+      code=row.code,
+      city=row.city,
+      country=code_to_country[row.code],
+      p_country=row.p_country,
+      p_participant=row.p_participant,
+      code2=code2,
+      country2=country2,
+      code2_style=code2_style,
+    )
+
     if int(row.year) <= int(next_year) + 2:
       # Reverse list
       tablehtml = rowhtml + tablehtml
@@ -46,16 +53,19 @@ def run():
       upcoming_row_ctr += 1
     # IPhO 2020 was a special event and is not listed in timeline database.
     if int(row.year) == 2019:
-      tablehtml = templates.get("timeline/index_row_2020") + tablehtml
+      tablehtml = render("timeline/index_row_2020", root="..") + tablehtml
 
   # Append an empty row to preserve row parity between tables for styling purposes
   if upcoming_row_ctr % 2:
     upcominghtml = "<tr style=\"display:none;\"></tr>" + upcominghtml
 
-  html = html.replace("__TABLE__", tablehtml)
-  html = html.replace("__UPCOMING__", upcominghtml)
-
-  html = templates.finalize(html, "..")
+  html = render(
+    "timeline/index",
+    root="..",
+    section="timeline",
+    table=tablehtml,
+    upcoming=upcominghtml,
+  )
   util.writefile("../timeline/index.html", html)
 
 if __name__ == "__main__":

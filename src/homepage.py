@@ -1,11 +1,13 @@
-import templates
 import util
+from templates import render
 
 def run():
   print("Generating homepage")
-  html = templates.get("homepage")
-  html = templates.set_headers(html, "homepage")
-  html = templates.finalize(html, ".")
+  html = render(
+    "homepage",
+    root=".",
+    section="homepage",
+  )
   util.writefile("../index.html", html)
 
 if __name__ == "__main__":

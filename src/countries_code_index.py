@@ -1,5 +1,4 @@
 import sys
-import templates
 import util
 from database_countries import code_indexed as countries_by_code
 from database_countries import previous_code
@@ -7,68 +6,78 @@ from database_countries import next_code
 from database_participants import code_grouped as participants_by_code
 from database_participants import count_medals
 from database_timeline import code_grouped as editions_by_code
+from templates import render
 
 def run(code):
   print("Generating countries/" + code + "/index")
-  html = templates.get("countries/code/index")
-  html = templates.set_headers(html, "countries")
   codedata = countries_by_code[code]
 
-  html = html.replace("__CODE__", code)
-  html = html.replace("__COUNTRY__", codedata.country)
-
   if codedata.website != "":
-    html = html.replace("__CONTACT_STYLE__", "")
-    html = html.replace("__NATIONAL_SITE__", codedata.website)
-    if len(codedata.website) < 50:
-      html = html.replace("__NATIONAL_SITE_TEXT__", codedata.website)
-    else:
-      html = html.replace("__NATIONAL_SITE_TEXT__", codedata.website[0:50] + "...")
+    contact_style = ""
+    national_site = codedata.website
+    national_site_text = codedata.website if len(codedata.website) < 50 else codedata.website[0:50] + "..."
   else:
-    html = html.replace("__CONTACT_STYLE__", "display: none;")
-    html = html.replace("__NATIONAL_SITE__", ".") # Google crawler fix
+    contact_style = "display: none;"
+    national_site = "." # Google crawler fix
+    national_site_text = ""
 
   if code in previous_code:
-    html = html.replace("__PREVIOUS_CODE__", previous_code[code])
-    html = html.replace("__PREVIOUS_CODE_STYLE__", "")
+    previous_code_value = previous_code[code]
+    previous_code_style = ""
   else:
-    html = html.replace("__PREVIOUS_CODE_STYLE__", "display: none;")
-    html = html.replace("__PREVIOUS_CODE__", ".") # Google crawler fix
+    previous_code_value = "." # Google crawler fix
+    previous_code_style = "display: none;"
 
   if code in next_code:
-    html = html.replace("__NEXT_CODE__", next_code[code])
-    html = html.replace("__NEXT_CODE_STYLE__", "")
+    next_code_value = next_code[code]
+    next_code_style = ""
   else:
-    html = html.replace("__NEXT_CODE_STYLE__", "display: none;")
-    html = html.replace("__NEXT_CODE__", ".") # Google crawler fix
+    next_code_value = "." # Google crawler fix
+    next_code_style = "display: none;"
 
   if code in editions_by_code:
     hostshtml = ""
     for yeardata in editions_by_code[code]:
-      hosthtml = templates.get("countries/code/index_host")
-      if yeardata.city:
-        hosthtml = hosthtml.replace("__CITY__", " - " + yeardata.city)
-      else:
-        hosthtml = hosthtml.replace("__CITY__", "")
       if yeardata.homepage:
-        homepagehtml = templates.get("countries/code/index_host_homepage")
-        homepagehtml = homepagehtml.replace("__LINK__", yeardata.homepage)
-        hosthtml = hosthtml.replace("__HOMEPAGE__", homepagehtml)
+        homepagehtml = render(
+          "countries/code/index_host_homepage",
+          root="../..",
+          link=yeardata.homepage,
+        )
       else:
-        hosthtml = hosthtml.replace("__HOMEPAGE__", "")
-      hosthtml = hosthtml.replace("__YEAR__", yeardata.year)
-      hostshtml += hosthtml
-    html = html.replace("__HOST__", "<dt>IPhO Host</dt>" + hostshtml)
+        homepagehtml = ""
+      hostshtml += render(
+        "countries/code/index_host",
+        root="../..",
+        city=" - " + yeardata.city if yeardata.city else "",
+        homepage=homepagehtml,
+        year=yeardata.year,
+      )
+    host = "<dt>IPhO Host</dt>" + hostshtml
   else:
-    html = html.replace("__HOST__", "")
+    host = ""
 
   medals = count_medals(participants_by_code.get(code, []))
-  html = html.replace("__GOLD__", str(medals["G"]))
-  html = html.replace("__SILVER__", str(medals["S"]))
-  html = html.replace("__BRONZE__", str(medals["B"]))
-  html = html.replace("__HONOURABLE__", str(medals["H"]))
 
-  html = templates.finalize(html, "../..")
+  html = render(
+    "countries/code/index",
+    root="../..",
+    section="countries",
+    code=code,
+    country=codedata.country,
+    contact_style=contact_style,
+    national_site=national_site,
+    national_site_text=national_site_text,
+    previous_code=previous_code_value,
+    previous_code_style=previous_code_style,
+    next_code=next_code_value,
+    next_code_style=next_code_style,
+    host=host,
+    gold=str(medals["G"]),
+    silver=str(medals["S"]),
+    bronze=str(medals["B"]),
+    honourable=str(medals["H"]),
+  )
   util.writefile("../countries/" + code + "/index.html", html)
 
 if __name__ == "__main__":

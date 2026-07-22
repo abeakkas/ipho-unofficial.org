@@ -5,60 +5,72 @@ from database_countries import code_indexed as countries_by_code
 from database_countries import previous_code
 from database_countries import next_code
 from database_participants import code_grouped as participants_by_code
+from templates import render
 
 def run(code):
   print("Generating countries/" + code + "/individual")
-  html = templates.get("countries/code/individual")
-  html = templates.set_headers(html, "countries")
-
-  html = html.replace("__CODE__", code)
-  html = html.replace("__COUNTRY__", countries_by_code[code].country)
 
   if code in previous_code:
-    html = html.replace("__PREVIOUS_CODE__", previous_code[code])
-    html = html.replace("__PREVIOUS_CODE_STYLE__", "")
+    previous_code_value = previous_code[code]
+    previous_code_style = ""
   else:
-    html = html.replace("__PREVIOUS_CODE_STYLE__", "display: none;")
-    html = html.replace("__PREVIOUS_CODE__", ".") # Google crawler fix
+    previous_code_value = "." # Google crawler fix
+    previous_code_style = "display: none;"
 
   if code in next_code:
-    html = html.replace("__NEXT_CODE__", next_code[code])
-    html = html.replace("__NEXT_CODE_STYLE__", "")
+    next_code_value = next_code[code]
+    next_code_style = ""
   else:
-    html = html.replace("__NEXT_CODE_STYLE__", "display: none;")
-    html = html.replace("__NEXT_CODE__", ".") # Google crawler fix
+    next_code_value = "." # Google crawler fix
+    next_code_style = "display: none;"
 
   tablehtml = ""
   if code in participants_by_code:
     yearhtml = ""
     lastyear = ""
     for participant in participants_by_code[code]:
-      rowhtml = templates.get("countries/code/individual_row")
       if participant.website:
-        link = templates.get("timeline/year/individual_participant_link")
-        link = link.replace("__LINK__", participant.website)
-        link = link.replace("__NAME__", participant.name)
-        rowhtml = rowhtml.replace("__NAME__", link)
+        name = render(
+          "timeline/year/individual_participant_link",
+          root="../..",
+          link=participant.website,
+          name=participant.name,
+        )
       else:
-        rowhtml = rowhtml.replace("__NAME__", participant.name)
-      rowhtml = rowhtml.replace("__RANK__", ("&ge;" if participant.rank_geq else "") + participant.rank)
-      rowhtml = rowhtml.replace("__YEAR__", participant.year)
-      rowhtml = rowhtml.replace("__MEDAL__", templates.medal[participant.medal])
+        name = participant.name
+
+      rowhtml = render(
+        "countries/code/individual_row",
+        root="../..",
+        name=name,
+        rank=("&ge;" if participant.rank_geq else "") + participant.rank,
+        year=participant.year,
+        medal=templates.medal[participant.medal],
+        css_class="" if lastyear == participant.year else "doubleTopLine",
+      )
       if lastyear == participant.year:
-        rowhtml = rowhtml.replace("__CLASS__", "")
         yearhtml += rowhtml
       else:
         lastyear = participant.year
         # reverse ordered:
         tablehtml = yearhtml + tablehtml
-        rowhtml = rowhtml.replace("__CLASS__", "doubleTopLine")
         yearhtml = rowhtml
     # Hacky way of removing first double top line:
     yearhtml = yearhtml.replace("doubleTopLine", "", 1)
     tablehtml = yearhtml + tablehtml
 
-  html = html.replace("__TABLE__", tablehtml)
-  html = templates.finalize(html, "../..")
+  html = render(
+    "countries/code/individual",
+    root="../..",
+    section="countries",
+    code=code,
+    country=countries_by_code[code].country,
+    previous_code=previous_code_value,
+    previous_code_style=previous_code_style,
+    next_code=next_code_value,
+    next_code_style=next_code_style,
+    table=tablehtml,
+  )
   util.writefile("../countries/" + code + "/individual.html", html)
 
 

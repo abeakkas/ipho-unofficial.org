@@ -7,88 +7,105 @@ from database_timeline import get_next_year
 from database_countries import code_to_country
 from database_participants import year_grouped as participants_by_year
 from database_participants import count_medals
+from templates import render
 
 def run(year):
   print("Generating timeline/" + year + "/index")
-  html = templates.get("timeline/year/index")
-  html = templates.set_headers(html, "timeline")
   yeardata = editions_by_year[year]
-  html = html.replace("__YEAR__", year)
-  html = html.replace("__NUMBER__", yeardata.number)
-  html = html.replace("__ORDINAL__", util.ordinal(yeardata.number))
-  html = html.replace("__DATE__", yeardata.date)
-  html = html.replace("__CODE__", yeardata.code)
-  html = html.replace("__COUNTRY__", code_to_country[yeardata.code])
 
   if yeardata.code2:
-    html = html.replace("__CODE2__", yeardata.code2)
-    html = html.replace("__COUNTRY2__", code_to_country[yeardata.code2])
-    html = html.replace("__CODE2_STYLE__", "")
+    code2 = yeardata.code2
+    country2 = code_to_country[yeardata.code2]
+    code2_style = ""
   else:
-    html = html.replace("__CODE2_STYLE__", "display: none;")
-    html = html.replace("__CODE2__", ".") # Google crawler fix
+    code2 = "." # Google crawler fix
+    country2 = ""
+    code2_style = "display: none;"
 
-  if yeardata.city:
-    html = html.replace("__CITY__", yeardata.city + ",")
-  else:
-    html = html.replace("__CITY__", "")
+  city = yeardata.city + "," if yeardata.city else ""
 
   if year in get_previous_year:
-    html = html.replace("__PREVIOUS_YEAR__", get_previous_year[year])
-    html = html.replace("__PREVIOUS_YEAR_STYLE__", "")
+    previous_year = get_previous_year[year]
+    previous_year_style = ""
   else:
-    html = html.replace("__PREVIOUS_YEAR_STYLE__", "display: none;")
-    html = html.replace("__PREVIOUS_YEAR__", ".") # Google crawler fix
+    previous_year = "." # Google crawler fix
+    previous_year_style = "display: none;"
 
   if year in get_next_year:
-    html = html.replace("__NEXT_YEAR__", get_next_year[year])
-    html = html.replace("__NEXT_YEAR_STYLE__", "")
+    next_year = get_next_year[year]
+    next_year_style = ""
   else:
-    html = html.replace("__NEXT_YEAR_STYLE__", "display: none;")
-    html = html.replace("__NEXT_YEAR__", ".") # Google crawler fix
+    next_year = "." # Google crawler fix
+    next_year_style = "display: none;"
 
   if yeardata.p_participant:
-    html = html.replace("__P_PARTICIPANT_STYLE__", "")
-    html = html.replace("__P_PARTICIPANT__", yeardata.p_participant)
+    p_participant = yeardata.p_participant
+    p_participant_style = ""
   else:
-    html = html.replace("__P_PARTICIPANT_STYLE__", "display: none;")
-    html = html.replace("__P_PARTICIPANT__", "")
+    p_participant = ""
+    p_participant_style = "display: none;"
 
   if yeardata.p_country:
-    html = html.replace("__P_COUNTRY_STYLE__", "")
-    html = html.replace("__P_COUNTRY__", yeardata.p_country)
+    p_country = yeardata.p_country
+    p_country_style = ""
   else:
-    html = html.replace("__P_COUNTRY_STYLE__", "display: none;")
-    html = html.replace("__P_COUNTRY__", "")
+    p_country = ""
+    p_country_style = "display: none;"
 
   if yeardata.homepage:
-    html = html.replace("__HOMEPAGE_STYLE__", "")
-    html = html.replace("__HOMEPAGE__", yeardata.homepage)
+    homepage = yeardata.homepage
+    homepage_style = ""
   else:
-    html = html.replace("__HOMEPAGE_STYLE__", "display: none;")
-    html = html.replace("__HOMEPAGE__", ".") # Google crawler fix
+    homepage = "." # Google crawler fix
+    homepage_style = "display: none;"
 
-  if templates.hasminutes(year):
-    html = html.replace("__MINUTES_STYLE__", "")
-  else:
-    html = html.replace("__MINUTES_STYLE__", "display: none;")
-
+  minutes_style = "" if templates.hasminutes(year) else "display: none;"
 
   if year in participants_by_year:
     medals = count_medals(participants_by_year[year])
-    html = html.replace("__AWARDS_STYLE__", "")
-    html = html.replace("__GOLD__", str(medals["G"]))
-    html = html.replace("__SILVER__", str(medals["S"]))
-    html = html.replace("__BRONZE__", str(medals["B"]))
-    html = html.replace("__HONOURABLE__", str(medals["H"]))
+    awards_style = ""
+    gold = str(medals["G"])
+    silver = str(medals["S"])
+    bronze = str(medals["B"])
+    honourable = str(medals["H"])
   else:
-    html = html.replace("__AWARDS_STYLE__", "display: none;")
-    html = html.replace("__GOLD__", "")
-    html = html.replace("__SILVER__", "")
-    html = html.replace("__BRONZE__", "")
-    html = html.replace("__HONOURABLE__", "")
+    awards_style = "display: none;"
+    gold = ""
+    silver = ""
+    bronze = ""
+    honourable = ""
 
-  html = templates.finalize(html, "../..")
+  html = render(
+    "timeline/year/index",
+    root="../..",
+    section="timeline",
+    year=year,
+    number=yeardata.number,
+    ordinal=util.ordinal(yeardata.number),
+    date=yeardata.date,
+    code=yeardata.code,
+    country=code_to_country[yeardata.code],
+    code2=code2,
+    country2=country2,
+    code2_style=code2_style,
+    city=city,
+    previous_year=previous_year,
+    previous_year_style=previous_year_style,
+    next_year=next_year,
+    next_year_style=next_year_style,
+    p_participant=p_participant,
+    p_participant_style=p_participant_style,
+    p_country=p_country,
+    p_country_style=p_country_style,
+    homepage=homepage,
+    homepage_style=homepage_style,
+    minutes_style=minutes_style,
+    awards_style=awards_style,
+    gold=gold,
+    silver=silver,
+    bronze=bronze,
+    honourable=honourable,
+  )
   util.writefile("../timeline/" + year + "/index.html", html)
 
 if __name__ == "__main__":

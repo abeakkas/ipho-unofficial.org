@@ -6,70 +6,91 @@ from database_participants import year_grouped as participants_by_year
 from database_timeline import year_indexed as editions_by_year
 from database_timeline import get_previous_year
 from database_timeline import get_next_year
+from templates import render
 
 def run(year):
   print("Generating timeline/" + year + "/individual")
-  html = templates.get("timeline/year/individual")
-  html = templates.set_headers(html, "timeline")
   yeardata = editions_by_year[year]
-  html = html.replace("__YEAR__", year)
-  html = html.replace("__NUMBER__", yeardata.number)
-  html = html.replace("__ORDINAL__", util.ordinal(yeardata.number))
 
   if year in get_previous_year:
-    html = html.replace("__PREVIOUS_YEAR__", get_previous_year[year])
-    html = html.replace("__PREVIOUS_YEAR_STYLE__", "")
+    previous_year = get_previous_year[year]
+    previous_year_style = ""
   else:
-    html = html.replace("__PREVIOUS_YEAR_STYLE__", "display: none;")
-    html = html.replace("__PREVIOUS_YEAR__", ".") # Google crawler fix
+    previous_year = "." # Google crawler fix
+    previous_year_style = "display: none;"
 
   if year in get_next_year:
-    html = html.replace("__NEXT_YEAR__", get_next_year[year])
-    html = html.replace("__NEXT_YEAR_STYLE__", "")
+    next_year = get_next_year[year]
+    next_year_style = ""
   else:
-    html = html.replace("__NEXT_YEAR_STYLE__", "display: none;")
-    html = html.replace("__NEXT_YEAR__", ".") # Google crawler fix
+    next_year = "." # Google crawler fix
+    next_year_style = "display: none;"
 
   show_points = year in participants_by_year and participants_by_year[year] and participants_by_year[year][0].theoretical
+  points_style = "" if show_points else "display: none;"
 
-  if show_points:
-    html = html.replace("__POINTS_STYLE__", "")
-  else:
-    html = html.replace("__POINTS_STYLE__", "display: none;")
-
-  tablehtml = ""
   if year in participants_by_year:
+    tablehtml = ""
     for row in participants_by_year[year]:
-      rowhtml = templates.get("timeline/year/individual_row")
       if row.code == "":
         # Unknown country: filler code keeps the link path valid; name is hidden.
-        rowhtml = rowhtml.replace("__CODE__", "TUR")
-        rowhtml = rowhtml.replace("__COUNTRY__", "")
+        code = "TUR"
+        country = ""
       else:
-        rowhtml = rowhtml.replace("__CODE__", row.code)
-        rowhtml = rowhtml.replace("__COUNTRY__", code_to_country[row.code])
+        code = row.code
+        country = code_to_country[row.code]
+
       if row.website:
-        link = templates.get("timeline/year/individual_participant_link")
-        link = link.replace("__LINK__", row.website)
-        link = link.replace("__NAME__", row.name)
-        rowhtml = rowhtml.replace("__NAME__", link)
+        name = render(
+          "timeline/year/individual_participant_link",
+          root="../..",
+          link=row.website,
+          name=row.name,
+        )
       else:
-        rowhtml = rowhtml.replace("__NAME__", row.name)
-      rowhtml = rowhtml.replace("__RANK__", ("&ge;" if row.rank_geq else "") + row.rank)
-      rowhtml = rowhtml.replace("__MEDAL__", templates.medal[row.medal])
+        name = row.name
+
       if show_points:
-        rowhtml = rowhtml.replace("__POINTS_STYLE__", "")
-        rowhtml = rowhtml.replace("__THEORETICAL__", row.theoretical)
-        rowhtml = rowhtml.replace("__EXPERIMENTAL__", row.experimental)
-        rowhtml = rowhtml.replace("__TOTAL__", row.total)
+        row_points_style = ""
+        theoretical = row.theoretical
+        experimental = row.experimental
+        total = row.total
       else:
-        rowhtml = rowhtml.replace("__POINTS_STYLE__", "display: none;")
-      tablehtml += rowhtml
+        row_points_style = "display: none;"
+        theoretical = ""
+        experimental = ""
+        total = ""
+
+      tablehtml += render(
+        "timeline/year/individual_row",
+        root="../..",
+        code=code,
+        country=country,
+        name=name,
+        rank=("&ge;" if row.rank_geq else "") + row.rank,
+        medal=templates.medal[row.medal],
+        points_style=row_points_style,
+        theoretical=theoretical,
+        experimental=experimental,
+        total=total,
+      )
   else:
     tablehtml = "<tr><td colspan=4>Results will be added once they are published on the official website.</td></tr>"
-  html = html.replace("__TABLE__", tablehtml)
 
-  html = templates.finalize(html, "../..")
+  html = render(
+    "timeline/year/individual",
+    root="../..",
+    section="timeline",
+    year=year,
+    number=yeardata.number,
+    ordinal=util.ordinal(yeardata.number),
+    previous_year=previous_year,
+    previous_year_style=previous_year_style,
+    next_year=next_year,
+    next_year_style=next_year_style,
+    points_style=points_style,
+    table=tablehtml,
+  )
   util.writefile("../timeline/" + year + "/individual.html", html)
 
 if __name__ == "__main__":

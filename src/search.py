@@ -1,5 +1,5 @@
-import templates
 import util
+from templates import render
 
 def run():
   print("Generating search")
@@ -9,9 +9,11 @@ def run():
   util.copyfile("database/2020.csv", "../search/2020.csv")
   util.copyfile("templates/search/search.js", "../search/search.js")
   util.copyfile("templates/search/asciify.js", "../search/asciify.js")
-  html = templates.get("search/index")
-  html = templates.set_headers(html, "search")
-  html = templates.finalize(html, "..")
+  html = render(
+    "search/index",
+    root="..",
+    section="search",
+  )
   util.writefile("../search/index.html", html)
 
 if __name__ == "__main__":
