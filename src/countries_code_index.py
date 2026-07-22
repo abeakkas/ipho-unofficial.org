@@ -5,6 +5,7 @@ from database_countries import previous_code
 from database_countries import next_code
 from database_participants import code_grouped as participants_by_code
 from database_participants import count_medals
+from database_participants import Medal
 from database_timeline import code_grouped as editions_by_code
 from templates import render
 
@@ -73,10 +74,10 @@ def run(code):
     next_code=next_code_value,
     next_code_style=next_code_style,
     host=host,
-    gold=str(medals["G"]),
-    silver=str(medals["S"]),
-    bronze=str(medals["B"]),
-    honourable=str(medals["H"]),
+    gold=str(medals[Medal.GOLD]),
+    silver=str(medals[Medal.SILVER]),
+    bronze=str(medals[Medal.BRONZE]),
+    honourable=str(medals[Medal.HONOURABLE]),
   )
   util.writefile("../countries/" + code + "/index.html", html)
 

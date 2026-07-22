@@ -7,6 +7,7 @@ from database_timeline import get_next_year
 from database_countries import code_to_country
 from database_participants import year_grouped as participants_by_year
 from database_participants import count_medals
+from database_participants import Medal
 from templates import render
 
 def run(year):
@@ -64,10 +65,10 @@ def run(year):
   if year in participants_by_year:
     medals = count_medals(participants_by_year[year])
     awards_style = ""
-    gold = str(medals["G"])
-    silver = str(medals["S"])
-    bronze = str(medals["B"])
-    honourable = str(medals["H"])
+    gold = str(medals[Medal.GOLD])
+    silver = str(medals[Medal.SILVER])
+    bronze = str(medals[Medal.BRONZE])
+    honourable = str(medals[Medal.HONOURABLE])
   else:
     awards_style = "display: none;"
     gold = ""

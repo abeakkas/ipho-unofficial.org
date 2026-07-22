@@ -3,6 +3,7 @@ from database_countries import code_to_country
 from database_countries import database as countries
 from database_participants import code_grouped as participants_by_code
 from database_participants import count_medals
+from database_participants import Medal
 from database_timeline import code_grouped as editions_by_code
 from templates import render
 
@@ -36,10 +37,10 @@ def run():
       code=row.code,
       country=code_to_country[row.code],
       hosts=hosts,
-      gold=str(medals["G"]),
-      silver=str(medals["S"]),
-      bronze=str(medals["B"]),
-      honourable=str(medals["H"]),
+      gold=str(medals[Medal.GOLD]),
+      silver=str(medals[Medal.SILVER]),
+      bronze=str(medals[Medal.BRONZE]),
+      honourable=str(medals[Medal.HONOURABLE]),
       css_class="tr-former" if row.former else "",
       national_site=national_site,
       national_site_text=national_site_text,
