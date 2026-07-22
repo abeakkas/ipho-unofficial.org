@@ -2,37 +2,37 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
-<link href="__ROOT__/img/fav-logo.ico" rel="shortcut icon" type="image/x-icon" />
-<link href="__ROOT__/css/design.css" rel="stylesheet" type="text/css" />
-<link href="__ROOT__/css/print.css" rel="stylesheet" type="text/css" media="print" />
-<title>IPhO: __COUNTRY__</title>
+<link href="${root}/img/fav-logo.ico" rel="shortcut icon" type="image/x-icon" />
+<link href="${root}/css/design.css" rel="stylesheet" type="text/css" />
+<link href="${root}/css/print.css" rel="stylesheet" type="text/css" media="print" />
+<title>IPhO: ${country}</title>
 </head>
 <body>
-__HEADER_SIDE__
+${header_side}
 <div id="main">
   <div class="flag">
-    <a href="__INDEX__">
-    <img title="__COUNTRY__" src="__ROOT__/img/flags/__CODE__.gif" alt="__COUNTRY__" style="border-width:0px;" />
+    <a href="${index}">
+    <img title="${country}" src="${root}/img/flags/${code}.gif" alt="${country}" style="border-width:0px;" />
     </a>
   </div>
   <h2>
-  <a href="../__PREVIOUS_CODE__/__INDEX__" class="pointer" style="__PREVIOUS_CODE_STYLE__">&#9668;</a>
-  <a href="__INDEX__" class="highlight">__COUNTRY__</a>
-  <a href="../__NEXT_CODE__/__INDEX__" class="pointer" style="__NEXT_CODE_STYLE__">&#9658;</a>
+  <a href="../${previous_code}/${index}" class="pointer" style="${previous_code_style}">&#9668;</a>
+  <a href="${index}" class="highlight">${country}</a>
+  <a href="../${next_code}/${index}" class="pointer" style="${next_code_style}">&#9658;</a>
   </h2>
   <h3 class="hideprn">
-  <a href="individual__HTML_EXT__">Individual results</a>
+  <a href="individual${html_ext}">Individual results</a>
   </h3>
   <dl class="normal">
-  <div style="__CONTACT_STYLE__">
+  <div style="${contact_style}">
     <dt>Contact</dt>
-    <dd>National PhO site: <a href="__NATIONAL_SITE__" target="_blank">__NATIONAL_SITE_TEXT__</a></dd>
+    <dd>National PhO site: <a href="${national_site}" target="_blank">${national_site_text}</a></dd>
   </div>
-  __HOST__
+  ${host}
   <dt>Performance at the IPhO</dt>
-  <dd>Gold medals: __GOLD__<br>Silver medals: __SILVER__<br>Bronze medals: __BRONZE__<br>Honourable mentions: __HONOURABLE__</dd>
+  <dd>Gold medals: ${gold}<br>Silver medals: ${silver}<br>Bronze medals: ${bronze}<br>Honourable mentions: ${honourable}</dd>
   </dl>
 </div>
-__FOOTER__
+${footer}
 </body>
 </html>

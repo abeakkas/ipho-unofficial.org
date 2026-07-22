@@ -2,7 +2,7 @@
 <a href="http://ipho-new.org/" target="_blank">IPhO Official Website</a>
 <a href="javascript:easteregg()" style="color: black;">&bull;</a>
 <b>Webmaster:</b>
-<a href="mailto:__WEBMASTER__">__WEBMASTER__</a>
+<a href="mailto:${webmaster}">${webmaster}</a>
 </div>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="766d63eb-0e2f-44ec-ada7-f41b3da0242d"></script>
 <script>
@@ -11,7 +11,7 @@
     var heads = ["newton", "einstein", "bohr", "feynman", "boltzmann", "curie", "dirac",
       "galileo", "maxwell", "planck", "schrodinger"];
     var img = document.createElement("img");
-    img.src = "__ROOT__/img/easter/" + heads[Math.floor(Math.random() * heads.length)] + ".png";
+    img.src = "${root}/img/easter/" + heads[Math.floor(Math.random() * heads.length)] + ".png";
     img.style.width = "150px";
     img.style.position = "absolute";
     if (rightside) {

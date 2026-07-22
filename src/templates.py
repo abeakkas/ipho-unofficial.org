@@ -19,20 +19,20 @@ def set_headers(html, type):
   type is one of ["homepage", "timeline", "countries", "search", "hall_of_fame", ""]
   """
   if type == "homepage":
-    html = html.replace("__HEADER_TOP__", get("header_top"))
+    html = html.replace("${header_top}", get("header_top"))
   else:
     side = get("header_side")
-    side = side.replace(f"__HIGHLIGHT_{type.upper()}__", "highlight")
-    side = side.replace("__HIGHLIGHT_TIMELINE__", "")
-    side = side.replace("__HIGHLIGHT_COUNTRIES__", "")
-    side = side.replace("__HIGHLIGHT_SEARCH__", "")
-    side = side.replace("__HIGHLIGHT_HALL_OF_FAME__", "")
-    html = html.replace("__HEADER_SIDE__", side)
-  html = html.replace("__HEADER_PREVIOUS_YEAR__", last_year)
-  html = html.replace("__HEADER_PREVIOUS_YEAR_HOMEPAGE__", editions_by_year[last_year].homepage)
-  html = html.replace("__HEADER_NEXT_YEAR__", next_year)
-  html = html.replace("__HEADER_NEXT_YEAR_HOMEPAGE__", editions_by_year[next_year].homepage)
-  html = html.replace("__FOOTER__", get("footer"))
+    side = side.replace(f"${{highlight_{type}}}", "highlight")
+    side = side.replace("${highlight_timeline}", "")
+    side = side.replace("${highlight_countries}", "")
+    side = side.replace("${highlight_search}", "")
+    side = side.replace("${highlight_hall_of_fame}", "")
+    html = html.replace("${header_side}", side)
+  html = html.replace("${header_previous_year}", last_year)
+  html = html.replace("${header_previous_year_homepage}", editions_by_year[last_year].homepage)
+  html = html.replace("${header_next_year}", next_year)
+  html = html.replace("${header_next_year_homepage}", editions_by_year[next_year].homepage)
+  html = html.replace("${footer}", get("footer"))
   return html
 
 def finalize(html, root):
@@ -41,30 +41,27 @@ def finalize(html, root):
   root is the relative path of the root directory of website
   See the setting config.github
   """
-  html = html.replace("__ROOT__", root)
+  html = html.replace("${root}", root)
   if config.github:
-    html = html.replace("__INDEX__", ".")
-    html = html.replace("__HTML_EXT__", "")
+    html = html.replace("${index}", ".")
+    html = html.replace("${html_ext}", "")
   else:
-    html = html.replace("__INDEX__", "index.html")
-    html = html.replace("__HTML_EXT__", ".html")
-  html = html.replace("__WEBMASTER__", config.webmaster_email)
+    html = html.replace("${index}", "index.html")
+    html = html.replace("${html_ext}", ".html")
+  html = html.replace("${webmaster}", config.webmaster_email)
   return html
-
-# Value keys whose token isn't just __UPPERCASE__ (e.g. Python-keyword names).
-_TOKEN_ALIASES = {"css_class": "__CLASS__"}
 
 def render(path, *, root, section=None, **values):
   """
   Render a template to final HTML.
   Fills chrome (when section is given), body values, then URL/root tokens.
-  Transitional: still fills __TOKEN__ via replace; will switch to ${token}.
+  Transitional: templates use ${token} syntax, but still filled via replace; will switch to string.Template.substitute.
   """
   html = get(path)
   if section is not None:
     html = set_headers(html, section)
   for key, value in values.items():
-    html = html.replace(_TOKEN_ALIASES.get(key, f"__{key.upper()}__"), value)
+    html = html.replace(f"${{{key}}}", value)
   html = finalize(html, root)
   return html
 
