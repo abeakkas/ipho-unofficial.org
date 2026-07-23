@@ -46,7 +46,7 @@ def run():
       national_site_style=national_site_style,
     )
 
-  render_page("countries/index", "../countries/index.html", table=tablehtml)
+  render_page("countries/index", table=tablehtml)
 
 if __name__ == "__main__":
   run()

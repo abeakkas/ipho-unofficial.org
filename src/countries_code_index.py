@@ -61,7 +61,6 @@ def run(code):
 
   render_page(
     "countries/code/index",
-    "../countries/" + code + "/index.html",
     code=code,
     country=codedata.country,
     contact_style=contact_style,

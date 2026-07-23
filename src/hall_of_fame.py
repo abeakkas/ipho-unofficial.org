@@ -70,14 +70,14 @@ def _print_group(group, medals):
     else:
       year_text = f"{row.year}({row.code})"
     participations += render_fragment(
-      "hall_of_fame/index_participation_year",
+      "hall-of-fame/index_participation_year",
       year=row.year,
       year_text=year_text,
       title="Appeared as " + row.name,
     ).strip()
 
   return render_fragment(
-    "hall_of_fame/index_row",
+    "hall-of-fame/index_row",
     name=group[0].name,
     code=group[0].code,
     country=code_to_country[group[0].code],
@@ -143,8 +143,7 @@ def run():
 
   # Apparently Google recommends dashes over underscores :/
   render_page(
-    "hall_of_fame/index",
-    "../hall-of-fame/index.html",
+    "hall-of-fame/index",
     table=tablehtml,
     table2=table2html,
   )

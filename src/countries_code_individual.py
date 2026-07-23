@@ -56,7 +56,6 @@ def run(code):
 
   render_page(
     "countries/code/individual",
-    "../countries/" + code + "/individual.html",
     code=code,
     country=countries_by_code[code].country,
     previous_code=previous_code_value,

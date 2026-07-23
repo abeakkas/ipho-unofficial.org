@@ -33,7 +33,6 @@ def run():
 
   render_page(
     "timeline/2020/index",
-    "../timeline/2020/index.html",
     table=tablehtml,
   )
 

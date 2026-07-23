@@ -36,7 +36,7 @@ def _fill_header_footer(html, path):
     highlight_timeline="highlight" if section == "timeline" else "",
     highlight_countries="highlight" if section == "countries" else "",
     highlight_search="highlight" if section == "search" else "",
-    highlight_hall_of_fame="highlight" if section == "hall_of_fame" else "",
+    highlight_hall_of_fame="highlight" if section == "hall-of-fame" else "",
     header_previous_year=last_year,
     header_previous_year_homepage=editions_by_year[last_year].homepage,
     header_next_year=next_year,
@@ -52,21 +52,30 @@ def _fill_header_footer(html, path):
     footer=render_fragment("footer"),
   )
 
-def render_page(path, out_path, **substitutions):
+def render_page(path, **substitutions):
   """
-  Render a full page and write it to out_path. Fills header/footer, resolves
-  {{root}} from the output location, and writes the file.
+  Render a full page and write it. The output location is derived from the
+  template path, and {{root}} is resolved from that location.
   """
   html = _load(path)
+
   if "${footer}" in html:
     html = _fill_header_footer(html, path)
   html = Template(html).substitute(**substitutions)
+
+  out_path = f"../{path}.html"
+  if "/code/" in out_path:
+    out_path = out_path.replace("/code/", f"/{substitutions['code']}/")
+  if "/year/" in out_path:
+    out_path = out_path.replace("/year/", f"/{substitutions['year']}/")
+
   out_dir = os.path.dirname(out_path)
   if path == "404":
     # 404 can be served from any URL, so its links must be absolute (empty root).
     root = ""
   else:
     root = os.path.relpath("..", out_dir)
+
   # {{root}} is a relative path prefix to the site root.
   os.makedirs(out_dir, exist_ok=True)
   with open(out_path, "w") as file:

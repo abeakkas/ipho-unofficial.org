@@ -60,7 +60,6 @@ def run():
 
   render_page(
     "timeline/index",
-    "../timeline/index.html",
     table=tablehtml,
     upcoming=upcominghtml,
   )

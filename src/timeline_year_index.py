@@ -77,7 +77,6 @@ def run(year):
 
   render_page(
     "timeline/year/index",
-    "../timeline/" + year + "/index.html",
     year=year,
     number=yeardata.number,
     ordinal=yeardata.ordinal,
