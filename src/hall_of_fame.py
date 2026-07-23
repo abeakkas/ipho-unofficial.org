@@ -1,4 +1,3 @@
-import util
 from asciify import asciify
 from collections import defaultdict
 from database_countries import code_to_country
@@ -143,7 +142,6 @@ def run():
     i += 1
 
   # Apparently Google recommends dashes over underscores :/
-  util.makedirs("../hall-of-fame")
   render_page(
     "hall_of_fame/index",
     "../hall-of-fame/index.html",

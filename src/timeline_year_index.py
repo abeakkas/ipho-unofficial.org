@@ -1,6 +1,5 @@
 import sys
 import templates
-import util
 from database_timeline import year_indexed as editions_by_year
 from database_timeline import get_previous_year
 from database_timeline import get_next_year
@@ -81,7 +80,7 @@ def run(year):
     "../timeline/" + year + "/index.html",
     year=year,
     number=yeardata.number,
-    ordinal=util.ordinal(yeardata.number),
+    ordinal=yeardata.ordinal,
     date=yeardata.date,
     code=yeardata.code,
     country=code_to_country[yeardata.code],

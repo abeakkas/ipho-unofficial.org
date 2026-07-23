@@ -1,5 +1,4 @@
 import templates
-import util
 from database_countries import code_to_country
 from database_2020 import database
 from templates import render_fragment
@@ -7,7 +6,6 @@ from templates import render_page
 
 def run():
   print("Generating timeline/2020")
-  util.makedirs("../timeline/2020")
 
   tablehtml = ""
   for participant in database:

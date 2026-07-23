@@ -13,6 +13,13 @@ class Edition(NamedTuple):
   p_country: str
   p_participant: str
 
+  @property
+  def ordinal(self):
+    """Ordinal suffix for the edition number, e.g. "st" for 41 (as in 41st)."""
+    if self.number[-2:] in ("11", "12", "13"):
+      return "th"
+    return {"1": "st", "2": "nd", "3": "rd"}.get(self.number[-1], "th")
+
 database: list[Edition] = []
 year_indexed: dict[str, Edition] = {}
 code_grouped: dict[str, list[Edition]] = defaultdict(list)

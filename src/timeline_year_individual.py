@@ -1,6 +1,5 @@
 import sys
 import templates
-import util
 from database_countries import code_to_country
 from database_participants import year_grouped as participants_by_year
 from database_timeline import year_indexed as editions_by_year
@@ -81,7 +80,7 @@ def run(year):
     "../timeline/" + year + "/individual.html",
     year=year,
     number=yeardata.number,
-    ordinal=util.ordinal(yeardata.number),
+    ordinal=yeardata.ordinal,
     previous_year=previous_year,
     previous_year_style=previous_year_style,
     next_year=next_year,

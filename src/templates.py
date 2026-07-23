@@ -1,6 +1,5 @@
 import config
 import os
-import util
 from functools import cache
 from string import Template
 from database_participants import last_year
@@ -13,7 +12,8 @@ def _load(path):
   """
   Load HTML from file and resolve the common substitutions.
   """
-  html = util.readfile("templates/" + path + ".html")
+  with open("templates/" + path + ".html") as file:
+    html = file.read()
   return Template(html).safe_substitute(
     index="." if config.github else "index.html",
     html_ext="" if config.github else ".html",
@@ -61,13 +61,16 @@ def render_page(path, out_path, **substitutions):
   if "${footer}" in html:
     html = _fill_header_footer(html, path)
   html = Template(html).substitute(**substitutions)
+  out_dir = os.path.dirname(out_path)
   if path == "404":
     # 404 can be served from any URL, so its links must be absolute (empty root).
     root = ""
   else:
-    root = os.path.relpath("..", os.path.dirname(out_path))
+    root = os.path.relpath("..", out_dir)
   # {{root}} is a relative path prefix to the site root.
-  util.writefile(out_path, html.replace("{{root}}", root))
+  os.makedirs(out_dir, exist_ok=True)
+  with open(out_path, "w") as file:
+    file.write(html.replace("{{root}}", root))
 
 def hasminutes(year):
   return os.path.exists(f"templates/minutes/{year}.pdf")
