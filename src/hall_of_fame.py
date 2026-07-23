@@ -5,7 +5,8 @@ from database_countries import code_to_country
 from database_participants import code_grouped as participants_by_code
 from database_participants import count_medals
 from database_participants import Medal
-from templates import render
+from templates import render_fragment
+from templates import render_page
 
 # Identities that algorithm can't find
 identity_overrides = [
@@ -69,17 +70,15 @@ def _print_group(group, medals):
       year_text = row.year
     else:
       year_text = f"{row.year}({row.code})"
-    participations += render(
+    participations += render_fragment(
       "hall_of_fame/index_participation_year",
-      root="..",
       year=row.year,
       year_text=year_text,
       title="Appeared as " + row.name,
     ).strip()
 
-  return render(
+  return render_fragment(
     "hall_of_fame/index_row",
-    root="..",
     name=group[0].name,
     code=group[0].code,
     country=code_to_country[group[0].code],
@@ -143,16 +142,14 @@ def run():
     table2html += _print_group(bins[i], medals)
     i += 1
 
-  html = render(
+  # Apparently Google recommends dashes over underscores :/
+  util.makedirs("../hall-of-fame")
+  render_page(
     "hall_of_fame/index",
-    root="..",
+    "../hall-of-fame/index.html",
     table=tablehtml,
     table2=table2html,
   )
-
-  # Apparently Google recommends dashes over underscores :/
-  util.makedirs("../hall-of-fame")
-  util.writefile("../hall-of-fame/index.html", html)
 
 if __name__ == "__main__":
   run()

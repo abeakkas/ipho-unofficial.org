@@ -8,7 +8,8 @@ from database_participants import Medal
 from database_timeline import year_indexed as editions_by_year
 from database_timeline import get_previous_year
 from database_timeline import get_next_year
-from templates import render
+from templates import render_fragment
+from templates import render_page
 
 def run(year):
   print("Generating timeline/" + year + "/country")
@@ -56,9 +57,8 @@ def run(year):
         rank = str(i + 1)
         prevcode = code
         prevrank = str(i + 1)
-      tablehtml += render(
+      tablehtml += render_fragment(
         "timeline/year/country_row",
-        root="../..",
         code=code,
         country=code_to_country[code],
         rank=rank,
@@ -68,9 +68,9 @@ def run(year):
         honourable=str(medals[code][Medal.HONOURABLE]),
       )
 
-  html = render(
+  render_page(
     "timeline/year/country",
-    root="../..",
+    "../timeline/" + year + "/country.html",
     year=year,
     number=yeardata.number,
     ordinal=util.ordinal(yeardata.number),
@@ -80,7 +80,6 @@ def run(year):
     next_year_style=next_year_style,
     table=tablehtml,
   )
-  util.writefile("../timeline/" + year + "/country.html", html)
 
 if __name__ == "__main__":
   run(sys.argv[1])

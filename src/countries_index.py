@@ -1,11 +1,11 @@
-import util
 from database_countries import code_to_country
 from database_countries import database as countries
 from database_participants import code_grouped as participants_by_code
 from database_participants import count_medals
 from database_participants import Medal
 from database_timeline import code_grouped as editions_by_code
-from templates import render
+from templates import render_fragment
+from templates import render_page
 
 def run():
   print("Generating countries/index")
@@ -14,7 +14,7 @@ def run():
   for row in countries:
     if row.code in editions_by_code:
       hosts = ", ".join(
-        render("countries/index_hostyear", root="..", year=year.year)
+        render_fragment("countries/index_hostyear", year=year.year)
         for year in editions_by_code[row.code]
       )
     else:
@@ -31,9 +31,8 @@ def run():
       national_site_text = ""
       national_site_style = "display: none;"
 
-    tablehtml += render(
+    tablehtml += render_fragment(
       "countries/index_row",
-      root="..",
       code=row.code,
       country=code_to_country[row.code],
       hosts=hosts,
@@ -47,12 +46,7 @@ def run():
       national_site_style=national_site_style,
     )
 
-  html = render(
-    "countries/index",
-    root="..",
-    table=tablehtml,
-  )
-  util.writefile("../countries/index.html", html)
+  render_page("countries/index", "../countries/index.html", table=tablehtml)
 
 if __name__ == "__main__":
   run()

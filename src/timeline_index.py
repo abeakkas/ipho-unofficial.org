@@ -1,8 +1,8 @@
-import util
 from database_countries import code_to_country
 from database_participants import next_year
 from database_timeline import database as editions
-from templates import render
+from templates import render_fragment
+from templates import render_page
 
 def monospace_date(date):
   if "-" not in date:
@@ -29,9 +29,8 @@ def run():
       country2 = ""
       code2_style = "display: none;"
 
-    rowhtml = render(
+    rowhtml = render_fragment(
       "timeline/index_row",
-      root="..",
       number=row.number,
       year=row.year,
       date=monospace_date(row.date),
@@ -53,19 +52,18 @@ def run():
       upcoming_row_ctr += 1
     # IPhO 2020 was a special event and is not listed in timeline database.
     if int(row.year) == 2019:
-      tablehtml = render("timeline/index_row_2020", root="..") + tablehtml
+      tablehtml = render_fragment("timeline/index_row_2020") + tablehtml
 
   # Append an empty row to preserve row parity between tables for styling purposes
   if upcoming_row_ctr % 2:
     upcominghtml = "<tr style=\"display:none;\"></tr>" + upcominghtml
 
-  html = render(
+  render_page(
     "timeline/index",
-    root="..",
+    "../timeline/index.html",
     table=tablehtml,
     upcoming=upcominghtml,
   )
-  util.writefile("../timeline/index.html", html)
 
 if __name__ == "__main__":
   run()

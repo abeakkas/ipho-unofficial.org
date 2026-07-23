@@ -8,7 +8,7 @@ from database_countries import code_to_country
 from database_participants import year_grouped as participants_by_year
 from database_participants import count_medals
 from database_participants import Medal
-from templates import render
+from templates import render_page
 
 def run(year):
   print("Generating timeline/" + year + "/index")
@@ -76,9 +76,9 @@ def run(year):
     bronze = ""
     honourable = ""
 
-  html = render(
+  render_page(
     "timeline/year/index",
-    root="../..",
+    "../timeline/" + year + "/index.html",
     year=year,
     number=yeardata.number,
     ordinal=util.ordinal(yeardata.number),
@@ -106,7 +106,6 @@ def run(year):
     bronze=bronze,
     honourable=honourable,
   )
-  util.writefile("../timeline/" + year + "/index.html", html)
 
 if __name__ == "__main__":
   run(sys.argv[1])

@@ -1,15 +1,10 @@
-import util
-from templates import render
+from templates import render_page
 
 def run():
   print("Generating 404")
   # This can't both work local and Github :/
   # but it only works on Github anyways
-  html = render(
-    "404",
-    root="",
-  )
-  util.writefile("../404.html", html)
+  render_page("404", "../404.html")
 
 if __name__ == "__main__":
   run()

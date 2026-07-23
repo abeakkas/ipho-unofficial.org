@@ -6,7 +6,8 @@ from database_participants import year_grouped as participants_by_year
 from database_timeline import year_indexed as editions_by_year
 from database_timeline import get_previous_year
 from database_timeline import get_next_year
-from templates import render
+from templates import render_fragment
+from templates import render_page
 
 def run(year):
   print("Generating timeline/" + year + "/individual")
@@ -41,9 +42,8 @@ def run(year):
         country = code_to_country[row.code]
 
       if row.website:
-        name = render(
+        name = render_fragment(
           "timeline/year/individual_participant_link",
-          root="../..",
           link=row.website,
           name=row.name,
         )
@@ -61,14 +61,13 @@ def run(year):
         experimental = ""
         total = ""
 
-      tablehtml += render(
+      tablehtml += render_fragment(
         "timeline/year/individual_row",
-        root="../..",
         code=code,
         country=country,
         name=name,
         rank=("&ge;" if row.rank_geq else "") + row.rank,
-        medal=templates.medal(row.medal, root="../.."),
+        medal=templates.medal(row.medal),
         points_style=row_points_style,
         theoretical=theoretical,
         experimental=experimental,
@@ -77,9 +76,9 @@ def run(year):
   else:
     tablehtml = "<tr><td colspan=4>Results will be added once they are published on the official website.</td></tr>"
 
-  html = render(
+  render_page(
     "timeline/year/individual",
-    root="../..",
+    "../timeline/" + year + "/individual.html",
     year=year,
     number=yeardata.number,
     ordinal=util.ordinal(yeardata.number),
@@ -90,7 +89,6 @@ def run(year):
     points_style=points_style,
     table=tablehtml,
   )
-  util.writefile("../timeline/" + year + "/individual.html", html)
 
 if __name__ == "__main__":
   run(sys.argv[1])

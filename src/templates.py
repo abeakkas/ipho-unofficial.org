@@ -9,24 +9,30 @@ from database_participants import Medal
 from database_timeline import year_indexed as editions_by_year
 
 @cache
-def _load(path, root):
+def _load(path):
   """
-  Load HTML from file and resolve root/index/html_ext/webmaster substitutions.
+  Load HTML from file and resolve the common substitutions.
   """
   html = util.readfile("templates/" + path + ".html")
   return Template(html).safe_substitute(
-    root=root,
     index="." if config.github else "index.html",
     html_ext="" if config.github else ".html",
     webmaster=config.webmaster_email,
   )
 
-def _fill_header_footer(html, root, path):
+def render_fragment(path, **substitutions):
   """
-  Fill header/footer. Nav highlight comes from path's first segment.
+  Render a partial HTML to be used as part of a page.
+  """
+  return Template(_load(path)).substitute(**substitutions)
+
+def _fill_header_footer(html, path):
+  """
+  Fill header/footer. Nav highlight is determined from path's first segment.
   """
   section = path.split("/")[0]
-  side = Template(_load("header_side", root)).substitute(
+  side = render_fragment(
+    "header_side",
     highlight_timeline="highlight" if section == "timeline" else "",
     highlight_countries="highlight" if section == "countries" else "",
     highlight_search="highlight" if section == "search" else "",
@@ -43,22 +49,30 @@ def _fill_header_footer(html, root, path):
     header_previous_year_homepage=editions_by_year[last_year].homepage,
     header_next_year=next_year,
     header_next_year_homepage=editions_by_year[next_year].homepage,
-    footer=_load("footer", root),
+    footer=render_fragment("footer"),
   )
 
-def render(path, *, root, **substitutions):
+def render_page(path, out_path, **substitutions):
   """
-  Render a template to the final HTML. All substitutions must be complete.
+  Render a full page and write it to out_path. Fills header/footer, resolves
+  {{root}} from the output location, and writes the file.
   """
-  html = _load(path, root)
+  html = _load(path)
   if "${footer}" in html:
-    html = _fill_header_footer(html, root, path)
-  return Template(html).substitute(**substitutions)
+    html = _fill_header_footer(html, path)
+  html = Template(html).substitute(**substitutions)
+  if path == "404":
+    # 404 can be served from any URL, so its links must be absolute (empty root).
+    root = ""
+  else:
+    root = os.path.relpath("..", os.path.dirname(out_path))
+  # {{root}} is a relative path prefix to the site root.
+  util.writefile(out_path, html.replace("{{root}}", root))
 
 def hasminutes(year):
   return os.path.exists(f"templates/minutes/{year}.pdf")
 
-def medal(kind, *, root):
+def medal(kind):
   paths = {
     Medal.GOLD: "medal_gold",
     Medal.SILVER: "medal_silver",
@@ -67,5 +81,4 @@ def medal(kind, *, root):
   }
   if kind not in paths:
     return ""
-  return _load(paths[kind], root)
-
+  return _load(paths[kind])

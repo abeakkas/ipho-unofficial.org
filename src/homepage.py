@@ -1,13 +1,8 @@
-import util
-from templates import render
+from templates import render_page
 
 def run():
   print("Generating homepage")
-  html = render(
-    "homepage",
-    root=".",
-  )
-  util.writefile("../index.html", html)
+  render_page("homepage", "../index.html")
 
 if __name__ == "__main__":
   run()
