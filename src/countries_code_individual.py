@@ -1,6 +1,7 @@
 import sys
 import templates
 import util
+from collections import defaultdict
 from database_countries import code_indexed as countries_by_code
 from database_countries import previous_code
 from database_countries import next_code
@@ -24,11 +25,15 @@ def run(code):
     next_code_value = "." # Google crawler fix
     next_code_style = "display: none;"
 
+  # participants.csv is ordered by ascending year then rank.
+  # Group rows by year then display newest year first.
+  groups = defaultdict(list)
+  for participant in participants_by_code.get(code, []):
+    groups[participant.year].append(participant)
+
   tablehtml = ""
-  if code in participants_by_code:
-    yearhtml = ""
-    lastyear = ""
-    for participant in participants_by_code[code]:
+  for year in reversed(groups):
+    for i, participant in enumerate(groups[year]):
       if participant.website:
         name = render(
           "timeline/year/individual_participant_link",
@@ -39,25 +44,17 @@ def run(code):
       else:
         name = participant.name
 
-      rowhtml = render(
+      # Divider above each year group except the topmost one.
+      divider = i == 0 and tablehtml != ""
+      tablehtml += render(
         "countries/code/individual_row",
         root="../..",
         name=name,
         rank=("&ge;" if participant.rank_geq else "") + participant.rank,
-        year=participant.year,
+        year=year,
         medal=templates.medal(participant.medal, root="../.."),
-        css_class="" if lastyear == participant.year else "doubleTopLine",
+        css_class="doubleTopLine" if divider else "",
       )
-      if lastyear == participant.year:
-        yearhtml += rowhtml
-      else:
-        lastyear = participant.year
-        # reverse ordered:
-        tablehtml = yearhtml + tablehtml
-        yearhtml = rowhtml
-    # Hacky way of removing first double top line:
-    yearhtml = yearhtml.replace("doubleTopLine", "", 1)
-    tablehtml = yearhtml + tablehtml
 
   html = render(
     "countries/code/individual",
