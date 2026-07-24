@@ -20,7 +20,7 @@ print("ALERT: adding preliminary results notice to timeline/2026")
 notice = (
   '  <b>Preliminary Results:</b><br/>\n'
   '  Results shown are based mainly on the closing ceremony and other sources on the Internet.<br/>\n'
-  '  Rankings reflect order of appearance at the closing ceremony.<br/>\n'
+  '  Participants are listed in the order they appear in the closing ceremony video.<br/>\n'
   f'  Please send any relevant corrections to the webmaster: <a href="mailto:{config.webmaster_email}">{config.webmaster_email}</a>\n'
 )
 for page in ["country", "individual"]:
