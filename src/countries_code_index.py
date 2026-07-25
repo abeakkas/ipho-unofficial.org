@@ -5,7 +5,7 @@ from database_countries import next_code
 from database_participants import code_grouped as participants_by_code
 from database_participants import count_medals
 from database_participants import Medal
-from database_timeline import code_grouped as editions_by_code
+from database_timeline import editions_hosted_by
 from templates import render_fragment
 from templates import render_page
 
@@ -36,26 +36,24 @@ def run(code):
     next_code_value = "."
     next_code_style = "display: none;"
 
-  if code in editions_by_code:
-    hostshtml = ""
-    for yeardata in editions_by_code[code]:
-      if yeardata.homepage:
-        homepagehtml = render_fragment(
-          "countries/code/index_host_homepage",
-          link=yeardata.homepage,
-          year=yeardata.year,
-        )
-      else:
-        homepagehtml = ""
-      hostshtml += render_fragment(
-        "countries/code/index_host",
-        city=" - " + yeardata.city if yeardata.city else "",
-        homepage=homepagehtml,
+  hostshtml = ""
+  for yeardata in editions_hosted_by(country):
+    if yeardata.homepage:
+      homepagehtml = render_fragment(
+        "countries/code/index_host_homepage",
+        link=yeardata.homepage,
         year=yeardata.year,
       )
-    host = "<dt>IPhO Host</dt>" + hostshtml
-  else:
-    host = ""
+    else:
+      homepagehtml = ""
+    hostshtml += render_fragment(
+      "countries/code/index_host",
+      city=" - " + yeardata.city if yeardata.city else "",
+      homepage=homepagehtml,
+      year=yeardata.year,
+    )
+  if hostshtml:
+    hostshtml = "<dt>IPhO Host</dt>" + hostshtml
 
   medals = count_medals(participants_by_code.get(code, []))
 
@@ -70,7 +68,7 @@ def run(code):
     previous_code_style=previous_code_style,
     next_code=next_code_value,
     next_code_style=next_code_style,
-    host=host,
+    host=hostshtml,
     gold=str(medals[Medal.GOLD]),
     silver=str(medals[Medal.SILVER]),
     bronze=str(medals[Medal.BRONZE]),

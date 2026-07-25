@@ -2,7 +2,7 @@ from database_countries import database as countries
 from database_participants import code_grouped as participants_by_code
 from database_participants import count_medals
 from database_participants import Medal
-from database_timeline import code_grouped as editions_by_code
+from database_timeline import editions_hosted_by
 from templates import render_fragment
 from templates import render_page
 
@@ -11,13 +11,10 @@ def run():
 
   tablehtml = ""
   for country in countries:
-    if country.code in editions_by_code:
-      hosts = ", ".join(
-        render_fragment("countries/index_hostyear", year=year.year)
-        for year in editions_by_code[country.code]
-      )
-    else:
-      hosts = ""
+    hosts = ", ".join(
+      render_fragment("countries/index_hostyear", year=edition.year)
+      for edition in editions_hosted_by(country)
+    )
 
     medals = count_medals(participants_by_code.get(country.code, []))
 

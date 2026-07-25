@@ -19,9 +19,9 @@ def run():
   upcominghtml = ""
   upcoming_row_ctr = 0
   for edition in editions:
-    if edition.country2:
-      code2 = edition.country2.code
-      country2 = edition.country2.name
+    if edition.host2:
+      code2 = edition.host2.code
+      country2 = edition.host2.name
       code2_style = ""
     else:
       code2 = "."
@@ -33,9 +33,9 @@ def run():
       number=edition.number,
       year=edition.year,
       date=monospace_date(edition.date),
-      code=edition.country.code,
+      code=edition.host.code,
       city=edition.city,
-      country=edition.country.name,
+      country=edition.host.name,
       p_country=edition.p_country,
       p_participant=edition.p_participant,
       code2=code2,

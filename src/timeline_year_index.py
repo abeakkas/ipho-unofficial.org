@@ -12,9 +12,9 @@ def run(year):
   print(f"Generating timeline/{year}/index")
   yeardata = editions_by_year[year]
 
-  if yeardata.country2:
-    code2 = yeardata.country2.code
-    country2 = yeardata.country2.name
+  if yeardata.host2:
+    code2 = yeardata.host2.code
+    country2 = yeardata.host2.name
     code2_style = ""
   else:
     code2 = "."
@@ -80,8 +80,8 @@ def run(year):
     number=yeardata.number,
     ordinal=yeardata.ordinal,
     date=yeardata.date,
-    code=yeardata.country.code,
-    country=yeardata.country.name,
+    code=yeardata.host.code,
+    country=yeardata.host.name,
     code2=code2,
     country2=country2,
     code2_style=code2_style,
