@@ -15,14 +15,14 @@ def run(code):
     previous_code_value = previous_code[code]
     previous_code_style = ""
   else:
-    previous_code_value = "." # Google crawler fix
+    previous_code_value = "."
     previous_code_style = "display: none;"
 
   if code in next_code:
     next_code_value = next_code[code]
     next_code_style = ""
   else:
-    next_code_value = "." # Google crawler fix
+    next_code_value = "."
     next_code_style = "display: none;"
 
   # participants.csv is ordered by ascending year then rank.

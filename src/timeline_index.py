@@ -24,7 +24,7 @@ def run():
       country2 = edition.country2.name
       code2_style = ""
     else:
-      code2 = "." # Google crawler fix
+      code2 = "."
       country2 = ""
       code2_style = "display: none;"
 

@@ -17,7 +17,7 @@ def run(year):
     country2 = yeardata.country2.name
     code2_style = ""
   else:
-    code2 = "." # Google crawler fix
+    code2 = "."
     country2 = ""
     code2_style = "display: none;"
 
@@ -27,14 +27,14 @@ def run(year):
     previous_year = get_previous_year[year]
     previous_year_style = ""
   else:
-    previous_year = "." # Google crawler fix
+    previous_year = "."
     previous_year_style = "display: none;"
 
   if year in get_next_year:
     next_year = get_next_year[year]
     next_year_style = ""
   else:
-    next_year = "." # Google crawler fix
+    next_year = "."
     next_year_style = "display: none;"
 
   if yeardata.p_participant:
@@ -55,7 +55,7 @@ def run(year):
     homepage = yeardata.homepage
     homepage_style = ""
   else:
-    homepage = "." # Google crawler fix
+    homepage = "."
     homepage_style = "display: none;"
 
   minutes_style = "" if templates.hasminutes(year) else "display: none;"

@@ -26,7 +26,7 @@ def run():
       national_site_text = country.website if len(country.website) < 50 else country.website[0:35] + "..."
       national_site_style = ""
     else:
-      national_site = "." # Google crawler fix
+      national_site = "."
       national_site_text = ""
       national_site_style = "display: none;"
 

@@ -19,21 +19,21 @@ def run(code):
     national_site_text = country.website if len(country.website) < 50 else country.website[0:50] + "..."
   else:
     contact_style = "display: none;"
-    national_site = "." # Google crawler fix
+    national_site = "."
     national_site_text = ""
 
   if code in previous_code:
     previous_code_value = previous_code[code]
     previous_code_style = ""
   else:
-    previous_code_value = "." # Google crawler fix
+    previous_code_value = "."
     previous_code_style = "display: none;"
 
   if code in next_code:
     next_code_value = next_code[code]
     next_code_style = ""
   else:
-    next_code_value = "." # Google crawler fix
+    next_code_value = "."
     next_code_style = "display: none;"
 
   if code in editions_by_code:

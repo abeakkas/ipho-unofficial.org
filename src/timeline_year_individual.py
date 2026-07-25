@@ -15,14 +15,14 @@ def run(year):
     previous_year = get_previous_year[year]
     previous_year_style = ""
   else:
-    previous_year = "." # Google crawler fix
+    previous_year = "."
     previous_year_style = "display: none;"
 
   if year in get_next_year:
     next_year = get_next_year[year]
     next_year_style = ""
   else:
-    next_year = "." # Google crawler fix
+    next_year = "."
     next_year_style = "display: none;"
 
   show_points = year in participants_by_year and participants_by_year[year] and participants_by_year[year][0].theoretical
