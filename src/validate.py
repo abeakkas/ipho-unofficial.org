@@ -15,19 +15,21 @@ def check_score_rank_consistency():
       continue
     last_rank = 0
     last_score = 1e10
-    for row in year_grouped[year]:
-      if not row.total or row.rank_geq:
+    for participant in year_grouped[year]:
+      if not participant.total or participant.rank_geq:
         break
-      rank = int(row.rank)
-      score = float(row.total)
+      rank = int(participant.rank)
+      score = float(participant.total)
       if rank < last_rank:
         n += 1
         if n <= LIMIT:
-          print(f"Rank should not decrease: {row}")
+          print("Rank should not decrease:")
+          print(participant)
       if score > last_score or (score == last_score and rank != last_rank):
         n += 1
         if n <= LIMIT:
-          print(f"Row should have higher rank: {row}")
+          print("Participant should have higher rank:")
+          print(participant)
       last_rank = rank
       last_score = score
   if n > LIMIT:
@@ -37,16 +39,17 @@ def check_score_rank_consistency():
 def check_score_sums():
   n = 0
   for year in year_grouped:
-    for row in year_grouped[year]:
-      if not row.theoretical or not row.experimental or not row.total:
+    for participant in year_grouped[year]:
+      if not participant.theoretical or not participant.experimental or not participant.total:
         continue
-      th = float(row.theoretical)
-      ex = float(row.experimental)
-      to = float(row.total)
+      th = float(participant.theoretical)
+      ex = float(participant.experimental)
+      to = float(participant.total)
       if abs(th + ex - to) > .0001:
         n += 1
         if n <= LIMIT:
-          print(f"Points don't add up: {row}")
+          print("Points don't add up:")
+          print(participant)
   if n > LIMIT:
     print(f"... and {n - LIMIT} more")
   return n
@@ -54,30 +57,30 @@ def check_score_sums():
 def check_score_precision():
   n = 0
   for year in year_grouped:
-    for row in year_grouped[year]:
-      for score in [row.theoretical, row.experimental, row.total]:
+    for participant in year_grouped[year]:
+      for score in [participant.theoretical, participant.experimental, participant.total]:
         if score and ("." not in score or len(score.split(".")[1]) != 2):
           n += 1
           if n <= LIMIT:
             print("Score precision should be two digits after decimal:")
-            print(f"{score} in {row}")
+            print(f"{score} in {participant}")
   if n > LIMIT:
     print(f"... and {n - LIMIT} more")
   return n
 
 def check_combining_characters():
   n = 0
-  for row in database:
-    for c in row.name:
+  for participant in database:
+    for c in participant.name:
       if 768 <= ord(c) < 880:
         n += 1
         if n <= LIMIT:
-          print(f"Combining character {c} detected in {row}")
+          print(f"Combining character {c} detected in {participant}")
           print("Please replace with a single character. See unicodedata.normalize")
-    if '\xa0' in row.name:
+    if '\xa0' in participant.name:
       n += 1
       if n <= LIMIT:
-        print(f"Non-breaking space \\xa0 detected in {row}")
+        print(f"Non-breaking space \\xa0 detected in {participant}")
         print("Please replace with a regular space")
   if n > LIMIT:
     print(f"... and {n - LIMIT} more")

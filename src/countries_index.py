@@ -10,20 +10,20 @@ def run():
   print("Generating countries/index")
 
   tablehtml = ""
-  for row in countries:
-    if row.code in editions_by_code:
+  for country in countries:
+    if country.code in editions_by_code:
       hosts = ", ".join(
         render_fragment("countries/index_hostyear", year=year.year)
-        for year in editions_by_code[row.code]
+        for year in editions_by_code[country.code]
       )
     else:
       hosts = ""
 
-    medals = count_medals(participants_by_code.get(row.code, []))
+    medals = count_medals(participants_by_code.get(country.code, []))
 
-    if row.website:
-      national_site = row.website
-      national_site_text = row.website if len(row.website) < 50 else row.website[0:35] + "..."
+    if country.website:
+      national_site = country.website
+      national_site_text = country.website if len(country.website) < 50 else country.website[0:35] + "..."
       national_site_style = ""
     else:
       national_site = "." # Google crawler fix
@@ -32,14 +32,14 @@ def run():
 
     tablehtml += render_fragment(
       "countries/index_row",
-      code=row.code,
-      country=row.name,
+      code=country.code,
+      country=country.name,
       hosts=hosts,
       gold=str(medals[Medal.GOLD]),
       silver=str(medals[Medal.SILVER]),
       bronze=str(medals[Medal.BRONZE]),
       honourable=str(medals[Medal.HONOURABLE]),
-      css_class="tr-former" if row.former else "",
+      css_class="tr-former" if country.former else "",
       national_site=national_site,
       national_site_text=national_site_text,
       national_site_style=national_site_style,

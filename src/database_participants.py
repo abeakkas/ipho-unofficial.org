@@ -3,7 +3,7 @@ from collections import defaultdict
 from enum import Enum
 from typing import NamedTuple
 from database_countries import Country
-from database_countries import code_indexed
+from database_countries import code_to_country
 from database_timeline import get_next_year
 
 class Medal(str, Enum):
@@ -45,7 +45,7 @@ with open("database/participants.csv") as file:
     if rank_geq:
       rank = rank.removeprefix(">=")
 
-    entry = Participant(year, rank, rank_geq, name, code_indexed[code], Medal(medal), theoretical, experimental, total, website)
+    entry = Participant(year, rank, rank_geq, name, code_to_country[code], Medal(medal), theoretical, experimental, total, website)
 
     database.append(entry)
     code_grouped[code].append(entry)

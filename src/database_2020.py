@@ -1,7 +1,7 @@
 import csv
 from typing import NamedTuple
 from database_countries import Country
-from database_countries import code_indexed
+from database_countries import code_to_country
 from database_participants import Medal
 
 class Participant(NamedTuple):
@@ -18,5 +18,5 @@ with open("database/2020.csv") as file:
   for row in reader:
     assert len(row) == 5, f"2020 row error: {row}"
     rank, name, code, medal, website = row
-    entry = Participant(rank, name, code_indexed[code], Medal(medal), website)
+    entry = Participant(rank, name, code_to_country[code], Medal(medal), website)
     database.append(entry)

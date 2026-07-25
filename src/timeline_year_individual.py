@@ -30,24 +30,24 @@ def run(year):
 
   if year in participants_by_year:
     tablehtml = ""
-    for row in participants_by_year[year]:
-      code = row.country.code
-      country = row.country.name
+    for participant in participants_by_year[year]:
+      code = participant.country.code
+      country = participant.country.name
 
-      if row.website:
+      if participant.website:
         name = render_fragment(
           "timeline/year/individual_participant_link",
-          link=row.website,
-          name=row.name,
+          link=participant.website,
+          name=participant.name,
         )
       else:
-        name = row.name
+        name = participant.name
 
       if show_points:
         row_points_style = ""
-        theoretical = row.theoretical
-        experimental = row.experimental
-        total = row.total
+        theoretical = participant.theoretical
+        experimental = participant.experimental
+        total = participant.total
       else:
         row_points_style = "display: none;"
         theoretical = ""
@@ -59,8 +59,8 @@ def run(year):
         code=code,
         country=country,
         name=name,
-        rank=("&ge;" if row.rank_geq else "") + row.rank,
-        medal=templates.medal(row.medal),
+        rank=("&ge;" if participant.rank_geq else "") + participant.rank,
+        medal=templates.medal(participant.medal),
         points_style=row_points_style,
         theoretical=theoretical,
         experimental=experimental,

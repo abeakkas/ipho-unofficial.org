@@ -3,7 +3,7 @@ from collections import defaultdict
 from typing import NamedTuple
 from typing import Optional
 from database_countries import Country
-from database_countries import code_indexed
+from database_countries import code_to_country
 
 class Edition(NamedTuple):
   number: str
@@ -42,7 +42,7 @@ with open("database/timeline.csv") as file:
     else:
       code2 = ""
 
-    entry = Edition(number, year, date, code_indexed[code], code_indexed[code2] if code2 else None, city, homepage,
+    entry = Edition(number, year, date, code_to_country[code], code_to_country[code2] if code2 else None, city, homepage,
                     p_country, p_participant)
 
     database.append(entry)

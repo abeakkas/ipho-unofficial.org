@@ -1,7 +1,7 @@
 import sys
 import templates
 from collections import defaultdict
-from database_countries import code_indexed as countries_by_code
+from database_countries import code_to_country
 from database_countries import previous_code
 from database_countries import next_code
 from database_participants import code_grouped as participants_by_code
@@ -26,7 +26,7 @@ def run(code):
     next_code_style = "display: none;"
 
   # participants.csv is ordered by ascending year then rank.
-  # Group rows by year then display newest year first.
+  # Group participants by year then display newest year first.
   groups = defaultdict(list)
   for participant in participants_by_code.get(code, []):
     groups[participant.year].append(participant)
@@ -57,7 +57,7 @@ def run(code):
   render_page(
     "countries/code/individual",
     code=code,
-    country=countries_by_code[code].name,
+    country=code_to_country[code].name,
     previous_code=previous_code_value,
     previous_code_style=previous_code_style,
     next_code=next_code_value,

@@ -1,5 +1,5 @@
 import sys
-from database_countries import code_indexed as countries_by_code
+from database_countries import code_to_country
 from database_countries import previous_code
 from database_countries import next_code
 from database_participants import code_grouped as participants_by_code
@@ -11,12 +11,12 @@ from templates import render_page
 
 def run(code):
   print(f"Generating countries/{code}/index")
-  codedata = countries_by_code[code]
+  country = code_to_country[code]
 
-  if codedata.website != "":
+  if country.website != "":
     contact_style = ""
-    national_site = codedata.website
-    national_site_text = codedata.website if len(codedata.website) < 50 else codedata.website[0:50] + "..."
+    national_site = country.website
+    national_site_text = country.website if len(country.website) < 50 else country.website[0:50] + "..."
   else:
     contact_style = "display: none;"
     national_site = "." # Google crawler fix
@@ -62,7 +62,7 @@ def run(code):
   render_page(
     "countries/code/index",
     code=code,
-    country=codedata.name,
+    country=country.name,
     contact_style=contact_style,
     national_site=national_site,
     national_site_text=national_site_text,

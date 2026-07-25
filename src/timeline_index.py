@@ -18,10 +18,10 @@ def run():
   tablehtml = ""
   upcominghtml = ""
   upcoming_row_ctr = 0
-  for row in editions:
-    if row.country2:
-      code2 = row.country2.code
-      country2 = row.country2.name
+  for edition in editions:
+    if edition.country2:
+      code2 = edition.country2.code
+      country2 = edition.country2.name
       code2_style = ""
     else:
       code2 = "." # Google crawler fix
@@ -30,27 +30,27 @@ def run():
 
     rowhtml = render_fragment(
       "timeline/index_row",
-      number=row.number,
-      year=row.year,
-      date=monospace_date(row.date),
-      code=row.country.code,
-      city=row.city,
-      country=row.country.name,
-      p_country=row.p_country,
-      p_participant=row.p_participant,
+      number=edition.number,
+      year=edition.year,
+      date=monospace_date(edition.date),
+      code=edition.country.code,
+      city=edition.city,
+      country=edition.country.name,
+      p_country=edition.p_country,
+      p_participant=edition.p_participant,
       code2=code2,
       country2=country2,
       code2_style=code2_style,
     )
 
-    if int(row.year) <= int(next_year) + 2:
+    if int(edition.year) <= int(next_year) + 2:
       # Reverse list
       tablehtml = rowhtml + tablehtml
     else:
       upcominghtml = rowhtml + upcominghtml
       upcoming_row_ctr += 1
     # IPhO 2020 was a special event and is not listed in timeline database.
-    if int(row.year) == 2019:
+    if int(edition.year) == 2019:
       tablehtml = render_fragment("timeline/index_row_2020") + tablehtml
 
   # Append an empty row to preserve row parity between tables for styling purposes
