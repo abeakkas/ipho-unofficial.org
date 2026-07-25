@@ -2,7 +2,9 @@ import csv
 from collections import defaultdict
 from enum import Enum
 from typing import NamedTuple
-from database_countries import code_to_country
+from typing import Optional
+from database_countries import Country
+from database_countries import code_indexed
 from database_timeline import get_next_year
 
 class Medal(str, Enum):
@@ -17,7 +19,7 @@ class Participant(NamedTuple):
   rank: str
   rank_geq: bool
   name: str
-  code: str
+  country: Optional[Country]
   medal: Medal
   theoretical: str
   experimental: str
@@ -44,14 +46,11 @@ with open("database/participants.csv") as file:
     if rank_geq:
       rank = rank.removeprefix(">=")
 
-    if code != "" and code not in code_to_country:
-      raise Exception(f"Participant database is corrupted! Row: {row}")
-
-    entry = Participant(year, rank, rank_geq, name, code, Medal(medal),
-                        theoretical, experimental, total, website)
+    country = code_indexed[code] if code != "" else None
+    entry = Participant(year, rank, rank_geq, name, country, Medal(medal), theoretical, experimental, total, website)
 
     database.append(entry)
-    code_grouped[entry.code].append(entry)
+    code_grouped[code].append(entry)
     year_grouped[entry.year].append(entry)
 
 last_year = max(year_grouped, key=int)

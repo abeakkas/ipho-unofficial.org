@@ -1,4 +1,3 @@
-from database_countries import code_to_country
 from database_participants import next_year
 from database_timeline import database as editions
 from templates import render_fragment
@@ -20,9 +19,9 @@ def run():
   upcominghtml = ""
   upcoming_row_ctr = 0
   for row in editions:
-    if row.code2:
-      code2 = row.code2
-      country2 = code_to_country[row.code2]
+    if row.country2:
+      code2 = row.country2.code
+      country2 = row.country2.name
       code2_style = ""
     else:
       code2 = "." # Google crawler fix
@@ -34,9 +33,9 @@ def run():
       number=row.number,
       year=row.year,
       date=monospace_date(row.date),
-      code=row.code,
+      code=row.country.code,
       city=row.city,
-      country=code_to_country[row.code],
+      country=row.country.name,
       p_country=row.p_country,
       p_participant=row.p_participant,
       code2=code2,

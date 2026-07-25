@@ -1,6 +1,5 @@
 from asciify import asciify
 from collections import defaultdict
-from database_countries import code_to_country
 from database_participants import code_grouped as participants_by_code
 from database_participants import count_medals
 from database_participants import Medal
@@ -53,8 +52,7 @@ def _find_recurring_participations():
     for row in participants_by_code[code2]:
       if row.year == year2 and row.name == name2:
         row2 = row
-    if not row1 or not row2:
-      raise Exception(f"Hall of fame exception not found: {(year1, code1, name1)} / {(year2, code2, name2)}")
+    assert row1 and row2, f"Hall of fame exception not found: {(year1, code1, name1)} / {(year2, code2, name2)}"
     merge(row1, row2)
 
   # Return unique lists.
@@ -65,10 +63,9 @@ def _print_group(group, medals):
   for row in sorted(group, key=lambda row: row.year):
     if participations:
       participations += ", "
-    if row.code == group[0].code:
-      year_text = row.year
-    else:
-      year_text = f"{row.year}({row.code})"
+    year_text = row.year
+    if row.country != group[0].country:
+      year_text += f"({row.country.code})"
     participations += render_fragment(
       "hall-of-fame/index_participation_year",
       year=row.year,
@@ -79,8 +76,8 @@ def _print_group(group, medals):
   return render_fragment(
     "hall-of-fame/index_row",
     name=group[0].name,
-    code=group[0].code,
-    country=code_to_country[group[0].code],
+    code=group[0].country.code,
+    country=group[0].country.name,
     gold=str(medals[Medal.GOLD]),
     silver=str(medals[Medal.SILVER]),
     bronze=str(medals[Medal.BRONZE]),

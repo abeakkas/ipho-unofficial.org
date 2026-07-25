@@ -62,7 +62,7 @@ def run(code):
   render_page(
     "countries/code/index",
     code=code,
-    country=codedata.country,
+    country=codedata.name,
     contact_style=contact_style,
     national_site=national_site,
     national_site_text=national_site_text,

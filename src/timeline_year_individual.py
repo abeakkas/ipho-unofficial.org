@@ -1,6 +1,5 @@
 import sys
 import templates
-from database_countries import code_to_country
 from database_participants import year_grouped as participants_by_year
 from database_timeline import year_indexed as editions_by_year
 from database_timeline import get_previous_year
@@ -32,13 +31,13 @@ def run(year):
   if year in participants_by_year:
     tablehtml = ""
     for row in participants_by_year[year]:
-      if row.code == "":
+      if row.country is None:
         # Unknown country: filler code keeps the link path valid; name is hidden.
         code = "TUR"
         country = ""
       else:
-        code = row.code
-        country = code_to_country[row.code]
+        code = row.country.code
+        country = row.country.name
 
       if row.website:
         name = render_fragment(

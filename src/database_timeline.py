@@ -1,13 +1,16 @@
 import csv
 from collections import defaultdict
 from typing import NamedTuple
+from typing import Optional
+from database_countries import Country
+from database_countries import code_indexed
 
 class Edition(NamedTuple):
   number: str
   year: str
   date: str
-  code: str
-  code2: str
+  country: Country
+  country2: Optional[Country]
   city: str
   homepage: str
   p_country: str
@@ -39,14 +42,14 @@ with open("database/timeline.csv") as file:
     else:
       code2 = ""
 
-    entry = Edition(number, year, date, code, code2, city, homepage,
+    entry = Edition(number, year, date, code_indexed[code], code_indexed[code2] if code2 else None, city, homepage,
                     p_country, p_participant)
 
     database.append(entry)
     year_indexed[entry.year] = entry
-    code_grouped[entry.code].append(entry)
-    if entry.code2:
-      code_grouped[entry.code2].append(entry)
+    code_grouped[code].append(entry)
+    if code2:
+      code_grouped[code2].append(entry)
     if prev != "":
       get_previous_year[entry.year] = prev
       get_next_year[prev] = entry.year

@@ -1,5 +1,4 @@
 import templates
-from database_countries import code_to_country
 from database_2020 import database
 from templates import render_fragment
 from templates import render_page
@@ -20,8 +19,8 @@ def run():
 
     tablehtml += render_fragment(
       "timeline/year/individual_row",
-      code=participant.code,
-      country=code_to_country[participant.code],
+      code=participant.country.code,
+      country=participant.country.name,
       name=name,
       rank=participant.rank,
       medal=templates.medal(participant.medal),

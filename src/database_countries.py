@@ -3,7 +3,7 @@ from typing import NamedTuple
 
 class Country(NamedTuple):
   code: str
-  country: str
+  name: str
   website: str
   former: bool
 
@@ -17,13 +17,13 @@ with open("database/countries.csv") as file:
   reader = csv.reader(file)
   prev = ""
   for row in reader:
-    assert len(row) == 4, f"Country row error: {row}"
-    code, country, website, former = row
-    entry = Country(code, country, website, former != "")
+    assert len(row) == 4, f"Expecting 4 elements per row: {row}"
+    code, name, website, former = row
+    entry = Country(code, name, website, former != "")
 
     database.append(entry)
     code_indexed[entry.code] = entry
-    code_to_country[entry.code] = entry.country
+    code_to_country[entry.code] = entry.name
     if prev:
       previous_code[entry.code] = prev
       next_code[prev] = entry.code

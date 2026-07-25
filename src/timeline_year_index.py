@@ -3,7 +3,6 @@ import templates
 from database_timeline import year_indexed as editions_by_year
 from database_timeline import get_previous_year
 from database_timeline import get_next_year
-from database_countries import code_to_country
 from database_participants import year_grouped as participants_by_year
 from database_participants import count_medals
 from database_participants import Medal
@@ -13,9 +12,9 @@ def run(year):
   print(f"Generating timeline/{year}/index")
   yeardata = editions_by_year[year]
 
-  if yeardata.code2:
-    code2 = yeardata.code2
-    country2 = code_to_country[yeardata.code2]
+  if yeardata.country2:
+    code2 = yeardata.country2.code
+    country2 = yeardata.country2.name
     code2_style = ""
   else:
     code2 = "." # Google crawler fix
@@ -81,8 +80,8 @@ def run(year):
     number=yeardata.number,
     ordinal=yeardata.ordinal,
     date=yeardata.date,
-    code=yeardata.code,
-    country=code_to_country[yeardata.code],
+    code=yeardata.country.code,
+    country=yeardata.country.name,
     code2=code2,
     country2=country2,
     code2_style=code2_style,
