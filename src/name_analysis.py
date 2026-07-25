@@ -23,6 +23,12 @@ def similarity(tokens1, tokens2):
     for chosen in permutations(longer, len(shorter))
   )
 
+def is_ordered_subset(name1, name2):
+  # Shorter name is the longer one with tokens dropped.
+  shorter, longer = sorted((name1.split(), name2.split()), key=len)
+  it = iter(longer)
+  return all(token in it for token in shorter)
+
 def find_similar_names():
   """Return (score, row1, row2) triples above THRESHOLD, best matches first."""
   matches = []
@@ -36,6 +42,8 @@ def find_similar_names():
           continue
         if int(row2.year) - int(row1.year) > MAX_YEAR_GAP:
           break
+        if is_ordered_subset(row1.name, row2.name):
+          continue
         score = similarity(tokens1, tokens2)
         if score >= THRESHOLD:
           matches.append((score, row1, row2))
