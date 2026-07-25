@@ -9,7 +9,6 @@ class Country(NamedTuple):
 
 database: list[Country] = []
 code_indexed: dict[str, Country] = {}
-code_to_country: dict[str, str] = {}
 previous_code: dict[str, str] = {}
 next_code: dict[str, str] = {}
 
@@ -23,7 +22,6 @@ with open("database/countries.csv") as file:
 
     database.append(entry)
     code_indexed[entry.code] = entry
-    code_to_country[entry.code] = entry.name
     if prev:
       previous_code[entry.code] = prev
       next_code[prev] = entry.code

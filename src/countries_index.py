@@ -1,4 +1,3 @@
-from database_countries import code_to_country
 from database_countries import database as countries
 from database_participants import code_grouped as participants_by_code
 from database_participants import count_medals
@@ -34,7 +33,7 @@ def run():
     tablehtml += render_fragment(
       "countries/index_row",
       code=row.code,
-      country=code_to_country[row.code],
+      country=row.name,
       hosts=hosts,
       gold=str(medals[Medal.GOLD]),
       silver=str(medals[Medal.SILVER]),
