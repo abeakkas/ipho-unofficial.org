@@ -5,7 +5,7 @@ from string import Template
 from database_participants import last_year
 from database_participants import next_year
 from database_participants import Medal
-from database_timeline import year_indexed as editions_by_year
+from database_timeline import editions_by_year
 
 @cache
 def _load(path):
@@ -81,10 +81,7 @@ def render_page(path, **substitutions):
   with open(out_path, "w") as file:
     file.write(html.replace("{{root}}", root))
 
-def hasminutes(year):
-  return os.path.exists(f"templates/minutes/{year}.pdf")
-
-def medal(kind):
+def medal_fragment(kind):
   paths = {
     Medal.GOLD: "medal_gold",
     Medal.SILVER: "medal_silver",

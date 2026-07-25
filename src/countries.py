@@ -1,6 +1,6 @@
 import countries_code
 import countries_index
-from database_countries import database as countries
+from database_countries import countries
 
 def run():
   print("Generating countries")

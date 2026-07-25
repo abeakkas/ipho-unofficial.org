@@ -1,5 +1,5 @@
 from database_participants import next_year
-from database_timeline import database as editions
+from database_timeline import editions
 from templates import render_fragment
 from templates import render_page
 

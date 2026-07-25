@@ -1,9 +1,9 @@
 import sys
-import templates
-from database_participants import year_grouped as participants_by_year
-from database_timeline import year_indexed as editions_by_year
+from database_participants import participants_by_year
+from database_timeline import editions_by_year
 from database_timeline import get_previous_year
 from database_timeline import get_next_year
+from templates import medal_fragment
 from templates import render_fragment
 from templates import render_page
 
@@ -60,7 +60,7 @@ def run(year):
         country=country,
         name=name,
         rank=("&ge;" if participant.rank_geq else "") + participant.rank,
-        medal=templates.medal(participant.medal),
+        medal=medal_fragment(participant.medal),
         points_style=row_points_style,
         theoretical=theoretical,
         experimental=experimental,

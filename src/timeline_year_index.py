@@ -1,9 +1,9 @@
+import os
 import sys
-import templates
-from database_timeline import year_indexed as editions_by_year
+from database_timeline import editions_by_year
 from database_timeline import get_previous_year
 from database_timeline import get_next_year
-from database_participants import year_grouped as participants_by_year
+from database_participants import participants_by_year
 from database_participants import count_medals
 from database_participants import Medal
 from templates import render_page
@@ -58,7 +58,10 @@ def run(year):
     homepage = "."
     homepage_style = "display: none;"
 
-  minutes_style = "" if templates.hasminutes(year) else "display: none;"
+  if os.path.exists(f"templates/minutes/{year}.pdf"):
+    minutes_style = ""
+  else:
+    minutes_style = "display: none;"
 
   if year in participants_by_year:
     medals = count_medals(participants_by_year[year])

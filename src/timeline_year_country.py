@@ -1,9 +1,9 @@
 import sys
 from collections import defaultdict
-from database_participants import year_grouped as participants_by_year
+from database_participants import participants_by_year
 from database_participants import count_medals
 from database_participants import Medal
-from database_timeline import year_indexed as editions_by_year
+from database_timeline import editions_by_year
 from database_timeline import get_previous_year
 from database_timeline import get_next_year
 from templates import render_fragment

@@ -1,5 +1,5 @@
-from database_countries import database as countries
-from database_participants import code_grouped as participants_by_code
+from database_countries import countries
+from database_participants import participants_by_code
 from database_participants import count_medals
 from database_participants import Medal
 from database_timeline import editions_hosted_by

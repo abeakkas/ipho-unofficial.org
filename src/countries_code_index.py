@@ -2,7 +2,7 @@ import sys
 from database_countries import code_to_country
 from database_countries import previous_code
 from database_countries import next_code
-from database_participants import code_grouped as participants_by_code
+from database_participants import participants_by_code
 from database_participants import count_medals
 from database_participants import Medal
 from database_timeline import editions_hosted_by

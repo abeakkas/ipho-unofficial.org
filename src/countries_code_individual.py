@@ -1,10 +1,10 @@
 import sys
-import templates
 from collections import defaultdict
 from database_countries import code_to_country
 from database_countries import previous_code
 from database_countries import next_code
-from database_participants import code_grouped as participants_by_code
+from database_participants import participants_by_code
+from templates import medal_fragment
 from templates import render_fragment
 from templates import render_page
 
@@ -50,7 +50,7 @@ def run(code):
         name=name,
         rank=("&ge;" if participant.rank_geq else "") + participant.rank,
         year=year,
-        medal=templates.medal(participant.medal),
+        medal=medal_fragment(participant.medal),
         css_class="doubleTopLine" if divider else "",
       )
 

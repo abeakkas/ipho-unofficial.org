@@ -1,6 +1,6 @@
 from asciify import asciify
 from collections import defaultdict
-from database_participants import code_grouped as participants_by_code
+from database_participants import participants_by_code
 from database_participants import count_medals
 from database_participants import Medal
 from templates import render_fragment

@@ -1,5 +1,5 @@
-import templates
-from database_2020 import database
+from database_2020 import participants
+from templates import medal_fragment
 from templates import render_fragment
 from templates import render_page
 
@@ -7,7 +7,7 @@ def run():
   print("Generating timeline/2020")
 
   tablehtml = ""
-  for participant in database:
+  for participant in participants:
     if participant.website:
       name = render_fragment(
         "timeline/year/individual_participant_link",
@@ -23,7 +23,7 @@ def run():
       country=participant.country.name,
       name=name,
       rank=participant.rank,
-      medal=templates.medal(participant.medal),
+      medal=medal_fragment(participant.medal),
       points_style="display: none;",
       theoretical="",
       experimental="",

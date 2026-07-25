@@ -22,14 +22,14 @@ class Edition(NamedTuple):
       return "th"
     return {"1": "st", "2": "nd", "3": "rd"}.get(self.number[-1], "th")
 
-database: list[Edition] = []
-year_indexed: dict[str, Edition] = {}
+editions: list[Edition] = []
+editions_by_year: dict[str, Edition] = {}
 # Technically, years can be non-consecutive, and wow that actually happened in 2020.
 get_previous_year: dict[str, str] = {}
 get_next_year: dict[str, str] = {}
 
 def editions_hosted_by(country: Country):
-  return [e for e in database if country in (e.host, e.host2)]
+  return [e for e in editions if country in (e.host, e.host2)]
 
 with open("database/timeline.csv") as file:
   reader = csv.reader(file)
@@ -46,8 +46,8 @@ with open("database/timeline.csv") as file:
     entry = Edition(number, year, date, code_to_country[code], code_to_country[code2] if code2 else None, city, homepage,
                     p_country, p_participant)
 
-    database.append(entry)
-    year_indexed[entry.year] = entry
+    editions.append(entry)
+    editions_by_year[entry.year] = entry
     if prev != "":
       get_previous_year[entry.year] = prev
       get_next_year[prev] = entry.year

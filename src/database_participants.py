@@ -31,9 +31,9 @@ def count_medals(participants: list[Participant]) -> dict[Medal, int]:
     counts[p.medal] += 1
   return counts
 
-database: list[Participant] = []
-code_grouped: dict[str, list[Participant]] = defaultdict(list)
-year_grouped: dict[str, list[Participant]] = defaultdict(list)
+participants: list[Participant] = []
+participants_by_code: dict[str, list[Participant]] = defaultdict(list)
+participants_by_year: dict[str, list[Participant]] = defaultdict(list)
 
 with open("database/participants.csv") as file:
   reader = csv.reader(file)
@@ -47,10 +47,10 @@ with open("database/participants.csv") as file:
 
     entry = Participant(year, rank, rank_geq, name, code_to_country[code], Medal(medal), theoretical, experimental, total, website)
 
-    database.append(entry)
-    code_grouped[code].append(entry)
-    year_grouped[entry.year].append(entry)
+    participants.append(entry)
+    participants_by_code[code].append(entry)
+    participants_by_year[entry.year].append(entry)
 
-last_year = max(year_grouped, key=int)
+last_year = max(participants_by_year, key=int)
 assert last_year in get_next_year, "Next year doesn't exist in timeline!"
 next_year = get_next_year[last_year]

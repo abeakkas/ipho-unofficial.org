@@ -1,7 +1,7 @@
 # Tries to find similar names in successive years
-from database_participants import database as participants
-from database_participants import year_grouped as participants_by_year
-from database_participants import code_grouped as participants_by_code
+from database_participants import participants
+from database_participants import participants_by_year
+from database_participants import participants_by_code
 from difflib import SequenceMatcher
 from unidecode import unidecode
 

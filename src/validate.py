@@ -1,6 +1,6 @@
 import sys
-from database_participants import database
-from database_participants import year_grouped
+from database_participants import participants
+from database_participants import participants_by_year
 
 # How many problems to print per check before truncating the rest
 LIMIT = 10
@@ -10,12 +10,12 @@ def check_score_rank_consistency():
   Check if someone with a higher score is below in rank than someone else.
   """
   n = 0
-  for year in year_grouped:
-    if not year_grouped[year][0].total:
+  for year in participants_by_year:
+    if not participants_by_year[year][0].total:
       continue
     last_rank = 0
     last_score = 1e10
-    for participant in year_grouped[year]:
+    for participant in participants_by_year[year]:
       if not participant.total or participant.rank_geq:
         break
       rank = int(participant.rank)
@@ -38,8 +38,8 @@ def check_score_rank_consistency():
 
 def check_score_sums():
   n = 0
-  for year in year_grouped:
-    for participant in year_grouped[year]:
+  for year in participants_by_year:
+    for participant in participants_by_year[year]:
       if not participant.theoretical or not participant.experimental or not participant.total:
         continue
       th = float(participant.theoretical)
@@ -56,8 +56,8 @@ def check_score_sums():
 
 def check_score_precision():
   n = 0
-  for year in year_grouped:
-    for participant in year_grouped[year]:
+  for year in participants_by_year:
+    for participant in participants_by_year[year]:
       for score in [participant.theoretical, participant.experimental, participant.total]:
         if score and ("." not in score or len(score.split(".")[1]) != 2):
           n += 1
@@ -70,7 +70,7 @@ def check_score_precision():
 
 def check_combining_characters():
   n = 0
-  for participant in database:
+  for participant in participants:
     for c in participant.name:
       if 768 <= ord(c) < 880:
         n += 1

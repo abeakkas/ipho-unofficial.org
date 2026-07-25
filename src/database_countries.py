@@ -7,7 +7,7 @@ class Country(NamedTuple):
   website: str
   former: bool
 
-database: list[Country] = []
+countries: list[Country] = []
 code_to_country: dict[str, Country] = {}
 previous_code: dict[str, str] = {}
 next_code: dict[str, str] = {}
@@ -20,7 +20,7 @@ with open("database/countries.csv") as file:
     code, name, website, former = row
     country = Country(code, name, website, former != "")
 
-    database.append(country)
+    countries.append(country)
     code_to_country[code] = country
     if prev_code:
       previous_code[code] = prev_code

@@ -1,7 +1,7 @@
 import timeline_index
 import timeline_year
 import timeline_2020
-from database_timeline import database as editions
+from database_timeline import editions
 
 def run():
   print("Generating timeline")
