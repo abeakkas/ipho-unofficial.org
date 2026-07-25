@@ -4,18 +4,14 @@ Run main.py from src to build the project:
 python3 main.py
 ```
 
-This generates the whole website to the parent folder of src. templates folder
-contains HTML files and database folder contains CSV data files.
+This generates the whole website to the parent folder of src.
 
-You can generate individual pages with scripts as well.
-```
-python3 timeline_year.py 2024
-```
+`templates` folder contains HTML files and `database` folder contains CSV data files.
 
 ## How to maintain
 
 After every competition:
-- Pull the rankings/medals from the official website and add to `archive` folder
+- Pull the rankings/medals from the official website in some format (pdf/html) and add to `archive` folder
 - Update `participants.csv` using the rankings data
 - Pull that year's minutes document from IPhO official website and add it to `templates/minutes`
 - Update `timeline.csv` using the minutes
@@ -27,14 +23,13 @@ After every competition:
 
 ##### database/participants.csv:
 * Columns: year, rank, name, country-code, medal, theoretical, experimental, total, website
-* Medal is one of: G, S, B, H, P
 * Ordered first by year then by rank
+* Medal is one of: G, S, B, H, P
 * Rank can be in two forms: `123`, `>=123`
 
 ##### database/timeline.csv:
-* Columns: number, year, date, country code, city, website, # of countries, # of participants
+* Columns: number, year, date, country-code, city, website, # of countries, # of participants
 * Ordered by year
-* Years are not necessarily consecutive
 * If there are multiple countries hosting the competition, codes are separated by '&'
 
 ##### database/countries.csv:
@@ -47,6 +42,12 @@ After every competition:
 ```
 python3 validate.py
 ```
+
+##### Run name_analysis.py to find possible duplicate participants:
+```
+python3 name_analysis.py
+```
+Reports same country participants a year or two apart whose names look alike: reordered, missing a middle name, or spelled differently. Handy for catching data entry slip ups and repeat participants for the hall of fame.
 
 ## Notes
 * Fahim Tajwar@2017 and Mohammad Fahim Tajwar@2014 from Bangladesh are not the same person

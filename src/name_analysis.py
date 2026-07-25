@@ -1,63 +1,51 @@
-# Tries to find similar names in successive years
-from database_participants import participants
-from database_participants import participants_by_year
-from database_participants import participants_by_code
+# Scans participants.csv for likely duplicate people: participants from the same
+# country, one or two years apart, whose names look similar without being
+# identical. Catches reordered names, added/dropped middle names, and spelling
+# variants (e.g. Ahmed vs Akhmed). Run by hand every now and then:
+#
+#   python3 name_analysis.py
+
 from difflib import SequenceMatcher
-from unidecode import unidecode
+from itertools import permutations
+from asciify import asciify
+from database_participants import participants_by_code
 
-def massive(from_year, to_year):
-  for year in participants_by_year:
-    for row in participants_by_year[year]:
-      row['supername'] = row['code'] + " " + " ".join(sorted(unidecode(row['name']).split(" ")))
-  threshold = .9
-  for year1 in range(from_year, to_year + 1):
-    print(year1)
-    for year2 in range(year1 + 1, year1 + 5):
-      if str(year1) in participants_by_year and str(year2) in participants_by_year:
-        for row1 in participants_by_year[str(year1)]:
-          for row2 in participants_by_year[str(year2)]:
-            ratio = SequenceMatcher(None, row1['supername'], row2['supername']).ratio()
-            if ratio > threshold:
-              print(row1)
-              print(row2)
+THRESHOLD = 0.7
+MAX_YEAR_GAP = 2
 
-def comp(s1, s2):
-  r1 = min(max(SequenceMatcher(None, x1, x2).ratio() for x2 in s2) for x1 in s1)
-  r2 = min(max(SequenceMatcher(None, x2, x1).ratio() for x1 in s1) for x2 in s2)
-  return max(r1, r2)
+def name_tokens(name):
+  return asciify(name).lower().replace("-", " ").split()
 
-def withincountry(start_year=1967):
-  threshold = .7
-  for code in participants_by_code:
-    for row in participants_by_code[code]:
-      row['seq'] = unidecode(row['name']).replace("-", " ").split(" ")
-    for i, row1 in enumerate(participants_by_code[code]):
-      for j, row2 in enumerate(participants_by_code[code]):
-        if int(row1['year']) < start_year or int(row2['year']) < start_year:
+def similarity(tokens1, tokens2):
+  shorter, longer = sorted((tokens1, tokens2), key=len)
+  return max(
+    min(SequenceMatcher(None, a, b).ratio() for a, b in zip(shorter, chosen))
+    for chosen in permutations(longer, len(shorter))
+  )
+
+def find_similar_names():
+  """Return (score, row1, row2) triples above THRESHOLD, best matches first."""
+  matches = []
+  for rows in participants_by_code.values():
+    tokenized = [(row, name_tokens(row.name)) for row in rows]
+    for i in range(len(tokenized)):
+      row1, tokens1 = tokenized[i]
+      for j in range(i + 1, len(tokenized)):
+        row2, tokens2 = tokenized[j]
+        if row1.year == row2.year or row1.name == row2.name:
           continue
-        if i == j:
+        if int(row2.year) - int(row1.year) > MAX_YEAR_GAP:
           break
-        if abs(int(row1['year']) - int(row2['year'])) < 3 and row1['name'] != row2['name']:
-          c = comp(row1['seq'], row2['seq'])
-          if c > threshold:
-            print(code)
-            print(c)
-            print(row1['year'], row1['name'])
-            print(row2['year'], row2['name'])
+        score = similarity(tokens1, tokens2)
+        if score >= THRESHOLD:
+          matches.append((score, row1, row2))
+  matches.sort(key=lambda match: match[0], reverse=True)
+  return matches
 
-def samenamedifferentcountry():
-  names = {}
-  for row in participants:
-    row['ascii'] = row['name']#''.join(sorted(unidecode(row['name']).lower().replace("-", " ").split(" ")))
-  for row in participants:
-    if row['ascii'] in names:
-      if names[row['ascii']]['code'] != row['code'] or abs(int(names[row['ascii']]['year']) - int(row['year'])) > 2:
-        print("wowowow")
-        print(names[row['ascii']])
-        print(row)
-    else:
-      names[row['ascii']] = row
+def run():
+  for score, row1, row2 in find_similar_names():
+    country = row1.country.name
+    print(f"{score:.2f}  {country}: ({row1.year}) {row1.name}  ~  ({row2.year}) {row2.name}")
 
-withincountry(2017)
-# samenamedifferentcountry()
-# massive(2016, 2019)
+if __name__ == "__main__":
+  run()
