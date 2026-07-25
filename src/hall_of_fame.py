@@ -78,10 +78,10 @@ def _print_group(group, medals):
     name=group[0].name,
     code=group[0].country.code,
     country=group[0].country.name,
-    gold=str(medals[Medal.GOLD]),
-    silver=str(medals[Medal.SILVER]),
-    bronze=str(medals[Medal.BRONZE]),
-    honourable=str(medals[Medal.HONOURABLE]),
+    gold=medals[Medal.GOLD],
+    silver=medals[Medal.SILVER],
+    bronze=medals[Medal.BRONZE],
+    honourable=medals[Medal.HONOURABLE],
     participations=participations,
   )
 

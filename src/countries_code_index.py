@@ -69,10 +69,10 @@ def run(code):
     next_code=next_code_value,
     next_code_style=next_code_style,
     host=hostshtml,
-    gold=str(medals[Medal.GOLD]),
-    silver=str(medals[Medal.SILVER]),
-    bronze=str(medals[Medal.BRONZE]),
-    honourable=str(medals[Medal.HONOURABLE]),
+    gold=medals[Medal.GOLD],
+    silver=medals[Medal.SILVER],
+    bronze=medals[Medal.BRONZE],
+    honourable=medals[Medal.HONOURABLE],
   )
 
 if __name__ == "__main__":

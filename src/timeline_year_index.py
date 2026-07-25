@@ -66,10 +66,10 @@ def run(year):
   if year in participants_by_year:
     medals = count_medals(participants_by_year[year])
     awards_style = ""
-    gold = str(medals[Medal.GOLD])
-    silver = str(medals[Medal.SILVER])
-    bronze = str(medals[Medal.BRONZE])
-    honourable = str(medals[Medal.HONOURABLE])
+    gold = medals[Medal.GOLD]
+    silver = medals[Medal.SILVER]
+    bronze = medals[Medal.BRONZE]
+    honourable = medals[Medal.HONOURABLE]
   else:
     awards_style = "display: none;"
     gold = ""

@@ -58,10 +58,10 @@ def run(year):
         code=country.code,
         country=country.name,
         rank=rank,
-        gold=str(medals[country][Medal.GOLD]),
-        silver=str(medals[country][Medal.SILVER]),
-        bronze=str(medals[country][Medal.BRONZE]),
-        honourable=str(medals[country][Medal.HONOURABLE]),
+        gold=medals[country][Medal.GOLD],
+        silver=medals[country][Medal.SILVER],
+        bronze=medals[country][Medal.BRONZE],
+        honourable=medals[country][Medal.HONOURABLE],
       )
 
   render_page(
