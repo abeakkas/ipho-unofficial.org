@@ -27,6 +27,6 @@ for page in ["country", "individual"]:
   path = f"../timeline/2026/{page}.html"
   with open(path) as file:
     html = file.read()
-  html = html.replace("  </h3>\n  <table>", "  </h3>\n" + notice + "  <table>", 1)
+  html = html.replace("  </h3>\n  <table>", f"  </h3>\n{notice}  <table>", 1)
   with open(path, "w") as file:
     file.write(html)

@@ -9,7 +9,7 @@ from templates import render_fragment
 from templates import render_page
 
 def run(code):
-  print("Generating countries/" + code + "/individual")
+  print(f"Generating countries/{code}/individual")
 
   if code in previous_code:
     previous_code_value = previous_code[code]

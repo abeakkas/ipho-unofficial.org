@@ -10,7 +10,7 @@ from database_participants import Medal
 from templates import render_page
 
 def run(year):
-  print("Generating timeline/" + year + "/index")
+  print(f"Generating timeline/{year}/index")
   yeardata = editions_by_year[year]
 
   if yeardata.code2:

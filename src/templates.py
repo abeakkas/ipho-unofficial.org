@@ -12,7 +12,7 @@ def _load(path):
   """
   Load HTML from file and resolve the common substitutions.
   """
-  with open("templates/" + path + ".html") as file:
+  with open(f"templates/{path}.html") as file:
     html = file.read()
   return Template(html).safe_substitute(
     index="." if config.github else "index.html",

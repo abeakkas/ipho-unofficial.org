@@ -9,7 +9,7 @@ from templates import render_fragment
 from templates import render_page
 
 def run(year):
-  print("Generating timeline/" + year + "/individual")
+  print(f"Generating timeline/{year}/individual")
   yeardata = editions_by_year[year]
 
   if year in get_previous_year:

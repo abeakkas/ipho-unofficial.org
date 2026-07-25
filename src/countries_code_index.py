@@ -10,7 +10,7 @@ from templates import render_fragment
 from templates import render_page
 
 def run(code):
-  print("Generating countries/" + code + "/index")
+  print(f"Generating countries/{code}/index")
   codedata = countries_by_code[code]
 
   if codedata.website != "":

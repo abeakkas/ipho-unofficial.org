@@ -73,7 +73,7 @@ def _print_group(group, medals):
       "hall-of-fame/index_participation_year",
       year=row.year,
       year_text=year_text,
-      title="Appeared as " + row.name,
+      title=f"Appeared as {row.name}",
     ).strip()
 
   return render_fragment(

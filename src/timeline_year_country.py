@@ -11,7 +11,7 @@ from templates import render_fragment
 from templates import render_page
 
 def run(year):
-  print("Generating timeline/" + year + "/country")
+  print(f"Generating timeline/{year}/country")
   yeardata = editions_by_year[year]
 
   if year in get_previous_year:
