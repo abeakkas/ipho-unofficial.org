@@ -31,8 +31,6 @@ def run(year):
   if year in participants_by_year:
     by_country = defaultdict(list)
     for participant in participants_by_year[year]:
-      if participant.country is None:
-        continue
       by_country[participant.country].append(participant)
     medals = {country: count_medals(participants) for country, participants in by_country.items()}
 

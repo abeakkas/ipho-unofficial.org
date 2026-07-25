@@ -31,13 +31,8 @@ def run(year):
   if year in participants_by_year:
     tablehtml = ""
     for row in participants_by_year[year]:
-      if row.country is None:
-        # Unknown country: filler code keeps the link path valid; name is hidden.
-        code = "TUR"
-        country = ""
-      else:
-        code = row.country.code
-        country = row.country.name
+      code = row.country.code
+      country = row.country.name
 
       if row.website:
         name = render_fragment(

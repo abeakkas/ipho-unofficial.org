@@ -30,7 +30,6 @@ After every competition:
 * Medal is one of: G, S, B, H, P
 * Ordered first by year then by rank
 * Rank can be in two forms: `123`, `>=123`
-* Country-code can be empty if unknown
 
 ##### database/timeline.csv:
 * Columns: number, year, date, country code, city, website, # of countries, # of participants

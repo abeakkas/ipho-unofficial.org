@@ -2,7 +2,6 @@ import csv
 from collections import defaultdict
 from enum import Enum
 from typing import NamedTuple
-from typing import Optional
 from database_countries import Country
 from database_countries import code_indexed
 from database_timeline import get_next_year
@@ -19,7 +18,7 @@ class Participant(NamedTuple):
   rank: str
   rank_geq: bool
   name: str
-  country: Optional[Country]
+  country: Country
   medal: Medal
   theoretical: str
   experimental: str
@@ -46,8 +45,7 @@ with open("database/participants.csv") as file:
     if rank_geq:
       rank = rank.removeprefix(">=")
 
-    country = code_indexed[code] if code != "" else None
-    entry = Participant(year, rank, rank_geq, name, country, Medal(medal), theoretical, experimental, total, website)
+    entry = Participant(year, rank, rank_geq, name, code_indexed[code], Medal(medal), theoretical, experimental, total, website)
 
     database.append(entry)
     code_grouped[code].append(entry)
