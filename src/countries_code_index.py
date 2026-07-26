@@ -1,7 +1,7 @@
 import sys
 from database_countries import code_to_country
-from database_countries import previous_code
-from database_countries import next_code
+from database_countries import code_before
+from database_countries import code_after
 from database_participants import participants_by_code
 from database_participants import count_medals
 from database_participants import Medal
@@ -22,15 +22,15 @@ def run(code):
     national_site = "."
     national_site_text = ""
 
-  if code in previous_code:
-    previous_code_value = previous_code[code]
+  if code in code_before:
+    previous_code = code_before[code]
     previous_code_style = ""
   else:
-    previous_code_value = "."
+    previous_code = "."
     previous_code_style = "display: none;"
 
-  if code in next_code:
-    next_code_value = next_code[code]
+  if code in code_after:
+    next_code_value = code_after[code]
     next_code_style = ""
   else:
     next_code_value = "."
@@ -64,7 +64,7 @@ def run(code):
     contact_style=contact_style,
     national_site=national_site,
     national_site_text=national_site_text,
-    previous_code=previous_code_value,
+    previous_code=previous_code,
     previous_code_style=previous_code_style,
     next_code=next_code_value,
     next_code_style=next_code_style,

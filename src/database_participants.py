@@ -4,7 +4,7 @@ from enum import Enum
 from typing import NamedTuple
 from database_countries import Country
 from database_countries import code_to_country
-from database_timeline import get_next_year
+from database_timeline import year_after
 
 class Medal(str, Enum):
   GOLD = "G"
@@ -62,5 +62,5 @@ with open("database/participants.csv") as file:
     participants_by_year[participant.year].append(participant)
 
 last_year = max(participants_by_year)
-assert last_year in get_next_year, "Next year doesn't exist in timeline!"
-next_year = get_next_year[last_year]
+assert last_year in year_after, "Next year doesn't exist in timeline!"
+next_year = year_after[last_year]

@@ -4,8 +4,8 @@ from database_participants import participants_by_year
 from database_participants import count_medals
 from database_participants import Medal
 from database_timeline import editions_by_year
-from database_timeline import get_previous_year
-from database_timeline import get_next_year
+from database_timeline import year_before
+from database_timeline import year_after
 from templates import render_fragment
 from templates import render_page
 
@@ -13,15 +13,15 @@ def run(year):
   print(f"Generating timeline/{year}/country")
   edition = editions_by_year[year]
 
-  if year in get_previous_year:
-    previous_year = get_previous_year[year]
+  if year in year_before:
+    previous_year = year_before[year]
     previous_year_style = ""
   else:
     previous_year = "."
     previous_year_style = "display: none;"
 
-  if year in get_next_year:
-    next_year = get_next_year[year]
+  if year in year_after:
+    next_year = year_after[year]
     next_year_style = ""
   else:
     next_year = "."

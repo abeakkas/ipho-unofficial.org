@@ -9,11 +9,11 @@ class Country(NamedTuple):
 
 countries: list[Country] = []
 code_to_country: dict[str, Country] = {}
-previous_code: dict[str, str] = {}
-next_code: dict[str, str] = {}
+code_before: dict[str, str] = {}
+code_after: dict[str, str] = {}
 
 with open("database/countries.csv") as file:
-  prev_code = ""
+  previous_code = None
   for row in csv.reader(file):
     assert len(row) == 4, f"Expecting 4 elements per row: {row}"
     code, name, website, former = row
@@ -22,7 +22,7 @@ with open("database/countries.csv") as file:
 
     countries.append(country)
     code_to_country[code] = country
-    if prev_code:
-      previous_code[code] = prev_code
-      next_code[prev_code] = code
-    prev_code = code
+    if previous_code:
+      code_before[code] = previous_code
+      code_after[previous_code] = code
+    previous_code = code

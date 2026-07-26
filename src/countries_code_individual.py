@@ -1,8 +1,8 @@
 import sys
 from collections import defaultdict
 from database_countries import code_to_country
-from database_countries import previous_code
-from database_countries import next_code
+from database_countries import code_before
+from database_countries import code_after
 from database_participants import participants_by_code
 from templates import medal_fragment
 from templates import render_fragment
@@ -11,15 +11,15 @@ from templates import render_page
 def run(code):
   print(f"Generating countries/{code}/individual")
 
-  if code in previous_code:
-    previous_code_value = previous_code[code]
+  if code in code_before:
+    previous_code = code_before[code]
     previous_code_style = ""
   else:
-    previous_code_value = "."
+    previous_code = "."
     previous_code_style = "display: none;"
 
-  if code in next_code:
-    next_code_value = next_code[code]
+  if code in code_after:
+    next_code_value = code_after[code]
     next_code_style = ""
   else:
     next_code_value = "."
@@ -58,7 +58,7 @@ def run(code):
     "countries/code/individual",
     code=code,
     country=code_to_country[code].name,
-    previous_code=previous_code_value,
+    previous_code=previous_code,
     previous_code_style=previous_code_style,
     next_code=next_code_value,
     next_code_style=next_code_style,
