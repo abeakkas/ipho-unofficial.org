@@ -36,8 +36,7 @@ participants_by_code: dict[str, list[Participant]] = defaultdict(list)
 participants_by_year: dict[int, list[Participant]] = defaultdict(list)
 
 with open("database/participants.csv") as file:
-  reader = csv.reader(file)
-  for row in reader:
+  for row in csv.reader(file):
     assert len(row) == 9, f"Expecting 9 elements per row: {row}"
     year, rank, name, code, medal, theoretical, experimental, total, website = row
 
@@ -45,11 +44,22 @@ with open("database/participants.csv") as file:
     if rank_geq:
       rank = rank.removeprefix(">=")
 
-    entry = Participant(int(year), rank, rank_geq, name, code_to_country[code], Medal(medal), theoretical, experimental, total, website)
+    participant = Participant(
+      int(year),
+      rank,
+      rank_geq,
+      name,
+      code_to_country[code],
+      Medal(medal),
+      theoretical,
+      experimental,
+      total,
+      website,
+    )
 
-    participants.append(entry)
-    participants_by_code[code].append(entry)
-    participants_by_year[entry.year].append(entry)
+    participants.append(participant)
+    participants_by_code[code].append(participant)
+    participants_by_year[participant.year].append(participant)
 
 last_year = max(participants_by_year)
 assert last_year in get_next_year, "Next year doesn't exist in timeline!"

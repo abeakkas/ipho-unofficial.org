@@ -13,11 +13,11 @@ previous_code: dict[str, str] = {}
 next_code: dict[str, str] = {}
 
 with open("database/countries.csv") as file:
-  reader = csv.reader(file)
   prev_code = ""
-  for row in reader:
+  for row in csv.reader(file):
     assert len(row) == 4, f"Expecting 4 elements per row: {row}"
     code, name, website, former = row
+
     country = Country(code, name, website, former != "")
 
     countries.append(country)

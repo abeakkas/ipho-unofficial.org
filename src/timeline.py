@@ -7,8 +7,8 @@ def run():
   print("Generating timeline")
   timeline_index.run()
   timeline_2020.run()
-  for yeardata in editions:
-    timeline_year.run(yeardata.year)
+  for edition in editions:
+    timeline_year.run(edition.year)
 
 if __name__ == "__main__":
   run()

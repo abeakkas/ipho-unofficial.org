@@ -10,18 +10,18 @@ from templates import render_page
 
 def run(year):
   print(f"Generating timeline/{year}/index")
-  yeardata = editions_by_year[year]
+  edition = editions_by_year[year]
 
-  if yeardata.host2:
-    code2 = yeardata.host2.code
-    country2 = yeardata.host2.name
+  if edition.host2:
+    code2 = edition.host2.code
+    country2 = edition.host2.name
     code2_style = ""
   else:
     code2 = "."
     country2 = ""
     code2_style = "display: none;"
 
-  city = yeardata.city + "," if yeardata.city else ""
+  city = edition.city + "," if edition.city else ""
 
   if year in get_previous_year:
     previous_year = get_previous_year[year]
@@ -37,22 +37,22 @@ def run(year):
     next_year = "."
     next_year_style = "display: none;"
 
-  if yeardata.p_participant:
-    p_participant = yeardata.p_participant
+  if edition.p_participant:
+    p_participant = edition.p_participant
     p_participant_style = ""
   else:
     p_participant = ""
     p_participant_style = "display: none;"
 
-  if yeardata.p_country:
-    p_country = yeardata.p_country
+  if edition.p_country:
+    p_country = edition.p_country
     p_country_style = ""
   else:
     p_country = ""
     p_country_style = "display: none;"
 
-  if yeardata.homepage:
-    homepage = yeardata.homepage
+  if edition.homepage:
+    homepage = edition.homepage
     homepage_style = ""
   else:
     homepage = "."
@@ -80,11 +80,11 @@ def run(year):
   render_page(
     "timeline/year/index",
     year=year,
-    number=yeardata.number,
-    ordinal=yeardata.ordinal,
-    date=yeardata.date,
-    code=yeardata.host.code,
-    country=yeardata.host.name,
+    number=edition.number,
+    ordinal=edition.ordinal,
+    date=edition.date,
+    code=edition.host.code,
+    country=edition.host.name,
     code2=code2,
     country2=country2,
     code2_style=code2_style,

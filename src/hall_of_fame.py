@@ -58,7 +58,7 @@ def _find_recurring_participations():
   # Return unique lists.
   return list({id(group): group for group in participant_bin.values()}.values())
 
-def _print_group(group, medals):
+def _render_group(group, medals):
   participations = ""
   for row in sorted(group, key=lambda row: row.year):
     if participations:
@@ -88,7 +88,7 @@ def _print_group(group, medals):
 def run():
   print("Generating hall_of_fame")
 
-  bins = _find_recurring_participations()
+  groups = _find_recurring_participations()
 
   # Sort by medal quality, best is first
   def quality(group):
@@ -101,18 +101,18 @@ def run():
       group[0].year,
       group[0].name,
     )
-  bins = sorted(bins, key=quality)
+  groups = sorted(groups, key=quality)
 
   tablehtml = ""
   i = 0
-  while i < len(bins):
-    medals = count_medals(bins[i])
+  while i < len(groups):
+    medals = count_medals(groups[i])
     # Cutoff at 1 gold, 1 silver, 1 bronze
     if medals[Medal.GOLD] < 2 and medals[Medal.SILVER] < 2 and medals[Medal.BRONZE] < 1:
       break
-    tablehtml += _print_group(bins[i], medals)
+    tablehtml += _render_group(groups[i], medals)
     i += 1
-  bins = bins[i:]
+  groups = groups[i:]
 
   # Sort by total number of medals, best is first
   def quantity(group):
@@ -126,16 +126,16 @@ def run():
       group[0].year,
       group[0].name,
     )
-  bins = sorted(bins, key=quantity)
+  groups = sorted(groups, key=quantity)
 
   table2html = ""
   i = 0
-  while i < len(bins):
-    medals = count_medals(bins[i])
+  while i < len(groups):
+    medals = count_medals(groups[i])
     # Cutoff at 3 medals
     if medals[Medal.GOLD] + medals[Medal.SILVER] + medals[Medal.BRONZE] < 3:
       break
-    table2html += _print_group(bins[i], medals)
+    table2html += _render_group(groups[i], medals)
     i += 1
 
   # Apparently Google recommends dashes over underscores :/

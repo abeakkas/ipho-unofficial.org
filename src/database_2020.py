@@ -14,9 +14,7 @@ class Participant(NamedTuple):
 participants: list[Participant] = []
 
 with open("database/2020.csv") as file:
-  reader = csv.reader(file)
-  for row in reader:
+  for row in csv.reader(file):
     assert len(row) == 5, f"2020 row error: {row}"
     rank, name, code, medal, website = row
-    entry = Participant(rank, name, code_to_country[code], Medal(medal), website)
-    participants.append(entry)
+    participants.append(Participant(rank, name, code_to_country[code], Medal(medal), website))

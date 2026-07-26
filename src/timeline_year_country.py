@@ -11,7 +11,7 @@ from templates import render_page
 
 def run(year):
   print(f"Generating timeline/{year}/country")
-  yeardata = editions_by_year[year]
+  edition = editions_by_year[year]
 
   if year in get_previous_year:
     previous_year = get_previous_year[year]
@@ -67,8 +67,8 @@ def run(year):
   render_page(
     "timeline/year/country",
     year=year,
-    number=yeardata.number,
-    ordinal=yeardata.ordinal,
+    number=edition.number,
+    ordinal=edition.ordinal,
     previous_year=previous_year,
     previous_year_style=previous_year_style,
     next_year=next_year,

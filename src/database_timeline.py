@@ -32,9 +32,8 @@ def editions_hosted_by(country: Country):
   return [e for e in editions if country in (e.host, e.host2)]
 
 with open("database/timeline.csv") as file:
-  reader = csv.reader(file)
   prev = None
-  for row in reader:
+  for row in csv.reader(file):
     assert len(row) == 8, f"Timeline row error: {row}"
     number, year, date, code, city, homepage, p_country, p_participant = row
 
@@ -43,12 +42,21 @@ with open("database/timeline.csv") as file:
     else:
       code2 = ""
 
-    entry = Edition(int(number), int(year), date, code_to_country[code], code_to_country[code2] if code2 else None, city, homepage,
-                    p_country, p_participant)
+    edition = Edition(
+      int(number),
+      int(year),
+      date,
+      code_to_country[code],
+      code_to_country[code2] if code2 else None,
+      city,
+      homepage,
+      p_country,
+      p_participant,
+    )
 
-    editions.append(entry)
-    editions_by_year[entry.year] = entry
+    editions.append(edition)
+    editions_by_year[edition.year] = edition
     if prev is not None:
-      get_previous_year[entry.year] = prev
-      get_next_year[prev] = entry.year
-    prev = entry.year
+      get_previous_year[edition.year] = prev
+      get_next_year[prev] = edition.year
+    prev = edition.year

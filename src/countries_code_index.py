@@ -37,20 +37,20 @@ def run(code):
     next_code_style = "display: none;"
 
   hostshtml = ""
-  for yeardata in editions_hosted_by(country):
-    if yeardata.homepage:
+  for edition in editions_hosted_by(country):
+    if edition.homepage:
       homepagehtml = render_fragment(
         "countries/code/index_host_homepage",
-        link=yeardata.homepage,
-        year=yeardata.year,
+        link=edition.homepage,
+        year=edition.year,
       )
     else:
       homepagehtml = ""
     hostshtml += render_fragment(
       "countries/code/index_host",
-      city=" - " + yeardata.city if yeardata.city else "",
+      city=" - " + edition.city if edition.city else "",
       homepage=homepagehtml,
-      year=yeardata.year,
+      year=edition.year,
     )
   if hostshtml:
     hostshtml = "<dt>IPhO Host</dt>" + hostshtml
