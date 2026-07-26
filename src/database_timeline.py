@@ -5,8 +5,8 @@ from database_countries import Country
 from database_countries import code_to_country
 
 class Edition(NamedTuple):
-  number: str
-  year: str
+  number: int
+  year: int
   date: str
   host: Country
   host2: Optional[Country]
@@ -18,22 +18,22 @@ class Edition(NamedTuple):
   @property
   def ordinal(self):
     """Ordinal suffix for the edition number, e.g. "st" for 41 (as in 41st)."""
-    if self.number[-2:] in ("11", "12", "13"):
+    if self.number % 100 in (11, 12, 13):
       return "th"
-    return {"1": "st", "2": "nd", "3": "rd"}.get(self.number[-1], "th")
+    return {1: "st", 2: "nd", 3: "rd"}.get(self.number % 10, "th")
 
 editions: list[Edition] = []
-editions_by_year: dict[str, Edition] = {}
+editions_by_year: dict[int, Edition] = {}
 # Technically, years can be non-consecutive, and wow that actually happened in 2020.
-get_previous_year: dict[str, str] = {}
-get_next_year: dict[str, str] = {}
+get_previous_year: dict[int, int] = {}
+get_next_year: dict[int, int] = {}
 
 def editions_hosted_by(country: Country):
   return [e for e in editions if country in (e.host, e.host2)]
 
 with open("database/timeline.csv") as file:
   reader = csv.reader(file)
-  prev = ""
+  prev = None
   for row in reader:
     assert len(row) == 8, f"Timeline row error: {row}"
     number, year, date, code, city, homepage, p_country, p_participant = row
@@ -43,12 +43,12 @@ with open("database/timeline.csv") as file:
     else:
       code2 = ""
 
-    entry = Edition(number, year, date, code_to_country[code], code_to_country[code2] if code2 else None, city, homepage,
+    entry = Edition(int(number), int(year), date, code_to_country[code], code_to_country[code2] if code2 else None, city, homepage,
                     p_country, p_participant)
 
     editions.append(entry)
     editions_by_year[entry.year] = entry
-    if prev != "":
+    if prev is not None:
       get_previous_year[entry.year] = prev
       get_next_year[prev] = entry.year
     prev = entry.year

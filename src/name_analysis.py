@@ -40,7 +40,7 @@ def find_similar_names():
         row2, tokens2 = tokenized[j]
         if row1.year == row2.year or row1.name == row2.name:
           continue
-        if int(row2.year) - int(row1.year) > MAX_YEAR_GAP:
+        if row2.year - row1.year > MAX_YEAR_GAP:
           break
         if is_ordered_subset(row1.name, row2.name):
           continue

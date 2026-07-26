@@ -14,7 +14,7 @@ class Medal(str, Enum):
   PARTICIPANT = "P"
 
 class Participant(NamedTuple):
-  year: str
+  year: int
   rank: str
   rank_geq: bool
   name: str
@@ -33,7 +33,7 @@ def count_medals(participants: list[Participant]) -> dict[Medal, int]:
 
 participants: list[Participant] = []
 participants_by_code: dict[str, list[Participant]] = defaultdict(list)
-participants_by_year: dict[str, list[Participant]] = defaultdict(list)
+participants_by_year: dict[int, list[Participant]] = defaultdict(list)
 
 with open("database/participants.csv") as file:
   reader = csv.reader(file)
@@ -45,12 +45,12 @@ with open("database/participants.csv") as file:
     if rank_geq:
       rank = rank.removeprefix(">=")
 
-    entry = Participant(year, rank, rank_geq, name, code_to_country[code], Medal(medal), theoretical, experimental, total, website)
+    entry = Participant(int(year), rank, rank_geq, name, code_to_country[code], Medal(medal), theoretical, experimental, total, website)
 
     participants.append(entry)
     participants_by_code[code].append(entry)
     participants_by_year[entry.year].append(entry)
 
-last_year = max(participants_by_year, key=int)
+last_year = max(participants_by_year)
 assert last_year in get_next_year, "Next year doesn't exist in timeline!"
 next_year = get_next_year[last_year]

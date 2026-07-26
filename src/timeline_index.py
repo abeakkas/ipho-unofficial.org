@@ -43,14 +43,14 @@ def run():
       code2_style=code2_style,
     )
 
-    if int(edition.year) <= int(next_year) + 2:
+    if edition.year <= next_year + 2:
       # Reverse list
       tablehtml = rowhtml + tablehtml
     else:
       upcominghtml = rowhtml + upcominghtml
       upcoming_row_ctr += 1
     # IPhO 2020 was a special event and is not listed in timeline database.
-    if int(edition.year) == 2019:
+    if edition.year == 2019:
       tablehtml = render_fragment("timeline/index_row_2020") + tablehtml
 
   # Append an empty row to preserve row parity between tables for styling purposes

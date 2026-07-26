@@ -8,7 +8,7 @@ from templates import render_page
 
 # Identities that algorithm can't find
 identity_overrides = [
-  (("2010", "SVK", "Eugen Hruska"), ("2011", "GER", "Eugen Hruska")),
+  ((2010, "SVK", "Eugen Hruska"), (2011, "GER", "Eugen Hruska")),
 ]
 
 def _find_recurring_participations():
@@ -34,7 +34,7 @@ def _find_recurring_participations():
   for code_rows in participants_by_code.values():
      years = defaultdict(list)
      for row in code_rows:
-       years[int(row.year)].append(row)
+       years[row.year].append(row)
      for year, rows in years.items():
        for row1 in rows:
          for y in range(year - 2, year):
@@ -63,7 +63,7 @@ def _print_group(group, medals):
   for row in sorted(group, key=lambda row: row.year):
     if participations:
       participations += ", "
-    year_text = row.year
+    year_text = str(row.year)
     if row.country != group[0].country:
       year_text += f"({row.country.code})"
     participations += render_fragment(
