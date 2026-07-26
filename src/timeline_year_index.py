@@ -58,7 +58,7 @@ def run(year):
     homepage = "."
     homepage_style = "display: none;"
 
-  if os.path.exists(f"templates/minutes/{year}.pdf"):
+  if os.path.exists(f"static_files/minutes/{year}.pdf"):
     minutes_style = ""
   else:
     minutes_style = "display: none;"

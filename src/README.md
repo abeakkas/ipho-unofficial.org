@@ -6,14 +6,14 @@ python3 main.py
 
 This generates the whole website to the parent folder of src.
 
-`templates` folder contains HTML files and `database` folder contains CSV data files.
+`templates` folder contains HTML files, `static_files` folder contains images/CSS/minutes that are copied to the output as-is, and `database` folder contains CSV data files.
 
 ## How to maintain
 
 After every competition:
 - Pull the rankings/medals from the official website in some format (pdf/html) and add to `archive` folder
 - Update `participants.csv` using the rankings data
-- Pull that year's minutes document from IPhO official website and add it to `templates/minutes`
+- Pull that year's minutes document from IPhO official website and add it to `static_files/minutes`
 - Update `timeline.csv` using the minutes
 - Run `main.py` and `validate.py`
 
