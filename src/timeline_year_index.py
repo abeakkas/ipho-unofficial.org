@@ -37,19 +37,19 @@ def run(year):
     next_year = "."
     next_year_style = "display: none;"
 
-  if edition.p_participant:
-    p_participant = edition.p_participant
-    p_participant_style = ""
+  if edition.participant_count:
+    participant_count = edition.participant_count
+    participant_count_style = ""
   else:
-    p_participant = ""
-    p_participant_style = "display: none;"
+    participant_count = ""
+    participant_count_style = "display: none;"
 
-  if edition.p_country:
-    p_country = edition.p_country
-    p_country_style = ""
+  if edition.country_count:
+    country_count = edition.country_count
+    country_count_style = ""
   else:
-    p_country = ""
-    p_country_style = "display: none;"
+    country_count = ""
+    country_count_style = "display: none;"
 
   if edition.homepage:
     homepage = edition.homepage
@@ -93,10 +93,10 @@ def run(year):
     previous_year_style=previous_year_style,
     next_year=next_year,
     next_year_style=next_year_style,
-    p_participant=p_participant,
-    p_participant_style=p_participant_style,
-    p_country=p_country,
-    p_country_style=p_country_style,
+    participant_count=participant_count,
+    participant_count_style=participant_count_style,
+    country_count=country_count,
+    country_count_style=country_count_style,
     homepage=homepage,
     homepage_style=homepage_style,
     minutes_style=minutes_style,

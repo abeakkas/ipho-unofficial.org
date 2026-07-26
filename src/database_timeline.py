@@ -12,8 +12,8 @@ class Edition(NamedTuple):
   host2: Optional[Country]
   city: str
   homepage: str
-  p_country: str
-  p_participant: str
+  country_count: str
+  participant_count: str
 
   @property
   def ordinal(self):
@@ -35,7 +35,7 @@ with open("database/timeline.csv") as file:
   prev = None
   for row in csv.reader(file):
     assert len(row) == 8, f"Timeline row error: {row}"
-    number, year, date, code, city, homepage, p_country, p_participant = row
+    number, year, date, code, city, homepage, country_count, participant_count = row
 
     if "&" in code:
       code, code2 = code.split("&")
@@ -50,8 +50,8 @@ with open("database/timeline.csv") as file:
       code_to_country[code2] if code2 else None,
       city,
       homepage,
-      p_country,
-      p_participant,
+      country_count,
+      participant_count,
     )
 
     editions.append(edition)
