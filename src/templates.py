@@ -2,10 +2,10 @@ import config
 import os
 from functools import cache
 from string import Template
-from database_participants import last_year
-from database_participants import next_year
+from database_participants import last_completed_year
 from database_participants import Medal
 from database_timeline import editions_by_year
+from database_timeline import year_after
 
 @cache
 def _load(path):
@@ -31,22 +31,23 @@ def _fill_header_footer(html, path):
   Fill header/footer. Nav highlight is determined from path's first segment.
   """
   section = path.split("/")[0]
+  next_year = year_after[last_completed_year]
   side = render_fragment(
     "header_side",
     highlight_timeline="highlight" if section == "timeline" else "",
     highlight_countries="highlight" if section == "countries" else "",
     highlight_search="highlight" if section == "search" else "",
     highlight_hall_of_fame="highlight" if section == "hall-of-fame" else "",
-    header_previous_year=last_year,
-    header_previous_year_homepage=editions_by_year[last_year].homepage,
+    header_previous_year=last_completed_year,
+    header_previous_year_homepage=editions_by_year[last_completed_year].homepage,
     header_next_year=next_year,
     header_next_year_homepage=editions_by_year[next_year].homepage,
   )
 
   return Template(html).safe_substitute(
     header_side=side,
-    header_previous_year=last_year,
-    header_previous_year_homepage=editions_by_year[last_year].homepage,
+    header_previous_year=last_completed_year,
+    header_previous_year_homepage=editions_by_year[last_completed_year].homepage,
     header_next_year=next_year,
     header_next_year_homepage=editions_by_year[next_year].homepage,
     footer=render_fragment("footer"),

@@ -1,9 +1,10 @@
-from database_participants import next_year
+from database_participants import last_completed_year
 from database_timeline import editions
+from database_timeline import year_after
 from templates import render_fragment
 from templates import render_page
 
-def monospace_date(date):
+def pad_date(date):
   if "-" not in date:
     return date
   if len(date.split("-")[0]) == 4:
@@ -32,7 +33,7 @@ def run():
       "timeline/index_row",
       number=edition.number,
       year=edition.year,
-      date=monospace_date(edition.date),
+      date=pad_date(edition.date),
       code=edition.host.code,
       city=edition.city,
       country=edition.host.name,
@@ -43,14 +44,14 @@ def run():
       code2_style=code2_style,
     )
 
-    if edition.year <= next_year + 2:
+    if edition.year > last_completed_year + 3:
+      upcominghtml += rowhtml
+      upcoming_row_ctr += 1
+    else:
       # IPhO 2020 was a special event and is not listed in timeline database.
       if edition.year == 2019:
         tablehtml += render_fragment("timeline/index_row_2020")
       tablehtml += rowhtml
-    else:
-      upcominghtml += rowhtml
-      upcoming_row_ctr += 1
 
   # Append an empty row to preserve row parity between tables for styling purposes
   if upcoming_row_ctr % 2:
