@@ -18,9 +18,11 @@ def name_tokens(name):
 
 def similarity(tokens1, tokens2):
   shorter, longer = sorted((tokens1, tokens2), key=len)
+  # Score each distinct token pair once, then pick the best matching.
+  ratios = [[SequenceMatcher(None, s, l).ratio() for l in longer] for s in shorter]
   return max(
-    min(SequenceMatcher(None, a, b).ratio() for a, b in zip(shorter, chosen))
-    for chosen in permutations(longer, len(shorter))
+    min(ratios[i][j] for i, j in enumerate(chosen))
+    for chosen in permutations(range(len(longer)), len(shorter))
   )
 
 def is_ordered_subset(name1, name2):
