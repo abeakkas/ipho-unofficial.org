@@ -47,6 +47,7 @@
 
 #header #sub {
   position: relative;
+  top: 1px;
 }
 
 #header #menu {
