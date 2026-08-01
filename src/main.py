@@ -16,17 +16,3 @@ search.run()
 hall_of_fame.run()
 static_files.run()
 
-print("ALERT: adding preliminary results notice to timeline/2026")
-notice = (
-  '  <b>Preliminary Results:</b><br/>\n'
-  '  Results shown are based mainly on the closing ceremony and other sources on the Internet.<br/>\n'
-  '  Participants are listed in the order they appear in the closing ceremony video.<br/>\n'
-  f'  Please send any relevant corrections to the webmaster: <a href="mailto:{config.webmaster_email}">{config.webmaster_email}</a>\n'
-)
-for page in ["country", "individual"]:
-  path = f"../timeline/2026/{page}.html"
-  with open(path) as file:
-    html = file.read()
-  html = html.replace("  </h3>\n  <table>", f"  </h3>\n{notice}  <table>", 1)
-  with open(path, "w") as file:
-    file.write(html)
