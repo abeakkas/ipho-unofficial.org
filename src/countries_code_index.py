@@ -16,7 +16,7 @@ def run(code):
   if country.website != "":
     contact_style = ""
     national_site = country.website
-    national_site_text = country.website if len(country.website) < 50 else country.website[0:50] + "..."
+    national_site_text = country.website if len(country.website) < 53 else country.website[0:50] + "..."
   else:
     contact_style = "display: none;"
     national_site = "."

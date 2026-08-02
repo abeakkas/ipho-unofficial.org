@@ -20,7 +20,7 @@ def run():
 
     if country.website:
       national_site = country.website
-      national_site_text = country.website if len(country.website) < 50 else country.website[0:35] + "..."
+      national_site_text = country.website if len(country.website) < 38 else country.website[0:35] + "..."
       national_site_style = ""
     else:
       national_site = "."

@@ -31,7 +31,13 @@ def _fill_header_footer(html, path):
   Fill header/footer. Nav highlight is determined from path's first segment.
   """
   section = path.split("/")[0]
-  next_year = year_after[last_completed_year]
+  if last_completed_year in year_after:
+    next_year = year_after[last_completed_year]
+    next_homepage = editions_by_year[next_year].homepage
+  else:
+    # No upcoming edition in timeline.csv yet; show the year with no homepage link.
+    next_year = last_completed_year + 1
+    next_homepage = "."
   side = render_fragment(
     "header_side",
     highlight_timeline="highlight" if section == "timeline" else "",
@@ -41,7 +47,7 @@ def _fill_header_footer(html, path):
     header_previous_year=last_completed_year,
     header_previous_year_homepage=editions_by_year[last_completed_year].homepage,
     header_next_year=next_year,
-    header_next_year_homepage=editions_by_year[next_year].homepage,
+    header_next_year_homepage=next_homepage,
   )
 
   return Template(html).safe_substitute(
@@ -49,7 +55,7 @@ def _fill_header_footer(html, path):
     header_previous_year=last_completed_year,
     header_previous_year_homepage=editions_by_year[last_completed_year].homepage,
     header_next_year=next_year,
-    header_next_year_homepage=editions_by_year[next_year].homepage,
+    header_next_year_homepage=next_homepage,
     footer=render_fragment("footer"),
   )
 
