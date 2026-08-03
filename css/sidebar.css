@@ -29,12 +29,20 @@
   font-size: 0.9em;
 }
 
-#sidebar ul a.highlight {
+/* The sidebar container carries the active section as a class; the link whose
+   own class matches it is the current page and gets highlighted. */
+#sidebar.timeline ul a.timeline,
+#sidebar.countries ul a.countries,
+#sidebar.search ul a.search,
+#sidebar.hall-of-fame ul a.hall-of-fame {
   color: black;
   font-weight: bold;
 }
 
-#sidebar ul a.highlight:hover {
+#sidebar.timeline ul a.timeline:hover,
+#sidebar.countries ul a.countries:hover,
+#sidebar.search ul a.search:hover,
+#sidebar.hall-of-fame ul a.hall-of-fame:hover {
   font-weight: bold;
   color: black;
   text-decoration: none;

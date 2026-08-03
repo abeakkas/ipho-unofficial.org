@@ -47,10 +47,7 @@ def render_page(path, **substitutions):
   if "${header_side}" in html:
     substitutions["header_side"] = render_fragment(
       "header_side",
-      highlight_timeline="highlight" if section == "timeline" else "",
-      highlight_countries="highlight" if section == "countries" else "",
-      highlight_search="highlight" if section == "search" else "",
-      highlight_hall_of_fame="highlight" if section == "hall-of-fame" else "",
+      section=section,
       header_previous_year=last_completed_year,
       header_previous_year_homepage=editions_by_year[last_completed_year].homepage,
       header_next_year=next_year,
