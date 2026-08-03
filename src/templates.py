@@ -26,10 +26,14 @@ def render_fragment(path, **substitutions):
   """
   return Template(_load(path)).substitute(**substitutions)
 
-def _fill_header_footer(html, path):
+def render_page(path, **substitutions):
   """
-  Fill header/footer. Nav highlight is determined from path's first segment.
+  Render a full page and write it. The output location is derived from the
+  template path, and {{root}} is resolved from that location.
   """
+  html = _load(path)
+
+  # Every page has a header and footer. Nav highlight is from the path's first segment.
   section = path.split("/")[0]
   if last_completed_year in year_after:
     next_year = year_after[last_completed_year]
@@ -38,36 +42,30 @@ def _fill_header_footer(html, path):
     # No upcoming edition in timeline.csv yet; show the year with no homepage link.
     next_year = last_completed_year + 1
     next_homepage = "."
-  side = render_fragment(
-    "header_side",
-    highlight_timeline="highlight" if section == "timeline" else "",
-    highlight_countries="highlight" if section == "countries" else "",
-    highlight_search="highlight" if section == "search" else "",
-    highlight_hall_of_fame="highlight" if section == "hall-of-fame" else "",
-    header_previous_year=last_completed_year,
-    header_previous_year_homepage=editions_by_year[last_completed_year].homepage,
-    header_next_year=next_year,
-    header_next_year_homepage=next_homepage,
-  )
 
-  return Template(html).safe_substitute(
-    header_side=side,
-    header_previous_year=last_completed_year,
-    header_previous_year_homepage=editions_by_year[last_completed_year].homepage,
-    header_next_year=next_year,
-    header_next_year_homepage=next_homepage,
-    footer=render_fragment("footer"),
-  )
+  # The homepage carries the header inline; every other page pulls in header_side.
+  if "${header_side}" in html:
+    substitutions["header_side"] = render_fragment(
+      "header_side",
+      highlight_timeline="highlight" if section == "timeline" else "",
+      highlight_countries="highlight" if section == "countries" else "",
+      highlight_search="highlight" if section == "search" else "",
+      highlight_hall_of_fame="highlight" if section == "hall-of-fame" else "",
+      header_previous_year=last_completed_year,
+      header_previous_year_homepage=editions_by_year[last_completed_year].homepage,
+      header_next_year=next_year,
+      header_next_year_homepage=next_homepage,
+    )
+  else:
+    substitutions["header_previous_year"] = last_completed_year
+    substitutions["header_previous_year_homepage"] = editions_by_year[last_completed_year].homepage
+    substitutions["header_next_year"] = next_year
+    substitutions["header_next_year_homepage"] = next_homepage
 
-def render_page(path, **substitutions):
-  """
-  Render a full page and write it. The output location is derived from the
-  template path, and {{root}} is resolved from that location.
-  """
-  html = _load(path)
+  substitutions["footer"] = render_fragment("footer")
 
-  if "${footer}" in html:
-    html = _fill_header_footer(html, path)
+  # Header/footer are added as values, so a '$' in a homepage URL is inserted
+  # literally rather than being re-parsed as a placeholder.
   html = Template(html).substitute(**substitutions)
 
   out_path = f"../{path}.html"
